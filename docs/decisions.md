@@ -2,6 +2,18 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 0 Step 4)
+
+- **Google Solar API caching is [Open] and must be resolved before Phase 3.** Fallback if
+  caching isn't allowed: the demo uses PVWatts plus the MassGIS building outline. — Qiao.
+- **Municipality comes from the geocoder's county subdivision, never the postal city or
+  ZIP** (DEC and MLP depend on it). — from Step 4 test; recorded in data-sources.md.
+- **Energy burden statistic: Massachusetts LEAD 2022 figures** (12.9% vs 2.3%), pending
+  confirmation of the ACS vintage. — Computed; Qiao asked for LEAD.
+- **Rules-data schema: An independent second design (Draft B) is written** from requirements
+  only, without seeing Draft A. Draft A stays uncommitted until Draft B
+  is done. — Qiao.
+
 ## 2026-11-06 (Phase 0 Step 3)
 
 - **Step 3 sources read directly.** — Qiao (option B).

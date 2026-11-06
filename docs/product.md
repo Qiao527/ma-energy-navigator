@@ -20,10 +20,11 @@ barrier. It started in Lowell and Springfield and added Chelsea, Lynn, Framingha
 Taunton in December 2025. MassCEC describes it as a pilot. [Decided — framing; facts
 checked 2026-11-06, see review-notes item 2]
 
-**Why it matters.** Low-income households spend a much larger share of income on energy
-than other households. [Decided — use a Massachusetts figure from DOE's LEAD Tool, found in
-Step 4. Fallback: ACEEE 2020 national *medians* (8.1% for households under 200% FPL vs 2.3%
-for non-low-income, 2017 AHS data), labeled as national and dated.]
+**Why it matters.** In Massachusetts, households below 200% of the federal poverty level
+spend on average about 13% of income on home energy, versus about 2% for other households.
+In 2–4 unit buildings the figures are 12.5% vs 2.4%. (DOE LEAD Tool 2022 update, group
+averages computed in `docs/data-sources.md` §8.) [Decided — source; Open — confirm the ACS
+vintage before publishing]
 
 **Why existing tools miss it.** Generic solar calculators answer "is my roof sunny?" They
 assume a homeowner, ignore Massachusetts programs, ignore who pays vs who saves, and treat
@@ -66,8 +67,9 @@ owner). These are asked, never guessed, and savings are assigned to whoever pays
 [Decided]
 
 Assumption to validate: 2–4 unit buildings, including condo-converted triple-deckers,
-are where split-incentive and coordination problems are sharpest. [Proposed — quantify
-with MassGIS / assessor data in Step 4; check with real users]
+are where split-incentive and coordination problems are sharpest. Evidence so far (LEAD
+2022): 549k Massachusetts households (20%) live in 2–4 unit buildings; 69% of them rent and
+28% are below 200% FPL (vs 20% statewide). [Proposed — still check with real users]
 
 ## 4. The key insight: coordination, not arithmetic
 
@@ -124,7 +126,12 @@ Coordination is the signature feature. [Decided]
 - All money as **low / mid / high scenarios** with confidence labels [Decided]
 - LLM explains results and drafts messages; it never computes numbers or names programs
 - FAQ, incl. why federal credits don't apply and what the tool can't decide
-- A live demo with a few real, cached addresses
+- A live demo with a few real addresses. A Boston rental near BC works well: Boston is a
+  Designated Equity Community.
+- **[Open — must be resolved before Phase 3]** Whether Google Solar API responses may be
+  cached for the demo (Service Specific Terms). **Fallback [Decided]:** if caching isn't
+  allowed, the demo's roof estimate uses PVWatts (public data, cacheable) plus the MassGIS
+  building outline for roof area, with wider ranges and a lower confidence label.
 
 **Stretch (after the core flow works)** [Decided]
 - Utility-bill reading (photo/PDF → usage, rate, utility). Until then, usage is entered as
@@ -236,18 +243,21 @@ For the README / pitch:
    (`docs/outreach-drafts.md` §3).
 2. ~~Eversource low-income community solar~~ → answered (auto-enrollment by lottery).
    National Grid and municipal programs are still open.
-3. Data sources for address → parcel → unit count / condo status → electric + gas utility →
-   EJ status, and their gaps (condos, mixed use). → Step 4
-4. Google Solar API: pricing, quota, coverage for target MA cities; PVWatts as fallback. → Step 4
-5. Is an NREL ResStock-type dataset practical for the v1.5 energy model? → Step 4
+3. ~~Data sources~~ → answered in `docs/data-sources.md`. Key rule: municipality comes from
+   the geocoder's county subdivision, never the postal city or ZIP.
+4. ~~Google Solar API~~ → priced (10,000 free Building Insights calls/month). Still open:
+   MA coverage check and caching terms.
+5. ~~ResStock~~ → practical for v1.5 (MA files 8–27 MB each).
 6. Stack choice. → Step 5
 7. Working name. → Step 5
 8. Real users: outreach to All In Energy / the navigator program and to a tenant or landlord
    near BC. Drafts in `docs/outreach-drafts.md`; Qiao sends them. [Decided — start now]
-9. Massachusetts energy burden figure from DOE LEAD. → Step 4
-10. Tenant concern that upgrades lead to rent increases. Energy Aligned Lease is
-    descriptive only and doesn't address it; MA rent rules weren't researched. Product stays
-    neutral. [Open — low priority]
+9. ~~Massachusetts energy burden figure~~ → computed from LEAD (§1). Confirm ACS vintage.
+10. Tenant concern that upgrades lead to rent increases. For DEC rental projects, the
+    2025–2027 Plan requires landlords to sign a form "committing not to raise renter or
+    evict tenants for a period" after receiving incentives (`docs/data-sources.md` §5).
+    The length of that period is still open. Outside DECs: no protection found; the product
+    stays neutral.
 
 ## 11. Proposed stack
 
