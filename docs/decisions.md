@@ -2,6 +2,43 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Checkpoint A, Phase 0 Step 1)
+
+Based on `docs/review-notes.md`.
+
+- **Signature feature reframed.** The "all eligible units → up to 100%, some → up to 75%"
+  insulation rule on the Mass Save landlord page belongs to the *Condo Owners* offer, not
+  the landlord offer (landlords get 100% off insulation for rental property). Coordination
+  stays the signature feature. Condo buildings get "units still needed". Rental buildings
+  get tenant → landlord and landlord → tenants messages. — Why: the v0 example applied the
+  rule to the wrong offer (Mass Save page, read 2026-11-06). — Qiao.
+- **Four roles in the rules engine (tenant, renting landlord, owner-occupant landlord,
+  condo owner); the v1 demo tells two stories: rental building and condo building.** —
+  Why: the all-units rule is real for condos; two stories keep the demo focused. — Qiao.
+- **One-line story reworded** to "Massachusetts is piloting human navigators in six
+  cities…". The coverage map is labeled as pilot coverage. — Why: MassCEC calls it a
+  pilot; "can't scale" was our inference. — Qiao.
+- **Data model: electric and gas utility stored separately, plus heating fuel; per-unit
+  `heat_paid_by` and `electric_paid_by`, asked, never guessed.** — Why: MLP towns and
+  gas-side programs differ; savings go to whoever pays. — Qiao.
+- **Form-first intake; the form is the only data source for calculations.** Optional
+  free-text entry: the LLM pre-fills the form, the user confirms, then we calculate. — Why:
+  testable, accessible, keeps numbers out of the LLM. — Qiao.
+- **Utility-bill reading moved to stretch.** — Why: biggest privacy surface; core flow
+  works without it. — Qiao.
+- **Uncertainty: low / mid / high named scenarios in v1** (Monte Carlo revisited in v1.5). — Qiao.
+- **Income-eligible path added to the v1 program list; federal §25C/§25D credits dropped**
+  (not allowed for expenditures after 2025-12-31, P.L. 119-21, IRS FAQ). The FAQ says so. — Qiao.
+- **Start user outreach now.** The lead drafts two emails (All In Energy / navigator
+  program; a tenant or landlord near BC). Qiao sends them. — Qiao.
+- **Energy burden statistic: prefer a Massachusetts figure from DOE's LEAD Tool** (Step 4).
+  Fallback is ACEEE 2020 national medians, labeled as national and dated. — Qiao.
+- **Remaining review items (6, 7, 10, 11, 15, 16, 19–21, 23) delegated to the lead.** All
+  applied to `product.md` as [Proposed]: rules-data staleness flag and expiry test, LLM
+  slot-filling, solar meter-allocation check, hand-off + "not advice" note, v1 success
+  criteria, multilingual note, tenant rent-increase concern and Energy Aligned Lease for
+  Step 3. — Qiao delegated; applied.
+
 ## 2026-11-06 (planning)
 
 - **Portfolio project, not a startup.** Optimize for demonstrated skill and a clear story,
