@@ -2,6 +2,11 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Checkpoint B, Phase 0 Step 2)
+
+- **Source capture uses a headless browser:** mass.gov returns 403 to plain HTTP clients but 200 to headless
+  Chromium (tested 2026-11-06). — Qiao.
+
 ## 2026-11-06 (Checkpoint A, Phase 0 Step 1)
 
 Based on `docs/review-notes.md`.
