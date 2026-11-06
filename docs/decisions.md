@@ -2,6 +2,21 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 0 Step 3)
+
+- **Step 3 sources read directly.** — Qiao (option B).
+- **v1 program list adds Designated Equity Communities, Mass Save Enhanced
+  (moderate-income) incentives, and the MA residential renewable energy income tax credit.**
+  Why: DEC and Enhanced are likely the strongest offers in both demo stories; the state
+  credit is the only remaining tax credit for owner-bought solar. — Qiao.
+- **Unclear rules stay unresolved in the product.** Condo "eligible unit" definition,
+  heat pump rebate account holder in rentals, and owner-occupied 100% vs 75% are asked by
+  email (`outreach-drafts.md` §3). Until answered, the product says "up to" and points to
+  the assessment. — Qiao.
+- **Tenant copy for utility low-income community solar:** "get on the discount rate", not
+  "sign up", because ECSAP enrolls by lottery. — from Step 3 evidence; Qiao agreed
+  to the program list.
+
 ## 2026-11-06 (Checkpoint B, Phase 0 Step 2)
 
 - **Source capture uses a headless browser:** mass.gov returns 403 to plain HTTP clients but 200 to headless

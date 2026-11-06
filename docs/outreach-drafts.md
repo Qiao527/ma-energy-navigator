@@ -68,3 +68,62 @@ Thank you,
 Qiao Long
 Boston College
 [email]
+
+---
+
+## 3. To Mass Save: three questions the website doesn't answer
+
+From `docs/incentives-research.md` "Flags for Qiao". Addresses are from
+https://www.masssave.com/en/contact (read 2026-11-06):
+- **SolutionsCenter@masssave.com**: Home Energy Assessments and eligibility (questions A
+  and C).
+- **MARebates@Resource-Innovations.com**: heat pump rebate processing (question B).
+
+Until they answer, the product says "up to" and names the assessment as the deciding step.
+Record replies, without names, in `docs/incentives-research.md`.
+
+### 3a. To SolutionsCenter@masssave.com
+
+**Subject:** Question about insulation offers for 2–4 unit condo buildings and owner-occupied homes
+
+Hello,
+
+I'm a Boston College student building a free, non-commercial tool that helps residents of
+Massachusetts 1–4 unit homes find the Mass Save offers that apply to them. I want to
+describe your offers accurately, and two points on your website aren't clear to me:
+
+A. **Condo buildings (2–4 units).** The landlord page says condo owners can get up to 100%
+   off insulation "if all eligible units in a 2–4-unit building participate (or up to 75%
+   off per unit if only some participate)", and that the unit must have a residential
+   heating meter. What makes a unit "eligible"? For example, if one unit has no residential
+   heating meter, does the building still need that unit to participate to reach 100%?
+
+C. **Owner-occupied homes.** The homeowner pages say "75–100% off approved insulation". Apart
+   from Designated Equity Communities, income-based offers, and the condo all-units rule,
+   is there another situation where an owner-occupied home gets 100% rather than 75%?
+
+A short answer, or a link to where this is written down, would help a lot.
+
+Thank you,
+Qiao Long
+Boston College
+[email]
+
+### 3b. To MARebates@Resource-Innovations.com
+
+**Subject:** Heat pump rebate in a rental unit: whose account applies?
+
+Hello,
+
+I'm a Boston College student building a free tool that explains Mass Save offers to
+residents of 2–4 unit buildings. The air-source heat pump page says customers "must apply
+using a residential electric account" and limits rebates per account.
+
+B. In a rental unit where the **tenant** holds the electric account and the **landlord**
+   buys and owns the heat pump, who applies for the rebate, and on which account? Does the
+   $8,500 per-account cap apply to each unit's account separately?
+
+Thank you,
+Qiao Long
+Boston College
+[email]

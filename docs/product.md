@@ -98,12 +98,21 @@ Coordination is the signature feature. [Decided]
 - **The form is the only source of data for calculations.** An optional entry point lets
   the user describe their situation in a few sentences; the LLM pre-fills the form; the
   user reviews and confirms; only then does anything get calculated.
-- Rules engine covering a small, verified set of programs. Candidate list for Step 3:
-  Mass Save assessment + weatherization (landlord, condo, homeowner offers), Mass Save
-  income-eligible path (incl. CAP agencies), Mass Save heat-pump rebates, community solar
-  (incl. low-income options), SMART 3.0 + net metering for rooftop solar, and handling for
-  municipal light plant (MLP) towns. [Decided — includes the income-eligible path;
-  Proposed — final list after Step 3]
+- Rules engine covering a small, verified set of programs (evidence in
+  `docs/incentives-research.md`): Mass Save assessment + weatherization (landlord, condo,
+  homeowner offers), **Designated Equity Communities (DEC)**, Income Eligible path (CAP
+  agencies), **Enhanced (moderate-income) incentives**, air-source heat-pump rebates
+  (2026 amounts and the announced 2027 change), HEAT Loan (owners only), community solar
+  (SMART 3.0 discount floors; utility low-income programs), SMART 3.0 + net metering for
+  rooftop ≤25 kW incl. credit allocation to other units, the **Massachusetts residential
+  renewable energy income tax credit**, and MLP handling. [Decided 2026-11-06]
+- Where a source leaves a rule unclear (e.g. which condo units count as "eligible", who
+  applies for a heat pump rebate on a tenant-held account), the product says "up to" and
+  names the assessment or program as the deciding step. It never resolves the ambiguity
+  itself. [Decided 2026-11-06]
+- Utility low-income community solar (e.g. Eversource ECSAP) enrolls by lottery from
+  discount-rate customers. Tenants are told how to get on the discount rate, not to "sign
+  up". [Decided 2026-11-06]
 - **No federal tax credits.** §25C and §25D are not allowed for expenditures after
   2025-12-31 (P.L. 119-21). The FAQ explains this. [Decided]
 - Rooftop solar module only for users who can install (Google Solar API, PVWatts fallback).
@@ -222,13 +231,11 @@ For the README / pitch:
 
 ## 10. Open questions for Phase 0
 
-1. Exact v1 program list, each verified against its official source (SMART 3.0 terms, net
-   metering incl. credit allocation across meters, income-eligible thresholds, heat-pump
-   rebate amounts for 2026, MLP handling). → Step 3
-2. Eversource low-income community solar: DPU approved the Eversource Community Solar
-   Access Program in D.P.U. 24-104 (2024). Still open: is it enrolling now, what does the
-   subscriber get, what's the National Grid equivalent, and did a 2025 law require
-   consolidated billing? → Step 3
+1. ~~Exact v1 program list~~ → answered in `docs/incentives-research.md` (Step 3). Remaining
+   gaps are listed at the end of that file. Three questions go to Mass Save by email
+   (`docs/outreach-drafts.md` §3).
+2. ~~Eversource low-income community solar~~ → answered (auto-enrollment by lottery).
+   National Grid and municipal programs are still open.
 3. Data sources for address → parcel → unit count / condo status → electric + gas utility →
    EJ status, and their gaps (condos, mixed use). → Step 4
 4. Google Solar API: pricing, quota, coverage for target MA cities; PVWatts as fallback. → Step 4
@@ -238,8 +245,9 @@ For the README / pitch:
 8. Real users: outreach to All In Energy / the navigator program and to a tenant or landlord
    near BC. Drafts in `docs/outreach-drafts.md`; Qiao sends them. [Decided — start now]
 9. Massachusetts energy burden figure from DOE LEAD. → Step 4
-10. Tenant concern that upgrades lead to rent increases; what Mass Save's Energy Aligned
-    Lease offers. → Step 3
+10. Tenant concern that upgrades lead to rent increases. Energy Aligned Lease is
+    descriptive only and doesn't address it; MA rent rules weren't researched. Product stays
+    neutral. [Open — low priority]
 
 ## 11. Proposed stack
 
