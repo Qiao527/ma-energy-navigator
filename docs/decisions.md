@@ -2,6 +2,33 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 0 Step 5: schema, name, stack)
+
+- **Rules-data schema decided: merge** (`docs/schema/rules-schema.md`). Keep Draft A's
+  structure, JSON + Zod and per-source quotes. Adopt Draft B's approach for seven issues:
+  unresolved conditions, install-date versioning with an archive, prerequisites separate
+  from eligibility, counterfactuals by re-evaluation, caps with scope, the missing heat
+  pump conditions, and named predicates. Condo 75% / 100% are shown Draft A's way (75% now,
+  100% as potential). Why: Draft B's semantics were more correct where Draft A
+  over-claimed (`comparison.md` §3). Both drafts and the comparison are committed as a
+  record. — Qiao.
+- **Three kinds of conditions:**
+  - eligibility (facts about the user);
+  - prerequisites (things the user does first; **never** make a result "not eligible" or
+    "potential" — shown as "eligible, next do X");
+  - confirmations (what only the program can confirm).
+
+  — Qiao.
+- **Each rule stores the install window and the application deadline separately.** — Qiao.
+- **Insulation has no Massachusetts cost source, so show the percentage and "you'd likely
+  pay close to nothing", never an invented amount.** Heat pump ($/ton, EEAC invoice study)
+  and rooftop solar ($/kW, DOER SMART cost survey) show dollar ranges. — Qiao.
+- **Name: Every Floor.** Domain, GitHub and web trademark checks were done by the lead; the
+  USPTO search was done by Qiao. No conflict. — Qiao.
+- **Stack approved** as in `product.md` §11. — Qiao.
+- **Phase 1 plan revised** to the merged schema (`docs/phase-1-plan.md`, 18 tasks). — the lead,
+  per Qiao's approval.
+
 ## 2026-11-06 (Phase 0 Step 4)
 
 - **Google Solar API caching is [Open] and must be resolved before Phase 3.** Fallback if

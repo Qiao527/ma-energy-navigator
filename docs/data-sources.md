@@ -263,6 +263,53 @@ This supports the core-user choice with data. The original MassGIS analysis (pit
   to narrow low/mid/high ranges. Not needed for v1.
 - **[Open]** license text (OEDI datasets are usually CC BY 4.0; *verify*).
 
+## 9b. Installed-cost sources for Massachusetts (Step 5 follow-up, 2026-11-06)
+
+Rule (decision 2026-11-06): show a dollar range only where a Massachusetts source exists;
+otherwise show the percentage alone.
+
+**Heat pumps: found [Official evaluation study]**
+- *Residential Heat Pump Invoice Cost Analysis (MA23X14-B-RHPINV)*, NMR for the Mass Save
+  Program Administrators, published by the EEAC (data accessed Aug 2024):
+  https://ma-eeac.org/wp-content/uploads/MA23X14-B-RHPINV-Residential-Heat-Pump-Invoice-Cost-Study-Web.pdf
+- Data: invoices from 227 ASHP and 490 mini-split Mass Save projects (2021–2022), plus
+  MassCEC databases (2019–2021).
+- Table 1, "Baseline Heat Pump Project Costs" (Jan. 2024 $), total installed cost:
+  - ductless mini-split **$5,830/ton**
+  - ducted & mixed mini-split **$6,914/ton**
+  - central ASHP **$6,560/ton**
+  - GSHP $14,211/ton
+- Spread (Table 6): ductless-only projects mean $5,664/ton, standard deviation $1,970
+  (n = 376).
+- Region (Table 14): Boston-area counties average $6,313/ton; statewide $5,661 (n = 665).
+- **Proposed range:** ductless $3,860 / $5,830 / $7,800 per ton (mean ± 1 SD). Label it
+  "2021–22 projects, in Jan 2024 dollars" with `confidence: medium`.
+- **Gap:** the dollar total also needs **tons per unit**. No Massachusetts source for
+  typical apartment tonnage was found. Until one is, show the rebate and cost for example
+  sizes ("for a 2-ton system …") or for the contractor's quoted size, not a guessed size.
+
+**Rooftop solar: found [Official survey; small sample]**
+- DOER SMART 3.0 *Aggregated Cost Survey Results*. These are installation costs that
+  market participants reported for the annual rate-setting.
+  - PY2027 draft (Oct 2026), rooftop ≤ 27.5 kWdc residential: mean $3,461, median **$3,750**,
+    25th percentile **$3,010**, 75th **$3,775** per kWdc, **N = 7**.
+    https://www.mass.gov/doc/aggregated-cost-survey-results-py2027/download
+  - PY2026 (final): mean $3,133, median $3,225, 25th $2,729, 75th $3,485 per kWdc, N = 12.
+    https://www.mass.gov/doc/aggregated-survey-results/download
+- The PY2027 sheet labels the column "Installation Cost ($/kwh)". From the magnitudes
+  ($3,000–$3,800) and the size bins (kWdc), the unit is **$/kWdc**. *[Inference — note
+  the label error when citing.]*
+- **Proposed range:** $3,010 / $3,750 / $3,775 per kWdc (PY2027 quartiles and median),
+  `confidence: low` (N = 7). PY2026 is cross-checked in the description.
+
+**Weatherization: not found → percentage only**
+- No Massachusetts evaluation study with a per-home or per-unit weatherization cost was
+  found in this pass.
+- National Grid's page says the average weatherization installation value is "over
+  $4,000" *[Secondary until read on the page; a lower bound, not a range]*.
+- Per the rule, insulation offers show "100% off" / "up to 75% off" without a dollar
+  figure. The National Grid figure may appear as context text, not as a computed number.
+
 ## 10. What we must ask the user
 
 Data can suggest these; only the user can confirm them (principle 4).
