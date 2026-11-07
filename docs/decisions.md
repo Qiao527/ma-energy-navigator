@@ -2,6 +2,20 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Checkpoint C: Phase 0 approved)
+
+- **Phase 0 approved.** Phase 1 starts from `docs/phase-1-plan.md` and
+  `docs/schema/rules-schema.md` v2. — Qiao.
+- **Income-table windows:** use the inferred 2026-10-01 → 2027-09-30 for now, marked
+  [Open]. Qiao asks Mass Save on Monday, together with the three questions in
+  `docs/outreach/emails.md` §3. — Qiao.
+- **Phase 1 runs in milestones.** The lead stops after each one to report what was done,
+  the test results, and the next milestone. Milestone 1 = the core rules logic
+  (three-valued conditions, the four roles as facts, all-units participation; plan Tasks
+  1–7), followed by a Chinese walkthrough of the logic. — Qiao.
+- **Outreach drafts moved** to `docs/outreach/emails.md` (older entries refer to the old
+  path `docs/outreach-drafts.md`). — per Qiao.
+
 ## 2026-11-06 (Phase 0 Step 6: review response)
 
 Based on `docs/reviews/phase-0-response.md` (Review A: 10 accepted, 1 partial; Review B: 6

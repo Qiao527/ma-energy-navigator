@@ -264,7 +264,7 @@ For the README / pitch:
 
 1. ~~Exact v1 program list~~ → answered in `docs/incentives-research.md` (Step 3). Remaining
    gaps are listed at the end of that file. Three questions go to Mass Save by email
-   (`docs/outreach-drafts.md` §3).
+   (`docs/outreach/emails.md` §3).
 2. ~~Eversource low-income community solar~~ → answered (auto-enrollment by lottery).
    National Grid and municipal programs are still open.
 3. ~~Data sources~~ → answered in `docs/data-sources.md`. Key rule: municipality comes from
@@ -275,7 +275,7 @@ For the README / pitch:
 6. Stack choice. → Step 5
 7. Working name. → Step 5
 8. Real users: outreach to All In Energy / the navigator program and to a tenant or landlord
-   near BC. Drafts in `docs/outreach-drafts.md`; Qiao sends them. [Decided — start now]
+   near BC. Drafts in `docs/outreach/emails.md`; Qiao sends them. [Decided — start now]
 9. ~~Massachusetts energy burden figure~~ → computed from LEAD (§1). Confirm ACS vintage.
 10. Tenant concern that upgrades lead to rent increases. For DEC rental projects, the
     2025–2027 Plan requires landlords to sign a form "committing not to raise renter or
