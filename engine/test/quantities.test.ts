@@ -61,6 +61,27 @@ describe('heating need from the user’s fuel records (Task 16)', () => {
   })
 })
 
+describe('weather normalization (E3): each season scaled to a normal winter by heating degree days', () => {
+  const recs = [{ year: 2023, quantity: 400, unit: 'gallons' as const }, { year: 2024, quantity: 500, unit: 'gallons' as const }]
+  const hdd = [a('heating_degree_days.ma.2023', 5571, 5571, 5571, 'high'), a('heating_degree_days_normal.ma.2023', 6441, 6441, 6441, 'high'),
+    a('heating_degree_days.ma.2024', 6014, 6014, 6014, 'high'), a('heating_degree_days_normal.ma.2024', 6407, 6407, 6407, 'high')]
+  const k = 0.1385 * 0.84
+  test('a mild season counts for more, a cold one for less; the spread between seasons shrinks', () => {
+    const e = heatLoadFromRecords(recs, 'oil', [...LIST, ...hdd], false)
+    const s23 = 400 * 6441 / 5571
+    const s24 = 500 * 6407 / 6014
+    expect(e?.range.low).toBeCloseTo(Math.min(s23, s24) * k, 6)
+    expect(e?.range.mid).toBeCloseTo((s23 + s24) / 2 * k, 6)
+    expect(e?.range.high).toBeCloseTo(Math.max(s23, s24) * k, 6)
+    expect(e?.why.join(' ')).toMatch(/normal winter/)
+  })
+  test('a season without degree-day data is used as recorded, and says so', () => {
+    const e = heatLoadFromRecords([...recs, { year: 2030, quantity: 450, unit: 'gallons' }], 'oil', [...LIST, ...hdd], false)
+    expect(e?.range.mid).toBeCloseTo((400 * 6441 / 5571 + 500 * 6407 / 6014 + 450) / 3 * k, 6)
+    expect(e?.why.join(' ')).toMatch(/2030.*not weather-normalized/)
+  })
+})
+
 describe('hot water from the same boiler (F2, Qiao 2026-11-07)', () => {
   const recs = [{ year: 2024, quantity: 400, unit: 'gallons' as const }, { year: 2025, quantity: 500, unit: 'gallons' as const }]
   const k = 0.1385 * 0.84

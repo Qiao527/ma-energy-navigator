@@ -1,0 +1,1216 @@
+[[page 1]]
+Final Report
+Residential ccASHP 
+Building Electrification 
+Study
+March 10, 2022
+
+[[page 2]]
+Cadmus Project Team 
+• Neil Veilleux: Principal Investigator
+• Christie Amero, PE: Project Manager
+• John Walczyk: Technical Advisor
+• Jeremy Koo: Technical Advisor
+• Mark Janett: Customer Survey and Contractor Interview 
+Task Lead
+• Nathan Hinkle: Data Analysis Lead
+• Anne Greening (Acadia Consulting Group): Home 
+Performance Contractor and Customer Interview Lead
+2
+[[page 3]]
+Project Advisory Committee
+• Project Funders
+• E4TheFuture: Steve Cowell, President
+• MassCEC: Meg Howard, Program Manager
+• NYSERDA: Victoria Engel-Fowles, Project Manager
+• DOE Building Technologies Office & PNNL: Monica Neukomm, Ed 
+Vineyard, Cheryn Metzger 
+• Stakeholders
+• Eversource: Peter Klint, Program Manager
+• National Grid: Stephen Lasher, Principal Engineer
+• NEEP: David Lis, Director of Technology & Market Solutions
+• Technical Advisors
+• Coughlin & Associates Energy Consulting: Tom Coughlin, Principal 
+• Bruce Harley Energy Consulting: Bruce Harley, Principal
+• Performance Systems Development: Greg Thomas, Chief Strategy & 
+Technology Officer 
+3
+[[page 4]]
+4
+Contents
+• Study Background
+• Key Objectives
+1. Are ccASHP systems meeting home comfort needs? 
+2. Are ccASHPs efficiently delivering heating and cooling?
+3. How does performance differ between applications?
+4. What are the grid impacts of ccASHP market scale up?
+5. What continued challenges with customer and contractor 
+experience need to be addressed to scale the market?
+• Conclusion
+[[page 5]]
+Study Background
+[[page 6]]
+Drivers of the Study 
+6
+Carbon reduction 
+targets require 
+transformation of the 
+built environment. 
+Widespread 
+electrification is 
+essential to achieve 
+carbon neutral 
+buildings.
+A concerted policy 
+push is necessary to 
+deploy whole-home (or 
+primary heating) 
+electrification.
+[[page 7]]
+Drivers of the Study 
+• Carbon reduction targets in the Northeast require transformation of the 
+built environment. 
+• Massachusetts seeks 50% GHG reductions by 2030 and 85% by 2050. 
+• New York seeks 40% GHG reductions by 2030 and 85% by 2050.
+• Direct emissions from fossil fuel combustion for space and water heating in 
+buildings account for approximately 30% of emissions.
+• Achieving carbon neutral buildings requires:
+• Widespread electrification of thermal loads.
+• Improved thermal performance of building envelopes.
+• Ability to store and/or shift energy use and interaction with the electric grid.
+• Supply of energy loads from zero emissions resources.
+• However, across the Northeast, most building thermal loads are served 
+by fossil fuels (oil, gas or propane). 
+• Use of heat pumps (electrification) is increasing, though primarily for supplemental 
+loads. 
+• Greater adoption of whole home heat pumps—or heat pumps serving as the 
+primary heating source (90% of thermal load or more)—is necessary to 
+decarbonize building stock.  
+7
+[[page 8]]
+Whole-Home or Primary with Backup ASHP 
+Deployment Barriers
+Technology & 
+performance risk
+• Poor technology performance 
+on coldest days of year
+• Poor comfort for building 
+occupants
+Financial
+• High upfront costs
+• Poor return on investment
+• Inadequate access to capital
+Marketing & 
+awareness
+• Lack of customer awareness
+• Insufficient marketing and 
+sales from contractors 
+Supply chain
+• Lack of training for 
+contractors 
+• Undersupply of 
+contractors
+Decision-making
+• Split incentives (landlord-
+tenant)
+• Misaligned priorities
+8
+A range of barriers inhibit adoption of whole home (or primary) electrification. 
+This study focused primarily on real or perceived technology and 
+performance risk. 
+[[page 9]]
+Scope of Work
+9
+Program database review
+identify trends and eligible sites for study
+Online surveys with customers (n=628)
+customer satisfaction and usage behavior
+Site visits + metered data collection (n=43)
+overall energy use, performance, fossil fuel displacement
+Customer billing analysis (n=84)
+comparison to previous heating fuel usage
+Literature review 
+sales, design, installation best practices
+Stakeholder interviews (n=4)
+understand electrification priorities
+Heat pump contractor 
+interviews (n=19)
+design, marketing, installation
+Quantitative Research Qualitative Research
+Residential (1-4 
+family) building 
+electrification
+Assess cold climate air 
+source heat pump 
+performance in NY + MA
+Whole-home and 
+primary w/ backup 
+heat pump configs
+[[page 10]]
+Key Objectives of the Study
+10
+1. Are ccASHP systems meeting home comfort needs?
+2. Are ccASHPs efficiently delivering heating and cooling?
+3. How does performance differ between whole-home and 
+primary with backup applications?
+4. What are the grid impacts of ccASHP market scale up?
+5. What continued challenges with customer and contractor 
+experience need to be addressed to scale the market?
+IMPORTANT CAVEAT: This in-depth research study focused on a small sample of 
+homes in MA and NY. We did not select the participant sample to be statistically 
+significant or representative of the population. Findings and conclusions from this 
+study are intended to provide an indication of potential operational trends. We 
+recommend additional data collection for a broader sample to draw firm conclusions 
+about ccASHP operation in the Northeast.   
+[[page 11]]
+Objective 1: Are ccASHP 
+systems meeting home comfort 
+needs? 
+[[page 12]]
+Customer Survey Key Findings
+12
+• Weatherization upgrades were usually completed at the same time 
+as ASHP installations. This was especially true among those that 
+had an energy audit completed, typically through the Mass Save 
+program.
+• Contractors were a key knowledge conduit, as contractors are how 
+most customers learned how to use their ASHP.
+• Customers primarily installed ASHPs to increase home comfort and 
+save money on energy bills. Customers with a whole-home 
+configuration are especially likely to be motivated by energy savings.
+• Word-of-mouth was the most common way that customers learned 
+about ASHPs and found their contractor.
+• Performance issues were uncommon with ASHPs, but customers with 
+a whole-home configuration gave lower overall satisfaction 
+ratings, likely due to the lack of backup system on extreme cold days. 
+• However, nearly all customers reported lower bills, leading to an 
+extremely high likelihood to recommend an ASHP to others 
+(whole-home = 8.9/10 would recommend; primary w/ backup = 9.3/10)
+[[page 13]]
+Customer Satisfaction
+13
+9.0
+8.5 8.4 8.4 8.3 8.2 7.9 7.8
+0.0
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0
+10.0
+Cooling
+performance of
+the ASHP
+Heating
+performance of
+the ASHP
+The contractor
+who installed the
+ASHP
+Weatherization
+measures
+Non-heating or
+cooling
+performance of
+the ASHP
+The reabte
+amount received
+Information
+provided by the
+contractor for
+programming
+settings
+The cost of your
+energy bill since
+installing the
+ASHP
+Average Score (1-10)
+In general customers reported an extremely high likelihood to recommend an ASHP
+to others, with slightly lower likelihood for customers with whole-home systems (whole-
+home = 8.9/10 would recommend; primary w/ backup = 9.3/10).
+[[page 14]]
+Participant Interview Key Findings
+14
+• Improved comfort and temperature 
+maintenance (n=10)
+• Working well and did what we wanted it to 
+(n=9)
+• Costs less to run (n=9) 
+• No fossil fuels, reducing carbon footprint 
+(n=7)
+• Extremely efficient (n=4)
+• Better than old system (n=4)
+• Easy to use (n=3)
+• Changes temperature quickly (n=2)
+• Quiet and clean (n=2)
+• Dehumidify function (n=2)
+• ‘Free’ electricity from solar PV (n=2)
+• Don’t have to haul as much firewood (n=1)
+• Distribution of heat to specific rooms is 
+not always consistent (n=3)
+• Requires more attention than previous 
+system (n=2)
+• System is oversized, so some rooms get 
+too hot and cool too fast, need separate 
+dehumidifiers (n=1)
+• Repeated breakdown of one outdoor unit 
+(n=1) 
+• Outdoor unit is too loud (n=1) 
+• Settings get screwed up and fan is 
+consistently on (n=1)
+• Doesn’t stay warm as long and doesn’t 
+heat enough when its cold outside (n=1)
+Very Satisfied Satisfied and Somewhat Satisfied
+Of the 43 sampled metering sites, 42 participated in follow up phone interviews. 32 of 
+the 42 reported being ‘very satisfied’ with their heat pump in the past year, 3 
+‘satisfied,’ and 7 ‘somewhat satisfied.’
+[[page 15]]
+Blower Door Test Results
+15
+According to the National Association for State Community Services Programs,1 homes 
+with ACH50 values <5 are considered tight, moderate is between 5 and 10 ACH50, and 
+leaky is >10 ACH50 (where ACH50 is the measured CFM at 50 Pa normalized for 
+conditioned building volume).
+On average, the participating homes would fall into the ‘moderate’ category based on 
+the results of the blower door tests. 
+However, this was a small sample of homes, and many variables factor into home 
+leakiness, including the type and quality of existing and new insulation, home age, and 
+test conditions. 
+Home Weatherization 
+Upgrade
+Number of 
+Homes2
+Measured Airflow, 
+CFM
+Equivalent 
+Leakage Area, 
+ELA
+Approximate 
+ACH50
+50 Pa 25 Pa
+No change/existing 8 2,889 1,848 160.6 9.5
+Pre-ASHP Installation 18 2,521 1,775 140.1 9.1
+During ASHP 
+Installation 4 2,567 1,429 142.8 10.1
+Post-ASHP Installation 4 1,928 1,138 107.0 8.5
+Overall 34 2,543 1,676 141.4 9.2
+1 National Association for State Community Services Programs. Blower Door Testing. Accessed February 2022. 
+https://nascsp.org/wp-content/uploads/2018/02/van-der-meer_blower-door-testing.pdf 
+2 Cadmus conducted blower door tests or collected contractor blower door test reports for 34 of the 43 sites. 
+[[page 16]]
+Comparison of Home Leakiness and 
+Comfort Satisfaction
+16
+Cadmus compared participating customer survey responses with measured home insulation 
+levels from onsite blower door tests in ACH50. On average, participants reported very high 
+satisfaction levels with heating and cooling performance, regardless of measured 
+leakiness. The lowest individual satisfaction score was a ‘5’ from a home with a 12.5 ACH50. 
+
+[[page 17]]
+Comparison of Backup Fuel System 
+Usage and Leakiness1
+17
+We compared leakiness to backup fuel system utilization for 22 homes where both data points 
+were available. The results of this limited sample show that primary with backup homes had 
+much higher backup fuel utilization and slightly higher leakiness (10% higher) than whole-
+home sites.
+Application Number 
+of Sites
+Average 
+Backup 
+Utilization1
+ACH50
+Primary w/ 
+Backup 13 37% 8.9
+Whole-Home 9 16% 8.1
+1 Where there were multiple backup fuel systems at one site, this plot reflects the system with the 
+highest utilization.  
+[[page 18]]
+Objective 2: Are ccASHP systems 
+efficiently delivering heating and 
+cooling?
+[[page 19]]
+Heating and Cooling Energy Use Intensity
+19
+Whole-home heating applications were 23% more energy intensive than primary 
+with backup applications. On average, heating energy use intensity (EUI) is almost
+10 times higher than cooling EUI. 
+Application Conditioned 
+Area, sq. ft
+Number 
+of Homes
+Heating Cooling
+Avg. ASHP System 
+Energy Use, kWh
+EUI, 
+kWh/sq. ft.
+Avg. ASHP System 
+Energy Use, kWh
+EUI, 
+kWh/sq. ft.
+Primary w/ Backup
+500 to 1,000 1 4,018 4.46 765 0.38
+1,000 to 1,500 3 3,889 3.14 348 0.23
+1,500 to 2,000 6 3,154 1.64 326 0.17
+2,000 to 2,500 5 4,589 1.89 434 0.25
+2,500 to 3,000 3 7,143 2.51 206 0.14
+3,000 to 3,500 1 7,268 2.27 125 0.06
+3,500 to 4,000 1 6,244 1.73 2,330 0.78
+Primary w/ Backup - 20 4,625 2.24 450 0.23
+Whole-Home
+500 to 1,000 1 3,603 3.60 340 0.26
+1,000 to 1,500 8 3,882 2.73 563 0.29
+1,500 to 2,000 8 4,336 2.41 462 0.24
+2,000 to 2,500 4 8,433 3.60 665 0.38
+2,500 to 3,000 1 11,802 3.93 1,704 1.22
+3,000 to 3,500 1 454 0.15 101 0.04
+Whole-Home - 23 5,015 2.75 565 0.31
+Overall - 43 4,833 2.51 512 0.27
+[[page 20]]
+Heating Season Utilization per 
+Outdoor Unit
+20
+Application System Type Number of 
+Outdoor Units Average Utilization
+Primary with
+Backup
+Single-zone, Ductless, Wall 8 36%
+Single-zone, Ducted, "Compact Ducted" 1 6%
+Single-zone, Ducted, Centrally Ducted 9 39%
+Multi-zone, Ductless 18 60%
+Overall 35 48%
+Whole-Home
+Single-zone, Ductless, Wall 11 73%
+Single-zone, Ductless, Floor 1 80%
+Single-zone, Ductless, Ceiling 1 61%
+Single-zone Ducted, Centrally Ducted 6 43%
+Multi-zone, Ductless 16 74%
+Multi-zone, Ducted 1 49%
+Multi-zone, Mix of Ductless and Ducted 1 98%
+Overall 38 68%
+Overall 73 58%
+ASHP systems used as the sole-source of heating were in-use 68% of metered hours during 
+the heating season. Primary with backup systems were used 48% of the time. Whole-home 
+systems operated 42% more often than primary with backup systems, on average. 
+[[page 21]]
+Heating Season Utilization During 
+Metering Period
+21
+While whole-home systems were utilized more than primary with backup systems on average, 
+individual system heating season utilization was highly variable. There was little correlation 
+between rated capacity and utilization. 
+
+[[page 22]]
+Cooling Season Utilization per Outdoor Unit
+22
+Application System Type Number of 
+Outdoor Units Average Utilization
+Primary with
+Backup
+Single-zone, Ductless, Wall 8 18%
+Single-zone, Ducted, "Compact Ducted" 1 0.1%
+Single-zone, Ducted, Centrally Ducted 8 29%
+Multi-zone, Ductless 18 26%
+Overall 35 24%
+Whole-Home
+Single-zone, Ductless, Wall 11 20%
+Single-zone, Ductless, Floor 1 3%
+Single-zone, Ductless, Ceiling 1 42%
+Single-zone Ducted, Centrally Ducted 6 26%
+Multi-zone, Ductless 16 33%
+Multi-zone, Ducted 1 55%
+Multi-zone, Mix of Ductless and Ducted 1 9%
+Overall 37 27%
+Total 72 26%
+Average cooling season utilization per outdoor unit was 56% less than heating season 
+utilization. Again, systems installed in whole-home applications were used more than 
+primary with backup systems (13% more), but overall average utilization was only 26%. 
+This result indicates that these participants may be using their ASHP systems primarily for 
+heating, rather than cooling.
+[[page 23]]
+Comparison of Heating Performance by System 
+Type and Indoor Heads
+23
+Ductless multi-zone systems with more than three indoor heads (some with branch-box control) had the 
+lowest average seasonal heating performance during the metering period. Anecdotal feedback from the 
+advisory committee and Cadmus’ experience indicate that the more zones a multi-zone system serves, the 
+higher the likelihood that some zones may be oversized, causing a greater differential between actual load and 
+capacity.
+In contrast, ductless single-zone systems had the highest measured performance. 
+System Type Description Number of Indoor 
+Heads
+Number of Outdoor 
+Units
+Average 
+Utilization, %
+Average Seasonal Heating 
+Performance, sCOP
+Ductless
+Single-zone, Wall 1 19 57% 3.23
+Single-zone, Ceiling 1 1 61% 1.85
+Single-zone, Floor 1 1 80% 3.20
+Multi-zone 2 15 66% 2.25
+Multi-zone 3 13 72% 2.57
+Multi-zone 4 3 45% 1.12
+Multi-zone 5 3 70% 1.52
+Mixed Multi-zone Mix of Non-ducted 
+and Ducted 3 1 98% 1.97
+Ducted1
+Single-zone, Central 1 15 41% 2.23
+Single-zone, Compact 1 1 6% N/A
+Multi-zone 2 1 49% 2.29
+Individual Outdoor Unit 73 58% 2.49
+Overall Site-Level 43 - 2.39
+1 Note that electric resistance demand is not included in the calculation of ducted system performance. 
+Actual performance for five of the ducted systems with ER is expected to be lower. 
+[[page 24]]
+Comparison of Measured Seasonal Heating 
+Performance by System Type1
+24
+Ductless, single-zone, wall and floor-mounted systems had the highest metered average seasonal heating 
+performance in both applications.  
+Ducted systems in primary with backup applications performed better than in whole-home applications, likely 
+due in part to being utilized for heating less often during the coldest times of the year.
+1 Note that electric resistance demand is not included in the calculation of ducted system performance. Actual performance for 
+five of the ducted systems with ER is expected to be lower. 
+
+[[page 25]]
+Overall Average Seasonal Heating 
+Performance1 by Outdoor Air Temperature Bin
+25
+As expected, the overall average heating performance for the sampled 
+homes peaked between 40-50°F, with a pronounced drop at 10°F.
+1 Calculated heat pump performance does not include intervals when electric resistance was 
+used. The actual performance for the five ducted sites with ER is expected to be lower.
+
+[[page 26]]
+Measured Heating Load Comparisons
+26
+• Cadmus calculated space heating load using metered indoor unit supply and 
+return temperatures and fan airflow.
+• We calculated the average measured heating load during cold outdoor air 
+conditions between 0-15°F and during a seven-hour ‘cold snap’ for each state.
+• The ‘cold snap’ was defined as 12 AM to 7 AM on January 31st for MA sites and 
+February 12th for NY sites. The average cold snap temperature for MA sites was 
+4.3°F and the average cold snap temperature for NY sites was 8.3°F. 
+• The next two slides compare the calculated space heating load during these two 
+conditions to the installed system maximum capacity based on NEEP test 
+procedures at 5°F, contractor design load, and Cadmus’ Manual J heating load.
+• When reviewing this data, please note the following:
+• The average design temperature for the 24 Massachusetts sites is 5.2°F 
+and 1.8°F for New York sites.
+• 2020/2021 was a mild winter and the ‘cold snap’ load may be 
+underestimating peak load. While the average temperature for MA sites was 
+close to design conditions, there was no prolonged period at design 
+conditions during this winter. 
+• The ‘cold snap’ load calculation includes intervals when the system was not 
+delivering heat (0 Btu/hr). The instantaneous peak load is expected to be 
+higher. 
+[[page 27]]
+Comparison of Contractor Heating Load to Measured 
+Heating Load1
+27
+1 For the 18 project sites where contractor Manual Js were provided
+2 Cold snap defined as 12 AM to 7 AM on January 31st (MA sites) and February 12th (NY sites). The average cold snap temperature 
+for MA sites was 4.3°F and the average cold snap temperature for NY sites was 8.3°F. 
+Compared to the average measured heating load during cold outdoor air temperatures (0 to 15F) and extreme cold snaps, 
+contractors do not appear to be under-sizing systems. Cadmus’ Manual J heating load, which incorporates blower door test 
+results, may be overstating the actual load. Oversized systems will result in higher upfront costs and potential performance issues.
+However, the average heating load for whole-home systems was 43% of the contractor’s design load during the extreme cold snap 
+(noting that the average incorporates intervals of zero load). 
+Application Conditioned 
+Area, sq. ft Sites
+Average NEEP 
+Total System  
+Capacity (5°F), 
+Btu/hr 
+Contractor 
+Design 
+Heating 
+Load, Btu/hr
+Cadmus 
+Manual J 
+Heating Load, 
+Btu/hr
+Cadmus / 
+Contractor 
+Heating Load, 
+%
+0-15F Average 
+Measured 
+Heating Load, 
+Btu/hr
+Cold Snap2
+Average 
+Measured 
+Heating Load, 
+Btu/hr
+Cold Snap / 
+Contractor 
+Design Load, 
+%
+Primary w/ Backup 1,500 to 2,000 1 30,100 59,886 54,230 91% 11,207 7,640 14%
+Primary w/ Backup 2,000 to 2,500 2 54,834 58,392 52,641 93% 21,623 11,721 22%
+Primary w/ Backup 3,000 to 3,500 2 60,535 72,008 89,451 126% 33,416 32,232 35%
+Primary w/ Backup 5 52,167 64,137 67,683 106% 24,257 19,109 26%
+Whole-Home 1,000 to 1,500 2 43,000 38,344 38,575 99% 14,796 14,455 41%
+Whole-Home 1,500 to 2,000 4 47,900 40,460 49,012 123% 25,106 23,417 51%
+Whole-Home 2,000 to 2,500 3 45,533 42,714 51,275 118% 17,027 19,907 40%
+Whole-Home 2,500 to 3,000 2 67,920 57,1623 80,785 141% 24,042 22,967 28%
+Whole-Home 3,000 to 3,500 2 43,650 41,624 63,659 155% 36,628 36,266 62%
+Whole-Home 13 49,026 43,403 55,070 126% 21,882 21,917 43%
+Overall 18 49,899 49,163 58,574 120% 22,624 21,039 38%
+[[page 28]]
+Comparison of AHRI Heating Capacity to Measured Heating 
+Load per Outdoor Unit
+28
+On average, metered data indicates that most systems operate well below their NEEP rated 
+maximum capacity (at 5°F) during extreme cold periods, but systems in whole-home applications 
+operated at 38% higher load than systems in primary with backup applications. 
+In whole-home applications, systems <30,000 Btu/hr appear to operate closer to design 
+capacity, suggesting they may be more appropriately sized for the zone they serve.
+System 
+Type
+NEEP ccASHP Capacity 
+Range (5°F), Btu/hr
+Number of 
+Outdoor 
+Units
+Population Average 
+NEEP Capacity, 
+Btu/hr
+0-15°F Average 
+Heating Load, 
+Btu/hr
+Cold Snap1 Average 
+Measured Heating Load, 
+Btu/hr
+Cold Snap Average 
+Measured Heating Load / 
+NEEP Capacity
+Min Max
+Primary w/ 
+Backup
+10,000 20,000 6 15,610 5,748 1,929 12%
+20,000 30,000 17 24,696 13,262 10,575 43%
+30,000 40,000 9 35,092 11,766 6,279 18%
+40,000 50,000 4 44,568 13,683 12,575 28%
+Overall 35 27,929 11,812 8,466 30%
+Whole-
+Home
+0 10,000 2 8,700 2,011 0 0%2
+10,000 20,000 11 14,118 10,709 11,427 81%
+20,000 30,000 13 25,554 15,886 15,634 61%
+30,000 40,000 3 38,652 16,436 10,388 28%
+30,000 50,000 6 46,333 23,258 21,515 46%
+50,000 60,000 2 55,420 22,148 20,700 37%
+Overall 38 27,363 14,834 13,955 51%
+Overall 73 27,634 13,300 11,168 40%
+1 Cold snap defined as 12 AM to 7 AM on January 31st (MA sites) and February 12th (NY sites). The average cold snap 
+temperature for MA sites was 4.3°F and the average cold snap temperature for NY sites was 8.3°F.  
+2 Systems were not used during the cold snap period.
+[[page 29]]
+ASHP System Performance vs ACH50
+29
+Measured ccASHP system seasonal heating performance is not closely tied to the 
+measured leakiness of a home.  
+Home leakiness directly impacts space conditioning load, but many other factors 
+influence performance. However, weatherization measures to reduce leakiness will 
+help improve comfort and potentially provide fuel cost savings.
+
+[[page 30]]
+Building Weatherization Timing
+Comparison of ASHP System Heating Load, Demand, and Performance
+30
+While there was no correlation between leakiness and seasonal heating performance, in this 
+sample we observed higher average seasonal heating performance in homes that 
+completed insulation upgrades than those without any insulation upgrades, though many of 
+these homes still had relatively high air leakage rates after completing weatherization work.
+However, we cannot draw conclusions from this small sample. 
+Weatherization 
+Upgrade Timing
+Number 
+of Homes
+Cold Snap 
+Heating Load per 
+Conditioned 
+Area, Btu/hr/sq. 
+ft.
+Average 
+Operating 
+Demand per 
+Conditioned 
+Area, kW/1,000 
+sq. ft.
+Average Utility 
+Peak Demand 
+per Conditioned 
+Area, kW/1,000 
+sq. ft.1
+Average 
+Seasonal 
+Heating 
+Performance, 
+COP
+No change to existing 
+insulation 12 9.44 1.10 0.76 2.25
+Before ASHP system 
+installation 20 9.75 1.02 1.01 2.43
+During ASHP system 
+installation 6 7.40 0.82 0.89 2.42
+After ASHP system 
+installation 5 7.11 1.13 0.61 2.60
+Overall 43 8.90 0.98 0.88 2.39
+1 Electric resistance demand is including the average operating and average utility peak demand calculations for 
+ducted systems. 
+[[page 31]]
+Cost Effectiveness Comparison
+31
+Application Fuel Type N Sq. Ft.
+Avg. 
+Installation 
+Cost1
+Avg. Installed 
+Cost per Sq. Ft.
+Annual Cost 
+Savings1
+Annual Cost 
+Savings per 
+Sq. Ft.
+Primary w/ 
+Backup
+All 20 2,167 $17,695 $8.50 $280 $0.20
+Non-Gas 15 2,156 $17,031 $7.90 $461 $0.32
+Gas 5 2,200 $19,686 $8.95 -$262 -$0.15
+Whole-Home1
+All 20 1,891 $18,755 $10.31 $264 $0.17
+Non-Gas 101 1,815 $20,207 $11.13 $682 $0.42
+Gas 10 1,968 $17,142 $9.18 -$153 -$0.09
+Total 40 2,029 $18,211 $9.38 $272 $0.18
+1 Missing installation cost data for one whole-home site and energy savings were not able to be estimated 
+for three whole-home sites.
+Average installation costs were 22% higher in whole-home sites than primary with backup relative to 
+square footage. Energy cost savings were higher for whole-home sites, though this was driven in part 
+by differences in energy costs between states and more New York whole-home sites.
+We estimated an energy cost penalty for natural gas customers in this sample, which is 
+unsurprising due to the high cost of electricity and relatively low cost of natural gas in the Northeast. 
+This result supports targeting delivered fuel and electric resistance heating customers for ccASHP
+systems first where economics are a priority. 
+[[page 32]]
+Utility Bill Impacts
+32
+Most respondents’ combined utility bills (electric, gas, propane, oil, etc.) were 
+lower since installing an ASHP.
+90% of respondents reported a change in 
+their overall energy bills since installing an 
+ASHP.
+76% said the change was the same as 
+what they expected.
+Respondents who installed weatherization 
+measures were significantly more likely to 
+see a decrease of $100 or more per 
+month (26%) compared to respondents 
+who did not install weatherization (19%).
+Respondents who had electric heating 
+prior to installing their ASHP were more 
+likely to see a decrease of at least $50 
+(67%) compared to gas (32%) and 
+delivered fuel (51%) respondents.
+Change in Overall Utility Bills since 
+ASHP Installation
+7%
+10%
+8%
+5%
+21%
+24%
+24%
+0% 5% 10% 15% 20% 25% 30%
+$100+ higher per month
+$50 - $99 higher per month
+$11 - $49 higher per month
+Within $10 per month
+$11 - $49 lower per month
+$50 - $99 lower per month
+$100+ lower per month
+[[page 33]]
+Objective 3: How does performance 
+differ between whole-home and 
+primary with backup applications?
+[[page 34]]
+Heating Season Metered Data Results
+34
+Application System 
+Type Homes Avg. 
+Utilization
+Avg. ccASHP 
+System Heating 
+Season 
+Demand, 
+kW/1,000 sq. ft.
+Avg. ccASHP 
+System Utility 
+Winter Peak1
+Demand, 
+kW/1,000 sq. ft.
+Measured Average 
+Seasonal Heating 
+Performance,2
+sCOP
+AHRI Rated  
+sCOP (from 
+HSPF)
+Measured 
+sCOP/ 
+Rated sCOP
+Primary w/ 
+Backup
+Ductless 14 50% 0.60 0.77 2.23 3.23 69%
+Ducted 5 38% 0.38 0.64 2.75 3.06 77%
+Mixed 1 48% 0.42 0.29 2.55 3.02 84%
+Total 20 48% 0.54 0.71 2.38 3.18 71%
+Whole-
+Home
+Ductless 13 75% 0.89 1.12 2.80 3.28 84%
+Ducted 6 43% 0.54 0.70 2.09 3.16 60%
+Mixed 4 69% 0.99 1.15 1.90 3.33 57%
+Total 23 68% 0.82 1.03 2.41 3.26 72%
+Total 43 58% 0.69 0.88 2.39 3.22 72%
+1 Utility Winter Peak defined as 5:00 PM to 7:00 PM daily, December, January, and February.
+2 Note that electric resistance demand is not included in the calculation of ducted system performance. Actual performance for five 
+of the ducted systems with ER is expected to be lower. 
+While on average, there was no significant difference in seasonal heating performance between whole-home 
+and primary w/ backup applications, ductless systems tended to perform better in whole-home applications 
+while ducted systems performed better in primary w/ backup applications. Ducted systems in primary with 
+backup applications tend not to have electric resistance elements.   
+[[page 35]]
+Heating Season Metered Data Results
+35
+1 New York State DPS. Technical Reference Manual (TRM). 
+https://www3.dps.ny.gov/W/PSCWeb.nsf/All/72C23DECFF52920A85257F1100671BDD
+Study 
+Results
+Tentative 
+Conclusions
+• ccASHP systems used in whole-home applications were 40-50% more demand 
+intensive per conditioned area than in primary with backup applications. 
+• Overall average ccASHP system seasonal heating performance of 2.39 sCOP was in 
+line with results from other studies, with slightly higher metered performance for 
+whole-home systems. 
+• Ducted system utilization includes heat pump and backup ER usage, but the 
+performance calculation reflects the heat pump power only (excludes ER). The actual 
+performance of the five ducted systems with ER is expected to be lower. 
+• We used the AHRI-rated heating seasonal performance factor (HSPF) as a rough 
+comparison metric for metered seasonal heating performance. 
+• For New York sites, we calculated the expected seasonal heating performance using the 
+methodology in the New York State TRM V8.1 On average, those sites would have been 
+expected to have an sCOP of 2.84, so the metered seasonal heating performance 
+was ~16% lower than expected under the TRM. 
+• In-field ccASHP seasonal heating performance is only slightly lower than expected when 
+AHRI ratings are normalized for the Northeast climate
+• Ductless whole-home systems may perform better than ductless primary with backup 
+systems despite operating at higher/colder hours due to various factors: 
+• Continuous operation vs. more cycling during hours well below peak heating needs
+• More representative system sizing for actual space heating needs
+• Ducted systems perform less efficiently in whole-home configurations, possibly because 
+of high electric resistance usage compared to primary with backup systems, since the 
+backup fuel system would operate during many of the hours when ER would otherwise be 
+used.
+[[page 36]]
+Objective 4: What are the electric 
+grid impacts of ccASHP market 
+scale up?
+[[page 37]]
+Heating Season Demand Impacts 
+37
+While the average demand during the utility Winter Peak period was only 
+0.88 kW/1,000 square feet, the average hourly maximum demand was as 
+high as 3.48 kW/1,000 square feet for mixed sites (both ducted and 
+ductless systems) and instantaneous site-level demand for one mixed site 
+was 9.12 kW/1,000 square feet.
+System Type
+Number 
+of 
+Homes
+Average 
+Conditioned 
+Area, 
+sq. ft.
+Total System 
+Electric 
+Energy Use, 
+kWh/
+1,000 sq. ft
+Average ASHP 
+Operating 
+Demand, 
+kW/1,000 sq. ft.
+Average 
+Maximum 
+Hourly Demand, 
+kW/1,000 sq. ft.
+Average Utility 
+Winter Peak 
+Demand,1
+kW/1,000 sq. ft.
+Site-Level 
+Maximum 2-
+Minute Interval 
+Demand, 
+kW/1,000 sq. ft.
+Ductless 27 1,878 2,728 0.91 2.11 0.90 5.47
+Ducted 11 2,281 1,453 1.10 3.04 0.64 8.47
+Mixed 5 1,907 3,468 1.05 3.48 1.04 9.12
+Overall 43 1,984 2,436 0.98 2.52 0.88 -
+1 Utility Winter Peak demand period defined as 5:00 PM to 7:00 PM daily during December, January, and 
+February.
+[[page 38]]
+Whole-Home and Primary with Backup System 
+Load Shape Comparison: New York Cold Snap Period1
+38
+1 The New York three-day cold snap 
+was defined as February 11th
+through February 13th (midnight to 
+midnight). The average outdoor air 
+dry bulb temperature across the 19 
+sites was 17.1°F during the three-
+day period.
+Electric grid impacts from 
+wide-scale residential heating 
+electrification may occur in 
+the early morning hours when 
+residents are waking up, 
+implying the use of overnight 
+space temperature setbacks. 
+
+[[page 39]]
+Whole-Home and Primary with Backup System 
+Load Shape Comparison: New York Cold Snap Period1
+39
+1 New York cold snap defined as February 11th through 13th (midnight to midnight).
+2 Note that electric resistance demand is not included in the calculation of ducted system performance. Actual 
+performance for five of the ducted systems with ER is expected to be lower. 
+Summary Parameter Application
+Whole-Home Primary w/ Backup
+Number of Homes 12 7
+Average Metered Demand, kW 2.77 2.21
+Average Maximum Demand per Hour (2-min interval), kW 4.45 4.00
+Maximum Site-Level Demand (2-min interval), kW 17.25 14.11
+Average Measured ASHP Heating Load, Btu/hr 20,598 19,859
+Average Seasonal Heating Performance, COP 2.24 2.36
+Average Outside Air Temperature, °F 17.2 16.9
+Average Windspeed, mph 4.9 5.4
+Heating performance2 is 
+relatively steady throughout 
+the day. 
+Systems with electric 
+resistance elements will have 
+the greatest peak demand 
+impact, reaching over 15 kW. 
+
+[[page 40]]
+Whole-Home and Primary w/ Backup System Load 
+Shape Comparison: Massachusetts Cold Snap Period1
+40
+1 The Massachusetts three-day cold 
+snap was defined as January 29th
+through 31st (midnight to midnight). 
+The average outdoor air dry bulb 
+temperature across the 24 sites 
+was 12.9°F during the three-day 
+period.
+On average, systems in whole-
+home applications will have a 
+greater peak demand impact.
+MA sites showed reduced early 
+morning demand peak than NY 
+sites, potentially due to Mass 
+Save’s set it-and-forget-it 
+messaging. 
+
+[[page 41]]
+Whole-Home and Primary w/ Backup System Load 
+Shape Comparison: Massachusetts Cold Snap Period1
+41
+1 Massachusetts cold snap defined as January 29th through 31st (midnight to midnight). 
+2 Note that electric resistance demand is not included in the calculation of ducted system performance. Actual performance for five 
+of the ducted systems with ER is expected to be lower. 
+Summary Parameter Application
+Whole-Home Primary w/ Backup
+Number of Homes 9 13
+Average Metered Demand, kW 3.11 1.81
+Average Maximum Demand per Hour (2-min interval), kW 4.88 3.13
+Maximum Site-Level Demand (2-min interval), kW 20.58 12.97
+Average Measured ASHP Heating Load, Btu/hr 20,265 10,701
+Average Seasonal Heating Performance, COP 2.55 1.67
+Average Outside Air Temperature, °F 13.6 12.5
+Average Windspeed, mph 8.2 9.2
+Heating performance 
+within applications is 
+relatively steady 
+throughout the day. 
+
+[[page 42]]
+Cooling Season Demand Impacts 
+42
+The metered average utility Summer Peak demand impact from ccASHPs 
+in cooling mode of 0.21 kW/1,000 square feet was 76% less than the 
+average utility Winter Peak demand impact of ccASHPs in heating mode 
+(0.88 kW/1,000 square feet). 
+However, the site-level, instantaneous demand impact for ductless systems 
+was almost 20% higher in cooling mode than heating mode.
+System Type
+Number 
+of 
+Homes
+Average 
+Conditioned 
+Area, 
+sq. ft.
+Total System 
+Electric 
+Energy Use, 
+kWh/
+1,000 sq. ft2
+Average ASHP 
+Operating 
+Demand, 
+kW/1,000 sq. ft.
+Average 
+Maximum 
+Hourly Demand, 
+kW/1,000 sq. ft.
+Average Utility 
+Summer Peak 
+Demand,1
+kW/1,000 sq. ft.
+Site-Level 
+Maximum 2-
+Minute Interval 
+Demand, 
+kW/1,000 sq. ft.
+Ductless 27 1,878 293 0.44 1.16 0.21 6.52
+Ducted 11 2,281 217 0.56 1.27 0.23 2.43
+Mixed 5 1,907 181 0.46 1.52 0.17 3.54
+Overall 43 1,984 258 0.49 1.23 0.21 -
+1 Utility Summer Peak demand period defined as 1:00 PM to 5:00 PM daily during June, July, and August.
+2 For reference, the Massachusetts 2020 Technical Reference Manual estimates the average residential home 
+cooling energy consumption for a central air conditioning system with 16.5 SEER to be 823 kWh/year.    
+[[page 43]]
+Objective 5: What continued 
+challenges with customer and contractor 
+experience need to be addressed to 
+scale the market?
+[[page 44]]
+Stakeholder Interview Feedback
+Residential Electrification
+44
+Economic Concerns
+customers may have net higher energy bills due to lower fuel 
+costs
+TechnologyAwareness and Reliability
+lack of trust in system reliability and general lack of 
+awareness of technology for both customers and contractors
+Costly Grid Upgrades
+electric utilities may need to invest in infrastructure upgrades 
+to meet new winter peak demand
+Existing Building Stock
+aging northeast building stock presents challenges to whole-
+home ASHP systems
+Conflicting Priorities 
+gas utilities may lose customers resulting in stranded assets
+Improved Customer Comfort
+appropriately sized systems: temperature control, reduced 
+noise, improved internal air emissions
+Customer Relationship Building
+strengthen electric utility relationship with customers 
+Reduce Electricity Costs
+defray cost of utility distribution by selling more energy for 
+same distribution
+Reduce Distributed Energy Generation 
+Impacts
+use energy generated at local nodes, i.e., solar energy coming 
+back on the grid
+Reduce Demand for Additional Gas Pipelines
+particular concern in downstate New York
+Challenges Benefits
+[[page 45]]
+Stakeholder Interview Recommendations
+45
+• Encourage weatherization measures 
+• Provide more opportunities for New Construction whole home 
+systems
+• Increase incentives and consider upstream incentives 
+• Develop electric heating rates to encourage off-peak energy use
+• Train contractors to properly size systems
+• Educate customers on benefits of ccASHPs for heating
+• Push-back on policies on integrated controls and backup systems
+• Recommending integrated controls encourages customer to retain backup 
+fuel systems 
+• Integrated controls are costly and difficult to install, even more 
+difficult to operate correctly
+• But retaining existing system may be simplest way to get customers 
+to invest in systems
+[[page 46]]
+Customer Concerns
+Whole-Home Primary w/ Backup Supplemental
+System cost 60% 61% 64%
+ASHP performance 
+at low outside temps 44% 62% 43%
+Understanding how 
+ASHP works 45% 40% 38%
+System maintenance 28% 38% 47%
+ASHP ability to 
+evenly cool or heat 
+the required area
+31% 34% 35%
+Potential energy 
+savings 24% 36% 24%
+ASHP reliability 27% 31% 23%
+46
+Whole-home customers noted fewer concerns than other customer types prior 
+to installation, but performance and cost were still top of mind.
+Question C13: Did you have any questions/concerns about the air source heat pump prior to the installation? 
+Please select all that apply. [MULTI-SELECT] 
+[[page 47]]
+Key Findings from Contractor 
+Interviews
+47
+• Contractors are overwhelmingly recommending cold-climate models; 
+ductless mini-splits still dominate over ducted systems. 
+• Primary with backup systems are most popular in both MA and NY 
+• Main barriers for ducted systems are higher cost and logistical limitations based 
+on home features
+• Customers report few performance issues with cold-climate models, thanks 
+in part to the education and best practices contractors provide.
+• Customer demand for ASHPs has increased in recent years, driven by 
+improved technology, widespread adoption, and rebates. 
+• Most discussed benefits include the higher efficiency and lower environmental 
+impact of ASHPs
+• MA contractors appreciate rebate programs for driving installations of 
+ASHPs, with satisfaction being highest with the Mass Save Program.
+• NY contractors expressed more room for improvement with rebate 
+programs, citing opportunity to improve program design and delivery.
+• Contractors had positive feedback for trainings, but reported challenges 
+with recruiting trained, qualified staff. 
+[[page 48]]
+Contractor Interviews:
+ASHPs Adoption Barriers 
+48
+Barrier General
+Barriers 
+Specific 
+to Central 
+System
+Specific to 
+Ductless 
+System
+Specific to ASHP 
+as Primary 
+Heating System
+Specific to 
+Cold-Climate 
+Models
+Cost    
+Aesthetics  
+Misconceptions about 
+the technology   
+Customer desires 
+(e.g., want cooling only) 
+Building logistics 
+(e.g., lack of ducts, 
+electrical power, and/or 
+physical space) 
+   
+Many NY contractors (6 out of 8 interviewed) reported that customers did not believe that ASHP 
+technology would effectively heat/cool their home, compared to 3 out of 11 contractors in MA. 
+[[page 49]]
+Conclusion
+49
+[[page 50]]
+Key Takeaways
+50
+• Customers are generally satisfied with ccASHP performance, but whole-home 
+customers tended to have slightly lower satisfaction.
+• Whole-home systems tend to be utilized more often than primary with backup 
+systems. 
+• Whole-home systems tended to be more expensive to install than primary with 
+backup systems.
+• The overall average seasonal heating performance of 2.39 sCOP is in line with 
+similar studies. 
+• On average, seasonal heating performance was similar between primary with 
+backup and whole-home applications, but varied significantly by home and 
+system type, influenced by many factors.
+• Winter Peak demand impacts of wide-scale ccASHP adoption will likely occur 
+during early morning hours, not during traditional utility peak periods.
+• Whole-home applications with electric resistance elements will have the greatest 
+electric grid impact during extreme cold periods.
+• Heating season demand impacts will be greater than cooling demand impacts. 
+• Contractors reported installation costs, aesthetics, customer misconceptions, and 
+building logistics as the top cited barriers to wide-scale ccASHP deployment. 
+• A customer’s existing fuel type is an important factor to cost effectiveness. 
+Natural gas customers will likely see overall utility bills increase by switching to 
+electric ccASHP systems for heating due to the high cost of electricity relative to 
+natural gas in the Northeast.
+[[page 51]]
+Conclusion
+• Policymakers and utilities involved in the project seek to understand whether study 
+results indicate a recommendation to focus on primary w/ backup vs. whole-home
+applications in ASHP programs and policies. 
+• However, the study sample size (43 homes) is insufficient to draw statistically 
+significant conclusions, and observations relevant to our research objectives should 
+be considered as directional. 
+• With regards to our research objectives comparing primary with backup and whole-
+home systems:
+(1) Comfort differences reported by customers were minimal
+(2) Observed differences in seasonal heating efficiency were minimal
+(3) Electrical demand was higher for whole-home systems during cold periods
+• Our study data does not suggest there are significant trends that would warrant 
+policy/program decisions encouraging or discouraging whole-home systems based on 
+concerns around customer comfort or system performance. 
+• However, the observed difference in electrical grid impacts (particularly in the context 
+of mass market adoption) may be a more important factor for policymakers and 
+utilities to consider for informing policy and programmatic decisions.
+• As discussed, cold snap periods were warmer and shorter than design conditions and 
+did not reflect periods of prolonged extreme cold that could have greater impacts on 
+customer comfort and grid demand. Further study with a larger sample during such a 
+weather event may provide more definitive conclusions on comfort, performance, and 
+grid impact issues that could influence policymakers and program administrators. 
+51
+[[page 52]]
+Program and Policy Recommendations
+• Incentive levels. Based on the projects metered, most sites will not 
+achieve a payback during the system lifetime based on the incentive 
+received. Incentive levels have since increased substantially for many 
+NY and MA sites, which may enable greater savings. 
+• Energy savings. Electric resistance and propane customers were most 
+likely to see significant energy savings, as well as oil customers in NY. 
+High electricity costs limit energy savings in MA. Utility rate structures 
+(particularly in MA) with lower volumetric costs to reflect higher grid 
+utilization may improve economics, though such structures may be 
+inappropriate in the long term with increasing electrification and winter 
+peak concerns.
+52
+[[page 53]]
+Recommendations for Future ccASHP 
+Data Collection Efforts
+53
+While this study allowed us to perform in-depth analysis on a variety of 
+factors that may impact ccASHP performance in the Northeast, we 
+identified the following opportunities for future data collection studies:
+• Collect data for a larger sample to achieve statistically significant results 
+for a selected region
+• Collect data for a longer duration (possibly multiple years) to capture 
+annual variances
+• Focus on whole-home installations; it is challenging to estimate heating 
+load served by backup heating sources
+• Collect data for a tighter interval (30s -1 min) to investigate defrost 
+demand and energy use
+• Investigate multi-zone system (>3 indoor heads) and branch-box system 
+potential performance challenges
+• Collect indoor space temperature setpoints to investigate times when 
+ccASHP systems are not able to maintain setpoints

@@ -51,7 +51,7 @@ const RECORD_UNIT: Partial<Record<Fuel, 'gallons' | 'therms' | 'kwh'>> = {
 
 type Records = NonNullable<Input['building']['units'][number]['fuelRecords']>
 
-function find(list: readonly Assumption[], id: string): Estimate | null {
+export function find(list: readonly Assumption[], id: string): Estimate | null {
   const a = list.find(x => x.id === id)
   if (!a) return null
   const n = a.sampleSize === undefined ? '' : ` (n = ${a.sampleSize})`
@@ -73,13 +73,26 @@ export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly
   if (heatContent === null || efficiency === null) return null
   const bySeason = new Map<number, number>()
   for (const r of records) bySeason.set(r.year, (bySeason.get(r.year) ?? 0) + r.quantity)
-  const totals = [...bySeason.values()]
+  // Weather normalization (E3): scale each season to a normal winter by heating degree days. The hot-water part
+  // is scaled too, which overstates its weather effect slightly (about 1% of the total at an 18% share).
+  const unnormalized: number[] = []
+  const totals = [...bySeason.entries()].sort(([a], [b]) => a - b).map(([year, total]) => {
+    const actual = find(list, `heating_degree_days.ma.${year}`)
+    const normal = find(list, `heating_degree_days_normal.ma.${year}`)
+    if (actual === null || normal === null || actual.range.mid <= 0) {
+      unnormalized.push(year)
+      return total
+    }
+    return (total * normal.range.mid) / actual.range.mid
+  })
   const seasons = totals.length
   const fuelUse = estimate(
     range(Math.min(...totals), totals.reduce((s, x) => s + x, 0) / seasons, Math.max(...totals)),
     seasons >= 2 ? 'medium' : 'low',
     `from your fuel records: ${seasons} heating season${seasons === 1 ? '' : 's'}`,
   )
+  if (unnormalized.length < seasons) fuelUse.why.push('each season scaled to a normal winter using Massachusetts heating degree days (NOAA)')
+  if (unnormalized.length > 0) fuelUse.why.push(`season${unnormalized.length === 1 ? '' : 's'} ${unnormalized.join(', ')} not weather-normalized (no degree-day data)`)
   const inputs = [fuelUse, heatContent, efficiency]
   const all = mul(mul(fuelUse.range, heatContent.range), efficiency.range)
   if (hotWaterFromBoiler === false) return combine(all, inputs)
@@ -96,7 +109,7 @@ export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly
 const RESSTOCK_FUEL: Partial<Record<Fuel, string>> = { oil: 'oil', natural_gas: 'natural_gas', propane: 'propane' }
 
 /** ResStock stock estimate: fuel × vintage group, else the fuel-only group (Task 16b). */
-function stock(list: readonly Assumption[], quantity: string, fuel: Fuel | null, band: VintageBand | null): Estimate | null {
+export function stock(list: readonly Assumption[], quantity: string, fuel: Fuel | null, band: VintageBand | null): Estimate | null {
   const f = fuel === null ? undefined : RESSTOCK_FUEL[fuel]
   if (f === undefined) return null
   return (band === null ? null : find(list, `${quantity}.${f}.${band}`)) ?? find(list, `${quantity}.${f}`)
