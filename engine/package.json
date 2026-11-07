@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm test",
     "data:status": "vitest run --config vitest.status.config.ts",
-    "rules:check-drafts": "vitest run --config vitest.drafts.config.ts"
+    "rules:check-drafts": "vitest run --config vitest.drafts.config.ts",
+    "scenarios": "vitest run test/scenarios.test.ts",
+    "scenarios:record": "vitest run --config vitest.record.config.ts"
   },
   "dependencies": {
     "zod": "4.6.7"

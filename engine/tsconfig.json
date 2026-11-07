@@ -19,6 +19,7 @@
     "status",
     "vitest.config.ts",
     "vitest.status.config.ts",
-    "vitest.drafts.config.ts"
+    "vitest.drafts.config.ts",
+    "vitest.record.config.ts"
   ]
 }

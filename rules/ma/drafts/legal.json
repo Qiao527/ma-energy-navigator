@@ -1,0 +1,48 @@
+[
+  {
+    "id": "ma_105_cmr_410_written_rental_agreement",
+    "summary": "The owner provides heat, oil, electricity and gas unless the unit has its own meter or tank and a written rental agreement says the occupant pays. A landlord can't move heating cost onto a tenant unilaterally.",
+    "leaseCheck": "Check your written rental agreement: does it say the tenant pays for heat (or heating fuel), not only electricity?",
+    "disclaimer": "This is not legal advice.",
+    "resources": [
+      {
+        "url": "https://www.mass.gov/doc/2025-guide-to-landlord-tenant-rights-11182025/download",
+        "section": "Does the rent cover heat and electricity?",
+        "quote": "The landlord must pay for the heat, hot water, and electricity unless a term in the lease or other written rental agreement requires the tenant to pay for these utilities.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masslegalhelp.org/sites/default/files/2025-02/06%20Utilities%202025_0.pdf",
+        "section": "Who pays for utilities",
+        "quote": "Fuel for hot water and heat: Landlord pays unless you signed a written document saying that the tenant must pay.",
+        "lastVerified": "2026-11-06"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download",
+        "section": "410.200(A)",
+        "quote": "The owner shall provide the electricity or gas used in each dwelling unit unless: (1) Such electricity or gas is metered through a meter which serves only the dwelling unit",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download",
+        "section": "410.200(A)(2)",
+        "quote": "A written rental agreement provides for payment by the occupant.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download",
+        "section": "410.210",
+        "quote": "The owner shall provide for the oil used for heating and/or hot water in each dwelling unit unless:",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download",
+        "section": "410.200(B)",
+        "quote": "then such electricity or gas may be metered through meters which serve more than one dwelling unit.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

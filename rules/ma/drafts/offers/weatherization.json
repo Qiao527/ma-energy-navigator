@@ -1,0 +1,601 @@
+[
+  {
+    "id": "masssave_insulation_rental_unit",
+    "version": "1",
+    "programId": "masssave_weatherization",
+    "title": "100% off insulation for a rental unit",
+    "measure": "weatherization",
+    "appliesTo": "each_unit",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "renter"
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "The property owner approves the work.",
+        "satisfiedWhen": {
+          "fact": "building.ownerApproval",
+          "op": "eq",
+          "value": true
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/for-renters",
+            "section": "Resources for renters",
+            "quote": "While larger measures like weatherization and heating and cooling system upgrades require property owner approval, there are actions you can take on your own.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 100,
+      "costOf": "weatherization"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "via_landlord",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+        "section": "Landlord offer",
+        "quote": "An instant incentive of 100% off insulation upgrades for your rental property",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_insulation_owner_standard",
+    "version": "1",
+    "programId": "masssave_weatherization",
+    "title": "At least 75% off insulation for an owner-occupied home",
+    "measure": "weatherization",
+    "appliesTo": "each_unit",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "owner"
+        },
+        {
+          "fact": "building.ownership",
+          "op": "eq",
+          "value": "single_owner"
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 75,
+      "costOf": "weatherization"
+    },
+    "qualification": "minimum",
+    "recipient": "property_owner",
+    "enrollment": "via_assessment",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/home-energy-assessments",
+        "section": "Incentives",
+        "quote": "75-100% off approved insulation improvements",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_insulation_condo_all_units",
+    "version": "1",
+    "programId": "masssave_weatherization",
+    "title": "Up to 100% off insulation when every eligible condo unit takes part",
+    "measure": "weatherization",
+    "appliesTo": "each_unit",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.ownership",
+          "op": "eq",
+          "value": "condo"
+        },
+        {
+          "fact": "building.unitCount",
+          "op": "gte",
+          "value": 2
+        },
+        {
+          "fact": "unit.hasResidentialHeatingMeter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "all_eligible_units_agree",
+        "kind": "coordination",
+        "description": "Every eligible unit in the building takes part.",
+        "satisfiedWhen": {
+          "allUnits": {
+            "eligible": {
+              "ref": "condo_eligible_unit"
+            },
+            "require": {
+              "fact": "unit.participating",
+              "op": "eq",
+              "value": true
+            }
+          }
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+            "section": "Condo Owners",
+            "quote": "if all eligible units in a 2–4-unit building participate (or up to 75% off per unit if only some participate)",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "condo_eligible_definition",
+        "question": "Which units count as 'eligible' for the all-units rule? We assume units with a residential heating meter, so the number of units still needed depends on this answer.",
+        "decidedBy": "Mass Save",
+        "nextAction": "Ask the Energy Specialist, or call Mass Save at 866-527-7283.",
+        "when": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+            "section": "Condo Owners",
+            "quote": "if all eligible units in a 2–4-unit building participate",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 100,
+      "costOf": "weatherization"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "via_assessment",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+        "section": "Condo Owners",
+        "quote": "Up to 100% off recommended insulation improvements for each unit, if all eligible units in a 2–4-unit building participate (or up to 75% off per unit if only some participate) *",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+        "section": "Condo Owners footnote",
+        "quote": "*Unit must have a residential heating meter",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_insulation_condo_some_units",
+    "version": "1",
+    "programId": "masssave_weatherization",
+    "title": "Up to 75% off insulation for a condo unit",
+    "measure": "weatherization",
+    "appliesTo": "each_unit",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.ownership",
+          "op": "eq",
+          "value": "condo"
+        },
+        {
+          "fact": "building.unitCount",
+          "op": "gte",
+          "value": 2
+        },
+        {
+          "fact": "unit.hasResidentialHeatingMeter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 75,
+      "costOf": "weatherization"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "via_assessment",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+        "section": "Condo Owners",
+        "quote": "(or up to 75% off per unit if only some participate)",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_dec_weatherization",
+    "version": "2025_2027",
+    "programId": "masssave_dec",
+    "title": "100% off insulation and air sealing in a Designated Equity Community",
+    "measure": "weatherization",
+    "appliesTo": "each_unit",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": "2027-12-31"
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.isDec",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "no_rent_increase_commitment",
+        "kind": "action",
+        "description": "For rented units, the landlord signs a form committing not to raise the rent or evict for a period after receiving the incentive. The length of the period isn't published.",
+        "satisfiedWhen": {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "owner"
+        },
+        "sources": [
+          {
+            "url": "https://ma-eeac.org/wp-content/uploads/FINAL-MA-2025-2027-Plan-09-25-24-v2.pdf",
+            "section": "Section 1: Equity, designated equity communities (pp. 29–30, 117)",
+            "quote": "Landlords will be required to sign a form – like what is currently required in the Low-Income program—committing not to raise renter or evict tenants for a period following the receipt of program incentives.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "For rented units, the landlord approves the work.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "unit.occupancy",
+              "op": "eq",
+              "value": "owner"
+            },
+            {
+              "fact": "building.ownerApproval",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Offers for rental properties and landlords in Designated Equity Communities",
+            "quote": "Landlords must provide approval for upgrades.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 100,
+      "costOf": "weatherization"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "via_assessment",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+        "section": "Lower energy bills—at no cost",
+        "quote": "If your home is in a Designated Equity Community (DEC), you qualify for 100% off weatherization upgrades, including insulation and air sealing, when recommended by an Energy Specialist during a Home Energy Assessment.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_income_eligible_weatherization",
+    "version": "2026_27",
+    "programId": "masssave_income_eligible",
+    "title": "No-cost weatherization through the Income Eligible Program",
+    "measure": "weatherization",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2026-10-01",
+      "until": "2027-09-30"
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "incomeAtMost": "masssave_income_eligible_2026_27"
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 100,
+      "costOf": "weatherization"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs",
+        "section": "Incentives",
+        "quote": "Installation of additional attic, wall, and basement insulation",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_enhanced_weatherization",
+    "version": "2026_27",
+    "programId": "masssave_enhanced",
+    "title": "No-cost weatherization with Enhanced (moderate-income) offers",
+    "measure": "weatherization",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2026-10-01",
+      "until": "2027-09-30"
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "incomeAbove": "masssave_income_eligible_2026_27"
+        },
+        {
+          "incomeAtMost": "masssave_enhanced_2026_27"
+        },
+        {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "owner"
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "fact": "building.gasUtility",
+              "op": "in",
+              "value": [
+                "eversource",
+                "national_grid",
+                "unitil",
+                "liberty",
+                "berkshire_gas"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [
+      {
+        "id": "enhanced_local_limit",
+        "question": "Income limits vary by area. Does this household's income qualify where it lives?",
+        "decidedBy": "Mass Save income verification",
+        "nextAction": "Use Mass Save's online income qualification tool or call 888-714-3990.",
+        "when": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/residential/programs-and-services/income-based-offers",
+            "section": "Income Qualifications",
+            "quote": "Enter your zip code to find the household income limits specific to your area.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 100,
+      "costOf": "weatherization"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "insulation",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/save-with-enhanced-incentives",
+        "section": "Incentives",
+        "quote": "No-cost weatherization upgrades",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

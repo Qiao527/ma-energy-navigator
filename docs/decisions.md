@@ -2,6 +2,27 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Phase 1, milestone 4: drafting workflow, rule drafts, standard scenarios)
+
+- **Technical:** approvals are a ledger `rules/ma/approvals.json` keyed by each
+  file's sha256. `loadRuleSet` refuses any active rule file whose content has no
+  approval, so a one-byte change needs re-approval. `drafts/` is never loaded except in
+  the check's preview mode. Why: "never add an active rule directly" becomes enforced, not
+  a convention.
+- **Technical:** `tools/approve_rules.py` (run by Qiao only) approves a file only
+  if its hash matches a passing `npm run rules:check-drafts` (`drafts/CHECK.json`).
+- **Technical:** the quote check compares against saved text snapshots in
+  `rules/ma/sources/` (captured with `tools/capture_source.py`). Normalization: NFKC,
+  collapsed whitespace, no space before punctuation (links in web pages leave one).
+  Nothing else is fuzzy.
+- **Technical:** standard scenarios live in `scenarios/ma/*.json` with fixed dates
+  and fixed quantities. `npm run scenarios` compares a stable summary (status, shown,
+  reason, missing, prerequisites, coordination counts, value, questions, steps, upcoming).
+  Baselines are recorded from the drafts and need Qiao's approval along with them. The
+  suite skips until approved rules exist.
+- **Technical:** `tools/draft_report.py` writes `rules/ma/drafts/REVIEW.md`, the
+  human-readable view Qiao approves from.
+
 ## 2026-11-06 (Phase 1, milestone 3: offers and plan)
 
 - **Technical:** milestone 3 implemented (Tasks 10–12) as planned.

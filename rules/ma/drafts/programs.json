@@ -1,0 +1,218 @@
+[
+  {
+    "id": "masssave_hea",
+    "name": "Mass Save Home Energy Assessment",
+    "administrator": "Sponsors of Mass Save",
+    "handoff": {
+      "label": "Book a no-cost Home Energy Assessment",
+      "phone": "866-527-7283",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/home-energy-assessments"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/home-energy-assessments",
+        "section": "Overview",
+        "quote": "The Sponsors of Mass Save offer no-cost virtual or in-person Home Energy Assessments.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_weatherization",
+    "name": "Mass Save insulation and air sealing",
+    "administrator": "Sponsors of Mass Save",
+    "handoff": {
+      "label": "Call Mass Save",
+      "phone": "866-527-7283",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/insulation-and-windows/insulation-and-air-sealing"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/insulation-and-windows/insulation-and-air-sealing",
+        "section": "Overview",
+        "quote": "Get 75-100 percent off approved insulation and air sealing improvements.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_income_eligible",
+    "name": "Mass Save Income Eligible Program",
+    "administrator": "Sponsors of Mass Save, through Community Action Program agencies",
+    "handoff": {
+      "label": "Call the Income Eligible line",
+      "phone": "866-537-7267",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs",
+        "section": "Overview",
+        "quote": "Through the Income Eligible Program, eligible homeowners and renters can receive a Home Energy Assessment, insulation and air-sealing upgrades, heating and cooling equipment upgrades, as well as new home appliances and more.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_enhanced",
+    "name": "Mass Save Enhanced (moderate-income) offers",
+    "administrator": "Sponsors of Mass Save",
+    "handoff": {
+      "label": "Check income and enroll",
+      "phone": "888-714-3990",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/save-with-enhanced-incentives"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/save-with-enhanced-incentives",
+        "section": "Overview",
+        "quote": "Get a fully managed, energy transformation for your home for up to no cost.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_dec",
+    "name": "Mass Save offers for Designated Equity Communities",
+    "administrator": "Sponsors of Mass Save",
+    "handoff": {
+      "label": "Call Mass Save",
+      "phone": "866-527-7283",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+        "section": "Eligibility",
+        "quote": "Eligibility is based on where you live—not your income.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_heat_pumps",
+    "name": "Mass Save air-source heat pump rebates",
+    "administrator": "Sponsors of Mass Save (processing: Resource Innovations)",
+    "handoff": {
+      "label": "Rebate questions",
+      "phone": "888-855-0340",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Rebates",
+        "quote": "There are three types of rebates: Whole-home, Partial-home and Basic.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_heat_loan",
+    "name": "Mass Save HEAT Loan",
+    "administrator": "Sponsors of Mass Save and participating lenders",
+    "handoff": {
+      "label": "Apply for 0% financing",
+      "phone": "866-527-7283",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing",
+        "section": "Incentives",
+        "quote": "you may be eligible to receive 0% financing up to $25,000 for qualifying energy-efficiency upgrades",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "smart",
+    "name": "SMART 3.0 solar incentive",
+    "administrator": "Massachusetts Department of Energy Resources",
+    "handoff": {
+      "label": "SMART program page",
+      "phone": "617-626-7369",
+      "url": "https://www.mass.gov/info-details/smart-30-program-details"
+    },
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/smart-30-program-details",
+        "section": "Program Year 2026 Flat Incentive Rates",
+        "quote": "Small (≤25 kW AC) Solar Tariff Generating Units (STGUs) and Low-Income STGUs, as defined in 225 CMR 28.00, receive a flat incentive rate per kilowatt-hour (kWh) of energy generated",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "community_solar",
+    "name": "Community shared solar",
+    "administrator": "Project owners under SMART 3.0 rules",
+    "handoff": {
+      "label": "Community solar in Massachusetts",
+      "phone": null,
+      "url": "https://www.eversource.com/residential/save-money-energy/clean-energy-options/solar-energy/community-solar"
+    },
+    "sources": [
+      {
+        "url": "https://www.eversource.com/residential/save-money-energy/clean-energy-options/solar-energy/community-solar",
+        "section": "How Does Community Solar Work",
+        "quote": "Community solar is available to all customers in Massachusetts",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "eversource_ecsap",
+    "name": "Eversource Community Solar Access Program",
+    "administrator": "Eversource",
+    "handoff": {
+      "label": "Eversource community solar",
+      "phone": null,
+      "url": "https://www.eversource.com/residential/save-money-energy/clean-energy-options/solar-energy/community-solar"
+    },
+    "sources": [
+      {
+        "url": "https://www.mass.gov/news/dpu-issues-order-on-low-income-solar-access",
+        "section": "Eversource ECSAP",
+        "quote": "The Eversource Community Solar Access Program (ECSAP) includes a simplified billing offering at no cost and an easy enrollment plan to encourage more low-income customer participation.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "utility_discount_rate",
+    "name": "Utility low-income discount rate",
+    "administrator": "Your electric and gas utility",
+    "handoff": {
+      "label": "Massachusetts Heat Line",
+      "phone": "800-632-8175",
+      "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs",
+        "section": "Utility Discount Rates",
+        "quote": "If you qualify for Fuel Assistance/HEAP or another income-verified program from the list below, you will be referred to your local natural gas or electric utility for a discount on your utility bills.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ma_solar_tax_credit",
+    "name": "Massachusetts residential renewable energy income tax credit",
+    "administrator": "Massachusetts Department of Revenue",
+    "handoff": {
+      "label": "M.G.L. c. 62 § 6(d)",
+      "phone": null,
+      "url": "https://www.mass.gov/info-details/mass-general-laws-c-62-ss-6"
+    },
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/mass-general-laws-c-62-ss-6",
+        "section": "§ 6(d)",
+        "quote": "shall be allowed a credit equal to fifteen per cent of the net expenditure for a renewable energy source property or one thousand dollars, whichever is lesser",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

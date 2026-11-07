@@ -1,0 +1,119 @@
+[
+  {
+    "id": "masssave_heat_loan",
+    "version": "1",
+    "programId": "masssave_heat_loan",
+    "title": "0% HEAT Loan up to $25,000",
+    "measure": "financing",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "user.role",
+          "op": "in",
+          "value": [
+            "renting_landlord",
+            "owner_occupant_landlord",
+            "condo_owner"
+          ]
+        },
+        {
+          "any": [
+            {
+              "fact": "building.electricIsMunicipal",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "all": [
+                {
+                  "fact": "building.gasUtility",
+                  "op": "in",
+                  "value": [
+                    "eversource",
+                    "national_grid",
+                    "unitil",
+                    "liberty",
+                    "berkshire_gas"
+                  ]
+                },
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "eq",
+                  "value": "natural_gas"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "hea_for_loan",
+        "kind": "action",
+        "description": "If the loan pays for a whole-home heat pump, windows or weatherization, complete a Home Energy Assessment first.",
+        "satisfiedWhen": {
+          "fact": "building.heaCompleted",
+          "op": "eq",
+          "value": true
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing",
+            "section": "How to Participate",
+            "quote": "A HEA is mandatory if you plan to pursue any of the following",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "loan_approval_first",
+        "kind": "action",
+        "description": "Get the loan authorized and approved before you pay the contractor; the lender's check is signed over to the contractor when the work is done.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing",
+            "section": "How to Participate",
+            "quote": "If your project meets the eligibility requirements, you will receive an Authorization Form.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [],
+    "benefit": {
+      "type": "loan",
+      "maxPrincipal": 25000,
+      "apr": 0
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": null,
+    "capGroups": [
+      "masssave_heat_loan"
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing",
+        "section": "Eligibility",
+        "quote": "Loan applicant must be the homeowner",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing",
+        "section": "Eligibility",
+        "quote": "Municipal electric customers can take advantage of the HEAT Loan offer if their home is heated with natural gas, provided by a Mass Save Sponsor",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

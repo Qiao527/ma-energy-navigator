@@ -8,8 +8,12 @@ import {
   CapRuleSchema, DecFileSchema, IncomeTableSchema, LegalConstraintSchema, OfferSchema, PredicateSchema, ProgramSchema, SequenceEdgeSchema,
 } from './rules-schema.js'
 
-/** Whitespace and Unicode-normalized text, so line breaks in a PDF don't break a verbatim quote. */
-export const normalizeText = (s: string): string => s.normalize('NFKC').replace(/\s+/g, ' ').trim()
+/**
+ * Whitespace and Unicode-normalized text, so line breaks in a PDF or links in a web page don't break a verbatim
+ * quote. Also drops a space before punctuation, which appears when a link ends right before "." or ",".
+ */
+export const normalizeText = (s: string): string =>
+  s.normalize('NFKC').replace(/\s+/g, ' ').replace(/ ([.,;:!?)])/g, '$1').replace(/\( /g, '(').trim()
 
 function collectSources(x: unknown, out: { url: string; quote: string }[]): void {
   if (Array.isArray(x)) for (const v of x) collectSources(v, out)

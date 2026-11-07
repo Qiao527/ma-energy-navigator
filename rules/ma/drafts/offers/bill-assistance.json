@@ -1,0 +1,55 @@
+[
+  {
+    "id": "utility_discount_rate_referral",
+    "version": "1",
+    "programId": "utility_discount_rate",
+    "title": "Ask your utility about the low-income discount rate",
+    "measure": "bill_assistance",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "fact": "user.onDiscountRate",
+      "op": "eq",
+      "value": false
+    },
+    "prerequisites": [],
+    "confirmations": [
+      {
+        "id": "discount_rate_basis",
+        "question": "Eligibility comes from enrollment in Fuel Assistance (HEAP), SNAP, MassHealth or a similar program. Is the household enrolled in one?",
+        "decidedBy": "your utility",
+        "nextAction": "Call the Massachusetts Heat Line at 1-800-632-8175 or your utility.",
+        "when": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs",
+            "section": "Utility Discount Rates",
+            "quote": "If you qualify for Fuel Assistance/HEAP or another income-verified program from the list below, you will be referred to your local natural gas or electric utility for a discount on your utility bills.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "none"
+    },
+    "qualification": "exact",
+    "recipient": "household",
+    "enrollment": "referral",
+    "exclusiveGroup": null,
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs",
+        "section": "Utility Discount Rates",
+        "quote": "Discounted rates that lower actual charges for your energy usage may be available.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "masssave_hp_money_2026",
+    "capGroup": "masssave_hp_account",
+    "scope": "account",
+    "limit": {
+      "type": "money",
+      "amount": 8500
+    },
+    "window": {
+      "from": "2026-01-01",
+      "until": "2026-12-31"
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Eligibility — Basic Rebate",
+        "quote": "The total rebate amount received is capped at $8,500 per account.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_hp_money_2027",
+    "capGroup": "masssave_hp_account",
+    "scope": "account",
+    "limit": {
+      "type": "money",
+      "amount": 7500
+    },
+    "window": {
+      "from": "2027-01-01",
+      "until": null
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Rebates",
+        "quote": "For all Whole-Home projects installed on or after January 1, 2027, the rebate will decrease to $2,350 per ton, capped at $7,500.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_whole_home_one_per_account",
+    "capGroup": "masssave_whole_home",
+    "scope": "account",
+    "limit": {
+      "type": "count",
+      "count": 1
+    },
+    "window": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "Limit one whole-home rebate per account.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_heat_loan_lifetime",
+    "capGroup": "masssave_heat_loan",
+    "scope": "customer_lifetime",
+    "limit": {
+      "type": "money",
+      "amount": 25000
+    },
+    "window": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/financing",
+        "section": "Incentives",
+        "quote": "Note: The maximum loan amount is over the lifetime of a customer’s energy efficiency upgrades.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

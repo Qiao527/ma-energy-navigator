@@ -1,0 +1,72 @@
+[
+  {
+    "id": "masssave_income_eligible_2026_27",
+    "label": "Mass Save Income Eligible, 2026–2027 heating season (max annual household income)",
+    "window": {
+      "from": "2026-10-01",
+      "until": "2027-09-30"
+    },
+    "bySize": [
+      53585,
+      70073,
+      86561,
+      103049,
+      119536,
+      136024,
+      139116,
+      142207,
+      145299,
+      148390,
+      151482,
+      154573,
+      157665,
+      160756,
+      163848,
+      166939,
+      170031
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/residential/programs-and-services/income-based-offers",
+        "section": "Income Qualifications",
+        "quote": "1 ≤ $53,585 $53,586 - $71,447",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "masssave_enhanced_2026_27",
+    "label": "Mass Save Enhanced Incentive upper limit, 2026–2027 heating season (statewide table; limits vary by area)",
+    "window": {
+      "from": "2026-10-01",
+      "until": "2027-09-30"
+    },
+    "bySize": [
+      71447,
+      93431,
+      115415,
+      137399,
+      159382,
+      181366,
+      185488,
+      189610,
+      193732,
+      197854,
+      201976,
+      206098,
+      210220,
+      214342,
+      218464,
+      222586,
+      226708
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/residential/programs-and-services/income-based-offers",
+        "section": "Income Qualifications",
+        "quote": "Enter your zip code to find the household income limits specific to your area.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

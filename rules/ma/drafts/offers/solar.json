@@ -1,0 +1,393 @@
+[
+  {
+    "id": "smart_small",
+    "version": "py2026",
+    "programId": "smart",
+    "title": "SMART 3.0 incentive for rooftop solar ≤25 kW (Program Year 2026)",
+    "measure": "rooftop_solar",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2026-01-01",
+      "until": "2026-12-31"
+    },
+    "applicationDeadline": "2026-12-31",
+    "eligibility": {
+      "all": [
+        {
+          "fact": "user.role",
+          "op": "in",
+          "value": [
+            "renting_landlord",
+            "owner_occupant_landlord",
+            "condo_owner"
+          ]
+        },
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "per_kwh",
+      "rate": 0.03,
+      "years": 20
+    },
+    "qualification": "exact",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "smart",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/smart-30-program-details",
+        "section": "Program Year 2026 Flat Incentive Rates (≤25 kW)",
+        "quote": "STGUs ≤25 kW AC $0.03/kWh",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/smart-30-program-details",
+        "section": "Program Year Annual Capacity and Rates",
+        "quote": "In a given Program Year, DOER will accept applications from January 1 through December 31 of that year.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.mass.gov/doc/225-cmr-2800-clean-09222026/download",
+        "section": "225 CMR 28.13(1)",
+        "quote": "All STGUs will be eligible to receive compensation under 225 CMR 28.00 for 20 years from the STGU’s Incentive Payment Effective Date.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "smart_low_income",
+    "version": "py2026",
+    "programId": "smart",
+    "title": "SMART 3.0 low-income rate for rooftop solar ≤25 kW (Program Year 2026)",
+    "measure": "rooftop_solar",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2026-01-01",
+      "until": "2026-12-31"
+    },
+    "applicationDeadline": "2026-12-31",
+    "eligibility": {
+      "all": [
+        {
+          "fact": "user.role",
+          "op": "in",
+          "value": [
+            "renting_landlord",
+            "owner_occupant_landlord",
+            "condo_owner"
+          ]
+        },
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "fact": "user.onDiscountRate",
+          "op": "eq",
+          "value": true
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [
+      {
+        "id": "smart_low_income_customer",
+        "question": "Low Income Customer also covers Low Income Eligible Areas, other needs-based programs and self-attestation. Does this household qualify?",
+        "decidedBy": "the solar installer and DOER",
+        "nextAction": "Ask the installer to check with the DOER Low Income Customer Self-Attestation Form.",
+        "when": null,
+        "sources": [
+          {
+            "url": "https://www.mass.gov/doc/225-cmr-2800-clean-09222026/download",
+            "section": "225 CMR 28.02 Low Income Customer",
+            "quote": "An End -use Customer that: (a) is on a low income discount rate of a Distribution Company",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "per_kwh",
+      "rate": 0.06,
+      "years": 20
+    },
+    "qualification": "exact",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "smart",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/smart-30-program-details",
+        "section": "Program Year 2026 Flat Incentive Rates (≤25 kW)",
+        "quote": "Low Income STGUs $0.06/kWh",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "community_solar_low_income_floor",
+    "version": "smart3",
+    "programId": "community_solar",
+    "title": "Community solar: at least 40% off the credits you receive (low-income customers)",
+    "measure": "community_solar",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-09-12",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "fact": "user.onDiscountRate",
+          "op": "eq",
+          "value": true
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "min_discount_on_credits",
+      "pct": 40
+    },
+    "qualification": "minimum",
+    "recipient": "household",
+    "enrollment": "apply",
+    "exclusiveGroup": "community_solar",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/doc/225-cmr-2800-clean-09222026/download",
+        "section": "225 CMR 28.07(5)(c)1.b",
+        "quote": "Low Income Customers shall receive not less than a 40 percent discount on the value of allocated Bill Credits from the Community Shared STGU to the Low Income Customer.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "community_solar_standard_floor",
+    "version": "smart3",
+    "programId": "community_solar",
+    "title": "Community solar: at least 20% off the credits you receive",
+    "measure": "community_solar",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-09-12",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "fact": "building.electricIsMunicipal",
+      "op": "eq",
+      "value": false
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "min_discount_on_credits",
+      "pct": 20
+    },
+    "qualification": "minimum",
+    "recipient": "household",
+    "enrollment": "apply",
+    "exclusiveGroup": "community_solar",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/doc/225-cmr-2800-clean-09222026/download",
+        "section": "225 CMR 28.07(5)(c)1.b",
+        "quote": "All other customers shall receive not less than a 20 percent discount on the value of allocated Bill Credits from the Community Shared STGU to the End- use Customer.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "eversource_ecsap",
+    "version": "1",
+    "programId": "eversource_ecsap",
+    "title": "You may be selected for Eversource's no-cost low-income community solar",
+    "measure": "community_solar",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2024-06-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.electricUtility",
+          "op": "eq",
+          "value": "eversource"
+        },
+        {
+          "fact": "user.onDiscountRate",
+          "op": "eq",
+          "value": true
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "none"
+    },
+    "qualification": "exact",
+    "recipient": "household",
+    "enrollment": "auto_selected",
+    "exclusiveGroup": null,
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/news/dpu-issues-order-on-low-income-solar-access",
+        "section": "Eversource ECSAP",
+        "quote": "In its filings, Eversource detailed that the ECSAP includes a target of $420 in annual bill savings for each low-income customer enrolled",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "net_metering_allocation",
+    "version": "1",
+    "programId": "smart",
+    "title": "Share rooftop solar credits with other units' accounts (net metering, Schedule Z)",
+    "measure": "rooftop_solar",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "user.role",
+          "op": "in",
+          "value": [
+            "renting_landlord",
+            "owner_occupant_landlord",
+            "condo_owner"
+          ]
+        },
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "schedule_z",
+        "kind": "action",
+        "description": "File Schedule Z with the utility to say which accounts get what share of the credits (up to 4 changes a year; same utility territory and load zone for systems of 25 kW or less).",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.mass.gov/info-details/net-metering-guide",
+            "section": "Allocation of net metering credits",
+            "quote": "A host customer may change Schedule Z no more than 4 times in one calendar year, unless there is a mutual agreement to change it more often.",
+            "lastVerified": "2026-11-06"
+          },
+          {
+            "url": "https://www.mass.gov/info-details/net-metering-guide",
+            "section": "Allocation of net metering credits",
+            "quote": "Nameplate cap exempt facilities cannot allocate excess net metering credits to host customer accounts served by different electric company service territories or different ISO-NE load zones.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [],
+    "benefit": {
+      "type": "none"
+    },
+    "qualification": "exact",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": null,
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/net-metering-guide",
+        "section": "Allocation of net metering credits",
+        "quote": "The host customer must fill out a form called Schedule Z to let the electric company know which account(s) the net metering credits should go to.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ma_solar_tax_credit",
+    "version": "1",
+    "programId": "ma_solar_tax_credit",
+    "title": "Massachusetts tax credit: 15% of solar cost, up to $1,000",
+    "measure": "tax_credit",
+    "appliesTo": "user",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2026-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "user.role",
+          "op": "in",
+          "value": [
+            "owner_occupant_landlord",
+            "condo_owner"
+          ]
+        },
+        {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "owner"
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "percent_of_cost_capped",
+      "pct": 15,
+      "cap": 1000,
+      "costOf": "rooftop_solar"
+    },
+    "qualification": "up_to",
+    "recipient": "household",
+    "enrollment": "apply",
+    "exclusiveGroup": null,
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/mass-general-laws-c-62-ss-6",
+        "section": "§ 6(d)",
+        "quote": "any owner or tenant of residential property located in the commonwealth who is not a dependent of another taxpayer and who occupies said property as his principal residence, shall be allowed a credit equal to fifteen per cent of the net expenditure for a renewable energy source property or one thousand dollars, whichever is lesser",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

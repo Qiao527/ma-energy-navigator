@@ -38,6 +38,9 @@ describe('quote check: every quote must appear verbatim in the saved source', ()
   test('whitespace and line breaks are normalized', () => {
     expect(normalizeText('a\n  b\t c')).toBe('a b c')
   })
+  test('a space left before punctuation by a link is dropped', () => {
+    expect(normalizeText('in the\nInstaller Network\n.')).toBe('in the Installer Network.')
+  })
   test('a quote present in the snapshot passes', () => {
     const d = rulesDir()
     expect(quoteProblems([OFFER], join(d, 'sources'))).toEqual([])
