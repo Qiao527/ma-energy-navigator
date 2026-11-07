@@ -2,6 +2,36 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Qiao's review of milestone 4, second round)
+
+- **Batch 1 rules: Qiao reviews first, then approves** with `tools/approve_rules.py`.
+  Nothing is approved yet. — Qiao.
+- **Scenarios `story1-installed-deadline-passed` and `story1-planning-after-deadline`
+  approved.** All 10 standard scenarios now have an approved baseline. — Qiao.
+- **Demo data is labeled.** Story 1's fuel records are fictional. Wherever they appear,
+  the interface and the README must say "demo data". (There is no README or UI yet. The
+  scenario `story` text already says "fictional demo numbers".) — Qiao.
+- **DEC no-cost heat pump on an already-installed rental unit: keep showing it, last in
+  the list.** It must state the sourced fact: the project is arranged by the turnkey
+  contractor before installation, and the website doesn't say whether an installed
+  project still qualifies, so this needs confirming. Why: don't decide for the user, and
+  don't hide a possible offer (Mass Save call, question 5). — Qiao.
+- **Hot water from the boiler: ask two questions.**
+  1. Does the hot water come from the boiler today?
+  2. After the heat pump, what heats the water: the same boiler, an electric water
+     heater, or a heat pump water heater?
+
+  If the boiler stays for hot water, the oil bill doesn't go to zero. Keep the hot-water
+  share of the oil and the boiler's fixed costs, and adjust the payer split to match.
+  - Take the hot-water share from a sourced dataset (for example EIA RECS).
+  - If none is found, mark the confidence low and say why.
+
+  Why: fuel records include hot water, so the heating need and the heat pump savings
+  would otherwise be too high. — Qiao.
+- **Follow-ups :** these become tasks in `docs/phase-1-plan.md` ("Follow-ups from
+  Qiao's second M4 review"). Each one that changes a scenario result needs Qiao's
+  approval again.
+
 ## 2026-11-07 (Tasks 16 and 16b: where heating need and heat pump size come from)
 
 - **Technical:** `engine/src/quantities.ts` estimates per unit, from the most

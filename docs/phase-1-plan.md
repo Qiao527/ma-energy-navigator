@@ -49,6 +49,27 @@ Phase 1 runs in milestones. The lead stops after each one and reports three thin
 
 Task numbers are kept stable, so tasks run in milestone order, not number order. Each milestone only uses what earlier milestones built. In M2, for example, Task 15 needs Tasks 2, 3 and 9, and Task 15b needs Task 15.
 
+### Follow-ups from Qiao's second M4 review (2026-11-07, not started)
+
+Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then `npm run scenarios`. A changed expected result needs Qiao's approval again.
+- **F1. DEC no-cost heat pump on an installed project.**
+  - When `installed`, `dec_rental_heat_pump_no_cost` still shows, sorted last in `shown`.
+  - It carries a sourced confirmation: arranged by the turnkey contractor before installation; whether an installed project qualifies isn't published; ask Mass Save.
+  - Quote the source verbatim. This is a rule change, so it goes through the drafting workflow.
+- **F2. Hot water.**
+  - New unit facts:
+    - `hotWaterFromBoiler: boolean | null`;
+    - `hotWaterAfter: 'boiler' | 'electric_resistance' | 'heat_pump_water_heater' | null`.
+  - Ask the first question only when the unit has fuel records or a boiler.
+  - `heatLoadFromRecords` takes out the hot-water share when hot water comes from the boiler.
+  - If `hotWaterAfter = boiler`, the landlord view keeps that oil plus the boiler's fixed costs, and the payer split follows.
+  - Find the hot-water share in EIA RECS (or another dataset) and record it as an assumption with a verbatim quote. If no source is found: confidence low, with the reason.
+  - The boiler's fixed costs need a source too.
+- **F3. Demo-data label.**
+  - Scenario and fixture inputs with fictional records carry a machine-readable `demoData: true`.
+  - The UI (Phase 4) and the README (when written) say "demo data" wherever those numbers appear.
+- **F4.** After Qiao approves batch 1: switch the scenarios to computed quantities (re-approval), then batch 2.
+
 ### Task 12b (M4): Rule drafting workflow — scope
 
 Design: `docs/product.md` §6a. The full TDD steps are written at the start of M4, after M3 is reviewed, so they build on the real M3 code. Scope fixed now:

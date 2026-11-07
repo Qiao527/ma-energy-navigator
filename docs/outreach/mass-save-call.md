@@ -81,8 +81,8 @@ For Qiao's phone call on Monday 2026-11-09. Number: **866-527-SAVE (7283)**
 - **Ask:** Can a DEC rental unit still use the no-cost turnkey offer if the landlord
   already installed heat pumps through their own contractor?
 - **Now:** after the deadline, an installed project sees "application deadline passed"
-  with the date. The DEC no-cost offer is still shown as "potential" for an installed
-  project, which is probably wrong (see the report to Qiao).
+  with the date. The DEC no-cost offer stays "potential" for an installed project,
+  shown last, with this question as its confirmation (Qiao, 2026-11-07).
 - **Affects:**
   - `ashp_*@2026` `applicationDeadline` (`offers/heat-pumps.json`);
   - `dec_rental_heat_pump_no_cost@2025_2027`.
