@@ -2,6 +2,30 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Positioning: an energy engineering portfolio; first public version today)
+
+- **The project stays a portfolio project, now framed as an energy engineering portfolio.** Why: the goal is
+  to show that the energy work is done right and explained clearly, not to run a business. — Qiao.
+- **Origin:** a hackathon brief on Massachusetts buildings (energy waste, retrofit prioritization, building
+  performance, tenant and owner incentives, access to energy savings). The hackathon has ended. The project
+  finishes the original idea, and the README says so. — Qiao.
+- **Not pursued:** an MCP server (removed from the v2 ideas), and a business that replaces traditional service
+  companies. "What an energy consultant decides for a triple-decker, made sourced and testable" stays as the
+  way the story is told, not as a business. — Qiao.
+- **Emphasis:** energy engineering first, human-centered second. The showcase is the chain: fuel records →
+  weather normalization → hot water removed → heat load → heat pump size → seasonal efficiency → bills and
+  CO₂ → who pays and who saves. The rules engine and the fairness framing support it. — Qiao.
+- **Scope added to Phase 1 (milestone M4b):** sourced fuel prices, heat pump seasonal efficiency, weather
+  normalization (heating degree days), CO₂, and a comparison with similar buildings. These come before the
+  polished UI. A methods write-up (assumptions, sources, uncertainty, validation) is a deliverable. — Qiao.
+- **A first public version today** (Qiao). It ships only with rules and assumptions Qiao has approved
+  (principle 3, §6a).
+  - Technical: a static site. The engine runs in the browser, with no LLM, no accounts and no stored
+    data.
+  - Built with Vite + TypeScript and plain semantic HTML. Why: it's the smallest thing that works for a form
+    and a report, and it keeps WCAG control simple.
+  - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
+
 ## 2026-11-07 (F2: hot water from the boiler)
 
 - **Technical:** the hot-water share comes from ResStock 2025.1 MA, the same file as Task 16b. It uses

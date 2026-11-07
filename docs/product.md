@@ -50,6 +50,16 @@ supports]
 
 ## 2. Positioning
 
+- **An energy engineering portfolio** [Decided 2026-11-07 — Qiao]. It started from a hackathon brief on
+  Massachusetts buildings (energy waste, retrofit prioritization, building performance, tenant and owner
+  incentives, access to energy savings). The hackathon has ended; this project finishes the idea. The showcase
+  is a sourced, tested energy chain:
+  - fuel records → weather normalization → hot water removed → heat load;
+  - → heat pump size → seasonal efficiency → bills and CO₂;
+  - → who pays and who saves.
+
+  The way the story is told: what an energy consultant decides for a triple-decker, made sourced and testable.
+  It is not a business that replaces service companies [Decided 2026-11-07 — Qiao].
 - Portfolio project, not a startup. Optimize for: a sharp problem, one flow that works
   end-to-end beautifully, a defensible technical core, visible product judgment, and at
   least one real user's feedback. [Decided]
@@ -241,8 +251,7 @@ can be added later. [Proposed]
 
 **v2 ideas** [Proposed]
 - Portfolio mode
-- Expose the rules engine as an MCP server so any AI agent can ask
-  "which MA programs does this building qualify for?"
+- (An MCP server was considered and dropped — Qiao, 2026-11-07.)
 
 ## 6. Architecture
 
@@ -351,6 +360,8 @@ For the README / pitch:
 3. A WCAG 2.2 AA audit passes.
 4. At least one real tenant, landlord or condo owner has tried it, and their feedback is
    written down.
+5. A methods write-up explains every step of the energy chain: assumption, source, range and why, plus a
+   validation of records-based heat loads against ResStock. [Decided 2026-11-07 — Qiao]
 
 ## 10. Open questions for Phase 0
 

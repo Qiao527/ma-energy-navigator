@@ -45,9 +45,29 @@ Phase 1 runs in milestones. The lead stops after each one and reports three thin
 | **M2 — money, from the landlord's side** ✅ | 8, 9, 15, **15b** | How money is computed, especially the payer split and "is it worth it" |
 | **M3 — offers and plan** ✅ | 10, 11, 12 | How an offer's status, next steps and the shown list are decided |
 | **M4 — rules data and real quantities** (12b, 14, 16, 16b ✅; 13 drafted, waiting for Qiao's approval) | **12b**, 13, 14, 16, **16b** | The drafting workflow, the standard scenarios, and where heating need and heat pump size come from |
+| **M4b — energy chain + first public version** (Qiao, 2026-11-07) | E1–E7 below | How each energy step is computed and sourced |
 | **M5 — wrap-up** | 17, 18 | Final verification and review |
 
 Task numbers are kept stable, so tasks run in milestone order, not number order. Each milestone only uses what earlier milestones built. In M2, for example, Task 15 needs Tasks 2, 3 and 9, and Task 15b needs Task 15.
+
+### M4b: energy chain and first public version (Qiao, 2026-11-07)
+
+Every number is a sourced assumption: snapshot, verbatim quote, the draft check, then Qiao's approval. Each step
+runs TDD, then `npm run scenarios`.
+- **E1. Prices:** heating oil, propane, natural gas and electricity for Massachusetts residential customers,
+  as low / mid / high with sources.
+- **E2. Heat pump seasonal efficiency** (cold-climate air-source heat pumps in Massachusetts).
+- **E3. Weather normalization:** each season's fuel use is scaled to a normal winter using heating degree days.
+- **E4. CO₂:** fuel and grid emission factors; tonnes per year before and after.
+- **E5. Comparison with similar buildings:** the records-based heat load vs the ResStock p25 / p50 / p75 for
+  the same fuel and vintage. Wording says "room to save", never "wasteful" (principle 6).
+- **E6. `report()`:** input → navigate + per-unit bills (heat pump, hot water) + landlord view + CO₂ +
+  comparison. This is the one entry point the web page calls.
+- **E7. Web v1** (`web/`): a static Vite + TypeScript site.
+  - Form → confirm → report. The engine runs in the browser.
+  - Only approved rules are bundled; the build fails otherwise.
+  - Story 1 is preloaded and labeled "demo data" (F3).
+  - Every chart has a table; WCAG 2.2 AA; works on a phone.
 
 ### Follow-ups from Qiao's second M4 review (2026-11-07, not started)
 
