@@ -2,6 +2,14 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 1, milestone 3: offers and plan)
+
+- **Technical:** milestone 3 implemented (Tasks 10–12) as planned.
+- **Technical:** coordination prerequisites ask only for the facts that would
+  settle each undecided unit (`missingByUnit` → `unitQuestions`). Why: a unit without a
+  heating meter that already said no is undecided only because the definition is open,
+  so asking it again would be wrong.
+
 ## 2026-11-06 (cost shifting: Qiao's three decisions)
 
 - **Never interpret the lease or the law for the user.** Show "Check your written rental

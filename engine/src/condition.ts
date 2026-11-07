@@ -95,13 +95,15 @@ export interface Participation {
   /** Units whose eligibility or answer isn't settled, including units the working assumption would leave out. */
   undecided: string[]
   missing: string[]
+  /** Per undecided unit: the facts that would settle it (empty when only the working assumption is in the way). */
+  missingByUnit: Record<string, string[]>
   /** Working assumptions the count depends on. */
   assumptions: string[]
 }
 
 /** Per-unit view of an all-units condition (research §2.3). Used for the "N more units needed" count. */
 export function participation(spec: { eligible: Condition; require: Condition }, s: Scope): Participation {
-  const out: Participation = { needed: [], likelyNeeded: [], undecided: [], missing: [], assumptions: [] }
+  const out: Participation = { needed: [], likelyNeeded: [], undecided: [], missing: [], missingByUnit: {}, assumptions: [] }
   for (const unit of s.input.building.units) {
     const us: Scope = { ...s, unit }
     const e = evaluate(spec.eligible, us)
@@ -118,6 +120,7 @@ export function participation(spec: { eligible: Condition; require: Condition },
     else {
       out.undecided.push(unit.id)
       out.missing.push(...e.missing, ...r.missing)
+      out.missingByUnit[unit.id] = [...new Set([...e.missing, ...r.missing])].sort()
     }
   }
   out.missing = [...new Set(out.missing)].sort()

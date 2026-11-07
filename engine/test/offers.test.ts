@@ -76,7 +76,10 @@ describe('evaluateOffer: prerequisites never change status (Qiao, 2026-11-06)', 
     }), { unit: null })
     const r = forUnit(run(offer({ prerequisites }), s), '1')
     expect(r?.status).toBe('eligible')
-    expect(r?.prerequisites[0]).toMatchObject({ kind: 'coordination', state: 'todo', unitsNeeded: ['2'], unitsLikelyNeeded: [], unitsUndecided: ['3'] })
+    expect(r?.prerequisites[0]).toMatchObject({
+      kind: 'coordination', state: 'todo', unitsNeeded: ['2'], unitsLikelyNeeded: [], unitsUndecided: ['3'],
+      unitQuestions: [{ unitId: '3', fact: 'unit.participating' }],
+    })
   })
 })
 
@@ -110,7 +113,7 @@ describe('chooseBest', () => {
   })
   test('an offer waiting on other units never hides the others (condo 75% stays)', () => {
     const waiting = r('a', 'eligible', 100, {
-      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'd', state: 'todo', unitsNeeded: ['3'], unitsLikelyNeeded: [], unitsUndecided: [] }],
+      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'd', state: 'todo', unitsNeeded: ['3'], unitsLikelyNeeded: [], unitsUndecided: [], unitQuestions: [] }],
     })
     expect(chooseBest([waiting, r('b', 'eligible', 75)], offers).map(x => x.offerId)).toEqual(['a', 'b'])
   })

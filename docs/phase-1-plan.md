@@ -42,8 +42,8 @@ Phase 1 runs in milestones. The lead stops after each one and reports three thin
 | Milestone | Tasks | Stop-and-explain topic |
 |---|---|---|
 | **M1 — core decisions** ✅ | 1–7 (+ working-assumption fix) | How three-valued conditions, roles and all-units participation decide |
-| **M2 — money, from the landlord's side** | 8, 9, 15, **15b** | How money is computed, especially the payer split and "is it worth it" |
-| **M3 — offers and plan** | 10, 11, 12 | How an offer's status, next steps and the shown list are decided |
+| **M2 — money, from the landlord's side** ✅ | 8, 9, 15, **15b** | How money is computed, especially the payer split and "is it worth it" |
+| **M3 — offers and plan** ✅ | 10, 11, 12 | How an offer's status, next steps and the shown list are decided |
 | **M4 — rules data and real quantities** | **12b**, 13, 14, 16, **16b** | The drafting workflow, the standard scenarios, and where heating need and heat pump size come from |
 | **M5 — wrap-up** | 17, 18 | Final verification and review |
 
@@ -967,13 +967,15 @@ export interface Participation {
   /** Units whose eligibility or answer isn't settled, including units the working assumption would leave out. */
   undecided: string[]
   missing: string[]
+  /** Per undecided unit: the facts that would settle it (empty when only the working assumption is in the way). */
+  missingByUnit: Record<string, string[]>
   /** Working assumptions the count depends on. */
   assumptions: string[]
 }
 
 /** Per-unit view of an all-units condition (research §2.3). Used for the "N more units needed" count. */
 export function participation(spec: { eligible: Condition; require: Condition }, s: Scope): Participation {
-  const out: Participation = { needed: [], likelyNeeded: [], undecided: [], missing: [], assumptions: [] }
+  const out: Participation = { needed: [], likelyNeeded: [], undecided: [], missing: [], missingByUnit: {}, assumptions: [] }
   for (const unit of s.input.building.units) {
     const us: Scope = { ...s, unit }
     const e = evaluate(spec.eligible, us)
@@ -990,6 +992,7 @@ export function participation(spec: { eligible: Condition; require: Condition },
     else {
       out.undecided.push(unit.id)
       out.missing.push(...e.missing, ...r.missing)
+      out.missingByUnit[unit.id] = [...new Set([...e.missing, ...r.missing])].sort()
     }
   }
   out.missing = [...new Set(out.missing)].sort()
@@ -1086,7 +1089,7 @@ describe('allUnits with the definition still a working assumption (today)', () =
     const s = at([m('1', true), m('2', true), m('3', false, false)], ASSUMED)
     expect(evaluate(ALL_UNITS, s)).toEqual({ value: 'unknown', missing: [], assumptions: ['condo_eligible_unit'] })
     expect(participation(SPEC, s)).toEqual({
-      needed: [], likelyNeeded: [], undecided: ['3'], missing: [], assumptions: ['condo_eligible_unit'],
+      needed: [], likelyNeeded: [], undecided: ['3'], missing: [], missingByUnit: { '3': [] }, assumptions: ['condo_eligible_unit'],
     })
   })
   test('an undecided answer asks for participation', () => {
@@ -1098,12 +1101,12 @@ describe('allUnits with the definition still a working assumption (today)', () =
 describe('participation counts (the "N more units needed" hint)', () => {
   test('metered unit said no → likely needed, not needed', () => {
     expect(participation(SPEC, at([m('1', true), m('2', true), m('3', false)], ASSUMED))).toEqual({
-      needed: [], likelyNeeded: ['3'], undecided: [], missing: [], assumptions: ['condo_eligible_unit'],
+      needed: [], likelyNeeded: ['3'], undecided: [], missing: [], missingByUnit: {}, assumptions: ['condo_eligible_unit'],
     })
   })
   test('unknown meter and said no → undecided, and we ask about the meter', () => {
     expect(participation(SPEC, at([m('1', true), m('2', false, null)], ASSUMED))).toEqual({
-      needed: [], likelyNeeded: [], undecided: ['2'], missing: ['unit.hasResidentialHeatingMeter'], assumptions: ['condo_eligible_unit'],
+      needed: [], likelyNeeded: [], undecided: ['2'], missing: ['unit.hasResidentialHeatingMeter'], missingByUnit: { '2': ['unit.hasResidentialHeatingMeter'] }, assumptions: ['condo_eligible_unit'],
     })
   })
 })
@@ -1112,7 +1115,7 @@ describe('once the definition is confirmed, the same data gives definite answers
   test('a metered unit said no → no, and it is needed', () => {
     const s = at([m('1', true), m('2', true), m('3', false)], CONFIRMED)
     expect(evaluate(ALL_UNITS, s).value).toBe('no')
-    expect(participation(SPEC, s)).toEqual({ needed: ['3'], likelyNeeded: [], undecided: [], missing: [], assumptions: [] })
+    expect(participation(SPEC, s)).toEqual({ needed: ['3'], likelyNeeded: [], undecided: [], missing: [], missingByUnit: {}, assumptions: [] })
   })
   test('an unmetered unit is not needed', () => {
     expect(evaluate(ALL_UNITS, at([m('1', true), m('2', false, false)], CONFIRMED)).value).toBe('yes')
@@ -2271,7 +2274,10 @@ describe('evaluateOffer: prerequisites never change status (Qiao, 2026-11-06)', 
     }), { unit: null })
     const r = forUnit(run(offer({ prerequisites }), s), '1')
     expect(r?.status).toBe('eligible')
-    expect(r?.prerequisites[0]).toMatchObject({ kind: 'coordination', state: 'todo', unitsNeeded: ['2'], unitsLikelyNeeded: [], unitsUndecided: ['3'] })
+    expect(r?.prerequisites[0]).toMatchObject({
+      kind: 'coordination', state: 'todo', unitsNeeded: ['2'], unitsLikelyNeeded: [], unitsUndecided: ['3'],
+      unitQuestions: [{ unitId: '3', fact: 'unit.participating' }],
+    })
   })
 })
 
@@ -2305,7 +2311,7 @@ describe('chooseBest', () => {
   })
   test('an offer waiting on other units never hides the others (condo 75% stays)', () => {
     const waiting = r('a', 'eligible', 100, {
-      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'd', state: 'todo', unitsNeeded: ['3'], unitsLikelyNeeded: [], unitsUndecided: [] }],
+      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'd', state: 'todo', unitsNeeded: ['3'], unitsLikelyNeeded: [], unitsUndecided: [], unitQuestions: [] }],
     })
     expect(chooseBest([waiting, r('b', 'eligible', 75)], offers).map(x => x.offerId)).toEqual(['a', 'b'])
   })
@@ -2384,6 +2390,8 @@ export interface PrerequisiteResult {
   unitsLikelyNeeded: string[] | null
   /** Coordination only: units whose eligibility or answer isn't settled. */
   unitsUndecided: string[] | null
+  /** Coordination only: what to ask about each undecided unit (nothing when only the working assumption is open). */
+  unitQuestions: { unitId: string; fact: string }[] | null
 }
 
 export interface OfferResult {
@@ -2409,12 +2417,13 @@ const STATE: Record<Tri, PrerequisiteResult['state']> = { yes: 'done', no: 'todo
 export const keyOf = (r: OfferResult): string => offerKey({ id: r.offerId, version: r.version })
 
 function prerequisiteResult(p: Prerequisite, s: Scope): PrerequisiteResult {
-  const base = { id: p.id, kind: p.kind, description: p.description, unitsNeeded: null, unitsLikelyNeeded: null, unitsUndecided: null }
+  const base = { id: p.id, kind: p.kind, description: p.description, unitsNeeded: null, unitsLikelyNeeded: null, unitsUndecided: null, unitQuestions: null }
   if (p.satisfiedWhen === null) return { ...base, state: 'check' }
   const state = STATE[evaluate(p.satisfiedWhen, s).value]
   if (p.kind === 'coordination' && 'allUnits' in p.satisfiedWhen) {
     const pt = participation(p.satisfiedWhen.allUnits, s)
-    return { ...base, state, unitsNeeded: pt.needed, unitsLikelyNeeded: pt.likelyNeeded, unitsUndecided: pt.undecided }
+    const unitQuestions = Object.entries(pt.missingByUnit).flatMap(([unitId, facts]) => facts.map(fact => ({ unitId, fact })))
+    return { ...base, state, unitsNeeded: pt.needed, unitsLikelyNeeded: pt.likelyNeeded, unitsUndecided: pt.undecided, unitQuestions }
   }
   return { ...base, state }
 }
@@ -2643,6 +2652,29 @@ describe('navigate: questions say whose fact it is (review B13)', () => {
     expect(nav('2026-11-15', null).questions).toContainEqual({ fact: 'unit.occupancy', unitId: '2', about: 'other_unit' })
   })
 })
+
+describe('navigate: only ask what is actually missing', () => {
+  const coordination = RuleSetSchema.parse({
+    ...rules,
+    offers: [{
+      ...OFFER, id: 'condo_all', exclusiveGroup: null, eligibility: { fact: 'unit.occupancy', op: 'eq', value: 'owner' },
+      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'Every eligible unit takes part.',
+        satisfiedWhen: { allUnits: { eligible: { ref: 'condo_eligible_unit' }, require: { fact: 'unit.participating', op: 'eq', value: true } } },
+        sources: [SOURCE] }],
+    }],
+    predicates: [{ id: 'condo_eligible_unit', condition: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }, workingAssumption: true, note: 'n', sources: [SOURCE] }],
+  })
+  const ask = (third: { participating: boolean | null; hasResidentialHeatingMeter: boolean | null }) => navigate(input({
+    userUnitId: '1',
+    building: { units: [unit('1', { occupancy: 'owner', hasResidentialHeatingMeter: true, participating: true }), unit('2', { occupancy: 'owner', ...third })] },
+  }), coordination, { asOf: '2026-11-15', installDate: null }, () => NO_QUANTITIES).questions
+  test('a unit without a meter that already said no is not asked again (only the definition is open)', () => {
+    expect(ask({ participating: false, hasResidentialHeatingMeter: false })).toEqual([])
+  })
+  test('a unit that hasn’t answered is asked, as another unit’s question', () => {
+    expect(ask({ participating: null, hasResidentialHeatingMeter: true })).toContainEqual({ fact: 'unit.participating', unitId: '2', about: 'other_unit' })
+  })
+})
 ```
 
 - [ ] **Step 3: Run to verify failure**
@@ -2766,7 +2798,7 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
   }
   for (const r of shown) {
     if (r.status === 'needs_info') for (const f of r.missing) ask(f, r.unitId)
-    for (const p of r.prerequisites) for (const u of p.unitsUndecided ?? []) ask('unit.participating', u)
+    for (const p of r.prerequisites) for (const q of p.unitQuestions ?? []) ask(q.fact, q.unitId)
   }
   if (options.installDate === null && upcoming.length > 0) ask('project.installDate', null)
 
@@ -2783,12 +2815,12 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
 }
 ```
 
-Note on `ask('unit.participating', u)`: a coordination prerequisite with undecided units asks about those units' agreement. The question goes to the user as "has unit N agreed?", marked `other_unit`. It doesn't change any status.
+Note on coordination questions: a coordination prerequisite asks only for the facts that would settle each undecided unit (`unitQuestions`, e.g. "has unit N agreed?" or "does unit N have a heating meter?"), marked `other_unit`. A unit that is undecided only because of the working assumption produces no question. Questions never change a status.
 
 - [ ] **Step 6: Run to verify pass**
 
 Run: `cd engine && npx vitest run test/plan.test.ts test/navigate.test.ts && npm run typecheck`
-Expected: PASS (3 + 4 tests); typecheck clean.
+Expected: PASS (3 + 6 tests); typecheck clean.
 
 - [ ] **Step 7: Commit**
 

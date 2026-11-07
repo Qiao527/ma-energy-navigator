@@ -21,6 +21,8 @@ export interface PrerequisiteResult {
   unitsLikelyNeeded: string[] | null
   /** Coordination only: units whose eligibility or answer isn't settled. */
   unitsUndecided: string[] | null
+  /** Coordination only: what to ask about each undecided unit (nothing when only the working assumption is open). */
+  unitQuestions: { unitId: string; fact: string }[] | null
 }
 
 export interface OfferResult {
@@ -46,12 +48,13 @@ const STATE: Record<Tri, PrerequisiteResult['state']> = { yes: 'done', no: 'todo
 export const keyOf = (r: OfferResult): string => offerKey({ id: r.offerId, version: r.version })
 
 function prerequisiteResult(p: Prerequisite, s: Scope): PrerequisiteResult {
-  const base = { id: p.id, kind: p.kind, description: p.description, unitsNeeded: null, unitsLikelyNeeded: null, unitsUndecided: null }
+  const base = { id: p.id, kind: p.kind, description: p.description, unitsNeeded: null, unitsLikelyNeeded: null, unitsUndecided: null, unitQuestions: null }
   if (p.satisfiedWhen === null) return { ...base, state: 'check' }
   const state = STATE[evaluate(p.satisfiedWhen, s).value]
   if (p.kind === 'coordination' && 'allUnits' in p.satisfiedWhen) {
     const pt = participation(p.satisfiedWhen.allUnits, s)
-    return { ...base, state, unitsNeeded: pt.needed, unitsLikelyNeeded: pt.likelyNeeded, unitsUndecided: pt.undecided }
+    const unitQuestions = Object.entries(pt.missingByUnit).flatMap(([unitId, facts]) => facts.map(fact => ({ unitId, fact })))
+    return { ...base, state, unitsNeeded: pt.needed, unitsLikelyNeeded: pt.likelyNeeded, unitsUndecided: pt.undecided, unitQuestions }
   }
   return { ...base, state }
 }
