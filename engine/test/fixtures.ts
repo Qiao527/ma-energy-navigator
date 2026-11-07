@@ -47,3 +47,32 @@ export function input(over: InputOverrides = {}): Input {
 export function scope(i: Input, over: Partial<Scope> = {}): Scope {
   return { input: i, unit: i.building.units[0] ?? null, derived: derive(i, []), incomeTables: {}, predicates: {}, ...over }
 }
+
+export const SOURCE = {
+  url: 'https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties',
+  section: 'Landlord offer',
+  quote: 'An instant incentive of 100% off insulation upgrades for your rental property',
+  lastVerified: '2026-11-06',
+}
+
+export const OFFER = {
+  id: 'test_offer',
+  version: '1',
+  programId: 'masssave_weatherization',
+  title: 'Test',
+  measure: 'weatherization',
+  appliesTo: 'each_unit',
+  dateBasis: 'as_of',
+  effective: { from: '2026-01-01', until: null },
+  applicationDeadline: null,
+  eligibility: { fact: 'unit.occupancy', op: 'eq', value: 'renter' },
+  prerequisites: [],
+  confirmations: [],
+  benefit: { type: 'percent_of_cost', pct: 100, costOf: 'weatherization' },
+  qualification: 'up_to',
+  recipient: 'property_owner',
+  enrollment: 'via_landlord',
+  exclusiveGroup: 'insulation',
+  capGroups: [],
+  sources: [SOURCE],
+}

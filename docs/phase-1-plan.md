@@ -1314,7 +1314,7 @@ export const OFFER = {
 
 ```ts
 import { describe, expect, test } from 'vitest'
-import { CapRuleSchema, OfferSchema } from '../src/rules-schema.js'
+import { CapRuleSchema, OfferSchema, PredicateSchema } from '../src/rules-schema.js'
 import { OFFER, SOURCE } from './fixtures.js'
 
 describe('OfferSchema', () => {
@@ -1365,6 +1365,14 @@ describe('CapRuleSchema', () => {
     const base = { id: 'c', capGroup: 'g', scope: 'account', window: { from: '2026-01-01', until: null }, sources: [SOURCE] }
     expect(CapRuleSchema.parse({ ...base, limit: { type: 'money', amount: 8500 } }).limit.type).toBe('money')
     expect(CapRuleSchema.parse({ ...base, limit: { type: 'count', count: 1 } }).limit.type).toBe('count')
+  })
+})
+
+describe('PredicateSchema', () => {
+  const p = { id: 'condo_eligible_unit', condition: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }, note: 'n', sources: [SOURCE] }
+  test('must say whether it is a working assumption', () => {
+    expect(() => PredicateSchema.parse(p)).toThrow()
+    expect(PredicateSchema.parse({ ...p, workingAssumption: true }).workingAssumption).toBe(true)
   })
 })
 ```
@@ -1817,7 +1825,7 @@ export function freshness(o: Offer, rules: RuleSet): string {
 - [ ] **Step 7: Run to verify pass**
 
 Run: `cd engine && npx vitest run test/rules-schema.test.ts test/provenance.test.ts && npm run typecheck`
-Expected: PASS (11 + 14 tests); typecheck clean.
+Expected: PASS (12 + 14 tests); typecheck clean.
 
 - [ ] **Step 8: Commit**
 
