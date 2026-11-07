@@ -2,6 +2,38 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 1, after milestone 2: cost shifting)
+
+- **Escalation rule** (CONTRIBUTING.md): The lead decides technical details and records them here.
+  Only product direction, policy interpretation, and ethics/fairness go to Qiao. Each
+  milestone ends with commit, push, and a report listing only Qiao's decisions. — Qiao.
+- **Landlord view splits real energy savings from cost shifted to tenants.** Any shift is
+  shown per year and per month, with fair options (lower rent, electricity allowance,
+  owner-paid meter). — Qiao (top priority).
+- **105 CMR 410 verified** (Mass. Register #1498, 6/23/2023; research §18):
+  - the owner provides heat, oil, electricity and gas unless there is a single-unit meter
+    or tank **and** a written rental agreement says the occupant pays;
+  - an owner-paid meter may serve several units.
+
+  Encoded as the sourced constraint `ma_105_cmr_410_written_rental_agreement` that the
+  landlord view attaches to every shift. Whether an existing "tenant pays electricity"
+  lease clause covers heat-pump electricity is a **policy-interpretation question for
+  Qiao**. — verified.
+- **Technical:**
+  - Payback defaults to **real** savings. `paybackIfCostShifted` is reported separately,
+    and only when a shift exists.
+  - `heatPumpMeterPaidBy` per unit defaults to the unit's electric payer.
+  - Field renamed to `projectCommitment` ("project commitment terms" in the UI); same
+    calculation.
+- **"Boiler needs replacing anyway" baseline** added. Cost from the user's quote,
+  otherwise the EEAC incremental cost study's oil boiler $920/ton (2023 $, confidence
+  low). — Qiao asked; source found.
+- **Tons per unit and annual heating need have no source yet.** Planned order: the user's
+  bills and the contractor's quote (medium), else a ResStock stock estimate (low, labelled
+  "typical for similar buildings"). No value is used without one. — technical.
+- **Two [Open] questions added:** cooling and the electric bill; seasonal heat pump rates.
+  — Qiao.
+
 ## 2026-11-06 (Phase 1, after milestone 1)
 
 - **Working assumptions never produce definite results.** "Eligible condo unit = has a

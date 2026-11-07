@@ -90,7 +90,7 @@ The rules engine still supports all four roles. **Demo stories:**
 
 | Role | Situation | What they need | In v1 demo |
 |---|---|---|---|
-| **Owner-occupant landlord** (core) | Lives on one floor; own unit and rental units are on different offers; pays for the work | **"Is it worth it for me?"**: what my own unit saves, who gains in the rental units (me or my tenants), how much incentives cover, and what a no-rent-increase commitment would cost me. Also which offer applies to which unit | **Story 1** |
+| **Owner-occupant landlord** (core) | Lives on one floor; own unit and rental units are on different offers; pays for the work | **"Is it worth it for me?"**: what my own unit saves, my real energy savings vs any heating cost moved onto my tenants, how much incentives cover, the project commitment terms, and whether replacing my boiler anyway changes the answer. Also which offer applies to which unit | **Story 1** |
 | Renting landlord (core) | Owns, doesn't live there; pays for upgrades; tenants may get the savings | The same "worth it" view, without an own unit | Engine only |
 | Condo owner | Owns one unit; the building's discount depends on the other owners | "Units still needed" for the all-units insulation offer, messages to neighbors | **Story 2** |
 | Tenant (entry point) | Doesn't control the building; may or may not pay for heat | Programs a renter can use alone, and a letter that gets the landlord to act | Entry into story 1 |
@@ -166,9 +166,19 @@ Coordination is the signature feature. [Decided]
   - **who gains in the rental units**, bill by bill (the landlord, the tenants, or a payer
     we don't know yet);
   - **how much incentives cover** of the project cost, plus the net upfront cost;
-  - **what a no-rent-increase commitment costs**: the forgone rent increase over the
-    commitment period. If the period or the increase isn't known, the cost is shown as
-    unknown with the reason.
+  - **real energy savings vs cost shifted to tenants**: the landlord's apparent saving
+    is split into the real energy saving and the heating cost that would move onto
+    tenants' electric bills. Any shift is shown in dollars per year and per month, with
+    fair options: lower the rent accordingly, an electricity allowance, or an owner-paid
+    meter for the heat pump. Under 105 CMR 410.200/410.210 the landlord can't shift heat
+    costs without a written rental agreement (research §18). Payback is computed on real
+    savings. [Decided 2026-11-06 — Qiao; legal reading pending Qiao]
+  - **project commitment terms** (UI label; formerly "cost of a no-rent-increase
+    commitment"): the forgone rent increase over the commitment period. If the period or
+    the increase isn't known, it is shown as unknown with the reason.
+  - **comparison baseline "the boiler needs replacing anyway"**: if chosen, the payback
+    subtracts the replacement cost the landlord would have paid regardless. It comes from
+    the user's quote, otherwise the EEAC study's $/ton (low confidence).
 
   All of these are estimates with confidence, computed by code.
 - **Who saves, who may pay more** [Decided 2026-11-06 — Qiao, top priority after review].
@@ -337,6 +347,14 @@ For the README / pitch:
 8. Real users: outreach to All In Energy / the navigator program and to a tenant or landlord
    near BC. Drafts in `docs/outreach/emails.md`; Qiao sends them. [Decided — start now]
 9. ~~Massachusetts energy burden figure~~ → computed from LEAD (§1). Confirm ACS vintage.
+11. **[Open] Cooling and the electric bill.** Heat pumps also cool. Where there was no AC
+    before, summer electricity rises (Mass Save heat pump page says so). How should the
+    bill estimate treat cooling: leave it out, or add it as a separate, clearly labelled
+    line? Needs a sourced cooling-load assumption.
+12. **[Open] Winter heat pump electric rates.** Eversource, National Grid and Unitil offer
+    seasonal heat pump rates (Nov–Apr) per the Mass Save page (research §8). Amounts,
+    eligibility and whether they apply to tenant-held accounts aren't read yet. They change
+    the tenant's bill in the cost-shift case.
 10. Tenant concern that upgrades lead to rent increases. For DEC rental projects, the
     2025–2027 Plan requires landlords to sign a form "committing not to raise renter or
     evict tenants for a period" after receiving incentives (`docs/data-sources.md` §5).

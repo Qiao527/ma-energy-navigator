@@ -426,6 +426,47 @@ Nothing here is encoded yet. This file is what the rules data (Phase 1) will be 
 
 ---
 
+## 18. Massachusetts housing law: who pays for heat (105 CMR 410)
+
+Read 2026-11-06 from the official text on mass.gov (headless browser), version **Mass.
+Register #1498, 6/23/2023**:
+https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download
+
+- **410.160(A):** "The owner shall provide and maintain in good operating condition a
+  heating system …" [Official]
+- **410.180(A):** "The owner shall provide heat in every habitable room … from September
+  15th through May 31st", at least 68°F (7 A.M.–11 P.M.) and 64°F at night. [Official]
+- **410.200(A):** "The owner shall provide the electricity or gas used in each dwelling
+  unit unless: (1) Such electricity or gas is metered through a meter which serves only
+  the dwelling unit … and (2) A written rental agreement provides for payment by the
+  occupant." [Official]
+- **410.200(B):** if the owner pays, the electricity or gas "may be metered through meters
+  which serve more than one dwelling unit". So a heat pump on an **owner-paid meter** is
+  allowed. [Official]
+- **410.210:** "The owner shall provide for the oil used for heating … unless: (A) Oil is
+  provided through a separate oil tank which serves only that dwelling unit; and (B) The
+  occupant is required to provide the oil under a written rental agreement." [Official]
+
+**What this means for the product.** The first point is the law's default; the rest is
+*inference* and needs Qiao's decision.
+- By default the owner provides heat, oil, electricity and gas. The tenant pays only with
+  **both** a meter (or tank) serving only their unit **and** a written rental agreement
+  that says so.
+- *Inference:* in Story 1 the landlord pays the oil heat. Running new heat pumps off the
+  tenant's own electric meter would move heating cost onto the tenant. That needs the
+  written rental agreement to provide for it. The landlord can't do it unilaterally.
+- *Inference, open:* does an existing lease clause "tenant pays electricity" already cover
+  electricity used for heat? This is a legal-interpretation question. The product must
+  not answer it for the user; it says "check your written rental agreement".
+- **Product rule [Proposed — needs Qiao's decision]:** when a project would move heating
+  cost onto a tenant's bill, the report:
+  1. shows the amount (per year and per month);
+  2. says it requires a written rental agreement (105 CMR 410.200/410.210);
+  3. offers fair options: lower the rent by that amount, give an electricity allowance, or
+     put the heat pump on an owner-paid meter (allowed by 410.200(B));
+  4. computes the landlord's payback on **real** energy savings by default.
+- Not legal advice. The product says so and points to the regulation.
+
 ## Flags for Qiao
 
 1. **DEC and Enhanced are new and important.** They're probably the strongest offers for

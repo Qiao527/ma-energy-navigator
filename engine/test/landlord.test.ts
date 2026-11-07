@@ -21,6 +21,7 @@ const story1 = (over: Partial<LandlordInput> = {}): LandlordInput => ({
   projectCost: e(45000, 55000, 65000),
   incentives: [{ offerId: 'ashp_whole_home', value: e(15900, 23850, 25500) }, { offerId: 'dec_weatherization', value: null }],
   rentCommitment: { months: null, forgoneIncreasePerUnitMonth: e(25, 50, 75), rentedUnits: 2 },
+  avoidedReplacementCost: null,
   ...over,
 })
 
@@ -60,20 +61,20 @@ describe('landlordView: incentives and upfront cost', () => {
   })
 })
 
-describe('landlordView: the no-rent-increase commitment', () => {
+describe('landlordView: project commitment terms (the no-rent-increase commitment)', () => {
   test('unknown period → no cost, with the reason; payback says it leaves the commitment out', () => {
     const v = landlordView(story1())
-    expect(v.commitmentCost).toEqual({ cost: null, reason: 'The length of the no-rent-increase period is not published.' })
+    expect(v.projectCommitment).toEqual({ cost: null, reason: 'The length of the project commitment period is not published.' })
     expect(v.paybackExcludesCommitment).toBe(true)
   })
   test('known period → forgone rent = months × increase × rented units, and it is added to the payback cost', () => {
     const v = landlordView(story1({ rentCommitment: { months: e(12, 12, 12), forgoneIncreasePerUnitMonth: e(25, 50, 75), rentedUnits: 2 } }))
-    expect(v.commitmentCost.cost?.range).toEqual(range(600, 1200, 1800))
+    expect(v.projectCommitment.cost?.range).toEqual(range(600, 1200, 1800))
     expect(v.paybackExcludesCommitment).toBe(false)
     expect(v.paybackYears).not.toBeNull()
   })
   test('no commitment required → zero cost', () => {
-    expect(landlordView(story1({ rentCommitment: null })).commitmentCost.cost?.range).toEqual(range(0, 0, 0))
+    expect(landlordView(story1({ rentCommitment: null })).projectCommitment.cost?.range).toEqual(range(0, 0, 0))
   })
 })
 
@@ -89,5 +90,46 @@ describe('landlordView: honesty about unknowns', () => {
     const v = landlordView(story1({ ownUnitId: null, units }))
     expect(v.landlordAnnual).toBeNull()
     expect(v.paybackYears).toBeNull()
+  })
+})
+
+describe('landlordView: real savings vs cost shifted to tenants (Qiao, 2026-11-06)', () => {
+  test('Story 1: the landlord’s apparent saving = real energy saving + heating cost moved onto tenants’ electric bills', () => {
+    const v = landlordView(story1())
+    expect(v.realSavings?.range.mid).toBeCloseTo(3 * sw.net.range.mid)
+    expect(v.shiftedToTenants.map(s => s.unitId)).toEqual(['2', '3'])
+    expect(v.shiftedTotal?.range.mid).toBeCloseTo(2 * sw.electricBill.range.mid)
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo((v.realSavings?.range.mid ?? NaN) - (v.shiftedTotal?.range.mid ?? NaN))
+  })
+  test('each shift shows its amount per month and that it needs a written rental agreement (105 CMR 410.200)', () => {
+    const s = landlordView(story1()).shiftedToTenants[0]
+    expect(s?.monthly.range.mid).toBeCloseTo(sw.electricBill.range.mid / 12)
+    expect(s?.constraint).toBe('ma_105_cmr_410_written_rental_agreement')
+    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter'])
+  })
+  test('heat pumps on an owner-paid meter: nothing shifts, and the landlord’s change equals the real saving', () => {
+    const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPumpMeterPaidBy: 'owner' as const }))
+    const v = landlordView(story1({ units }))
+    expect(v.shiftedToTenants).toEqual([])
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo(v.realSavings?.range.mid ?? NaN)
+    expect(v.paybackIfCostShifted).toBeNull()
+  })
+  test('tenants already paying for heat: no shift by the landlord', () => {
+    const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPaidBy: 'tenant' as const }))
+    expect(landlordView(story1({ units })).shiftedToTenants).toEqual([])
+  })
+})
+
+describe('landlordView: "the boiler needs replacing anyway" baseline', () => {
+  const rich = (avoided: ReturnType<typeof e> | null) => landlordView(story1({
+    rentCommitment: null,
+    avoidedReplacementCost: avoided,
+    units: story1().units.map(u => ({ ...u, bills: { ...sw, net: e(-2000, -1500, -1000) } })),
+  }))
+  test('the avoided replacement cost shortens the payback', () => {
+    const without = rich(null)
+    const withBaseline = rich(e(7000, 9000, 11000))
+    expect(withBaseline.usesReplacementBaseline).toBe(true)
+    expect(withBaseline.paybackYears?.range.mid).toBeLessThan(without.paybackYears?.range.mid ?? 0)
   })
 })

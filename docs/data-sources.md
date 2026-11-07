@@ -302,6 +302,31 @@ otherwise show the percentage alone.
 - **Proposed range:** $3,010 / $3,750 / $3,775 per kWdc (PY2027 quartiles and median),
   `confidence: low` (N = 7). PY2026 is cross-checked in the description.
 
+**Oil boiler replacement ("the boiler needs replacing anyway"): found [Official evaluation
+study; low confidence]**
+- *Heat Pump Incremental Cost Research* (Guidehouse for the Mass Save PAs, published by
+  the EEAC, 2024-08-09), Table 3: new-unit **oil boiler $920 per ton**, gas boiler $1,201,
+  propane boiler $1,331 (2023 dollars). The figures come from the 2018 MA RES19 cost study
+  for single-family installs, adjusted for inflation and efficiency.
+  https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf
+- Per ton means it needs the unit's capacity (see below). Use with **confidence low**;
+  the user can enter their own replacement quote instead, which takes precedence.
+
+**Heat pump tons per unit and annual heating need: no Massachusetts source yet**
+- Answer to Qiao (2026-11-06): **today there is no source for either.** The Phase 1 tests
+  use fixture values only.
+- Plan, in order of preference:
+  1. **Annual heating need from the user's own past fuel use** (gallons of oil or therms
+     × fuel energy content × system efficiency) → confidence **medium**, "from your
+     bills".
+  2. **Tons from the contractor's quote** (Manual J) → confidence **medium**, "from your
+     quote".
+  3. Otherwise a **stock estimate**: heating need and tons from NREL/NLR ResStock 2025
+     baseline results for Massachusetts 2–4 unit buildings of similar vintage and fuel
+     (§9) → confidence **low**, "typical for similar buildings, not measured for yours".
+     ResStock is a simulated building stock, not this building.
+- No value is used until one of these exists for the address.
+
 **Weatherization: not found → percentage only**
 - No Massachusetts evaluation study with a per-home or per-unit weatherization cost was
   found in this pass.

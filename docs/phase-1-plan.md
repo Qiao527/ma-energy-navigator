@@ -71,7 +71,7 @@ Design: `docs/product.md` §6a. It turns the scenario tests into data, so that r
 - `scenarios/ma/*.json`: `{ id, title, story, input, options: { asOf, installDate }, quantities, expect }`. `expect` lists, per offer and unit, the status, version, reason, prerequisite states, units needed / likely needed / undecided, plus the payer split and landlord view where relevant.
 - `engine/test/scenarios.test.ts` runs every file. `npm run scenarios` runs only those.
 - Starting set:
-  1. **owner-occupant landlord, Boston triple-decker** (Story 1): lives on floor 1, rents floors 2–3, oil heat; landlord pays heat, tenants pay electricity;
+  1. **owner-occupant landlord, Boston triple-decker** (Story 1): lives on floor 1, rents floors 2–3, oil heat; landlord pays heat, tenants pay electricity. The expected landlord view shows real savings vs heating cost shifted to units 2–3 (per year and per month), the 105 CMR 410 constraint, the fair options, and payback on real savings; a variant puts the heat pumps on an owner-paid meter (no shift), and another uses the "boiler needs replacing anyway" baseline;
   2. the same building seen by a **tenant** (entry point);
   3. **Somerville condo** with unit 3 agreed / declined / undecided / no meter;
   4. **Belmont MLP**;
@@ -3355,6 +3355,20 @@ Notes on dates:
 - The ECSAP `effective.from` is the month of the June 2024 DPU order; read D.P.U. 24-104 if the exact date matters.
 - SMART PY2026 retires on 2027-01-01. Add PY2027 versions once DOER finalizes the PY2027 rates (expected around December 2026), or CI fails.
 
+- [ ] **Step 15b: Create `rules/ma/legal.json`** (research §18), the sourced legal constraints that the landlord view refers to by id. Add `legal: LegalConstraint[]` to `RuleSetSchema` (`{ id, summary, sources }`), load it in `loadRuleSet`, and add a data check that `HEAT_COST_SHIFT_CONSTRAINT` from `landlord.ts` exists in it.
+
+```json
+[
+  { "id": "ma_105_cmr_410_written_rental_agreement",
+    "summary": "The owner provides heat, oil, electricity and gas unless the unit has its own meter or tank and a written rental agreement says the occupant pays. A landlord can't move heating cost onto a tenant unilaterally.",
+    "sources": [
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(A)", "quote": "The owner shall provide the electricity or gas used in each dwelling unit unless: (1) Such electricity or gas is metered through a meter which serves only the dwelling unit", "lastVerified": "2026-11-06" },
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(A)(2)", "quote": "A written rental agreement provides for payment by the occupant.", "lastVerified": "2026-11-06" },
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.210", "quote": "The owner shall provide for the oil used for heating and/or hot water in each dwelling unit unless:", "lastVerified": "2026-11-06" },
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(B)", "quote": "then such electricity or gas may be metered through meters which serve more than one dwelling unit.", "lastVerified": "2026-11-06" } ] }
+]
+```
+
 - [ ] **Step 16: Create `rules/ma/offers/bill-assistance.json`** (research §4, §10)
 
 ```json
@@ -3849,7 +3863,9 @@ git commit -m "feat(engine): payer split (who saves, who may pay more), payback,
 
 ### Task 15b: The landlord view — "Is it worth it for me?"
 
-The core user is the owner-occupant landlord (decision 2026-11-06). For one project (e.g. heat pumps in every unit), the engine answers four questions:
+The core user is the owner-occupant landlord (decision 2026-11-06). For one project (e.g. heat pumps in every unit), the engine answers these questions:
+- What are my **real energy savings**, and how much heating cost would move onto my **tenants'** bills (shown per year and per month, with fair options, and flagged as needing a written rental agreement under 105 CMR 410)? Payback uses real savings.
+- Does the answer change if **the boiler needs replacing anyway**?
 - What does **my own unit** save?
 - **Who gains in the rental units**, bill by bill?
 - **How much do incentives cover**?
@@ -3887,6 +3903,7 @@ const story1 = (over: Partial<LandlordInput> = {}): LandlordInput => ({
   projectCost: e(45000, 55000, 65000),
   incentives: [{ offerId: 'ashp_whole_home', value: e(15900, 23850, 25500) }, { offerId: 'dec_weatherization', value: null }],
   rentCommitment: { months: null, forgoneIncreasePerUnitMonth: e(25, 50, 75), rentedUnits: 2 },
+  avoidedReplacementCost: null,
   ...over,
 })
 
@@ -3926,20 +3943,20 @@ describe('landlordView: incentives and upfront cost', () => {
   })
 })
 
-describe('landlordView: the no-rent-increase commitment', () => {
+describe('landlordView: project commitment terms (the no-rent-increase commitment)', () => {
   test('unknown period → no cost, with the reason; payback says it leaves the commitment out', () => {
     const v = landlordView(story1())
-    expect(v.commitmentCost).toEqual({ cost: null, reason: 'The length of the no-rent-increase period is not published.' })
+    expect(v.projectCommitment).toEqual({ cost: null, reason: 'The length of the project commitment period is not published.' })
     expect(v.paybackExcludesCommitment).toBe(true)
   })
   test('known period → forgone rent = months × increase × rented units, and it is added to the payback cost', () => {
     const v = landlordView(story1({ rentCommitment: { months: e(12, 12, 12), forgoneIncreasePerUnitMonth: e(25, 50, 75), rentedUnits: 2 } }))
-    expect(v.commitmentCost.cost?.range).toEqual(range(600, 1200, 1800))
+    expect(v.projectCommitment.cost?.range).toEqual(range(600, 1200, 1800))
     expect(v.paybackExcludesCommitment).toBe(false)
     expect(v.paybackYears).not.toBeNull()
   })
   test('no commitment required → zero cost', () => {
-    expect(landlordView(story1({ rentCommitment: null })).commitmentCost.cost?.range).toEqual(range(0, 0, 0))
+    expect(landlordView(story1({ rentCommitment: null })).projectCommitment.cost?.range).toEqual(range(0, 0, 0))
   })
 })
 
@@ -3957,6 +3974,47 @@ describe('landlordView: honesty about unknowns', () => {
     expect(v.paybackYears).toBeNull()
   })
 })
+
+describe('landlordView: real savings vs cost shifted to tenants (Qiao, 2026-11-06)', () => {
+  test('Story 1: the landlord’s apparent saving = real energy saving + heating cost moved onto tenants’ electric bills', () => {
+    const v = landlordView(story1())
+    expect(v.realSavings?.range.mid).toBeCloseTo(3 * sw.net.range.mid)
+    expect(v.shiftedToTenants.map(s => s.unitId)).toEqual(['2', '3'])
+    expect(v.shiftedTotal?.range.mid).toBeCloseTo(2 * sw.electricBill.range.mid)
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo((v.realSavings?.range.mid ?? NaN) - (v.shiftedTotal?.range.mid ?? NaN))
+  })
+  test('each shift shows its amount per month and that it needs a written rental agreement (105 CMR 410.200)', () => {
+    const s = landlordView(story1()).shiftedToTenants[0]
+    expect(s?.monthly.range.mid).toBeCloseTo(sw.electricBill.range.mid / 12)
+    expect(s?.constraint).toBe('ma_105_cmr_410_written_rental_agreement')
+    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter'])
+  })
+  test('heat pumps on an owner-paid meter: nothing shifts, and the landlord’s change equals the real saving', () => {
+    const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPumpMeterPaidBy: 'owner' as const }))
+    const v = landlordView(story1({ units }))
+    expect(v.shiftedToTenants).toEqual([])
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo(v.realSavings?.range.mid ?? NaN)
+    expect(v.paybackIfCostShifted).toBeNull()
+  })
+  test('tenants already paying for heat: no shift by the landlord', () => {
+    const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPaidBy: 'tenant' as const }))
+    expect(landlordView(story1({ units })).shiftedToTenants).toEqual([])
+  })
+})
+
+describe('landlordView: "the boiler needs replacing anyway" baseline', () => {
+  const rich = (avoided: ReturnType<typeof e> | null) => landlordView(story1({
+    rentCommitment: null,
+    avoidedReplacementCost: avoided,
+    units: story1().units.map(u => ({ ...u, bills: { ...sw, net: e(-2000, -1500, -1000) } })),
+  }))
+  test('the avoided replacement cost shortens the payback', () => {
+    const without = rich(null)
+    const withBaseline = rich(e(7000, 9000, 11000))
+    expect(withBaseline.usesReplacementBaseline).toBe(true)
+    expect(withBaseline.paybackYears?.range.mid).toBeLessThan(without.paybackYears?.range.mid ?? 0)
+  })
+})
 ```
 
 - [ ] **Step 2: Run to verify failure**
@@ -3970,7 +4028,7 @@ Expected: FAIL — module not found.
 import { combine, estimate, type Estimate } from './estimate.js'
 import type { Fuel, Payer } from './facts.js'
 import { simplePaybackYears, splitByPayer, type SwitchEstimates } from './finance.js'
-import { add, capAt, div, floorAt, mul, point, range, sub, sum, type Range } from './range.js'
+import { add, capAt, div, floorAt, mul, point, range, scale, sub, sum, type Range } from './range.js'
 
 export interface UnitProject {
   unitId: string
@@ -3979,10 +4037,13 @@ export interface UnitProject {
   electricPaidBy: Payer | null
   /** Bill changes for this unit; null when the project doesn't change its heating. */
   bills: SwitchEstimates | null
+  /** Who pays the meter the heat pump runs on. Defaults to electricPaidBy (the unit's own meter). */
+  heatPumpMeterPaidBy?: Payer | null
 }
 
+/** "Project commitment terms" in the UI (Qiao, 2026-11-06): the no-rent-increase commitment some offers require. */
 export interface RentCommitment {
-  /** Length of the no-rent-increase period in months; null = not published (research §3 / data-sources §5). */
+  /** Length of the commitment period in months; null = not published (data-sources §5). */
   months: Estimate | null
   /** The monthly rent increase per rented unit the landlord would otherwise have made: the landlord's own input. */
   forgoneIncreasePerUnitMonth: Estimate | null
@@ -3998,14 +4059,42 @@ export interface LandlordInput {
   incentives: { offerId: string; value: Estimate | null }[]
   /** null = no commitment applies. */
   rentCommitment: RentCommitment | null
+  /**
+   * Comparison baseline: "the boiler needs replacing anyway". The cost of the replacement the landlord would
+   * have paid regardless; subtracted from the upfront cost for payback. null = not chosen.
+   */
+  avoidedReplacementCost: Estimate | null
+}
+
+/** 105 CMR 410.200 / 410.210: the owner pays for heat unless a separate meter or tank AND a written rental agreement say otherwise. */
+export const HEAT_COST_SHIFT_CONSTRAINT = 'ma_105_cmr_410_written_rental_agreement' as const
+
+export interface ShiftedCost {
+  unitId: string
+  /** Heating cost that moves onto the tenant's electric bill (positive = tenant pays more). */
+  annual: Estimate
+  /** The same per month: the size of a fair rent reduction or electricity allowance. */
+  monthly: Estimate
+  /** The landlord can't do this unilaterally (research §18). */
+  constraint: typeof HEAT_COST_SHIFT_CONSTRAINT
+  /** Fair ways to handle it; UI copy explains each. */
+  fairOptions: ('lower_rent' | 'electricity_allowance' | 'owner_paid_meter')[]
 }
 
 export interface LandlordView {
   /** Annual change on the landlord's own unit. */
   ownUnit: Estimate | null
+  /**
+   * Real energy savings on the heating the landlord paid for before: the net change across both bills
+   * (fuel saved minus the new electricity), whoever ends up paying the electricity. Negative = saves.
+   */
+  realSavings: Estimate | null
+  /** Heating cost that would move onto tenants' electric bills (Qiao, 2026-11-06: show it, with fair options). */
+  shiftedToTenants: ShiftedCost[]
+  shiftedTotal: Estimate | null
   /** Rental units: annual change for the landlord and for the tenant. */
   rentals: { unitId: string; landlord: Estimate | null; tenant: Estimate | null; unknownPayer: boolean }[]
-  /** Own unit plus rental bills the landlord pays. */
+  /** Own unit plus rental bills the landlord pays = realSavings + shiftedTotal (mid). Only fair with tenant agreement. */
   landlordAnnual: Estimate | null
   /** True when some bill's payer is unknown, so the total leaves it out. */
   landlordAnnualIncomplete: boolean
@@ -4016,10 +4105,18 @@ export interface LandlordView {
   /** Share of the project cost covered by known incentives, 0–1. */
   coverage: Estimate | null
   netUpfront: Estimate
-  commitmentCost: { cost: Estimate | null; reason: string | null }
-  /** (net upfront + commitment cost) / landlord's annual savings. Null when the landlord doesn't save for sure. */
+  /** UI label: "project commitment terms". */
+  projectCommitment: { cost: Estimate | null; reason: string | null }
+  /**
+   * Payback on REAL savings: (net upfront + commitment − avoided replacement) / −realSavings.
+   * Null when the landlord doesn't save for sure.
+   */
   paybackYears: Estimate | null
+  /** Payback if the shifted cost were left on tenants: only possible with a written rental agreement. */
+  paybackIfCostShifted: Estimate | null
   paybackExcludesCommitment: boolean
+  /** True when the "boiler needs replacing anyway" baseline was used. */
+  usesReplacementBaseline: boolean
 }
 
 const negate = (r: Range): Range => range(-r.high, -r.mid, -r.low)
@@ -4029,8 +4126,8 @@ function sumEstimates(es: Estimate[]): Estimate | null {
 }
 
 function commitment(c: RentCommitment | null): { cost: Estimate | null; reason: string | null } {
-  if (c === null) return { cost: estimate(point(0), 'high', 'No no-rent-increase commitment applies'), reason: null }
-  if (c.months === null) return { cost: null, reason: 'The length of the no-rent-increase period is not published.' }
+  if (c === null) return { cost: estimate(point(0), 'high', 'No project commitment applies'), reason: null }
+  if (c.months === null) return { cost: null, reason: 'The length of the project commitment period is not published.' }
   if (c.forgoneIncreasePerUnitMonth === null) return { cost: null, reason: 'Enter the rent increase you would otherwise have made.' }
   const perUnit = mul(c.months.range, c.forgoneIncreasePerUnitMonth.range)
   return { cost: combine(range(perUnit.low * c.rentedUnits, perUnit.mid * c.rentedUnits, perUnit.high * c.rentedUnits), [c.months, c.forgoneIncreasePerUnitMonth]), reason: null }
@@ -4040,16 +4137,32 @@ export function landlordView(a: LandlordInput): LandlordView {
   let ownUnit: Estimate | null = null
   let incomplete = false
   const landlordParts: Estimate[] = []
+  const realParts: Estimate[] = []
+  const shifted: ShiftedCost[] = []
   const rentals: LandlordView['rentals'] = []
   for (const u of a.units) {
     if (u.bills === null) continue
-    const split = splitByPayer(u.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: u.electricPaidBy, upfrontNet: null })
+    const meterPayer = u.heatPumpMeterPaidBy === undefined ? u.electricPaidBy : u.heatPumpMeterPaidBy
+    const split = splitByPayer(u.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: meterPayer, upfrontNet: null })
     if (split.unallocated.length > 0) incomplete = true
     if (split.owner.annual !== null) landlordParts.push(split.owner.annual)
+    if (u.heatPaidBy === 'owner') realParts.push(u.bills.net)
+    if (u.heatPaidBy === 'owner' && u.heatingFuel !== 'electric_resistance' && meterPayer === 'tenant') {
+      const annual = u.bills.electricBill
+      shifted.push({
+        unitId: u.unitId,
+        annual,
+        monthly: combine(scale(annual.range, 1 / 12), [annual]),
+        constraint: HEAT_COST_SHIFT_CONSTRAINT,
+        fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter'],
+      })
+    }
     if (u.unitId === a.ownUnitId) ownUnit = split.owner.annual
     else rentals.push({ unitId: u.unitId, landlord: split.owner.annual, tenant: split.tenant.annual, unknownPayer: split.unallocated.length > 0 })
   }
   const landlordAnnual = sumEstimates(landlordParts)
+  const realSavings = sumEstimates(realParts)
+  const shiftedTotal = sumEstimates(shifted.map(s => s.annual))
 
   const known = a.incentives.flatMap(i => (i.value === null ? [] : [i.value]))
   const incentivesKnown = sumEstimates(known)
@@ -4060,17 +4173,21 @@ export function landlordView(a: LandlordInput): LandlordView {
     ? combine(capAt(div(incentivesKnown.range, a.projectCost.range), 1), [incentivesKnown, a.projectCost])
     : null
 
-  const commitmentCost = commitment(a.rentCommitment)
-  const paybackExcludesCommitment = commitmentCost.cost === null
-  const upfrontWithCommitment = commitmentCost.cost
-    ? combine(add(netUpfront.range, commitmentCost.cost.range), [netUpfront, commitmentCost.cost])
+  const projectCommitment = commitment(a.rentCommitment)
+  const withCommitment = projectCommitment.cost
+    ? combine(add(netUpfront.range, projectCommitment.cost.range), [netUpfront, projectCommitment.cost])
     : netUpfront
-  const paybackYears = landlordAnnual
-    ? simplePaybackYears(upfrontWithCommitment, combine(negate(landlordAnnual.range), [landlordAnnual]))
-    : null
+  const paybackCost = a.avoidedReplacementCost
+    ? combine(floorAt(sub(withCommitment.range, a.avoidedReplacementCost.range), 0), [withCommitment, a.avoidedReplacementCost])
+    : withCommitment
+  const payback = (annual: Estimate | null): Estimate | null =>
+    annual ? simplePaybackYears(paybackCost, combine(negate(annual.range), [annual])) : null
 
   return {
     ownUnit,
+    realSavings,
+    shiftedToTenants: shifted,
+    shiftedTotal,
     rentals,
     landlordAnnual,
     landlordAnnualIncomplete: incomplete,
@@ -4079,9 +4196,11 @@ export function landlordView(a: LandlordInput): LandlordView {
     incentivesWithoutAmount: a.incentives.filter(i => i.value === null).map(i => i.offerId),
     coverage,
     netUpfront,
-    commitmentCost,
-    paybackYears,
-    paybackExcludesCommitment,
+    projectCommitment,
+    paybackYears: payback(realSavings),
+    paybackIfCostShifted: shifted.length > 0 ? payback(landlordAnnual) : null,
+    paybackExcludesCommitment: projectCommitment.cost === null,
+    usesReplacementBaseline: a.avoidedReplacementCost !== null,
   }
 }
 ```
@@ -4089,7 +4208,7 @@ export function landlordView(a: LandlordInput): LandlordView {
 - [ ] **Step 4: Run to verify pass**
 
 Run: `cd engine && npx vitest run test/landlord.test.ts && npm run typecheck`
-Expected: PASS (11 tests); typecheck clean.
+Expected: PASS (16 tests); typecheck clean.
 
 - [ ] **Step 5: Commit**
 
@@ -4217,7 +4336,9 @@ export function quantitiesFromAssumptions(list: readonly Assumption[]): Quantiti
 | `heat_pump_cost_per_ton` | 3860 / 5830 / 7800 USD per ton (ductless; mean ± 1 SD) | MA23X14-B-RHPINV Table 1 and Table 6 | Found |
 | `rooftop_solar_cost_per_kw` | 3010 / 3750 / 3775 USD per kWdc | DOER SMART PY2027 Aggregated Cost Survey (rooftop ≤27.5 kWdc residential, N = 7) | Found |
 | `solar_yield_kwh_per_kw_year` | min / median / max of PVWatts v8 runs | PVWatts v8 (`developer.nlr.gov`) for Boston, Worcester, Springfield; tilt 20–35°, azimuth 180°, losses 14% | Compute in this step |
-| `heat_pump_tons_per_unit` | — | No Massachusetts source found | **Omit** (the UI shows example sizes or the contractor's quoted size) |
+| `heat_pump_tons_per_unit` | from the contractor's quote (medium), else ResStock MA 2–4 unit stock estimate (**low**, "typical for similar buildings") | data-sources §9b | Per address; no default value |
+| `annual_heat_load_mmbtu` | from the user's past fuel use (medium), else ResStock MA stock estimate (**low**) | data-sources §9b | Per address; no default value |
+| `oil_boiler_replacement_cost_per_ton` | 920 / 920 / 920 USD per ton (2023 $), confidence **low**; the user's own quote overrides | EEAC Heat Pump Incremental Cost Research (2024), Table 3 | Found |
 | `weatherization_cost_per_unit` | — | No Massachusetts source found | **Omit** (percentage only) |
 | `rooftop_solar_kw_per_building` | — | Per address from Google Solar / PVWatts in Phase 3 | **Omit** |
 | `community_solar_credits_per_year` | — | No published typical value | **Omit** |
