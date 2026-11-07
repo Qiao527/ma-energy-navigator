@@ -67,7 +67,12 @@ function compare(yours: Estimate, typical: Estimate): Comparison {
 
 const tonnes = (kg: Range): Range => scale(kg, 1 / 1000)
 
-export function unitEnergy(input: Input, unitId: string, list: readonly Assumption[]): UnitEnergy {
+export interface EnergyOptions {
+  /** Whose meter the heat pumps run on. 'unit' = each floor's own meter (who pays electricity); 'owner' = an owner-paid meter. */
+  heatPumpMeter?: 'unit' | 'owner'
+}
+
+export function unitEnergy(input: Input, unitId: string, list: readonly Assumption[], opts: EnergyOptions = {}): UnitEnergy {
   const u = input.building.units.find(x => x.id === unitId)
   if (u === undefined) throw new Error(`unknown unit ${unitId}`)
   const notes: string[] = []
@@ -100,7 +105,7 @@ export function unitEnergy(input: Input, unitId: string, list: readonly Assumpti
     return out
   }
   out.bills = heatPumpSwitch({ load: heatLoad, fuelEfficiency: side.efficiency, fuelPricePerMMBtu: side.price, seasonalCop: cop, electricityPricePerKwh: elec })
-  out.split = splitByPayer(out.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: u.electricPaidBy, upfrontNet: null })
+  out.split = splitByPayer(out.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: opts.heatPumpMeter === 'owner' ? 'owner' : u.electricPaidBy, upfrontNet: null })
 
   // CO₂ per MMBtu of heat delivered: fuel burned ÷ efficiency; heat pump kWh ÷ COP × grid factor.
   const fuelKg = div(side.kgCo2.range, side.efficiency.range)
@@ -131,7 +136,7 @@ export function unitEnergy(input: Input, unitId: string, list: readonly Assumpti
   return out
 }
 
-export interface ReportOptions extends NavigateOptions {
+export interface ReportOptions extends NavigateOptions, EnergyOptions {
   /** Comparison baseline: the boiler needs replacing anyway (its sourced cost per ton is subtracted for payback). */
   boilerNeedsReplacing: boolean
 }
@@ -151,7 +156,7 @@ const sumOf = (es: Estimate[]): Estimate => combine(sum(es.map(e => e.range)), e
 export function report(rawInput: unknown, rules: RuleSet, options: ReportOptions, list: readonly Assumption[]): Report {
   const input = InputSchema.parse(rawInput)
   const navigation = navigate(input, rules, { asOf: options.asOf, installDate: options.installDate }, quantitiesFor(input, list))
-  const units = input.building.units.map(u => unitEnergy(input, u.id, list))
+  const units = input.building.units.map(u => unitEnergy(input, u.id, list, { heatPumpMeter: options.heatPumpMeter ?? 'unit' }))
   const withCo2 = units.flatMap(u => (u.co2 ? [u.co2] : []))
   const co2Total = withCo2.length === 0 ? null : {
     before: sumOf(withCo2.map(c => c.before)), after: sumOf(withCo2.map(c => c.after)), change: sumOf(withCo2.map(c => c.change)),
@@ -167,7 +172,11 @@ export function report(rawInput: unknown, rules: RuleSet, options: ReportOptions
     for (const e of units) {
       const u = input.building.units.find(x => x.id === e.unitId)
       if (u === undefined || e.bills === null || u.heatingFuel === null) continue
-      projects.push({ unitId: u.id, heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: u.electricPaidBy, bills: e.bills, ...(e.hotWater ? { hotWater: e.hotWater } : {}) })
+      projects.push({
+        unitId: u.id, heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: u.electricPaidBy, bills: e.bills,
+        ...(options.heatPumpMeter === 'owner' ? { heatPumpMeterPaidBy: 'owner' as const } : {}),
+        ...(e.hotWater ? { hotWater: e.hotWater } : {}),
+      })
       const qu = q(u.id)
       if (qu.cost.heat_pump) costs.push(qu.cost.heat_pump)
       if (qu.heatPumpTons) tons.push(qu.heatPumpTons)
@@ -222,4 +231,13 @@ export function breakEven(list: readonly Assumption[], fuel: Fuel): { electricit
   if (s === null || elec === null || cop === null) return null
   const fuelPer = s.price.range.mid / s.efficiency.range.mid
   return { electricityPricePerKwh: (fuelPer * cop.range.mid) / KWH_PER_MMBTU, seasonalCop: (elec.range.mid * KWH_PER_MMBTU) / fuelPer }
+}
+
+/** What-if values (E7): the user's own price or efficiency replaces the sourced range with that exact value. Unknown ids are ignored. */
+export function withOverrides(list: readonly Assumption[], overrides: Readonly<Record<string, number>>): Assumption[] {
+  return list.map(a => {
+    const v = overrides[a.id]
+    if (v === undefined || !Number.isFinite(v) || v <= 0) return a
+    return { ...a, value: { low: v, mid: v, high: v }, description: `Your value for the what-if (${a.unit}); the sourced figure was: ${a.description}` }
+  })
 }

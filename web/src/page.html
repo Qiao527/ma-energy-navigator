@@ -33,6 +33,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration-color: var(--muted); text-underline-offset: 3px; }
 a:hover { text-decoration-color: var(--ink); }
@@ -236,6 +237,103 @@ input, select { font: inherit; font-size: 0.95rem; color: var(--ink); background
 .hint { font-size: 0.8rem; color: var(--muted); }
 footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; display: grid; gap: 8px; font-size: 0.85rem; color: var(--muted); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* What-if bar: one row of controls that scopes everything below */
+.whatif { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+.whatif-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px; padding-block: 10px; }
+.ctl { display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; column-gap: 10px; align-items: center; min-width: 0; }
+.ctl label, .ctl .ctl-l { grid-column: 1 / -1; font-size: 0.75rem; color: var(--muted); font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.ctl input[type=range] { width: clamp(110px, 14vw, 170px); min-height: 28px; padding: 0; border: 0; background: transparent; accent-color: var(--ink); }
+.ctl output { font: 600 0.9rem var(--body); font-variant-numeric: tabular-nums; min-width: 6.5em; }
+.ctl.meter { grid-template-columns: auto; }
+.reset { font-size: 0.8rem; min-height: 36px; padding: 6px 12px; }
+@media (max-width: 700px) { .whatif { position: static; } .whatif-row { gap: 8px 16px; } }
+.seg-toggle { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 999px; padding: 2px; gap: 2px; justify-self: start; }
+.seg-toggle button { border: 0; min-height: 34px; padding: 5px 12px; font-size: 0.82rem; }
+.seg-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.tag { font-family: var(--mono); color: var(--ink); border: 1px solid var(--ink); border-radius: 3px; padding: 0 6px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.7rem; }
+.tag.whatif { color: var(--elec); border-color: var(--elec); }
+.figure.shift.none dd { color: var(--ok); }
+.per { font-weight: 400; color: var(--muted); font-size: 0.8em; margin-left: 1px; }
+
+/* Mechanism layers in the elevation */
+.elevation .seg-toggle { margin-bottom: 14px; }
+.mech { transition: opacity 450ms ease; }
+.mech path, .mech rect, .mech circle { vector-effect: non-scaling-stroke; }
+.mode-today .mech-after, .mode-after .mech-today { opacity: 0; }
+.mode-after .mech-after .lineset, .mode-after .mech-after .wire { stroke-dasharray: 260; stroke-dashoffset: 0; transition: stroke-dashoffset 900ms ease 150ms; }
+.mode-today .mech-after .lineset, .mode-today .mech-after .wire { stroke-dasharray: 260; stroke-dashoffset: 260; }
+.pipe { fill: none; stroke: var(--fuel); stroke-width: 2.5; }
+.radiator { fill: var(--surface); stroke: var(--fuel); stroke-width: 1.2; }
+.boiler { fill: var(--surface); stroke: var(--fuel); stroke-width: 1.5; }
+.boiler.kept { stroke-dasharray: 3 2; }
+.flame { fill: none; stroke: var(--fuel); stroke-width: 1.5; }
+.tank { fill: color-mix(in srgb, var(--fuel) 18%, var(--surface)); stroke: var(--fuel); stroke-width: 1.5; }
+.unit-in { fill: var(--surface); stroke: var(--elec); stroke-width: 1.5; }
+.unit-out { fill: var(--surface); stroke: var(--elec); stroke-width: 1.5; }
+.fan { fill: none; stroke: var(--elec); stroke-width: 1.2; }
+.lineset { fill: none; stroke: var(--elec); stroke-width: 1.5; }
+.wire { fill: none; stroke: var(--elec); stroke-width: 1.2; stroke-dasharray: 2 2; }
+.meter circle { fill: var(--surface); stroke: var(--elec); stroke-width: 1.5; }
+.meter path { stroke: var(--elec); stroke-width: 1.2; fill: none; }
+.floor-row { transition: opacity 200ms ease; border-radius: 4px; }
+.floor-row:focus-visible { outline-offset: 0; }
+.dim { opacity: 0.32; }
+
+/* Heat price bars (HTML so they glide when values change) */
+.hbars { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.hb-row { display: grid; grid-template-columns: minmax(110px, 0.36fr) minmax(0, 1fr) 4.5em; gap: 14px; align-items: center; padding: 8px 6px; border-radius: 4px; }
+.hb-row:hover, .hb-row:focus-visible { background: color-mix(in srgb, var(--line) 45%, transparent); }
+.hb-label { font-size: 0.88rem; color: var(--ink-2); }
+.hb-row.em .hb-label { color: var(--ink); font-weight: 600; }
+.hb-track { position: relative; height: 16px; border-left: 1px solid var(--ink-2); }
+.hb-range { position: absolute; top: 4px; height: 8px; border-radius: 4px; transition: left 450ms ease, width 450ms ease; }
+.hb-range.fuel { background: color-mix(in srgb, var(--fuel) 38%, transparent); }
+.hb-range.elec { background: color-mix(in srgb, var(--elec) 38%, transparent); }
+.hb-dot { position: absolute; top: 1px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid var(--surface); transition: left 450ms ease; }
+.hb-dot.fuel { background: var(--fuel); } .hb-dot.elec { background: var(--elec); }
+.hb-value { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.hb-axis { position: relative; height: 18px; margin-left: calc(min(0.36 * 100%, 999px)); }
+.hb-axis, .sb-ticks { font: 11px var(--mono); color: var(--muted); }
+.hb-axis { display: none; }
+.be-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border-top: 1.5px solid var(--ink); }
+.be { display: grid; gap: 2px; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+.be-k { font-size: 0.82rem; color: var(--muted); }
+.be-v { font-weight: 600; font-size: 1.6rem; letter-spacing: -0.01em; color: var(--elec); }
+.be-v small { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+.be-n { font: 0.75rem var(--mono); color: var(--muted); }
+
+/* Floor bars */
+.sbars { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 18px; }
+.sb-group { display: grid; gap: 5px; transition: opacity 200ms ease; }
+.sb-floor { font: 600 1.15rem var(--display); }
+.sb { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); align-items: center; gap: 10px; }
+.sb-label { font: 0.72rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.sb-track { display: flex; align-items: center; gap: 2px; height: 14px; padding-right: 5.5em; position: relative; }
+.sb-seg { height: 100%; transition: width 450ms ease; cursor: default; }
+.sb-seg:first-child { border-radius: 3px 0 0 3px; }
+.sb-seg:last-of-type { border-radius: 0 3px 3px 0; }
+.sb-seg.fuel { background: var(--fuel); } .sb-seg.elec { background: var(--elec); } .sb-seg.kept { background: color-mix(in srgb, var(--fuel) 42%, var(--surface)); }
+.sb-seg:hover, .sb-seg:focus-visible { filter: brightness(1.12); outline: 2px solid var(--ink); outline-offset: 1px; }
+.sb-total { margin-left: 8px; font-weight: 600; font-size: 0.88rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sb-axis { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 10px; }
+.sb-ticks { position: relative; height: 16px; margin-right: 5.5em; border-top: 1px solid var(--line); }
+.sb-ticks span, .hb-axis span { position: absolute; transform: translateX(-50%); top: 2px; }
+
+/* Map extras */
+.map-wrap .seg-toggle { margin-bottom: 10px; }
+.map text { font-size: calc(13px * var(--z, 1)); stroke-width: calc(4px * var(--z, 1)); }
+.map .town-label { font-size: calc(9.5px * var(--z, 1)); fill: var(--ink-2); font-weight: 400; }
+.map path { vector-effect: non-scaling-stroke; }
+.map circle { vector-effect: non-scaling-stroke; }
+.map .pulse { fill: none; stroke: var(--elec); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(3.2); opacity: 0; } }
+
+/* Tooltip: value first */
+.tip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--paper); border-radius: 6px; padding: 7px 10px; display: grid; gap: 1px; max-width: 280px; box-shadow: 0 6px 18px color-mix(in srgb, var(--ink) 25%, transparent); }
+.tip strong { font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.tip span { font-size: 0.78rem; opacity: 0.8; }
+
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 <!-- BODY -->
@@ -244,11 +342,20 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
   <p class="wordmark"><strong>Every Floor</strong><span>Heat pumps &amp; efficiency for Massachusetts 2–4 unit homes</span></p>
   <button type="button" data-action="edit">Edit the building</button>
 </div></header>
+<div class="whatif" id="whatif" role="region" aria-label="What-if controls: they change every number on the page"><div class="wrap whatif-row">
+  <span class="kicker">What if</span>
+  <div class="ctl"><label for="wi-elec">Electricity</label><input type="range" id="wi-elec" min="0.15" max="0.45" step="0.01"><output id="wi-elec-o" for="wi-elec"></output></div>
+  <div class="ctl" id="wi-fuel-ctl"><label for="wi-fuel" id="wi-fuel-l">Heating oil</label><input type="range" id="wi-fuel" min="2" max="5" step="0.05"><output id="wi-fuel-o" for="wi-fuel"></output></div>
+  <div class="ctl"><label for="wi-cop">Heat pump efficiency</label><input type="range" id="wi-cop" min="1.5" max="4" step="0.1"><output id="wi-cop-o" for="wi-cop"></output></div>
+  <div class="ctl meter"><span class="ctl-l" id="wi-meter-l">Heat pumps run on</span><div class="seg-toggle" role="group" aria-labelledby="wi-meter-l"><button type="button" data-meter="unit">Each floor’s meter</button><button type="button" data-meter="owner">Owner-paid meter</button></div></div>
+  <button type="button" id="wi-reset" class="reset">Back to statewide averages</button>
+</div></div>
 <main class="wrap" id="report"></main>
 <dialog id="editor" aria-labelledby="editor-title">
   <div class="editor-head"><h2 id="editor-title">The building</h2><button type="button" id="close">Done</button></div>
   <form id="form" novalidate></form>
 </dialog>
+<div id="tip" class="tip" role="tooltip" hidden></div>
 <p id="live" class="sr-only" aria-live="polite"></p>
 <footer><div class="wrap">
   <p>The programs decide eligibility. This page shows what their published rules say and names what to confirm. Nothing here is legal advice. Every number comes from tested code and a sourced assumption; prices are Massachusetts statewide averages, so your own bills may differ.</p>

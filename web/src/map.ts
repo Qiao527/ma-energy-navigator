@@ -14,7 +14,16 @@ const PILOT_SOURCES = [
 ]
 const DEC_SOURCE = RULES.dec.sources[0]
 
-export function mapSection(s: State): string {
+/** The map's viewBox for a zoom level: the whole state, or a window around the building's town. */
+export function mapView(here: { x: number; y: number } | undefined, zoom: 'state' | 'local'): { vb: string; z: number } {
+  const [, , W, H] = towns.viewBox.split(' ').map(Number) as [number, number, number, number]
+  if (zoom === 'state' || !here) return { vb: towns.viewBox, z: 1 }
+  const w = 190, h = (w * H) / W
+  const x = Math.min(Math.max(here.x - w / 2, 0), W - w), y = Math.min(Math.max(here.y - h / 2, 0), H - h)
+  return { vb: `${x.toFixed(1)} ${y.toFixed(1)} ${w} ${h.toFixed(1)}`, z: w / W }
+}
+
+export function mapSection(s: State, zoom: 'state' | 'local'): string {
   const dec = new Map(RULES.dec.municipalities.map(m => [m.name, m]))
   const town = s.input.building.municipality.trim()
   const here = towns.towns.find(t => t.name.toLowerCase() === town.toLowerCase())
@@ -22,11 +31,15 @@ export function mapSection(s: State): string {
     const d = dec.get(t.name)
     const cls = d ? (d.narrowedFor.length ? 'dec part' : 'dec') : 'town'
     const label = `${t.name}${d ? (d.narrowedFor.length ? ': Designated Equity Community in parts (Environmental Justice block groups) for some utilities' : ': Designated Equity Community') : ''}${PILOT.includes(t.name) ? '; navigator pilot city' : ''}`
-    return `<path d="${t.d}" class="${cls}${here === t ? ' here' : ''}"><title>${esc(label)}</title></path>`
+    const [name, ...rest] = label.split(/[:;] /)
+    return `<path d="${t.d}" class="${cls}${here === t ? ' here' : ''}" data-tip="${esc(name ?? t.name)}|${esc(rest.join('; ') || 'Mass Save and the regional CAP agency serve every town')}"></path>`
   }).join('')
+  const view = mapView(here, zoom)
+  const z = view.z
   const pins = towns.towns.filter(t => PILOT.includes(t.name)).map(t =>
-    `<g class="pin"><circle cx="${t.x}" cy="${t.y}" r="7"/><text x="${t.x + 11}" y="${t.y + 4}">${t.name}</text></g>`).join('')
-  const herePin = here ? `<g class="pin-here"><circle cx="${here.x}" cy="${here.y}" r="9"/><circle cx="${here.x}" cy="${here.y}" r="3"/><text x="${here.x + 13}" y="${here.y - 10}">${esc(here.name)}</text></g>` : ''
+    `<g class="pin"><circle cx="${t.x}" cy="${t.y}" r="${7 * z}"/><text x="${t.x + 11 * z}" y="${t.y + 4 * z}">${t.name}</text></g>`).join('')
+  const herePin = here ? `<g class="pin-here"><circle cx="${here.x}" cy="${here.y}" r="${10 * z}" class="pulse"/><circle cx="${here.x}" cy="${here.y}" r="${9 * z}"/><circle cx="${here.x}" cy="${here.y}" r="${3 * z}"/><text x="${here.x + 13 * z}" y="${here.y - 10 * z}">${esc(here.name)}</text></g>` : ''
+  const labels = zoom === 'local' ? towns.towns.filter(t => t !== here && !PILOT.includes(t.name)).map(t => `<text class="town-label" x="${t.x}" y="${t.y}" text-anchor="middle">${esc(t.name)}</text>`).join('') : ''
 
   const isDec = here ? dec.get(here.name) : undefined
   const nearest = here && !PILOT.includes(here.name)
@@ -46,6 +59,8 @@ export function mapSection(s: State): string {
       </ul>
       <p class="muted">Sources: <a href="${esc(DEC_SOURCE?.url ?? '')}" target="_blank" rel="noopener">Mass Save DEC list</a> · ${PILOT_SOURCES.map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.label}</a>`).join(' · ')} · <a href="${esc(towns.source)}" target="_blank" rel="noopener">Census town boundaries</a>. Places are shown to point people to help, never to rank them.</p>
     </div>
-    <div class="map-wrap"><svg class="map" viewBox="${towns.viewBox}" role="img" aria-labelledby="map-t"><title id="map-t">Massachusetts cities and towns: Designated Equity Communities, navigator pilot cities${here ? `, and ${esc(here.name)}` : ''}</title>${paths}${pins}${herePin}</svg></div>
+    <div class="map-wrap">
+      ${here ? `<div class="seg-toggle" role="group" aria-label="Map view"><button type="button" data-zoom="state" aria-pressed="${zoom === 'state'}">All of Massachusetts</button><button type="button" data-zoom="local" aria-pressed="${zoom === 'local'}">Around ${esc(here.name)}</button></div>` : ''}
+      <svg class="map" viewBox="${view.vb}" data-k="map" data-z="${z}" style="--z:${z}" role="img" aria-labelledby="map-t"><title id="map-t">Massachusetts cities and towns: Designated Equity Communities, navigator pilot cities${here ? `, and ${esc(here.name)}` : ''}</title>${paths}${labels}${pins}${herePin}</svg></div>
   </section>`
 }

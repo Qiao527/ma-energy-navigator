@@ -26,6 +26,26 @@ Newest first. Format: date — decision — why — decided by.
     and a report, and it keeps WCAG control simple.
   - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
 
+## 2026-11-07 (Interactive version)
+
+- **Technical:**
+  - A what-if bar sits above the report: electricity price, the building's fuel price, heat pump efficiency,
+    and whose meter the heat pumps run on. One row of controls scopes every number below it.
+  - What-if values replace a sourced range with the user's exact value (engine `withOverrides`, tested), and the
+    page labels them "what-if values".
+  - The meter option is engine `heatPumpMeter: 'owner'` (tested). It removes the shifted cost, which is fair
+    option 3.
+- **Technical, the elevation shows the switch itself:**
+  - Today: the basement boiler and oil tank, a shared riser, and radiators.
+  - With heat pumps: outdoor units on each porch, line sets to wall heads, and each floor's meter, or one owner
+    meter bus.
+  - The boiler stays, drawn dashed, when it keeps heating the hot water.
+- **Technical, motion and highlighting:**
+  - Between renders, bars glide, numbers count, and the map pans or zooms ("Around <town>").
+  - A floor is highlighted everywhere it appears.
+  - One tooltip, value first, works on hover and keyboard focus.
+  - All motion is off under `prefers-reduced-motion`.
+
 ## 2026-11-07 (Qiao's review of web v1)
 
 - **"Heat pumps may not save" is presented as it is** (option A). The headline states the yearly change, and the

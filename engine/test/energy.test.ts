@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { describe, expect, test } from 'vitest'
-import { breakEven, heatCosts, report, unitEnergy } from '../src/energy.js'
+import { breakEven, heatCosts, report, unitEnergy, withOverrides } from '../src/energy.js'
 import { InputSchema } from '../src/facts.js'
 import { KWH_PER_MMBTU } from '../src/finance.js'
 import { AssumptionsSchema, type Assumption } from '../src/quantities.js'
@@ -138,5 +138,46 @@ describe('the price of one unit of heat, and the break-even point (why heat pump
   test('a fuel without a sourced price gives no row and no break-even', () => {
     expect(heatCosts(LIST).some(x => x.id === 'propane')).toBe(false)
     expect(breakEven(LIST, 'propane')).toBeNull()
+  })
+})
+
+describe('what-if controls: the user’s own values replace the statewide ones', () => {
+  test('an override becomes that exact value, says it is the user’s, and leaves other assumptions alone', () => {
+    const l = withOverrides(LIST, { 'price.electricity': 0.25, heat_pump_seasonal_cop: 3 })
+    const p = l.find(x => x.id === 'price.electricity')
+    expect(p?.value).toEqual({ low: 0.25, mid: 0.25, high: 0.25 })
+    expect(p?.description).toMatch(/your value/i)
+    expect(l.find(x => x.id === 'heat_pump_seasonal_cop')?.value.mid).toBe(3)
+    expect(l.find(x => x.id === 'price.oil')).toEqual(LIST.find(x => x.id === 'price.oil'))
+  })
+  test('an override for an assumption that does not exist is ignored, never invented', () => {
+    expect(withOverrides(LIST, { 'price.propane': 3 }).some(x => x.id === 'price.propane')).toBe(false)
+  })
+})
+
+describe('heat pumps on an owner-paid meter (fair option 3)', () => {
+  const i = InputSchema.parse(input({ role: 'owner_occupant_landlord', userUnitId: '1', building: { units: [
+    unit('1', { occupancy: 'owner', heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'owner', fuelRecords: RECS, hotWaterFromBoiler: false }),
+    unit('2', { occupancy: 'renter', heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', fuelRecords: RECS, hotWaterFromBoiler: false }),
+  ] } }))
+  test('the tenant’s electric bill no longer changes; the landlord gets the net; nothing shifts', () => {
+    const u = unitEnergy(i, '2', LIST, { heatPumpMeter: 'owner' })
+    expect(u.split?.tenant.annual).toBeNull()
+    expect(u.split?.owner.annual).toEqual(u.bills?.net)
+  })
+})
+
+describe('report: heat pump meter option reaches the landlord view', () => {
+  const rulesDir = fileURLToPath(new URL('../../rules/ma/', import.meta.url))
+  const rules = loadRuleSet(rulesDir, { requireApproval: false, overlayDir: `${rulesDir}drafts` })
+  const list = loadAssumptions(rulesDir, { requireApproval: false, overlayDir: `${rulesDir}drafts` })
+  const floor = (id: string, occupancy: 'owner' | 'renter') => unit(id, {
+    occupancy, heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: occupancy === 'owner' ? 'owner' : 'tenant', fuelRecords: RECS, hotWaterFromBoiler: false,
+  })
+  const i = input({ role: 'owner_occupant_landlord', userUnitId: '1', building: { yearBuilt: 1910, electricUtility: 'eversource', units: [floor('1', 'owner'), floor('2', 'renter')] } })
+  test('owner-paid meter: no shifted cost, and the landlord’s change equals the real energy change', () => {
+    const r = report(i, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false, heatPumpMeter: 'owner' }, list)
+    expect(r.landlord?.shiftedToTenants).toEqual([])
+    expect(r.landlord?.landlordAnnual?.range.mid).toBeCloseTo(r.landlord?.realSavings?.range.mid ?? NaN, 6)
   })
 })
