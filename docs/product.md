@@ -81,7 +81,9 @@ them is: **"Is this worth doing for me?"**
 
 The rules engine still supports all four roles. **Demo stories:**
 1. **Owner-occupant landlord** (first story): lives on the 1st floor of a triple-decker
-   and rents the 2nd and 3rd.
+   and rents the 2nd and 3rd. The landlord pays the oil heat for all three floors and has
+   **two years of oil delivery records**, so the heating need comes from real use
+   (confidence medium). The tenants pay their own electricity.
 2. **Condo building** (second story): "N more units needed".
 3. The tenant appears as the entry point that leads into story 1 (the letter to the
    landlord).
@@ -151,6 +153,11 @@ Coordination is the signature feature. [Decided]
   up". [Decided 2026-11-06]
 - **No federal tax credits.** §25C and §25D are not allowed for expenditures after
   2025-12-31 (P.L. 119-21). The FAQ explains this. [Decided]
+- **Heating need and heat pump size for everyone** [Decided 2026-11-06 — Qiao]. These
+  come from the user's past fuel records where available (confidence medium). Otherwise
+  they come from a **ResStock-based Massachusetts estimate** for similar 2–4 unit
+  buildings (confidence low, "typical for similar buildings, not measured for yours").
+  This is built in Phase 1, so most users still get a number.
 - Rooftop solar module only for users who can install (Google Solar API, PVWatts fallback).
   It must say which meter(s) get the benefit, since each unit usually has its own meter.
   [Proposed — Step 3 verifies net-metering credit allocation]
@@ -172,7 +179,22 @@ Coordination is the signature feature. [Decided]
     fair options: lower the rent accordingly, an electricity allowance, or an owner-paid
     meter for the heat pump. Under 105 CMR 410.200/410.210 the landlord can't shift heat
     costs without a written rental agreement (research §18). Payback is computed on real
-    savings. [Decided 2026-11-06 — Qiao; legal reading pending Qiao]
+    savings. [Decided 2026-11-06 — Qiao]
+    - **We never interpret the law for the user.** The report says "Check your written
+      rental agreement" and names the exact thing to look for: does it say the tenant
+      pays for **heat** (or heating fuel), not only "electricity"? It lists where to get
+      help (the Attorney General's Guide to Landlord-Tenant Rights, MassLegalHelp's
+      utilities chapter, the local Board of Health) and says "This is not legal advice."
+    - **The recommended payback is always the no-shift one.** The "if costs were shifted"
+      payback appears only as a comparison, always with the 105 CMR 410 note, never in a
+      recommendation slot.
+    - **Fair options (four):**
+      1. lower the rent by the shifted amount;
+      2. an electricity allowance;
+      3. an owner-paid meter for the heat pump;
+      4. negotiate at renewal or a new lease and write it down. This must explain the
+         electricity change openly; renewal must not be used to shift the cost
+         unannounced.
   - **project commitment terms** (UI label; formerly "cost of a no-rent-increase
     commitment"): the forgone rent increase over the commitment period. If the period or
     the increase isn't known, it is shown as unknown with the reason.

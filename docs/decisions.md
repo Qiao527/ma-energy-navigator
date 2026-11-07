@@ -2,6 +2,26 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (cost shifting: Qiao's three decisions)
+
+- **Never interpret the lease or the law for the user.** Show "Check your written rental
+  agreement: does it say the tenant pays for heat (or heating fuel), not only
+  electricity?", list resources (the AG's 2025 guide, MassLegalHelp ch. 6, the local
+  Board of Health), and say "This is not legal advice." — Qiao.
+- **The recommended payback is the no-shift one.** The cost-shifted payback is
+  comparison-only, always with the 105 CMR 410 note, never in a recommendation slot. —
+  Qiao.
+- **Fourth fair option:** negotiate at renewal or a new lease, in writing, with the
+  electricity change explained openly. Never a disguised shift at renewal. — Qiao.
+- **ResStock estimates moved into Phase 1** (Task 16b, M4). First pass for oil-heated
+  Massachusetts 2–4 unit homes: 22.8 / 35.8 / 50.8 MMBtu heating load and 1.97 / 2.48 /
+  3.29 tons, confidence low. — Qiao asked; computed.
+- **Demo Story 1 has two years of oil delivery records** (heating need from records,
+  confidence medium). — Qiao.
+- **Technical:** fuel records go per unit as `fuelRecords`. Estimate precedence:
+  records → contractor tons → ResStock fuel × vintage → ResStock fuel only. A group needs
+  at least 30 samples.
+
 ## 2026-11-06 (Phase 1, after milestone 2: cost shifting)
 
 - **Escalation rule** (CONTRIBUTING.md): The lead decides technical details and records them here.

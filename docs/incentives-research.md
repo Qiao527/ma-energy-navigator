@@ -458,13 +458,29 @@ https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habi
 - *Inference, open:* does an existing lease clause "tenant pays electricity" already cover
   electricity used for heat? This is a legal-interpretation question. The product must
   not answer it for the user; it says "check your written rental agreement".
-- **Product rule [Proposed — needs Qiao's decision]:** when a project would move heating
+- **Product rule [Decided 2026-11-06 — Qiao]:** when a project would move heating
   cost onto a tenant's bill, the report:
   1. shows the amount (per year and per month);
   2. says it requires a written rental agreement (105 CMR 410.200/410.210);
   3. offers fair options: lower the rent by that amount, give an electricity allowance, or
      put the heat pump on an owner-paid meter (allowed by 410.200(B));
-  4. computes the landlord's payback on **real** energy savings by default.
+  4. computes the landlord's payback on **real** energy savings by default;
+  5. adds a fourth fair option: negotiate at renewal or a new lease, in writing, with the
+     electricity change explained openly;
+  6. never interprets the lease. It says "Check your written rental agreement: does it
+     say the tenant pays for heat (or heating fuel), not only electricity?" and lists
+     resources.
+- **Resources** (read 2026-11-06):
+  - Attorney General's *2025 Guide to Landlord-Tenant Rights*: "The landlord must pay for
+    the heat, hot water, and electricity unless a term in the lease or other written
+    rental agreement requires the tenant to pay for these utilities." and "A tenant
+    cannot be required to pay for heating oil unless there is a separate tank that serves
+    only the tenant's unit."
+    https://www.mass.gov/doc/2025-guide-to-landlord-tenant-rights-11182025/download
+  - MassLegalHelp, *Legal Tactics* ch. 6 Utilities (2025): "Fuel for hot water and heat:
+    Landlord pays unless you signed a written document saying that the tenant must pay."
+    https://www.masslegalhelp.org/sites/default/files/2025-02/06%20Utilities%202025_0.pdf
+  - The local **Board of Health** enforces 105 CMR 410.
 - Not legal advice. The product says so and points to the regulation.
 
 ## Flags for Qiao

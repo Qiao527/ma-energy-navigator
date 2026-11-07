@@ -50,8 +50,11 @@ export interface ShiftedCost {
   monthly: Estimate
   /** The landlord can't do this unilaterally (research §18). */
   constraint: typeof HEAT_COST_SHIFT_CONSTRAINT
-  /** Fair ways to handle it; UI copy explains each. */
-  fairOptions: ('lower_rent' | 'electricity_allowance' | 'owner_paid_meter')[]
+  /**
+   * Fair ways to handle it; UI copy explains each (Qiao, 2026-11-06). negotiate_at_lease_renewal means agreeing
+   * in writing at renewal or a new lease, with the electricity change explained openly — never a disguised shift.
+   */
+  fairOptions: ('lower_rent' | 'electricity_allowance' | 'owner_paid_meter' | 'negotiate_at_lease_renewal')[]
 }
 
 export interface LandlordView {
@@ -85,7 +88,10 @@ export interface LandlordView {
    * Null when the landlord doesn't save for sure.
    */
   paybackYears: Estimate | null
-  /** Payback if the shifted cost were left on tenants: only possible with a written rental agreement. */
+  /**
+   * COMPARISON ONLY. Payback if the shifted cost were left on tenants: only possible with a written rental
+   * agreement. Never shown in a recommendation slot (Qiao, 2026-11-06); always shown with the 105 CMR 410 note.
+   */
   paybackIfCostShifted: Estimate | null
   paybackExcludesCommitment: boolean
   /** True when the "boiler needs replacing anyway" baseline was used. */
@@ -127,7 +133,7 @@ export function landlordView(a: LandlordInput): LandlordView {
         annual,
         monthly: combine(scale(annual.range, 1 / 12), [annual]),
         constraint: HEAT_COST_SHIFT_CONSTRAINT,
-        fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter'],
+        fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'],
       })
     }
     if (u.unitId === a.ownUnitId) ownUnit = split.owner.annual

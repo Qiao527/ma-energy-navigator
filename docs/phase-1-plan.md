@@ -44,8 +44,8 @@ Phase 1 runs in milestones. The lead stops after each one and reports three thin
 | **M1 — core decisions** ✅ | 1–7 (+ working-assumption fix) | How three-valued conditions, roles and all-units participation decide |
 | **M2 — money, from the landlord's side** | 8, 9, 15, **15b** | How money is computed, especially the payer split and "is it worth it" |
 | **M3 — offers and plan** | 10, 11, 12 | How an offer's status, next steps and the shown list are decided |
-| **M4 — rules data under governance** | **12b**, 13, 14 | The drafting workflow and the standard scenarios |
-| **M5 — wrap-up** | 16, 17, 18 | Final verification and review |
+| **M4 — rules data and real quantities** | **12b**, 13, 14, 16, **16b** | The drafting workflow, the standard scenarios, and where heating need and heat pump size come from |
+| **M5 — wrap-up** | 17, 18 | Final verification and review |
 
 Task numbers are kept stable, so tasks run in milestone order, not number order. Each milestone only uses what earlier milestones built. In M2, for example, Task 15 needs Tasks 2, 3 and 9, and Task 15b needs Task 15.
 
@@ -65,13 +65,31 @@ Design: `docs/product.md` §6a. The full TDD steps are written at the start of M
 - Tests: a draft with a quote missing from its snapshot fails; an approved rule loads; an active rule without approval is a data problem; a draft is never loaded.
 - Task 13's rules then go through this workflow: drafted from the saved snapshots, checked, and approved by Qiao.
 
+### Task 16b (M4): ResStock stock estimates — scope (Qiao, 2026-11-06: moved into Phase 1)
+
+Without this, most users get no dollar figure. Scope fixed now; the full TDD steps are written at the start of M4.
+- `analysis/resstock_estimates.py` reads `MA_upgrade0.csv.gz` (ResStock 2025 release 1, AMY2018), downloaded into an empty folder outside the repo.
+  - Filter: `in.geometry_building_type_recs = "Multi-Family with 2 - 4 Units"`.
+  - Group by `in.heating_fuel` × vintage band (before 1950 / 1950–1999 / 2000+).
+  - Write **weighted** p25 / p50 / p75 of `out.load.heating.energy_delivered..kbtu` (→ MMBtu) and of `out.params.size_heating_system_primary..kbtu_per_hr` (→ tons, ÷ 12), each with its sample count.
+- Output: `rules/ma/assumptions-resstock.json`, entries like `annual_heat_load_mmbtu|fuel_oil|pre1950`, each with `confidence: "low"`, `why: "typical for similar Massachusetts 2–4 unit buildings (ResStock, simulated), not measured for yours"`, the S3 URL as source and the sample size.
+  - A group with fewer than 30 samples falls back to the fuel-only group.
+  - If even that has fewer than 30 samples, it is omitted.
+- First pass (2026-11-06): oil heat 22.8 / 35.8 / 50.8 MMBtu, 1.97 / 2.48 / 3.29 tons (n = 349). The Task 16b tests check the script reproduces these from a small fixture with the same columns.
+- `quantitiesFromAssumptions` (Task 16) picks the most specific estimate: the user's fuel records (Task 16), then the contractor's tons, then ResStock fuel × vintage, then ResStock fuel only. The chosen source and its `why` travel in the `Estimate`.
+
+**Task 16 additions (M4):**
+- `UnitSchema` gains `fuelRecords: { year: number; quantity: number; unit: 'gallons' | 'therms' | 'kwh' }[] | null`.
+- `heatLoadFromRecords()` = average annual quantity × EIA heat content × efficiency. Efficiency is the user's value, otherwise the 84% AFUE baseline from the EEAC study. Two or more years → medium; one year → low.
+- Read and cite EIA's heat-content values before encoding them.
+
 ### Task 14 (M4): Standard scenarios — scope
 
 Design: `docs/product.md` §6a. It turns the scenario tests into data, so that rule, engine, prompt and model changes all run against the same fixed set:
 - `scenarios/ma/*.json`: `{ id, title, story, input, options: { asOf, installDate }, quantities, expect }`. `expect` lists, per offer and unit, the status, version, reason, prerequisite states, units needed / likely needed / undecided, plus the payer split and landlord view where relevant.
 - `engine/test/scenarios.test.ts` runs every file. `npm run scenarios` runs only those.
 - Starting set:
-  1. **owner-occupant landlord, Boston triple-decker** (Story 1): lives on floor 1, rents floors 2–3, oil heat; landlord pays heat, tenants pay electricity. The expected landlord view shows real savings vs heating cost shifted to units 2–3 (per year and per month), the 105 CMR 410 constraint, the fair options, and payback on real savings; a variant puts the heat pumps on an owner-paid meter (no shift), and another uses the "boiler needs replacing anyway" baseline;
+  1. **owner-occupant landlord, Boston triple-decker** (Story 1): lives on floor 1, rents floors 2–3, oil heat; landlord pays heat, tenants pay electricity. The landlord has **two years of oil delivery records** (heating need from records, confidence medium). The expected landlord view shows real savings vs heating cost shifted to units 2–3 (per year and per month), the 105 CMR 410 constraint, the fair options, and payback on real savings; a variant puts the heat pumps on an owner-paid meter (no shift), and another uses the "boiler needs replacing anyway" baseline;
   2. the same building seen by a **tenant** (entry point);
   3. **Somerville condo** with unit 3 agreed / declined / undecided / no meter;
   4. **Belmont MLP**;
@@ -3355,12 +3373,21 @@ Notes on dates:
 - The ECSAP `effective.from` is the month of the June 2024 DPU order; read D.P.U. 24-104 if the exact date matters.
 - SMART PY2026 retires on 2027-01-01. Add PY2027 versions once DOER finalizes the PY2027 rates (expected around December 2026), or CI fails.
 
-- [ ] **Step 15b: Create `rules/ma/legal.json`** (research §18), the sourced legal constraints that the landlord view refers to by id. Add `legal: LegalConstraint[]` to `RuleSetSchema` (`{ id, summary, sources }`), load it in `loadRuleSet`, and add a data check that `HEAT_COST_SHIFT_CONSTRAINT` from `landlord.ts` exists in it.
+- [ ] **Step 15b: Create `rules/ma/legal.json`** (research §18), the sourced legal constraints that the landlord view refers to by id.
+  - Add `legal: LegalConstraint[]` to `RuleSetSchema`: `{ id, summary, leaseCheck, resources: Source[], disclaimer, sources }`.
+  - Load it in `loadRuleSet`.
+  - Add a data check that `HEAT_COST_SHIFT_CONSTRAINT` from `landlord.ts` exists in it.
+  - The UI shows `leaseCheck` and `resources` next to every shifted cost and never interprets the lease (Qiao, 2026-11-06).
 
 ```json
 [
   { "id": "ma_105_cmr_410_written_rental_agreement",
     "summary": "The owner provides heat, oil, electricity and gas unless the unit has its own meter or tank and a written rental agreement says the occupant pays. A landlord can't move heating cost onto a tenant unilaterally.",
+    "leaseCheck": "Check your written rental agreement: does it say the tenant pays for heat (or heating fuel), not only electricity?",
+    "disclaimer": "This is not legal advice.",
+    "resources": [
+      { "url": "https://www.mass.gov/doc/2025-guide-to-landlord-tenant-rights-11182025/download", "section": "Does the rent cover heat and electricity?", "quote": "The landlord must pay for the heat, hot water, and electricity unless a term in the lease or other written rental agreement requires the tenant to pay for these utilities.", "lastVerified": "2026-11-06" },
+      { "url": "https://www.masslegalhelp.org/sites/default/files/2025-02/06%20Utilities%202025_0.pdf", "section": "Who pays for utilities", "quote": "Fuel for hot water and heat: Landlord pays unless you signed a written document saying that the tenant must pay.", "lastVerified": "2026-11-06" } ],
     "sources": [
       { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(A)", "quote": "The owner shall provide the electricity or gas used in each dwelling unit unless: (1) Such electricity or gas is metered through a meter which serves only the dwelling unit", "lastVerified": "2026-11-06" },
       { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(A)(2)", "quote": "A written rental agreement provides for payment by the occupant.", "lastVerified": "2026-11-06" },
@@ -3987,7 +4014,7 @@ describe('landlordView: real savings vs cost shifted to tenants (Qiao, 2026-11-0
     const s = landlordView(story1()).shiftedToTenants[0]
     expect(s?.monthly.range.mid).toBeCloseTo(sw.electricBill.range.mid / 12)
     expect(s?.constraint).toBe('ma_105_cmr_410_written_rental_agreement')
-    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter'])
+    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'])
   })
   test('heat pumps on an owner-paid meter: nothing shifts, and the landlord’s change equals the real saving', () => {
     const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPumpMeterPaidBy: 'owner' as const }))
@@ -4077,8 +4104,11 @@ export interface ShiftedCost {
   monthly: Estimate
   /** The landlord can't do this unilaterally (research §18). */
   constraint: typeof HEAT_COST_SHIFT_CONSTRAINT
-  /** Fair ways to handle it; UI copy explains each. */
-  fairOptions: ('lower_rent' | 'electricity_allowance' | 'owner_paid_meter')[]
+  /**
+   * Fair ways to handle it; UI copy explains each (Qiao, 2026-11-06). negotiate_at_lease_renewal means agreeing
+   * in writing at renewal or a new lease, with the electricity change explained openly — never a disguised shift.
+   */
+  fairOptions: ('lower_rent' | 'electricity_allowance' | 'owner_paid_meter' | 'negotiate_at_lease_renewal')[]
 }
 
 export interface LandlordView {
@@ -4112,7 +4142,10 @@ export interface LandlordView {
    * Null when the landlord doesn't save for sure.
    */
   paybackYears: Estimate | null
-  /** Payback if the shifted cost were left on tenants: only possible with a written rental agreement. */
+  /**
+   * COMPARISON ONLY. Payback if the shifted cost were left on tenants: only possible with a written rental
+   * agreement. Never shown in a recommendation slot (Qiao, 2026-11-06); always shown with the 105 CMR 410 note.
+   */
   paybackIfCostShifted: Estimate | null
   paybackExcludesCommitment: boolean
   /** True when the "boiler needs replacing anyway" baseline was used. */
@@ -4154,7 +4187,7 @@ export function landlordView(a: LandlordInput): LandlordView {
         annual,
         monthly: combine(scale(annual.range, 1 / 12), [annual]),
         constraint: HEAT_COST_SHIFT_CONSTRAINT,
-        fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter'],
+        fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'],
       })
     }
     if (u.unitId === a.ownUnitId) ownUnit = split.owner.annual

@@ -105,7 +105,7 @@ describe('landlordView: real savings vs cost shifted to tenants (Qiao, 2026-11-0
     const s = landlordView(story1()).shiftedToTenants[0]
     expect(s?.monthly.range.mid).toBeCloseTo(sw.electricBill.range.mid / 12)
     expect(s?.constraint).toBe('ma_105_cmr_410_written_rental_agreement')
-    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter'])
+    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'])
   })
   test('heat pumps on an owner-paid meter: nothing shifts, and the landlord’s change equals the real saving', () => {
     const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPumpMeterPaidBy: 'owner' as const }))

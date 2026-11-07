@@ -324,8 +324,27 @@ study; low confidence]**
   3. Otherwise a **stock estimate**: heating need and tons from NREL/NLR ResStock 2025
      baseline results for Massachusetts 2–4 unit buildings of similar vintage and fuel
      (§9) → confidence **low**, "typical for similar buildings, not measured for yours".
-     ResStock is a simulated building stock, not this building.
+     ResStock is a simulated building stock, not this building. **Moved into Phase 1**
+     (Qiao, 2026-11-06).
+     - First pass (2026-11-06, `MA_upgrade0.csv.gz`, weighted per dwelling unit,
+       `in.geometry_building_type_recs = Multi-Family with 2 - 4 Units`):
+       - oil heat (n = 349): delivered heating load p25/p50/p75 **22.8 / 35.8 /
+         50.8 MMBtu**; primary heating system size **1.97 / 2.48 / 3.29 tons**;
+       - oil heat, built before 1950 (n = 274): 27.6 / 38.4 / 51.8 MMBtu;
+       - gas heat (n = 1,681): 21.3 / 33.4 / 50.0 MMBtu and 1.74 / 2.43 / 3.25 tons.
+     - Heating-system size is the existing system's capacity, used as a **proxy** for heat
+       pump tons (a Manual J load would be better), which is one more reason for "low".
 - No value is used until one of these exists for the address.
+
+**From past fuel records to heating need [Proposed — Phase 1, Task 16]**
+- annual heating need (MMBtu delivered) = average annual fuel use × heat content × system
+  efficiency.
+- Heat content: EIA's figures for heating oil (≈ 0.1385 MMBtu/gal), propane and natural
+  gas. *[To read and cite in Task 16.]*
+- Efficiency: the user's value, otherwise the EEAC study's baseline oil boiler 84% AFUE
+  (Table 2).
+- Two or more years of records → confidence **medium**. One year → **low** (a single
+  winter can be unusual).
 
 **Weatherization: not found → percentage only**
 - No Massachusetts evaluation study with a per-home or per-unit weatherization cost was
