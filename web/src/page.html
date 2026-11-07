@@ -1,4 +1,5 @@
 <title>Every Floor</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='7' y='4' width='18' height='25' fill='none' stroke='%2316191c' stroke-width='2.5'/%3E%3Cpath d='M7 12h18M7 20h18' stroke='%2316191c' stroke-width='2'/%3E%3C/svg%3E">
 <meta name="description" content="Massachusetts heat pump and efficiency programs for 2–4 unit homes: who saves, who may pay more, and what to do first.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +35,10 @@
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
+html { scroll-padding-top: var(--sticky, 96px); }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 30; background: var(--ink); color: var(--paper); padding: 10px 14px; border-radius: 6px; text-decoration: none; }
+.skip:focus { top: 12px; }
+details summary { min-height: 24px; padding-block: 2px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration-color: var(--muted); text-underline-offset: 3px; }
 a:hover { text-decoration-color: var(--ink); }
@@ -326,7 +331,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .map .town-label { font-size: calc(9.5px * var(--z, 1)); fill: var(--ink-2); font-weight: 400; }
 .map path { vector-effect: non-scaling-stroke; }
 .map circle { vector-effect: non-scaling-stroke; }
-.map .pulse { fill: none; stroke: var(--elec); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out infinite; }
+.map .pulse { fill: none; stroke: var(--elec); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out 3; }
 @keyframes pulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(3.2); opacity: 0; } }
 
 /* Tooltip: value first */
@@ -337,6 +342,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 <!-- BODY -->
+<a class="skip" href="#report">Skip to the report</a>
 <p id="preview" class="preview" role="status" hidden></p>
 <header class="topbar"><div class="wrap">
   <p class="wordmark"><strong>Every Floor</strong><span>Heat pumps &amp; efficiency for Massachusetts 2–4 unit homes</span></p>
@@ -350,7 +356,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
   <div class="ctl meter"><span class="ctl-l" id="wi-meter-l">Heat pumps run on</span><div class="seg-toggle" role="group" aria-labelledby="wi-meter-l"><button type="button" data-meter="unit">Each floor’s meter</button><button type="button" data-meter="owner">Owner-paid meter</button></div></div>
   <button type="button" id="wi-reset" class="reset">Back to statewide averages</button>
 </div></div>
-<main class="wrap" id="report"></main>
+<main class="wrap" id="report" tabindex="-1"></main>
 <dialog id="editor" aria-labelledby="editor-title">
   <div class="editor-head"><h2 id="editor-title">The building</h2><button type="button" id="close">Done</button></div>
   <form id="form" novalidate></form>

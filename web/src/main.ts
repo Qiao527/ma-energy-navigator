@@ -30,8 +30,10 @@ function syncControls(): void {
   const f = FUEL_CTL[mainFuel(state)]
   elec.value = String(val('price.electricity'))
   $('wi-elec-o').textContent = `$${val('price.electricity').toFixed(2)}/kWh`
+  elec.setAttribute('aria-valuetext', `${val('price.electricity').toFixed(2)} dollars per kilowatt-hour`)
   cop.value = String(val('heat_pump_seasonal_cop'))
   $('wi-cop-o').textContent = val('heat_pump_seasonal_cop').toFixed(1)
+  cop.setAttribute('aria-valuetext', `seasonal efficiency ${val('heat_pump_seasonal_cop').toFixed(1)}`)
   const fuelCtl = $('wi-fuel-ctl')
   fuelCtl.hidden = !f
   if (f) {
@@ -40,6 +42,7 @@ function syncControls(): void {
     fuel.value = String(val(f.id))
     fuel.dataset.id = f.id
     $('wi-fuel-o').textContent = `$${val(f.id).toFixed(2)}${f.unit}`
+    fuel.setAttribute('aria-valuetext', `${val(f.id).toFixed(2)} dollars per ${f.unit === '/gal' ? 'gallon' : 'therm'}`)
   }
   for (const b of document.querySelectorAll<HTMLButtonElement>('#whatif [data-meter]')) b.setAttribute('aria-pressed', String(b.dataset.meter === view.meter))
   $('wi-reset').hidden = Object.keys(view.whatIf).length === 0 && view.meter === 'unit'
@@ -112,13 +115,20 @@ function play(old: Map<string, Snap>): void {
   if (later.length) requestAnimationFrame(() => requestAnimationFrame(() => later.forEach(f => f())))
 }
 
+let announceTimer = 0
 function render(announce = true): void {
   const old = snapshot()
   reportEl.innerHTML = reportHtml(state, view)
   if (!reduced.matches) play(old)
   syncControls()
-  if (announce) liveEl.textContent = 'Updated.'
+  if (announce) {
+    clearTimeout(announceTimer)
+    announceTimer = window.setTimeout(() => { liveEl.textContent = document.getElementById('h-answer')?.textContent ?? '' }, 900)
+  }
 }
+// The sticky what-if bar must never cover the focused control (WCAG 2.4.11).
+const sticky = (): void => document.documentElement.style.setProperty('--sticky', `${($('whatif').getBoundingClientRect().height || 0) + 16}px`)
+window.addEventListener('resize', sticky)
 function renderForm(): void { formEl.innerHTML = formHtml(state) }
 
 // ---------- report interactions ----------
@@ -171,6 +181,7 @@ reportEl.addEventListener('focusin', e => {
   showTip(el, r.left + r.width / 2, r.top)
 })
 reportEl.addEventListener('focusout', () => { tip.hidden = true })
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tip.hidden = true })
 
 // ---------- editor drawer ----------
 
@@ -207,3 +218,4 @@ if (DATA.status.previewDrafts) {
 $('built').textContent = DATA.status.builtOn
 renderForm()
 render(false)
+sticky()

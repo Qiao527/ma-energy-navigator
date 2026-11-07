@@ -197,7 +197,7 @@ function hero(r: Report, s: State, v: View): string {
   return `<section class="hero" aria-labelledby="h-answer">
     <div class="answer">
       <p class="sheet">${esc(sheet)}${s.demo ? ' <span class="tag">demo data</span>' : ''}${whatIf ? ' <span class="tag whatif">what-if values</span>' : ''}</p>
-      <h2 id="h-answer" class="headline">${h.text}</h2>
+      <h1 id="h-answer" class="headline">${h.text}</h1>
       ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using your what-if values.' : 'Statewide prices, winter 2025–26. Try your own in the bar above.'}</p>` : ''}
       ${keyFigures(r)}
       ${r.landlordReason ? `<p class="muted">${esc(r.landlordReason)}</p>` : ''}
@@ -282,7 +282,7 @@ function beforeAfter(r: Report, s: State, v: View): string {
   const bar = (segs: Seg[], key: string, label: string) => {
     const total = segs.reduce((a, x) => a + x.value, 0)
     return `<div class="sb"><span class="sb-label">${label}</span><span class="sb-track">${segs.map((sg, i) =>
-      `<span class="sb-seg ${sg.kind}" data-k="${key}.${i}" style="width:${pct(sg.value)}" tabindex="0" data-tip="${esc(cap(sg.label))}|about ${usd(sg.value)} a year"></span>`).join('')}<span class="sb-total">${n(`${key}.t`, total)}</span></span></div>`
+      `<span class="sb-seg ${sg.kind}" data-k="${key}.${i}" style="width:${pct(sg.value)}" tabindex="0" role="img" aria-label="${esc(cap(sg.label))}: about ${usd(sg.value)} a year" data-tip="${esc(cap(sg.label))}|about ${usd(sg.value)} a year"></span>`).join('')}<span class="sb-total">${n(`${key}.t`, total)}</span></span></div>`
   }
   const body = groups.map(g => `<li class="sb-group" data-floor="${g.unit.id}"><span class="sb-floor">${FLOOR(g.unit.id)}</span>${bar(g.today, `ba${g.unit.id}.today`, 'today')}${bar(g.after, `ba${g.unit.id}.after`, 'heat pumps')}</li>`).join('')
   const ticks = Array.from({ length: lim / step + 1 }, (_, i) => i * step)

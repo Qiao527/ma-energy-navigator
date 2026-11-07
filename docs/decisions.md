@@ -26,6 +26,33 @@ Newest first. Format: date — decision — why — decided by.
     and a report, and it keeps WCAG control simple.
   - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
 
+## 2026-11-07 (Rules approved; first public release prepared)
+
+- **All 16 rule and assumption files approved** (batches 1 and 2) by Qiao in chat ("approve"). The approval
+  command was run at Qiao's explicit instruction; the ledger records `approvedBy: Qiao`. — Qiao.
+- **Scenario baselines: not yet reviewed** (all 10 wait for Qiao). Not a release blocker. — Qiao.
+- **Publishing rule:** everything on GitHub is published under Qiao's account (Qiao527); recorded in `CONTRIBUTING.md`.
+  — Qiao.
+- **Technical, accessibility pass (WCAG 2.2 AA):**
+  - axe-core reports no violations in light or dark mode.
+  - Fixed during the pass:
+    - the answer is the page's `h1`;
+    - a skip link;
+    - scroll padding so the sticky what-if bar never covers focus (2.4.11);
+    - spoken slider values (`aria-valuetext`);
+    - named bar segments;
+    - Escape dismisses tooltips (1.4.13);
+    - the map pulse stops after three cycles (2.2.2);
+    - 24 px targets on disclosure summaries (2.5.8);
+    - a live region that reads the new answer after a pause;
+    - an inline favicon.
+  - All text tokens are at 4.5:1 or above in both themes.
+- **Technical, repository:**
+  - README with the energy chain, sources, the honest finding and the demo-data label;
+  - CI: engine tests, draft check, scenarios, Python tests, web build;
+  - GitHub Pages workflow (builds from approved rules on `main`);
+  - generated files (`__pycache__`, `web/dist`) removed from git.
+
 
 ## 2026-11-07 (Interactive version)
 
