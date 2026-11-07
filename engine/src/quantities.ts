@@ -1,7 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { z } from 'zod'
-import { approvalProblems } from './approvals.js'
 import type { Quantities } from './benefit.js'
 import { combine, estimate, type Estimate } from './estimate.js'
 import type { Fuel, Input } from './facts.js'
@@ -26,20 +23,6 @@ export const AssumptionSchema = z.strictObject({
 })
 export const AssumptionsSchema = z.array(AssumptionSchema)
 export type Assumption = z.infer<typeof AssumptionSchema>
-
-export const ASSUMPTION_FILES = ['assumptions.json', 'assumptions-resstock.json'] as const
-
-/** Approved assumption files only (same approval ledger as the rules), unless previewing drafts. */
-export function loadAssumptions(dir: string, opts: { requireApproval?: boolean; overlayDir?: string } = {}): Assumption[] {
-  if (opts.requireApproval ?? true) {
-    const problems = approvalProblems(dir)
-    if (problems.length > 0) throw new Error(problems.join('\n'))
-  }
-  return ASSUMPTION_FILES.flatMap(f => {
-    const p = opts.overlayDir !== undefined && existsSync(join(opts.overlayDir, f)) ? join(opts.overlayDir, f) : join(dir, f)
-    return existsSync(p) ? AssumptionsSchema.parse(JSON.parse(readFileSync(p, 'utf8'))) : []
-  })
-}
 
 export type VintageBand = 'pre1950' | '1950_1999' | '2000_plus'
 export const vintageBand = (yearBuilt: number | null): VintageBand | null =>

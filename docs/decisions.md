@@ -22,9 +22,29 @@ Newest first. Format: date — decision — why — decided by.
   (principle 3, §6a).
   - Technical: a static site. The engine runs in the browser, with no LLM, no accounts and no stored
     data.
-  - Built with Vite + TypeScript and plain semantic HTML. Why: it's the smallest thing that works for a form
+  - Built with esbuild + TypeScript and plain semantic HTML (changed from Vite while building: one dependency, and the output is one standalone HTML file, so any static host or a shared link can serve it). Why: it's the smallest thing that works for a form
     and a report, and it keeps WCAG control simple.
   - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
+
+## 2026-11-07 (M4b built: energy chain and web v1)
+
+- **Technical:** sourced assumptions added to the drafts. All quotes pass the draft check.
+  - Prices: DOER winter 2025–26 outlook vs last winter. Oil $3.10–3.43/gal, propane $3.17–3.33/gal, gas
+    $2.03–2.24/therm, electricity $0.33–0.35/kWh. Confidence medium; these are statewide averages. The winter
+    heat pump rate is not modeled yet.
+  - Heat pump seasonal COP: Cadmus field study, whole-home systems in MA and NY. Mixed 1.90, all whole-home
+    2.41, ductless 2.80. Confidence medium; the study winter was mild.
+  - CO₂: EPA 2025 Emission Factors Hub. Oil 73.96, gas 53.06, propane 62.87 kg/MMBtu; New England grid 537.2
+    lb/MWh (total output, CO₂ only).
+  - Heating degree days: NOAA CPC Massachusetts population-weighted season totals for 2021–2025 and each
+    season's normal. The normal is 6,407 in every season except 2023–24, which is 6,441.
+- **Technical:** `report()` is the single entry point. Electric water heaters are not estimated
+  (there's no sourced efficiency), and the report says so. The landlord view counts only eligible owner
+  incentives.
+- **Engineering finding, for Qiao:** at these statewide prices, oil → heat pump raises running costs in Story 1.
+  Per MMBtu of heat delivered, oil costs about $32 and a heat pump at COP 2.41 about $42. The report says so
+  and shows no payback. This matches DOER's own caution: "households should not assume that switching fuels
+  will automatically lead to savings."
 
 ## 2026-11-07 (F2: hot water from the boiler)
 

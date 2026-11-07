@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { approvalProblems } from './approvals.js'
+import { AssumptionsSchema, type Assumption } from './quantities.js'
 import { RuleSetSchema, type RuleSet } from './rules-schema.js'
 
 export interface LoadOptions {
@@ -40,5 +41,19 @@ export function loadRuleSet(dir: string, opts: LoadOptions = {}): RuleSet {
     caps: read('caps.json', []),
     sequence: read('sequence.json', []),
     legal: read('legal.json', []),
+  })
+}
+
+export const ASSUMPTION_FILES = ['assumptions.json', 'assumptions-resstock.json'] as const
+
+/** Approved assumption files only (same approval ledger as the rules), unless previewing drafts. */
+export function loadAssumptions(dir: string, opts: { requireApproval?: boolean; overlayDir?: string } = {}): Assumption[] {
+  if (opts.requireApproval ?? true) {
+    const problems = approvalProblems(dir)
+    if (problems.length > 0) throw new Error(problems.join('\n'))
+  }
+  return ASSUMPTION_FILES.flatMap(f => {
+    const p = opts.overlayDir !== undefined && existsSync(join(opts.overlayDir, f)) ? join(opts.overlayDir, f) : join(dir, f)
+    return existsSync(p) ? AssumptionsSchema.parse(JSON.parse(readFileSync(p, 'utf8'))) : []
   })
 }

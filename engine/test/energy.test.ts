@@ -3,8 +3,8 @@ import { describe, expect, test } from 'vitest'
 import { report, unitEnergy } from '../src/energy.js'
 import { InputSchema } from '../src/facts.js'
 import { KWH_PER_MMBTU } from '../src/finance.js'
-import { loadRuleSet } from '../src/load-rules.js'
-import { AssumptionsSchema, loadAssumptions, type Assumption } from '../src/quantities.js'
+import { AssumptionsSchema, type Assumption } from '../src/quantities.js'
+import { loadAssumptions, loadRuleSet } from '../src/load-rules.js'
 import { input, SOURCE, unit } from './fixtures.js'
 
 const a = (id: string, low: number, mid: number, high: number, confidence: Assumption['confidence'] = 'medium'): Assumption =>

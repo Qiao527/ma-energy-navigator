@@ -1,0 +1,169 @@
+<title>Every Floor</title>
+<meta name="description" content="Massachusetts heat pump and efficiency programs for 2–4 unit homes: who saves, who may pay more, and what to do first.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a triple-decker read top to bottom. The form sits beside the report on wide screens and above it on phones; the report's signature is the building drawn as stacked floors. */
+:root {
+  --paper: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #18212d;
+  --muted: #546273;
+  --line: #d5dce6;
+  --clapboard: #2d5b8a;      /* accent: painted triple-decker siding */
+  --clapboard-soft: #e2ebf5;
+  --fuel: #b0661a;           /* the bill that shrinks */
+  --electric: #1d7f86;       /* the bill that grows */
+  --ok: #2c7a3f; --ok-soft: #e3f2e6;
+  --maybe: #8a6a00; --maybe-soft: #fbf1cf;
+  --ask: #2d5b8a; --ask-soft: #e2ebf5;
+  --no: #8a3434; --no-soft: #f6e2e2;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10161e; --surface: #18212c; --ink: #e6ebf2; --muted: #9aa8b8; --line: #2c3949;
+    --clapboard: #8db7e4; --clapboard-soft: #1f3247; --fuel: #e3a057; --electric: #5cc3c9;
+    --ok: #7fcf8f; --ok-soft: #1c3322; --maybe: #e2c25a; --maybe-soft: #352d12; --ask: #8db7e4; --ask-soft: #1f3247; --no: #e59a9a; --no-soft: #3a2020;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10161e; --surface: #18212c; --ink: #e6ebf2; --muted: #9aa8b8; --line: #2c3949;
+  --clapboard: #8db7e4; --clapboard-soft: #1f3247; --fuel: #e3a057; --electric: #5cc3c9;
+  --ok: #7fcf8f; --ok-soft: #1c3322; --maybe: #e2c25a; --maybe-soft: #352d12; --ask: #8db7e4; --ask-soft: #1f3247; --no: #e59a9a; --no-soft: #3a2020;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.55 var(--body); }
+a { color: var(--clapboard); text-underline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--clapboard); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-stretch: 85%; line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: 1.45rem; font-weight: 750; }
+h3 { font-size: 1.02rem; font-weight: 700; }
+p { margin: 0; }
+.small { font-size: 0.85rem; color: var(--muted); }
+.wrap { max-width: 1280px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.preview { background: var(--no-soft); color: var(--no); font-weight: 600; text-align: center; padding-block: var(--s2); border-bottom: 1px solid var(--no); }
+header.top { border-bottom: 1px solid var(--line); background: var(--surface); }
+header.top .wrap { padding-block: var(--s5); display: grid; gap: var(--s2); }
+.brand { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; }
+.brand h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; font-stretch: 78%; letter-spacing: -0.01em; }
+.brand .tag { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+header.top p { color: var(--muted); max-width: 68ch; }
+main.wrap { display: grid; gap: var(--s6); padding-block: var(--s6); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1040px) { main.wrap { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); align-items: start; } #form { position: sticky; top: var(--s4); max-height: calc(100vh - 2 * var(--s4)); overflow: auto; } }
+#form { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: var(--s5); display: grid; gap: var(--s5); min-width: 0; }
+.form-head { display: grid; gap: var(--s3); }
+.row { display: flex; gap: var(--s2); flex-wrap: wrap; align-items: center; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s3); min-width: 0; }
+legend { font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: 1rem; padding: 0; margin-bottom: var(--s3); }
+fieldset.unit { border-top: 1px solid var(--line); padding-top: var(--s4); }
+fieldset.sub legend { font-family: var(--body); font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: var(--s2); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--s3); }
+.field { display: grid; gap: var(--s1); min-width: 0; }
+label { font-size: 0.85rem; font-weight: 500; }
+input, select { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; width: 100%; min-width: 0; min-height: 40px; }
+.with-unit { display: flex; align-items: center; gap: var(--s2); }
+.with-unit span { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.hint { font-size: 0.8rem; color: var(--muted); }
+button { font: 500 0.88rem var(--body); border-radius: 6px; padding: 8px 12px; min-height: 40px; cursor: pointer; border: 1px solid var(--clapboard); background: transparent; color: var(--clapboard); }
+button:hover { background: var(--clapboard-soft); }
+.demo-tag { display: inline-block; font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--maybe-soft); color: var(--maybe); border: 1px solid var(--maybe); border-radius: 4px; padding: 2px 8px; }
+.demo-tag.inline { margin-bottom: var(--s3); }
+.demo-note { font-size: 0.85rem; background: var(--maybe-soft); border-radius: 6px; padding: var(--s3); }
+#report { display: grid; gap: var(--s7); min-width: 0; }
+#report > section { display: grid; gap: var(--s4); min-width: 0; }
+.lede { color: var(--muted); max-width: 70ch; }
+.verdict { font-family: var(--display); font-stretch: 88%; font-size: clamp(1.3rem, 2.6vw, 1.75rem); font-weight: 600; line-height: 1.3; max-width: 40ch; text-wrap: balance; }
+.verdict strong { color: var(--clapboard); font-weight: 800; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--s3); margin-top: calc(-1 * var(--s5)); }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: var(--s4); display: grid; gap: var(--s2); align-content: start; }
+.tile h3 { font-family: var(--mono); font-stretch: 100%; font-size: 0.74rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.big { font-family: var(--display); font-stretch: 85%; font-size: 1.3rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+.conf { justify-self: start; font-family: var(--mono); font-size: 0.72rem; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--line); color: var(--muted); }
+.conf-low { border-style: dashed; }
+.conf-high { border-color: var(--ok); color: var(--ok); }
+details summary { cursor: pointer; font-size: 0.85rem; color: var(--clapboard); }
+details ul { margin: var(--s2) 0 0; padding-left: 1.1em; font-size: 0.85rem; color: var(--muted); display: grid; gap: var(--s1); }
+.why summary { font-size: 0.78rem; }
+/* The building: stacked floors under a roofline. */
+.house { max-width: 640px; }
+.roof { height: 26px; background: var(--clapboard); clip-path: polygon(4% 100%, 50% 0, 96% 100%); }
+.floors { list-style: none; margin: 0; padding: 0; border: 2px solid var(--clapboard); border-top: 0; background: repeating-linear-gradient(180deg, var(--surface) 0 13px, var(--clapboard-soft) 13px 14px); }
+.floor { padding: var(--s4); border-top: 2px solid var(--clapboard); display: grid; gap: var(--s2); background: color-mix(in srgb, var(--surface) 88%, transparent); }
+.floor-head { display: flex; gap: var(--s2); align-items: baseline; flex-wrap: wrap; }
+.floor-head strong { font-family: var(--display); font-stretch: 85%; font-size: 1.1rem; }
+.occ { font-size: 0.85rem; color: var(--muted); }
+.you { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--clapboard); color: var(--surface); border-radius: 3px; padding: 1px 6px; }
+.pay { font-size: 0.85rem; color: var(--muted); }
+.changes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s1); font-variant-numeric: tabular-nums; }
+.who { display: inline-block; min-width: 7.5em; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.shift-flag { font-size: 0.85rem; font-weight: 600; color: var(--electric); }
+/* Chart */
+.chart { width: 100%; max-width: 760px; height: auto; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .zero { stroke: var(--ink); stroke-width: 1.5; }
+.chart .tick, .chart .axis { fill: var(--muted); font: 11px var(--mono); }
+.chart .axis { text-transform: uppercase; letter-spacing: 0.06em; }
+.chart .label { fill: var(--ink); font: 12px var(--body); }
+.chart .bar.less { fill: var(--fuel); }
+.chart .bar.more { fill: var(--electric); }
+.chart .mid { stroke: var(--ink); stroke-width: 2.5; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-size: 0.8rem; color: var(--muted); padding-bottom: var(--s2); }
+th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+tbody th { font-weight: 500; }
+.nowrap { white-space: nowrap; }
+.fair { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--electric); border-radius: 0 10px 10px 0; padding: var(--s5); }
+.fair ul, .fair ol { margin: 0; padding-left: 1.2em; display: grid; gap: var(--s1); }
+.law { background: var(--paper); border-radius: 6px; padding: var(--s3); }
+.steps { margin: 0; padding-left: 1.4em; display: grid; gap: var(--s2); }
+.offer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s4); }
+.offer-group { display: grid; gap: var(--s2); align-content: start; }
+.offers { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.offer { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: var(--s3); display: grid; gap: var(--s2); }
+.offer-head { display: grid; gap: var(--s1); }
+.status { justify-self: start; font-family: var(--mono); font-size: 0.72rem; font-weight: 500; border-radius: 4px; padding: 1px 7px; }
+.status::before { margin-right: 4px; }
+.s-ok { background: var(--ok-soft); color: var(--ok); } .s-ok::before { content: "✓"; }
+.s-maybe { background: var(--maybe-soft); color: var(--maybe); } .s-maybe::before { content: "?"; }
+.s-ask { background: var(--ask-soft); color: var(--ask); } .s-ask::before { content: "…"; }
+.s-no { background: var(--no-soft); color: var(--no); } .s-no::before { content: "×"; }
+.value { font-variant-numeric: tabular-nums; display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap; }
+.unit-energies { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s4); }
+.unit-energy { border-top: 2px solid var(--clapboard); padding-top: var(--s3); display: grid; gap: var(--s2); align-content: start; min-width: 0; }
+.cmp { font-size: 0.9rem; }
+.cmp-higher_than_most { border-left: 3px solid var(--fuel); padding-left: var(--s2); }
+.note { font-size: 0.85rem; color: var(--muted); border-left: 3px solid var(--line); padding-left: var(--s2); }
+.questions, .contacts { margin: 0; padding-left: 1.2em; display: grid; gap: var(--s2); }
+.contacts { list-style: none; padding: 0; }
+.contacts li { display: grid; gap: 2px; border-bottom: 1px solid var(--line); padding-bottom: var(--s2); }
+.phone { font-family: var(--mono); user-select: all; }
+.error { color: var(--no); background: var(--no-soft); padding: var(--s4); border-radius: 8px; }
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: var(--s5); display: grid; gap: var(--s2); font-size: 0.82rem; color: var(--muted); max-width: 1280px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+<!-- BODY -->
+<p id="preview" class="preview" role="status" hidden></p>
+<header class="top"><div class="wrap">
+  <div class="brand"><h1>Every Floor</h1><span class="tag">Massachusetts · 2–4 unit homes</span></div>
+  <p>For triple-deckers and two-families: which Massachusetts programs fit each floor, what to do first, and what a heat pump switch means for the landlord and for each tenant, with every number shown as a range and traced to its source.</p>
+</div></header>
+<main class="wrap">
+  <form id="form" aria-labelledby="form-title" novalidate></form>
+  <div id="report" aria-label="Your report"></div>
+</main>
+<p id="live" class="sr-only" aria-live="polite"></p>
+<footer><div class="wrap">
+  <p>Programs decide eligibility; this tool shows what their published rules say and names what to confirm. Nothing here is legal advice. Numbers come from tested code and sourced assumptions; prices are Massachusetts statewide averages, so your own bills may differ.</p>
+  <p>Built <span id="built"></span>. An energy engineering portfolio project by Qiao Long (Boston College). Nothing you enter leaves your browser.</p>
+</div></footer>
