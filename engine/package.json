@@ -9,7 +9,9 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm test"
+    "check": "npm run typecheck && npm test",
+    "data:status": "vitest run --config vitest.status.config.ts",
+    "rules:check-drafts": "vitest run --config vitest.drafts.config.ts"
   },
   "dependencies": {
     "zod": "4.6.7"

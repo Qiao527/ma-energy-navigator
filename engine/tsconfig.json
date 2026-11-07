@@ -8,8 +8,17 @@
     "noImplicitOverride": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "noEmit": true
   },
-  "include": ["src", "test", "vitest.config.ts"]
+  "include": [
+    "src",
+    "test",
+    "status",
+    "vitest.config.ts",
+    "vitest.status.config.ts",
+    "vitest.drafts.config.ts"
+  ]
 }

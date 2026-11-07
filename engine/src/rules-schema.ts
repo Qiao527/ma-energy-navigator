@@ -163,6 +163,19 @@ export const SequenceEdgeSchema = z.strictObject({
 })
 export type SequenceEdge = z.infer<typeof SequenceEdgeSchema>
 
+/** A sourced legal constraint the report refers to by id (research §18). Never interpreted for the user. */
+export const LegalConstraintSchema = z.strictObject({
+  id: Id,
+  summary: z.string().min(1),
+  /** The exact thing the user should check, e.g. in their written rental agreement. */
+  leaseCheck: z.string().min(1),
+  disclaimer: z.string().min(1),
+  /** Where to get help. */
+  resources: Sources,
+  sources: Sources,
+})
+export type LegalConstraint = z.infer<typeof LegalConstraintSchema>
+
 export const RuleSetSchema = z.strictObject({
   programs: z.array(ProgramSchema),
   offers: z.array(OfferSchema),
@@ -171,5 +184,6 @@ export const RuleSetSchema = z.strictObject({
   dec: DecFileSchema,
   caps: z.array(CapRuleSchema),
   sequence: z.array(SequenceEdgeSchema),
+  legal: z.array(LegalConstraintSchema).default([]),
 })
 export type RuleSet = z.infer<typeof RuleSetSchema>
