@@ -106,7 +106,7 @@ function keyFigures(r: Report): string {
   }
   if (L) out.push(fig(rangeN('up', L.netUpfront.range.low, L.netUpfront.range.high), L.incentivesKnown ? `upfront after ${between(L.incentivesKnown.range.low, L.incentivesKnown.range.high)} in rebates` : 'upfront; rebate amount not known yet'))
   if (L?.paybackYears) out.push(fig(`${rangeN('pb', L.paybackYears.range.low, L.paybackYears.range.high, 'n0')}<small> yrs</small>`, 'payback on real savings'))
-  else if (L?.realSavings) out.push(fig('No payback', 'running costs don’t fall for sure with these prices'))
+  else if (L?.realSavings) out.push(fig('No payback', 'running costs may rise at these prices'))
   if (r.co2Total) out.push(fig(`−${rangeN('co2', -r.co2Total.change.range.high, -r.co2Total.change.range.low, 'n1')}<small> t CO₂/yr</small>`, `from about ${num(r.co2Total.before.range.mid, 0)} t today`, 'co2'))
   return out.length ? `<dl class="figures">${out.join('')}</dl>` : ''
 }
@@ -198,7 +198,7 @@ function hero(r: Report, s: State, v: View): string {
     <div class="answer">
       <p class="sheet">${esc(sheet)}${s.demo ? ' <span class="tag">demo data</span>' : ''}${whatIf ? ' <span class="tag whatif">what-if values</span>' : ''}</p>
       <h2 id="h-answer" class="headline">${h.text}</h2>
-      ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using the values you set above.' : 'At Massachusetts statewide prices for winter 2025–26. Set your own prices above.'}</p>` : ''}
+      ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using your what-if values.' : 'Statewide prices, winter 2025–26. Try your own in the bar above.'}</p>` : ''}
       ${keyFigures(r)}
       ${r.landlordReason ? `<p class="muted">${esc(r.landlordReason)}</p>` : ''}
     </div>
@@ -246,8 +246,8 @@ function heatPrice(s: State, v: View): string {
     <caption>Cost per million Btu (MMBtu) of heat delivered</caption><thead><tr><th scope="col">System</th><th scope="col">Low</th><th scope="col">Typical</th><th scope="col">High</th><th scope="col">Confidence</th></tr></thead>
     <tbody>${rows.map(r => `<tr><th scope="row">${SOURCE_LABEL[r.id]}</th><td>$${num(r.perMMBtu.range.low, 2)}</td><td>$${num(r.perMMBtu.range.mid, 2)}</td><td>$${num(r.perMMBtu.range.high, 2)}</td><td>${CONF[r.perMMBtu.confidence]}</td></tr>`).join('')}</tbody></table></div></details>`
   return `<section class="band" aria-labelledby="h-why"><div class="band-text">
-      <p class="kicker">Why</p><h2 id="h-why">The price of one unit of heat</h2><p>${lead}</p>${verdict}
-      <p class="muted">Move the controls at the top to test your own electricity price, ${fuelName(current)} price or heat pump efficiency. The new winter heat pump rate lowers delivery charges and is not counted yet.</p>
+      <h2 id="h-why">The price of one unit of heat</h2><p>${lead}</p>${verdict}
+      <p class="muted">Test your own electricity price, ${fuelName(current)} price or heat pump efficiency in the bar above. The new winter heat pump rate lowers delivery charges. It is not counted yet.</p>
     </div>
     <div class="band-chart"><ol class="hbars" aria-label="Cost per million Btu of heat, by system">${bars}</ol>
       <div class="hb-axis" aria-hidden="true">${ticks.map(t => `<span style="left:${pct(t)}">$${t}</span>`).join('')}</div>
@@ -289,8 +289,8 @@ function beforeAfter(r: Report, s: State, v: View): string {
   const table = `<details class="data"><summary>Show ranges and who pays</summary><div class="table-wrap"><table>
     <caption>Yearly change by floor and bill (low to high; minus = pays less)</caption><thead><tr><th scope="col">Floor</th><th scope="col">Fuel bill</th><th scope="col">Electric bill</th><th scope="col">Both together</th></tr></thead>
     <tbody>${groups.map(g => { const b = g.e.bills!; const sg = (e: Estimate) => `${e.range.low > 0 ? '+' : e.range.low < 0 ? '−' : ''}${usd(e.range.low)} to ${e.range.high > 0 ? '+' : e.range.high < 0 ? '−' : ''}${usd(e.range.high)}`; return `<tr><th scope="row">${FLOOR(g.unit.id)}</th><td>${sg(b.fuelBill)}</td><td>${sg(b.electricBill)}</td><td>${sg(b.net)}</td></tr>` }).join('')}</tbody></table></div></details>`
-  return `<section aria-labelledby="h-floors"><p class="kicker">Floor by floor</p><h2 id="h-floors">What each floor spends on heat, today and after</h2>
-    <p class="lede">Typical values per year. The fuel bill disappears and an electric bill appears, often for a different person. Hover or focus a bar for who pays.</p>
+  return `<section aria-labelledby="h-floors"><h2 id="h-floors">What each floor spends on heat, today and after</h2>
+    <p class="lede">Typical yearly costs. The fuel bill goes away. An electric bill takes its place, often for a different person.</p>
     <ol class="sbars">${body}</ol>
     <div class="sb-axis" aria-hidden="true"><span class="sb-label"></span><span class="sb-ticks">${ticks.map(t => `<span style="left:${pct(t)}">${usd(t)}</span>`).join('')}</span></div>
     <p class="legend"><span><span class="swatch fuel"></span>Heating fuel</span><span><span class="swatch elec"></span>Heat pump electricity</span>${groups.some(g => g.today.length > 1) ? '<span><span class="swatch kept"></span>Hot-water fuel that stays</span>' : ''}</p>${table}</section>`
@@ -303,14 +303,14 @@ function fairness(r: Report): string {
   if (!L || L.shiftedToTenants.length === 0) return ''
   const legal = RULES.legal.find(x => x.id === HEAT_COST_SHIFT_CONSTRAINT)
   const total = L.shiftedTotal
-  return `<section class="fair" aria-labelledby="h-fair"><p class="kicker">Fairness</p><h2 id="h-fair">Part of the saving is your tenants’ new electric bill</h2>
-    <p class="lede">You pay for oil today. Heat pumps on the tenants’ meters move ${total ? `${between(total.range.low, total.range.high)} a year` : 'heating cost'} onto their bills. Your real energy change is the figure at the top, which already includes that electricity.</p>
+  return `<section class="fair" aria-labelledby="h-fair"><h2 id="h-fair">Part of the saving is your tenants’ new electric bill</h2>
+    <p class="lede">You pay for oil today. Heat pumps on the tenants’ meters move ${total ? `${between(total.range.low, total.range.high)} a year` : 'heating cost'} onto their bills. The figure at the top already counts that electricity.</p>
     ${legal ? `<p class="law"><strong>${esc(legal.leaseCheck)}</strong> ${esc(legal.summary)} <em>${esc(legal.disclaimer)}</em> Help: ${legal.resources.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.section)}</a>`).join(' · ')}</p>` : ''}
     <ol class="options">
       <li><strong>Lower the rent</strong><span>by the monthly amount on each floor.</span></li>
       <li><strong>Electricity allowance</strong><span>of the same size, paid to the tenant.</span></li>
       <li><strong>Owner-paid meter</strong><span>for the heat pumps, so nothing moves.</span></li>
-      <li><strong>Agree in writing at renewal</strong><span>with the change explained openly, never slipped in.</span></li>
+      <li><strong>Agree in writing at renewal</strong><span>and explain the electricity change openly.</span></li>
     </ol>
     <p><button type="button" data-meter="owner">See it with an owner-paid meter</button></p>
     ${L.paybackIfCostShifted ? `<p class="muted">For comparison only: leaving the cost on tenants (which needs a written rental agreement) would give a payback of ${between(L.paybackIfCostShifted.range.low, L.paybackIfCostShifted.range.high, n => num(n, 0))} years.</p>` : ''}
@@ -344,7 +344,7 @@ function plan(r: Report): string {
     const after = st.after.length ? `<p class="muted">${st.after.map(a => esc(a.reason)).join(' ')}</p>` : ''
     return `<li class="step"><h3>${MEASURE[st.measure] ?? st.measure}</h3>${after}<ul class="offers">${items}</ul></li>`
   }).join('')
-  return `<section aria-labelledby="h-plan"><p class="kicker">Plan</p><h2 id="h-plan">What to do, in order</h2>
+  return `<section aria-labelledby="h-plan"><h2 id="h-plan">What to do, in order</h2>
     <p class="lede">The programs decide eligibility. This shows what their published rules say, and what only they can confirm.</p><ol class="steps">${steps}</ol></section>`
 }
 
@@ -365,8 +365,8 @@ function engineering(r: Report, s: State): string {
     const notes = e.notes.map(n => `<p class="muted">${esc(n)}</p>`).join('')
     return `<div class="eng-col" data-floor="${e.unitId}"><h3>${FLOOR(e.unitId)}</h3><ol class="chain">${chain.join('')}</ol>${cmp}${notes}</div>`
   }).join('')
-  return `<section aria-labelledby="h-eng"><p class="kicker">Method</p><h2 id="h-eng">How each number is worked out</h2>
-    <p class="lede">Fuel records are scaled to a normal Massachusetts winter with NOAA heating degree days, the hot-water share is taken out when the boiler heats water, and the heat pump runs at efficiency measured in Massachusetts and New York homes.</p>
+  return `<section aria-labelledby="h-eng"><h2 id="h-eng">How each number is worked out</h2>
+    <p class="lede">Each floor’s fuel records are scaled to a normal Massachusetts winter with NOAA degree days. When the boiler also heats water, the hot-water share comes out. The heat pump runs at the efficiency measured in real Massachusetts and New York homes.</p>
     <div class="eng">${cols}</div></section>`
 }
 function node(label: string, value: string, note: string, e?: Estimate): string {

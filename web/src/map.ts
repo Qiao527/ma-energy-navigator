@@ -46,18 +46,18 @@ export function mapSection(s: State, zoom: 'state' | 'local'): string {
     ? towns.towns.filter(t => PILOT.includes(t.name)).reduce((a, b) => (Math.hypot(a.x - here.x, a.y - here.y) <= Math.hypot(b.x - here.x, b.y - here.y) ? a : b))
     : null
   const summary = here
-    ? `${esc(here.name)} ${isDec ? (isDec.narrowedFor.length ? 'is a Designated Equity Community in its Environmental Justice block groups for some utilities' : 'is a Designated Equity Community, so its residents get Mass Save’s enhanced offers wherever they live in it') : 'is not a Designated Equity Community; income-based offers may still apply'}. ${PILOT.includes(here.name) ? 'It is also a navigator pilot city, so you can book a free call with a human navigator.' : `It is outside the six-city navigator pilot${nearest ? ` (the nearest pilot city is ${nearest.name})` : ''}, so this page is the navigator; Mass Save and the regional CAP agency still help everywhere.`}`
+    ? `${esc(here.name)} ${isDec ? (isDec.narrowedFor.length ? 'is a Designated Equity Community in its Environmental Justice block groups for some utilities' : 'is a Designated Equity Community, so every resident gets Mass Save’s enhanced offers') : 'is not a Designated Equity Community; income-based offers may still apply'}. ${PILOT.includes(here.name) ? 'It is also a navigator pilot city, so you can book a free call with a human navigator.' : `It is outside the six-city navigator pilot${nearest ? ` (the nearest pilot city is ${nearest.name})` : ''}, so this page is your navigator. Mass Save and the regional CAP agency serve every town.`}`
     : town ? `We couldn’t find “${esc(town)}” among Massachusetts’ 351 cities and towns. Check the spelling.` : 'Enter the city or town to place the building on the map.'
 
   return `<section class="map-band" aria-labelledby="h-map">
-    <div class="band-text"><p class="kicker">Access</p><h2 id="h-map">Where extra help reaches</h2><p>${summary}</p>
+    <div class="band-text"><h2 id="h-map">Where extra help reaches</h2><p>${summary}</p>
       <ul class="map-legend">
-        <li><span class="key dec" aria-hidden="true"></span>Designated Equity Community: enhanced offers by place, not income</li>
+        <li><span class="key dec" aria-hidden="true"></span>Designated Equity Community: enhanced offers for everyone who lives there</li>
         <li><span class="key part" aria-hidden="true"></span>Designated in its Environmental Justice block groups only, for some utilities</li>
         <li><span class="key pin" aria-hidden="true"></span>Navigator pilot city (MassCEC)</li>
         ${here ? '<li><span class="key here" aria-hidden="true"></span>This building’s town</li>' : ''}
       </ul>
-      <p class="muted">Sources: <a href="${esc(DEC_SOURCE?.url ?? '')}" target="_blank" rel="noopener">Mass Save DEC list</a> · ${PILOT_SOURCES.map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.label}</a>`).join(' · ')} · <a href="${esc(towns.source)}" target="_blank" rel="noopener">Census town boundaries</a>. Places are shown to point people to help, never to rank them.</p>
+      <p class="muted">Sources: <a href="${esc(DEC_SOURCE?.url ?? '')}" target="_blank" rel="noopener">Mass Save DEC list</a> · ${PILOT_SOURCES.map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.label}</a>`).join(' · ')} · <a href="${esc(towns.source)}" target="_blank" rel="noopener">Census town boundaries</a>. The shading shows where extra help applies.</p>
     </div>
     <div class="map-wrap">
       ${here ? `<div class="seg-toggle" role="group" aria-label="Map view"><button type="button" data-zoom="state" aria-pressed="${zoom === 'state'}">All of Massachusetts</button><button type="button" data-zoom="local" aria-pressed="${zoom === 'local'}">Around ${esc(here.name)}</button></div>` : ''}

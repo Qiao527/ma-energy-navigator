@@ -26,6 +26,7 @@ Newest first. Format: date — decision — why — decided by.
     and a report, and it keeps WCAG control simple.
   - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
 
+
 ## 2026-11-07 (Interactive version)
 
 - **Technical:**
