@@ -1,35 +1,52 @@
-# Product definition (draft v0)
+# Product definition (draft v1)
 
-Status: draft written from the planning conversation on 2026-11-06. Every statement is
-tagged **[Decided]**, **[Proposed]** or **[Open]** (see `CONTRIBUTING.md`). Phase 0 exists to
-challenge the [Proposed] items and answer the [Open] ones.
+Status: v0 was written from the planning conversation on 2026-11-06. v1 applies the
+Checkpoint A decisions from the same day (see `docs/review-notes.md` and
+`docs/decisions.md`). Every statement is tagged **[Decided]**, **[Proposed]** or
+**[Open]** (see `CONTRIBUTING.md`).
 
-Working name: **[Open]** — propose 3–5 names in Phase 0.
+Name: **Every Floor** [Decided 2026-11-06 — Qiao]. Triple-deckers are stacked floors, and
+the signature feature is getting every unit on board.
+
+Collision check (2026-11-06):
+- **Domains:** `everyfloor.com` is taken (registered since 2008; redirects to a
+  HugeDomains for-sale page). `everyfloor.org`, `.app`, `.io`, `.dev`, `.us` and
+  `every-floor.com` have no DNS records, so they're probably unregistered *(inference —
+  confirm at a registrar)*.
+- **GitHub:** no project with this name in energy or housing; the 42 search hits are
+  unrelated games and demos.
+- **Trademark:** a web search found no "Every Floor" / "EveryFloor" mark; similar names
+  belong to flooring companies.
+- **USPTO:** Qiao searched the USPTO database on 2026-11-06; no conflict.
+- No blocking problem found. Name confirmed.
 
 ---
 
 ## 1. Why this exists
 
 **The gap.** Massachusetts has generous clean-energy and efficiency programs, but they are
-hard to navigate. The state itself recognized this: in January 2025 MassCEC launched the
-*Home Modernization Navigator*, a free service where residents book a call with a human
-navigator who explains bills, programs and incentives. It prioritizes renters, rental
-property owners, low-income households and non-English speakers, and names the
-owner/renter split incentive as a key barrier. As of late 2025 it covered six cities
-(Lowell, Springfield, Chelsea, Lynn, Framingham, Taunton) because human navigators don't
-scale. [Decided — framing; facts to re-verify]
+hard to navigate. In January 2025 MassCEC launched the *Home Modernization Navigator*: a
+free service where residents book a call with a human navigator who explains bills,
+programs and incentives. It prioritizes renters, rental property owners, low-income
+households and non-English speakers, and names the owner/renter split incentive as a key
+barrier. It started in Lowell and Springfield and added Chelsea, Lynn, Framingham and
+Taunton in December 2025. MassCEC describes it as a pilot. [Decided — framing; facts
+checked 2026-11-06, see review-notes item 2]
 
-**Why it matters.** Households under 200% of the federal poverty level spend on average
-about 8.1% of income on energy, versus 2.3% for other households. [Proposed — re-verify
-source and date before using in the README]
+**Why it matters.** In Massachusetts, households below 200% of the federal poverty level
+spend on average about 13% of income on home energy, versus about 2% for other households.
+In 2–4 unit buildings the figures are 12.5% vs 2.4%. (DOE LEAD Tool 2022 update, group
+averages computed in `docs/data-sources.md` §8.) [Decided — source; Open — confirm the ACS
+vintage before publishing]
 
-**Why existing tools miss it.** Generic solar calculators (e.g. Google Sunroof) answer
-"is my roof sunny?" They assume a homeowner, ignore Massachusetts programs, ignore who pays
-vs who saves, and treat solar in isolation from weatherization and heating. [Decided]
+**Why existing tools miss it.** Generic solar calculators answer "is my roof sunny?" They
+assume a homeowner, ignore Massachusetts programs, ignore who pays vs who saves, and treat
+solar in isolation from weatherization and heating. [Decided]
 
-**One-line story:** *The state proved people need energy navigators, but human navigators
-can't cover the state. This project turns the navigator's knowledge into a product.*
-[Decided]
+**One-line story:** *Massachusetts is piloting human energy navigators in six cities. This
+project asks how much of a navigator's knowledge can become software that anyone in the
+state can use.* [Decided — reworded at Checkpoint A so it claims only what the evidence
+supports]
 
 ## 2. Positioning
 
@@ -40,56 +57,123 @@ can't cover the state. This project turns the navigator's knowledge into a produ
   and sequencing**. [Decided]
 - Massachusetts first; architecture lets other states add rules data later (not built in v1).
   [Decided]
+- The product hands people off. Every plan ends with the real next contact (Mass Save,
+  CAP agency, utility, or the MassCEC navigator in pilot cities) and a short note that the
+  program, not this tool, decides eligibility. [Proposed]
 
 ## 3. Users
 
 Core users: people in **Massachusetts 1–4 unit residential buildings**. [Decided]
 
-| Persona | Situation | What they need |
-|---|---|---|
-| Tenant (e.g. Maria, 2nd floor of a triple-decker) | Pays the bills, doesn't control the building | Programs a renter can use alone (incl. community solar), and a way to ask the landlord |
-| Renting landlord (owns, doesn't live there) | Pays for upgrades, tenants get the savings | What it costs net of incentives, who benefits, how to get all units on board |
-| Owner-occupant landlord (lives on one floor) | Mixed: own unit and rental units follow different rules | Which rules apply to which unit, and the combined picture |
+The rules engine supports four roles. The v1 demo tells two stories: a **rental building**
+(tenant + landlord) and a **condo building** (unit owners). [Decided]
 
-Assumption to validate: triple-deckers / 2–4 unit buildings are where the split incentive
-and coordination problems are sharpest. [Proposed — quantify with MassGIS parcel data and
-check with at least one real tenant or landlord]
+| Role | Situation | What they need | In v1 demo |
+|---|---|---|---|
+| Tenant (e.g. Maria, 2nd floor of a triple-decker) | Doesn't control the building; may or may not pay for heat | Programs a renter can use alone (incl. community solar, income-eligible path), and a way to bring the landlord in | Yes (rental story) |
+| Renting landlord (owns, doesn't live there) | Pays for upgrades, tenants may get the savings | Net cost after incentives, who benefits, how to arrange access with every unit | Yes (rental story) |
+| Condo owner (unit in a 2–4 unit condo building) | Owns one unit; the building's discount depends on the other owners | "Units still needed" for the all-units insulation offer, messages to neighbors | Yes (condo story) |
+| Owner-occupant landlord (lives on one floor) | Own unit and rental units are on different offers | Which offer applies to which unit, combined picture | Engine only |
+
+Every unit records **who pays for heat** and **who pays for electricity** (tenant or
+owner). These are asked, never guessed, and savings are assigned to whoever pays.
+[Decided]
+
+Assumption to validate: 2–4 unit buildings, including condo-converted triple-deckers,
+are where split-incentive and coordination problems are sharpest. Evidence so far (LEAD
+2022): 549k Massachusetts households (20%) live in 2–4 unit buildings; 69% of them rent and
+28% are below 200% FPL (vs 20% statewide). [Proposed — still check with real users]
 
 ## 4. The key insight: coordination, not arithmetic
 
-Example rules from Mass Save's 1–4 unit landlord offer (to be re-verified before encoding):
-the rental offer applies to renter-occupied units only (owner-occupied units don't qualify);
-insulation can reach 100% off when **all** eligible units in a 2–4 unit building
-participate, versus up to 75% per unit when only some do; a residential heating meter is
-required. [Proposed — verify against the official page]
+The hard part in a small multifamily building is getting the right people to act. What
+needs coordinating depends on who owns the building. Rules below come from the Mass Save
+landlord page, read 2026-11-06; Step 3 verifies them in full before anything is encoded.
 
-So in a triple-decker the hard part is getting every household to agree. The product
-should show "1 more unit agreeing moves insulation from 75% to 100% off" and generate the
-messages that make that happen. This is the signature feature. [Decided]
+- **Condo building (2–4 units):** insulation is up to 100% off per unit if **all** eligible
+  units participate, up to 75% if only some do; the unit must have a residential heating
+  meter. The product shows "1 more unit agreeing moves insulation from 75% to 100% off"
+  and generates messages to the other owners. [Decided — feature; Proposed — rule text
+  until Step 3]
+- **Rental building:** the landlord offer is 100% off insulation for the rental property
+  (no all-units condition stated). Here the coordination is tenant → landlord ("there's a
+  100%-off offer for this building") and landlord → tenants (assessment and installation
+  access, scheduling). The product generates both messages. [Decided — feature; Proposed —
+  rule text until Step 3]
+- **Owner-occupied units** follow homeowner offers; the Residential Turnkey Solutions
+  (health and safety barriers) offer covers renter-occupied units only. [Proposed — verify]
+
+Coordination is the signature feature. [Decided]
 
 ## 5. v1 scope
 
 **In v1** [Decided unless marked]
-- Three roles: tenant, renting landlord, owner-occupant landlord
-- Address → building profile (shown to the user to confirm/fill gaps)
-- Rules engine covering a small, verified set of programs: Mass Save assessment and
-  weatherization, heat-pump rebates, community solar, rooftop solar + net metering
-  [Proposed — final list depends on Phase 0 verification]
-- Rooftop solar module only for users who can install (Google Solar API, PVWatts fallback)
+- Four roles in the rules engine; two demo stories (rental, condo)
+- Address → building profile, shown to the user to confirm or fill gaps
+- **The form is the only source of data for calculations.** An optional entry point lets
+  the user describe their situation in a few sentences; the LLM pre-fills the form; the
+  user reviews and confirms; only then does anything get calculated.
+- Rules engine covering a small, verified set of programs (evidence in
+  `docs/incentives-research.md`): Mass Save assessment + weatherization (landlord, condo,
+  homeowner offers), **Designated Equity Communities (DEC)**, Income Eligible path (CAP
+  agencies), **Enhanced (moderate-income) incentives**, air-source heat-pump rebates
+  (2026 amounts and the announced 2027 change), HEAT Loan (owners only), community solar
+  (SMART 3.0 discount floors; utility low-income programs), SMART 3.0 + net metering for
+  rooftop ≤25 kW incl. credit allocation to other units, the **Massachusetts residential
+  renewable energy income tax credit**, and MLP handling. [Decided 2026-11-06]
+- Where a source leaves a rule unclear (e.g. which condo units count as "eligible", who
+  applies for a heat pump rebate on a tenant-held account), the product says "up to" and
+  names the assessment or program as the deciding step. It never resolves the ambiguity
+  itself. [Decided 2026-11-06]
+- Utility low-income community solar (e.g. Eversource ECSAP) enrolls by lottery from
+  discount-rate customers. Tenants are told how to get on the discount rate, not to "sign
+  up". [Decided 2026-11-06]
+- **No federal tax credits.** §25C and §25D are not allowed for expenditures after
+  2025-12-31 (P.L. 119-21). The FAQ explains this. [Decided]
+- Rooftop solar module only for users who can install (Google Solar API, PVWatts fallback).
+  It must say which meter(s) get the benefit, since each unit usually has its own meter.
+  [Proposed — Step 3 verifies net-metering credit allocation]
 - Ordered action plan with the reason for each step
-- Coordination tools: letter to landlord, explainer for each tenant, "units still needed"
-- All money as ranges with confidence labels
-- Conversational intake agent (LLM routes to deterministic tools) [Proposed]
-- Utility-bill reading (photo/PDF → usage, rate, utility) [Proposed]
-- A live demo with a few real, cached addresses
+- Coordination tools: tenant → landlord letter, landlord → tenants scheduling note,
+  condo "units still needed" and messages to other owners. The 75% tier shows as
+  eligible; the 100% tier shows "N more units needed" and is never shown as "not
+  eligible" for lack of agreement [Decided 2026-11-06]
+- All money as **low / mid / high scenarios** with confidence labels [Decided]
+- **Who saves, who may pay more** [Decided 2026-11-06 — Qiao, top priority after review].
+  For each unit, the report shows:
+  - the heating-fuel bill change for whoever pays heat;
+  - the electric bill change for whoever pays electricity;
+  - the upfront cost after incentives for the property owner.
+
+  Example: oil → heat pump, landlord pays oil, tenant pays electricity → landlord saves,
+  tenant's electric bill goes up. An unknown payer is shown as "we don't know who pays
+  this bill".
+- LLM explains results and drafts messages; it never computes numbers or names programs
+- FAQ, incl. why federal credits don't apply and what the tool can't decide
+- A live demo with a few real addresses. A Boston rental near BC works well: Boston is a
+  Designated Equity Community.
+- **[Open — must be resolved before Phase 3]** Whether Google Solar API responses may be
+  cached for the demo (Service Specific Terms). **Fallback [Decided]:** if caching isn't
+  allowed, the demo's roof estimate uses PVWatts (public data, cacheable) plus the MassGIS
+  building outline for roof area, with wider ranges and a lower confidence label.
+
+**Stretch (after the core flow works)** [Decided]
+- Utility-bill reading (photo/PDF → usage, rate, utility). Until then, usage is entered as
+  a monthly bill range or defaults to typical values with a wider range and lower
+  confidence.
 
 **Not in v1** (listed in README as future work, deliberately cut) [Decided]
 - Municipal / nonprofit portfolio mode (batch CSV, ranking, heatmap)
 - Multilingual output, PDF export, real application submission
 - Self-built LiDAR roof modeling; detailed building heating-load simulation
 
+Multilingual note: the navigator pilot prioritizes non-English speakers. The README says
+openly that v1 is English-only, and user-facing strings live in one place so translation
+can be added later. [Proposed]
+
 **v1.5** [Proposed]
-- Household energy-use model (quantile regression on NREL ResStock-type data) to narrow ranges
+- Household energy-use model (quantile regression on NREL ResStock-type data) to narrow
+  ranges; revisit Monte Carlo then
 
 **v2 ideas** [Proposed]
 - Portfolio mode
@@ -99,14 +183,14 @@ messages that make that happen. This is the signature feature. [Decided]
 ## 6. Architecture
 
 ```
-User (address + role / natural language / utility bill)
+User (address + role → structured form; optional free-text → LLM pre-fills form → user confirms)
         ↓
-AI navigator agent — understand, ask follow-ups, call tools, explain
+AI navigator agent — pre-fill, ask follow-ups, call tools, explain, draft messages
         ↓ calls tools                     ↑ returns results
 Deterministic tool layer (all numbers computed here)
-  ├─ Building data   parcel, utility territory, roof
+  ├─ Building data   parcel, electric + gas utility, roof
   ├─ Rules engine    eligibility, counterfactuals ("what would change the answer")
-  ├─ Finance         ranges, total household energy cost (not electricity only)
+  ├─ Finance         low/mid/high scenarios, total household energy cost, split by who pays
   └─ Energy model    quantile regression (v1.5)
         ↑ reads
 External data (Google Solar, PVWatts, MassGIS)   Rules data (JSON + source + verified date)
@@ -121,19 +205,26 @@ Design notes:
 - Some rules depend on other households' choices (all-units conditions). [Decided]
 - Heat pumps raise electricity use while cutting oil/gas: finance must model total household
   energy cost. [Decided]
-- Municipal light plant towns are outside Mass Save; utility territory changes which rules
-  apply. [Proposed — verify]
+- The building profile stores `electric_utility`, `gas_utility` and `heating_fuel`
+  separately; rules key off the ones they depend on. MLP towns are outside Mass Save for
+  electric programs (the Mass Save landlord page says municipal utility customers are not
+  part of the program). [Decided — data model; Proposed — exact MLP/gas rules until Step 3]
+- Rules data handles change over time: `effective_from` / `effective_until`,
+  `last_verified`, a staleness flag in the UI when `last_verified` is older than 90 days,
+  and a test that fails if a shipped rule lacks `source_url` or is past `effective_until`.
+  Programs changed mid-plan in 2025–2026 (federal credits ended, Mass Save heat-pump
+  rebates revised, SMART 3.0). [Proposed — schema in Step 5]
 
 ## 7. Technical difficulties
 
 | Difficulty | Treatment |
 |---|---|
 | Rules engine + counterfactual reasoning | Main technical showcase. Heavy tests incl. property-based. |
-| Uncertainty propagation + total energy cost | Low/mid/high scenarios or Monte Carlo. [Open — which] |
-| Keeping the LLM honest | Structured inputs only; check every number in output exists in tool results; check no unknown programs; an eval set. |
+| Uncertainty propagation + total energy cost | Low/mid/high named scenarios in v1 [Decided]; Monte Carlo considered with the v1.5 model. |
+| Keeping the LLM honest | Structured form is the only data source. LLM text uses slots (e.g. `{saving.mid}`, `{program:id}`) filled from tool results, so the LLM never types a number or program name. Second line of defense: validator that every number/program in output exists in tool results. An eval set. [Proposed — slots] |
 | Sequencing (weatherize → heat pump, roof age → solar, panel capacity) | Dependency rules with explanations. |
 | Address → building data fusion | Show and confirm; ask when unknown. |
-| Incentive data accuracy | Biggest risk. Verify every rule before code. |
+| Incentive data accuracy | Biggest risk. Verify every rule before code. Checkpoint A already caught one misread rule. |
 | LiDAR roof modeling, precise heating load | Out of scope. Use APIs / reference values. |
 
 ## 8. Visualizations
@@ -142,45 +233,82 @@ Each chart answers one question. All have text alternatives. [Decided — princi
 Proposed — specific set]
 
 In the product:
-1. **Building diagram** — floors, who lives there, eligibility, who has agreed;
-   "1 more unit → 100% off". Signature visual.
-2. **Incentive waterfall** — total cost → minus each program (clickable source) → what you pay.
-3. **Bill before/after** — 12 months, with a range band.
-4. **Action roadmap** — ordered steps with cost, savings, who to contact.
-5. **Roof sun map** — only for users who can install solar.
+1. **Building diagram**: floors, who lives there, who owns, who pays for heat, eligibility,
+   who has agreed. In the condo story: "1 more unit → 100% off". Signature visual.
+2. **Incentive waterfall**: total cost → minus each program (clickable source) → what you pay.
+3. **Bill before/after**: 12 months, with a range band; labeled "estimated from typical
+   usage" when the user didn't enter bills.
+4. **Action roadmap**: ordered steps with cost, savings, who to contact.
+5. **Roof sun map**: only for users who can install solar.
 
 For the README / pitch:
-1. **Coverage gap map** — the six navigator cities vs the rest of the state.
-2. **Energy burden comparison.**
-3. **Original data analysis** — how many 2–4 unit buildings exist in MA, where, how many in
-   EJ areas, how many outside navigator coverage. [Open — needs MassGIS work]
-4. **Same person, two answers** — generic calculator vs this product for Maria.
+1. **Navigator pilot coverage map**: the six pilot cities, labeled as a pilot, with other
+   statewide help (Mass Save, CAP agencies) noted so the map doesn't imply "no help
+   elsewhere". [Decided]
+2. **Energy burden comparison**, Massachusetts figure from DOE LEAD preferred. [Decided]
+3. **Original data analysis**: how many 2–4 unit buildings (and condo buildings) exist in
+   MA, where, how many in EJ areas, how many outside navigator pilot cities. [Open — needs
+   MassGIS work]
+4. **Same person, two answers**: generic calculator vs this product for Maria.
 
-## 9. Open questions for Phase 0
+## 9. Success criteria for v1 [Proposed]
 
-1. Exact v1 program list, each verified against its official source (incl. current SMART
-   status, net metering, any state or federal tax credits for residential solar/heat pumps
-   — federal rules changed in 2025; do not assume).
-2. Is Eversource's low-income community solar model (subscriber gets an on-bill credit at no
-   cost) approved in MA, and how does it change what we tell tenants?
-3. Data sources for address → parcel → unit count → utility territory → EJ status, and their
-   gaps (condos, mixed use).
-4. Google Solar API: pricing, quota, coverage for target MA cities; PVWatts as fallback.
-5. Is an NREL ResStock-type dataset practical for the v1.5 energy model (format, size, license)?
-6. Stack choice (proposed below) — confirm or change with reasons.
-7. Working name.
-8. Who can we talk to (a tenant, a landlord, All In Energy / navigator staff)?
+1. The rules engine gives the right answer for a set of hand-written scenarios, each
+   checked against the cited source.
+2. The LLM eval set shows zero invented numbers or programs.
+3. A WCAG 2.2 AA audit passes.
+4. At least one real tenant, landlord or condo owner has tried it, and their feedback is
+   written down.
 
-## 10. Proposed stack
+## 10. Open questions for Phase 0
 
-Next.js + TypeScript, MapLibre GL, Tailwind, a chart library with accessible output,
-rules engine as a pure TypeScript package with its own tests, Vercel hosting, LLM via the
-LLM API. [Proposed — Phase 0 to confirm; consider Python for data analysis scripts]
+1. ~~Exact v1 program list~~ → answered in `docs/incentives-research.md` (Step 3). Remaining
+   gaps are listed at the end of that file. Three questions go to Mass Save by email
+   (`docs/outreach/emails.md` §3).
+2. ~~Eversource low-income community solar~~ → answered (auto-enrollment by lottery).
+   National Grid and municipal programs are still open.
+3. ~~Data sources~~ → answered in `docs/data-sources.md`. Key rule: municipality comes from
+   the geocoder's county subdivision, never the postal city or ZIP.
+4. ~~Google Solar API~~ → priced (10,000 free Building Insights calls/month). Still open:
+   MA coverage check and caching terms.
+5. ~~ResStock~~ → practical for v1.5 (MA files 8–27 MB each).
+6. Stack choice. → Step 5
+7. Working name. → Step 5
+8. Real users: outreach to All In Energy / the navigator program and to a tenant or landlord
+   near BC. Drafts in `docs/outreach/emails.md`; Qiao sends them. [Decided — start now]
+9. ~~Massachusetts energy burden figure~~ → computed from LEAD (§1). Confirm ACS vintage.
+10. Tenant concern that upgrades lead to rent increases. For DEC rental projects, the
+    2025–2027 Plan requires landlords to sign a form "committing not to raise renter or
+    evict tenants for a period" after receiving incentives (`docs/data-sources.md` §5).
+    The length of that period is still open. Outside DECs: no protection found; the product
+    stays neutral.
 
-## 11. Sources used in this draft
+## 11. Stack (Step 5 review)
+
+| Layer | Choice | Status | Why |
+|---|---|---|---|
+| Rules engine + finance | TypeScript package `engine/`, Node 24 LTS, Zod 4 for rules-data validation, Vitest + fast-check | [Decided 2026-11-06] | Same language as the app, so the browser and server share one engine. Zod gives types and runtime checks from one schema. fast-check covers the property tests in `docs/tooling.md`. Versions are pinned in `docs/phase-1-plan.md` |
+| Rules data | JSON files in `rules/ma/`, one folder per state; schema in `docs/schema/rules-schema.md` | [Decided 2026-11-06] | Policy edits are data edits plus tests. Schema merged from two independent designs |
+| Data analysis | Python scripts in `analysis/` (standard library first) | [Proposed] | LEAD and MassGIS work is tabular/geospatial; it stays out of the app |
+| App | Next.js 16 (App Router) + TypeScript + Tailwind | [Proposed — confirm in Phase 3] | Server routes for the engine and LLM API calls; static pages for the demo. Mind Next.js writing its own CONTRIBUTING.md (tooling.md caveat) |
+| Charts | Hand-built SVG with D3 scales, each chart paired with a data table | [Proposed — confirm in Phase 3] | Only 4–5 simple charts. Hand-built SVG gives full control over WCAG 2.2 (text alternatives, patterns as well as colour, keyboard focus). Alternatives: Observable Plot (faster, weaker accessibility control), Recharts |
+| Map | MapLibre GL | [Proposed] | Supporting role only (confirm the building, show the roof); open source, no per-view fee |
+| LLM | LLM API, model chosen in Phase 2 | [Decided — provider; Open — model] | Explanations, form pre-fill and message drafts only |
+| Hosting | Vercel | [Proposed] | Fits Next.js; free tier is enough for a portfolio demo |
+| Storage | None in v1 | [Proposed] | No accounts; demo addresses run on request. Cached data is limited to what the terms allow (Solar API caching is [Open]) |
+
+Change from v0: none of substance. Added Zod and fast-check, put charts as hand-built SVG,
+dropped the idea of a chart library until Phase 3 shows a need, and confirmed Python only
+for analysis.
+
+## 12. Sources used in this draft
 
 - MassCEC Home Modernization Navigator: https://www.masscec.com/program/home-modernization-navigator-program
 - MassCEC expansion press release: https://www.masscec.com/press/masscec-expands-no-cost-service-help-more-residents-reduce-energy-costs-and-modernize-their
-- Mass Save, landlords with 1–4 unit properties: https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties
+- Lynn joins the navigator pilot (Dec 2025): https://itemlive.com/2025/12/12/home-modernization-navigator-program-comes-to-lynn/
+- Mass Save, landlords with 1–4 unit properties (read 2026-11-06): https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties
+- IRS FAQ on OBBBA changes to §25C/§25D: https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-act-obbb
+- ACEEE national energy burden fact sheet (fallback statistic): https://www.aceee.org/sites/default/files/pdfs/ACEEE-01%20Energy%20Burden%20-%20National.pdf
+- DPU order on low-income solar access (D.P.U. 24-104): https://www.mass.gov/news/dpu-issues-order-on-low-income-solar-access
 - Energy burden and Eversource LMI community solar model: https://www.renewableenergyworld.com/solar/how-utilities-can-make-community-solar-work-for-low-income-customers/
 - Community solar acquisition costs: https://pv-magazine-usa.com/2025/11/10/cap-agencies-make-good-partners-for-community-solar/
