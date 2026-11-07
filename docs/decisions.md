@@ -2,6 +2,36 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 0 Step 6: review response)
+
+Based on `docs/reviews/phase-0-response.md` (Review A: 10 accepted, 1 partial; Review B: 6
+accepted, 7 partial, 2 rejected).
+
+- **Payer split is the top priority.** The report shows who saves and who may pay more,
+  per bill and per person. — Qiao.
+- **The three Review A blockers are fixed:**
+  - condo participation is a coordination prerequisite, not eligibility;
+  - "you'd likely pay close to nothing" is **withdrawn** (supersedes the Step 5 entry
+    below), and offers show "up to X%" and who decides;
+  - the payer split is modeled.
+
+  — Qiao.
+- **Fact namespaces `user.*`, `unit.*`, `building.*`** (review B01). — Qiao.
+- **No archive folder.** Versions stay in the data; dates decide; tests use fixed dates;
+  `npm run data:status` reports on today's date. Chosen over a status field because both
+  dates (effective period and application deadline) already determine the state. A
+  stored status would duplicate them and drift. — per Qiao's instruction to weigh
+  it.
+- **review B04 rejected:** while not every condo unit agrees, 75% is eligible and
+  100% shows "N more units needed". It is never "not eligible". — Qiao.
+- **Relative deadlines and pre-approvals only where a rule exists:** none found for
+  relative deadlines. HEAT Loan pre-approval added. — Qiao; verified against the
+  saved official pages.
+- **`Benefit` and `Measure` were indeed undefined** in `rules-schema.md`; now defined
+  (schema v2). — verified.
+- **Income-table windows** set to 2026-10-01 → 2027-09-30 as an inference, Open until
+  Mass Save confirms. — technical.
+
 ## 2026-11-06 (Phase 0 Step 5: schema, name, stack)
 
 - **Rules-data schema decided: merge** (`docs/schema/rules-schema.md`). Keep Draft A's

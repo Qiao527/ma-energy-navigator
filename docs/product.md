@@ -135,8 +135,19 @@ Coordination is the signature feature. [Decided]
   [Proposed — Step 3 verifies net-metering credit allocation]
 - Ordered action plan with the reason for each step
 - Coordination tools: tenant → landlord letter, landlord → tenants scheduling note,
-  condo "units still needed" and messages to other owners
+  condo "units still needed" and messages to other owners. The 75% tier shows as
+  eligible; the 100% tier shows "N more units needed" and is never shown as "not
+  eligible" for lack of agreement [Decided 2026-11-06]
 - All money as **low / mid / high scenarios** with confidence labels [Decided]
+- **Who saves, who may pay more** [Decided 2026-11-06 — Qiao, top priority after review].
+  For each unit, the report shows:
+  - the heating-fuel bill change for whoever pays heat;
+  - the electric bill change for whoever pays electricity;
+  - the upfront cost after incentives for the property owner.
+
+  Example: oil → heat pump, landlord pays oil, tenant pays electricity → landlord saves,
+  tenant's electric bill goes up. An unknown payer is shown as "we don't know who pays
+  this bill".
 - LLM explains results and drafts messages; it never computes numbers or names programs
 - FAQ, incl. why federal credits don't apply and what the tool can't decide
 - A live demo with a few real addresses. A Boston rental near BC works well: Boston is a

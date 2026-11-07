@@ -147,6 +147,10 @@ Nothing here is encoded yet. This file is what the rules data (Phase 1) will be 
   rates for households on HEAP, SNAP, MassHealth, WIC, EAEDC, Head Start, public housing,
   school lunch. [Official]
 - **Source:** https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/income-eligible-programs
+- **[Open] Validity dates of the table.** The page says only "2026 – 2027 Heating Season".
+  The rules data uses 2026-10-01 → 2027-09-30 (the LIHEAP program year) as an
+  *inference* until Mass Save confirms. Offers that use the table end with it (review
+  review A5).
 - **[Open]** For a renter: does the Income Eligible Program need the landlord's approval
   for insulation and heating work? Almost certainly yes for heating systems (*inference*),
   but the page doesn't say.
@@ -231,6 +235,10 @@ Nothing here is encoded yet. This file is what the rules data (Phase 1) will be 
 - Up to **$25,000** lifetime per customer (effective 2025-01-01). Covers weatherization,
   pre-weatherization barriers, windows (with completed weatherization), batteries in
   ConnectedSolutions, heat pumps, heat pump water heaters. [Official]
+- **Pre-approval:** the loan is authorized (Authorization Form) and approved by a lender
+  before the lender's check is signed over to the contractor. The HEA requirement on this
+  page ("A HEA is mandatory if you plan to pursue … Whole Home Heat Pump …") is part of
+  the **loan** process, not of the heat pump rebate (review A8). [Official]
 - **"Loan applicant must be the homeowner."** Tenants can't use it. Needs a residential
   electric or gas account with a Sponsor. Municipal-electric customers qualify only if
   heated with natural gas from a Sponsor. Subject to lender approval. [Official]
@@ -443,6 +451,7 @@ Nothing here is encoded yet. This file is what the rules data (Phase 1) will be 
 | When homeowners get 100% vs 75% insulation outside DEC/income/condo | Phone Mass Save |
 | Condo "eligible unit" definition | Phone Mass Save |
 | Heat pump rebate: tenant-held account, landlord-owned equipment | Phone Mass Save |
+| Income-table validity dates (2026–27 heating season) | Ask Mass Save; rules use an inferred Oct–Sep window |
 | SMART flat incentive + net metering together for ≤25 kW | Read Eversource SMART 3.0 tariff (Phase 1, before encoding) |
 | PY2027 SMART rates | Re-read after DOER finalizes (≈ Dec 2026) |
 | National Grid and municipal LICSS status | DPU File Room |
