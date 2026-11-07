@@ -12,6 +12,7 @@ const Q: Quantities = {
   heatPumpTons: estimate(range(2, 3, 4), 'medium', 'fixture'),
   solarKwhPerYear: estimate(range(4000, 5000, 6000), 'medium', 'fixture'),
   communitySolarCreditsPerYear: estimate(range(600, 800, 1000), 'low', 'fixture'),
+  heatLoadMMBtu: null,
 }
 
 describe('benefitValue', () => {

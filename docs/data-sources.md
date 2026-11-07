@@ -261,7 +261,14 @@ This supports the core-user choice with data. The original MassGIS analysis (pit
 - **Verdict:** practical for v1.5. Filter MA buildings by type (2–4 unit), vintage and
   heating fuel, then fit quantile regression of energy use on features we actually collect,
   to narrow low/mid/high ranges. Not needed for v1.
-- **[Open]** license text (OEDI datasets are usually CC BY 4.0; *verify*).
+- **License: CC-BY-4.0** (the release's `citation.txt`, read 2026-11-07; snapshot in
+  `rules/ma/sources/resstock-2025-1-citation.txt`). Cite as: National Renewable Energy
+  Laboratory (NREL). (2025). ResStock 2025 Release 1 (AMY 2018) [Data set]. OEDI.
+  https://doi.org/10.25984/1876417.
+- Stock estimates script: `analysis/resstock_estimates.py` (Task 16b). It writes
+  `rules/ma/drafts/assumptions-resstock.json`. Each ResStock model is one dwelling unit,
+  so values are per unit. `weight` = "Number of dwelling units this model represents in
+  real life."
 
 ## 9b. Installed-cost sources for Massachusetts (Step 5 follow-up, 2026-11-06)
 
@@ -282,8 +289,12 @@ otherwise show the percentage alone.
 - Spread (Table 6): ductless-only projects mean $5,664/ton, standard deviation $1,970
   (n = 376).
 - Region (Table 14): Boston-area counties average $6,313/ton; statewide $5,661 (n = 665).
-- **Proposed range:** ductless $3,860 / $5,830 / $7,800 per ton (mean ± 1 SD). Label it
-  "2021–22 projects, in Jan 2024 dollars" with `confidence: medium`.
+- **Used (2026-11-07):** ductless $3,694 / $5,664 / $7,634 per ton, which is Table 6's
+  ductless-only mean ± 1 SD (n = 376). Label it "2021–22 projects, in Jan 2024 dollars"
+  with `confidence: medium`.
+  - The earlier proposal ($3,860 / $5,830 / $7,800) mixed the overall mean with a
+    standard deviation from a different group. Corrected.
+  - Draft: `rules/ma/drafts/assumptions.json`.
 - **Gap:** the dollar total also needs **tons per unit**. No Massachusetts source for
   typical apartment tonnage was found. Until one is, show the rebate and cost for example
   sizes ("for a 2-ton system …") or for the contractor's quoted size, not a guessed size.

@@ -24,6 +24,13 @@ export const UnitSchema = z.strictObject({
   participating: z.boolean().nullable(),
   /** Occupied full time during the winter heating season (heat pump rebates, research §6). */
   occupiedAllWinter: z.boolean().nullable(),
+  /** Past fuel use, one entry per delivery or bill; `year` = the heating season starting that year (Task 16). */
+  fuelRecords: z
+    .array(z.strictObject({ year: z.number().int().min(2000).max(2100), quantity: z.number().nonnegative(), unit: z.enum(['gallons', 'therms', 'kwh']) }))
+    .nullable()
+    .default(null),
+  /** Heat pump size from a contractor's quote, in tons. */
+  heatPumpTonsQuoted: z.number().positive().nullable().default(null),
 })
 export type Unit = z.infer<typeof UnitSchema>
 

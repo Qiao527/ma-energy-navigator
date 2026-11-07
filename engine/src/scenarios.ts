@@ -38,6 +38,7 @@ function quantitiesOf(s: Scenario): Quantities {
     heatPumpTons: toEstimate(s.quantities.heatPumpTons),
     solarKwhPerYear: toEstimate(s.quantities.solarKwhPerYear),
     communitySolarCreditsPerYear: toEstimate(s.quantities.communitySolarCreditsPerYear),
+    heatLoadMMBtu: null,
   }
 }
 

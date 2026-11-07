@@ -1,7 +1,7 @@
 {
   "id": "story1-installed-deadline-passed",
   "title": "Story 1 — installed in December 2026, checked after the 2027-02-28 paperwork deadline",
-  "story": "Story 1: owner-occupant landlord in a Boston triple-decker (DEC). Lives on floor 1, rents floors 2–3. Oil heat paid by the landlord for all floors; tenants pay their own electricity. Built 1910; no assessment or weatherization yet. The heat pumps were installed on 2026-12-01; the landlord checks on 2027-03-01.",
+  "story": "Story 1: owner-occupant landlord in a Boston triple-decker (DEC). Lives on floor 1, rents floors 2–3. Oil heat paid by the landlord for all floors; tenants pay their own electricity. Built 1910; no assessment or weatherization yet. The landlord has oil delivery records for two heating seasons (2024–25, 2025–26) for each floor (fictional demo numbers). The heat pumps were installed on 2026-12-01; the landlord checks on 2027-03-01.",
   "input": {
     "role": "owner_occupant_landlord",
     "userUnitId": "1",
@@ -24,7 +24,19 @@
           "electricPaidBy": "owner",
           "hasResidentialHeatingMeter": null,
           "participating": null,
-          "occupiedAllWinter": true
+          "occupiedAllWinter": true,
+          "fuelRecords": [
+            {
+              "year": 2024,
+              "quantity": 455,
+              "unit": "gallons"
+            },
+            {
+              "year": 2025,
+              "quantity": 490,
+              "unit": "gallons"
+            }
+          ]
         },
         {
           "id": "2",
@@ -34,7 +46,19 @@
           "electricPaidBy": "tenant",
           "hasResidentialHeatingMeter": null,
           "participating": null,
-          "occupiedAllWinter": true
+          "occupiedAllWinter": true,
+          "fuelRecords": [
+            {
+              "year": 2024,
+              "quantity": 420,
+              "unit": "gallons"
+            },
+            {
+              "year": 2025,
+              "quantity": 445,
+              "unit": "gallons"
+            }
+          ]
         },
         {
           "id": "3",
@@ -44,7 +68,19 @@
           "electricPaidBy": "tenant",
           "hasResidentialHeatingMeter": null,
           "participating": null,
-          "occupiedAllWinter": true
+          "occupiedAllWinter": true,
+          "fuelRecords": [
+            {
+              "year": 2024,
+              "quantity": 515,
+              "unit": "gallons"
+            },
+            {
+              "year": 2025,
+              "quantity": 560,
+              "unit": "gallons"
+            }
+          ]
         }
       ]
     },

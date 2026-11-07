@@ -8,9 +8,11 @@ export interface Quantities {
   heatPumpTons: Estimate | null
   solarKwhPerYear: Estimate | null
   communitySolarCreditsPerYear: Estimate | null
+  /** Annual heat delivered to the unit, MMBtu (feeds the bill estimates, finance.ts). */
+  heatLoadMMBtu: Estimate | null
 }
 
-export const NO_QUANTITIES: Quantities = { cost: {}, heatPumpTons: null, solarKwhPerYear: null, communitySolarCreditsPerYear: null }
+export const NO_QUANTITIES: Quantities = { cost: {}, heatPumpTons: null, solarKwhPerYear: null, communitySolarCreditsPerYear: null, heatLoadMMBtu: null }
 
 /** Money value of a benefit, or null when it isn't money or a needed quantity is unknown. */
 export function benefitValue(b: Benefit, q: Quantities): Estimate | null {

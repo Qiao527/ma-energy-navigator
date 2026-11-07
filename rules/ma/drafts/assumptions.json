@@ -1,0 +1,174 @@
+[
+  {
+    "id": "heat_pump_cost_per_ton",
+    "description": "Installed cost of a ductless mini-split heat pump per ton in Massachusetts (Mass Save projects with only heat pump work, 2021–22, January 2024 dollars); range = mean ± 1 standard deviation",
+    "unit": "USD per ton",
+    "value": {
+      "low": 3694,
+      "mid": 5664,
+      "high": 7634
+    },
+    "confidence": "medium",
+    "sampleSize": 376,
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/MA23X14-B-RHPINV-Residential-Heat-Pump-Invoice-Cost-Study-Web.pdf",
+        "section": "Table 6: Ductless MSHP – Project Scope Cost Dependency (Jan. 2024$/ton)",
+        "quote": "Ductless MSHP only Multiple Measures n 376 31 Mean $5,664 $6,546 Standard Deviation $1,970 $3,104",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "oil_boiler_replacement_cost_per_ton",
+    "description": "Cost of a new baseline oil boiler per ton (inflation adjusted), for the 'boiler needs replacing anyway' comparison; your own quote replaces it",
+    "unit": "USD per ton",
+    "value": {
+      "low": 920,
+      "mid": 920,
+      "high": 920
+    },
+    "confidence": "low",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Oil Boiler - - 0.84 AFUE $920",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_efficiency.oil",
+    "description": "Efficiency of a new baseline oil boiler (AFUE 0.84); an older boiler is probably less efficient",
+    "unit": "fraction",
+    "value": {
+      "low": 0.84,
+      "mid": 0.84,
+      "high": 0.84
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Oil Boiler - - 0.84 AFUE $920",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_efficiency.natural_gas",
+    "description": "Efficiency of a new baseline gas boiler (AFUE 0.82); an older boiler is probably less efficient",
+    "unit": "fraction",
+    "value": {
+      "low": 0.82,
+      "mid": 0.82,
+      "high": 0.82
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Natural Gas Boiler - - 0.82 AFUE $1,201",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_efficiency.propane",
+    "description": "Efficiency of a new baseline propane boiler (AFUE 0.82); an older boiler is probably less efficient",
+    "unit": "fraction",
+    "value": {
+      "low": 0.82,
+      "mid": 0.82,
+      "high": 0.82
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Propane Boiler - - 0.82 AFUE $1,331",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.oil",
+    "description": "Heat content of heating oil: 138,500 Btu per gallon",
+    "unit": "MMBtu per gallon",
+    "value": {
+      "low": 0.1385,
+      "mid": 0.1385,
+      "high": 0.1385
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "Heating oil 1 gallon=138,500 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.propane",
+    "description": "Heat content of propane: 91,452 Btu per gallon",
+    "unit": "MMBtu per gallon",
+    "value": {
+      "low": 0.091452,
+      "mid": 0.091452,
+      "high": 0.091452
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "Propane 1 gallon=91,452 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.natural_gas",
+    "description": "Heat content of natural gas: 100,000 Btu per therm",
+    "unit": "MMBtu per therm",
+    "value": {
+      "low": 0.1,
+      "mid": 0.1,
+      "high": 0.1
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "1 therm=100,000 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.electric_resistance",
+    "description": "Electricity: 3,412 Btu per kilowatthour",
+    "unit": "MMBtu per kWh",
+    "value": {
+      "low": 0.003412,
+      "mid": 0.003412,
+      "high": 0.003412
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "Electricity 1 kilowatthour=3,412 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  }
+]

@@ -1,0 +1,990 @@
+[[page 1]]
+ 
+Heat Pump Incremental Cost Research 
+ 
+  1 
+ 
+ 
+To: Massachusetts Residential Program Administrators 
+  
+From:  Ryan Powanda and Steven Tobias, Guidehouse 
+  
+Date: August 9, 2024 
+  
+Re: Massachusetts Heat Pump Incremental Cost Research 
+ 
+Executive Summary  
+This memo presents the results of the Massachusetts heat pump incremental costs analysis. 
+This study supports the Massachusetts Program Administrators (PAs) in their Three-Year 
+Planning efforts to accurately estimate costs and benefits for heat pump fuel displacement 
+program offerings, which incentivize the installation of air and ground source heat pumps 
+(HPs) to displace pre-existing fuel fired (natural gas, oil, propane) or electric resistance 
+heating equipment.   
+This study leverages new HP cost research performed by NMR in 2023 and 2024 for the MA 
+PAs. Recent NMR studies include an analysis of the MassCEC database and online 
+webscraping data collection. These activities served to estimate recent HP installation costs 
+and to understand the components of those costs, including equipment cost, installation, 
+and labor costs.   
+The incremental cost study also leveraged data from Guidehouse’s RES19 and RES23 
+studies. Cost and efficiency data from the studies were compiled and used to inform 
+equipment costs or to cross-validate costs from other studies. Costs from the prior studies 
+were updated for inflation to 2023 dollars and adjusted based on incremental efficiency 
+differences between the prior study source and the incremental cost study equipment 
+efficiencies for program rebated heat pumps, new equipment, and existing equipment. 
+Table ES-1 through Table ES-3 summarizes the key findings of this research for each of 
+three baseline scenarios. The three baseline scenarios are as follows and are described in 
+detail in Section 1.5. 
+• Market Rate Program Data Designation Scenario: This scenario summarizes costs for 
+market rate heat pump program participants. This scenario includes the baseline 
+equipment weights for all heating and cooling equipment types. Heat pump usage for the 
+Full Displacement measure category is based on the full Heat Pump Metering Study 
+metered sample, where the displacement categorizes are defined in the program 
+tracking database.  
+• Market Rate Alternative Scenario: This scenario summarizes costs for market rate 
+heat pump program participants. This scenario removes the baseline weights for 
+baseline heat pump types and re-weights the remaining equipment types to 100%. Heat 
+pump usage for the Full Displacement measure category is based on the subset of the 
+[[page 2]]
+Heat Pump Incremental Cost Research 
+ 
+  2 
+ 
+Heat Pump Metering Study metered sample where the customer either removed or 
+disconnected their pre-existing heating equipment.  
+• Income Eligible Scenario: This scenario summarizes costs for income eligible heat 
+pump program participants. The baseline equipment type is assumed to be the pre-
+existing system types per the measure name. Because this Incremental Cost study 
+assumes zero cost for pre-existing equipment, this scenario results in an incremental 
+cost identical to the new equipment cost. 
+For the market rate scenarios, the baseline equipment costs represent the blended average 
+of costs for the equipment the customer would have installed if they did not install the HP 
+they did, which could have been keeping their pre-existing HVAC system installed (assumed 
+to be zero cost) or installing an alternative piece of equipment (noted as “New" equipment in 
+this study). The HP installation costs are broken out for a new unit (at a base efficiency 
+level), and for a higher efficiency HP unit representing a program-average installation. 
+Results are provided for three incremental cost scenarios: 
+• Baseline equipment to new unit heat pump 
+• New unit heat pump to program rebated heat pump 
+• Baseline equipment to program rebated heat pump 
+These costs are summarized for each of the program measures, which vary based on 
+installed HP type, displacement scenario (full or partial displacement), and the customer’s 
+pre-existing heating fuel type. The costs are normalized by the rated cooling tonnage of the 
+installed HP equipment.  
+[[page 3]]
+Heat Pump Incremental Cost Research 
+ 
+  3 
+ 
+Table ES-1: Heat Pump Fuel Displacement Incremental Costs - Market Rate Program 
+Data Displacement Scenario 
+Measure Name Displacement 
+Type 
+Blended 
+Baseline 
+Equipme
+nt Cost 
+($/Ton) 
+HP - 
+New Unit 
+Cost 
+($/Ton) 
+HP - 
+Program 
+Rebated 
+Cost 
+($/Ton) 
+Baseline to 
+HP - New 
+Unit 
+Incremental 
+Cost 
+($/Ton) 
+HP - New 
+Unit to HP - 
+Program 
+Rebated 
+Incremental 
+Cost ($/Ton) 
+Baseline to 
+HP - 
+Program 
+Rebated 
+Incremental 
+Cost 
+($/Ton) 
+Central HP 
+Displacing Electric 
+Resistance 
+Full $2,884 $7,294 $7,781 $4,410 $486 $4,896 
+Central HP 
+Displacing Oil Partial $2,688 $7,294 $7,781 $4,607 $486 $5,093 
+Central HP 
+Displacing 
+Propane 
+Partial $2,725 $7,294 $7,781 $4,569 $486 $5,056 
+Central HP 
+Displacing Natural 
+Gas 
+Partial $2,893 $7,294 $7,781 $4,401 $486 $4,887 
+Central HP 
+Displacing Oil Full $2,688 $7,294 $7,781 $4,607 $486 $5,093 
+Central HP 
+Displacing 
+Propane 
+Full $2,725 $7,294 $7,781 $4,569 $486 $5,056 
+Central HP 
+Displacing Natural 
+Gas 
+Full $2,893 $7,294 $7,781 $4,401 $486 $4,887 
+GSHP Displacing 
+Electric 
+Resistance 
+Full $3,292 $14,238 $14,876 $10,946 $638 $11,584 
+GSHP Displacing 
+Oil Full $5,343 $14,238 $14,876 $8,894 $638 $9,532 
+GSHP Displacing 
+Propane Full $5,343 $14,238 $14,876 $8,895 $638 $9,533 
+GSHP Displacing 
+Natural Gas Full $5,350 $14,238 $14,876 $8,887 $638 $9,526 
+Minisplit HP 
+Displacing Electric 
+Resistance 
+Full $1,046 $5,443 $6,029 $4,396 $586 $4,982 
+Minisplit HP 
+Displacing Oil Partial $1,079 $5,443 $6,029 $4,363 $586 $4,949 
+Minisplit HP 
+Displacing 
+Propane 
+Partial $1,162 $5,443 $6,029 $4,280 $586 $4,867 
+Minisplit HP 
+Displacing Natural 
+Gas 
+Partial $1,156 $5,443 $6,029 $4,286 $586 $4,873 
+Minisplit HP 
+Displacing Oil Full $1,079 $5,443 $6,029 $4,363 $586 $4,949 
+Minisplit HP 
+Displacing 
+Propane 
+Full $1,162 $5,443 $6,029 $4,280 $586 $4,867 
+Minisplit HP 
+Displacing Natural 
+Gas 
+Full $1,156 $5,443 $6,029 $4,286 $586 $4,873 
+Source: Guidehouse analysis 
+ 
+[[page 4]]
+Heat Pump Incremental Cost Research 
+ 
+  4 
+ 
+Table ES-2: Heat Pump Fuel Displacement Incremental Costs - Market Rate Alternate 
+Scenario 
+Measure Name Displacement 
+Type 
+Blended 
+Baseline 
+Equipme
+nt Cost 
+($/Ton) 
+HP - 
+New Unit 
+Cost 
+($/Ton) 
+HP - 
+Program 
+Rebated 
+Cost 
+($/Ton) 
+Baseline to 
+HP - New 
+Unit 
+Incremental 
+Cost 
+($/Ton) 
+HP - New 
+Unit to HP - 
+Program 
+Rebated 
+Incremental 
+Cost ($/Ton) 
+Baseline to 
+HP - 
+Program 
+Rebated 
+Incremental 
+Cost 
+($/Ton) 
+Central HP 
+Displacing Electric 
+Resistance 
+Full $1,917 $7,294 $7,781 $5,378 $486 $5,864 
+Central HP 
+Displacing Oil Partial $1,899 $7,294 $7,781 $5,396 $486 $5,882 
+Central HP 
+Displacing 
+Propane 
+Partial $1,947 $7,294 $7,781 $5,347 $486 $5,834 
+Central HP 
+Displacing Natural 
+Gas 
+Partial $1,984 $7,294 $7,781 $5,311 $486 $5,797 
+Central HP 
+Displacing Oil Full $1,899 $7,294 $7,781 $5,396 $486 $5,882 
+Central HP 
+Displacing 
+Propane 
+Full $1,947 $7,294 $7,781 $5,347 $486 $5,834 
+Central HP 
+Displacing Natural 
+Gas 
+Full $1,984 $7,294 $7,781 $5,311 $486 $5,797 
+GSHP Displacing 
+Electric 
+Resistance 
+Full $1,769 $14,238 $14,876 $12,469 $638 $13,107 
+GSHP Displacing 
+Oil Full $1,671 $14,238 $14,876 $12,567 $638 $13,205 
+GSHP Displacing 
+Propane Full $1,670 $14,238 $14,876 $12,568 $638 $13,206 
+GSHP Displacing 
+Natural Gas Full $1,683 $14,238 $14,876 $12,555 $638 $13,193 
+Minisplit HP 
+Displacing Electric 
+Resistance 
+Full $803 $5,443 $6,029 $4,640 $586 $5,226 
+Minisplit HP 
+Displacing Oil Partial $748 $5,443 $6,029 $4,694 $586 $5,280 
+Minisplit HP 
+Displacing 
+Propane 
+Partial $939 $5,443 $6,029 $4,503 $586 $5,089 
+Minisplit HP 
+Displacing Natural 
+Gas 
+Partial $834 $5,443 $6,029 $4,609 $586 $5,195 
+Minisplit HP 
+Displacing Oil Full $748 $5,443 $6,029 $4,694 $586 $5,280 
+Minisplit HP 
+Displacing 
+Propane 
+Full $939 $5,443 $6,029 $4,503 $586 $5,089 
+Minisplit HP 
+Displacing Natural 
+Gas 
+Full $834 $5,443 $6,029 $4,609 $586 $5,195 
+Source: Guidehouse analysis 
+ 
+[[page 5]]
+Heat Pump Incremental Cost Research 
+ 
+  5 
+ 
+Table ES-3: Heat Pump Fuel Displacement Incremental Costs - Income Eligible 
+Scenario 
+Measure Name Displacement 
+Type 
+Blended 
+Baseline 
+Equipme
+nt Cost 
+($/Ton) 
+HP - 
+New Unit 
+Cost 
+($/Ton) 
+HP - 
+Program 
+Rebated 
+Cost 
+($/Ton) 
+Baseline to 
+HP - New 
+Unit 
+Incremental 
+Cost 
+($/Ton) 
+HP - New 
+Unit to HP - 
+Program 
+Rebated 
+Incremental 
+Cost ($/Ton) 
+Baseline to 
+HP - 
+Program 
+Rebated 
+Incremental 
+Cost 
+($/Ton) 
+Central HP 
+Displacing Electric 
+Resistance 
+Full $0 $7,294 $7,781 $7,294 $486 $7,781 
+Central HP 
+Displacing Oil Partial $0 $7,294 $7,781 $7,294 $486 $7,781 
+Central HP 
+Displacing 
+Propane 
+Partial $0 $7,294 $7,781 $7,294 $486 $7,781 
+Central HP 
+Displacing Natural 
+Gas 
+Partial $0 $7,294 $7,781 $7,294 $486 $7,781 
+Central HP 
+Displacing Oil Full $0 $7,294 $7,781 $7,294 $486 $7,781 
+Central HP 
+Displacing 
+Propane 
+Full $0 $7,294 $7,781 $7,294 $486 $7,781 
+Central HP 
+Displacing Natural 
+Gas 
+Full $0 $7,294 $7,781 $7,294 $486 $7,781 
+GSHP Displacing 
+Electric 
+Resistance 
+Full $0 $14,238 $14,876 $14,238 $638 $14,876 
+GSHP Displacing 
+Oil Full $0 $14,238 $14,876 $14,238 $638 $14,876 
+GSHP Displacing 
+Propane Full $0 $14,238 $14,876 $14,238 $638 $14,876 
+GSHP Displacing 
+Natural Gas Full $0 $14,238 $14,876 $14,238 $638 $14,876 
+Minisplit HP 
+Displacing Electric 
+Resistance 
+Full $0 $5,443 $6,029 $5,443 $586 $6,029 
+Minisplit HP 
+Displacing Oil Partial $0 $5,443 $6,029 $5,443 $586 $6,029 
+Minisplit HP 
+Displacing 
+Propane 
+Partial $0 $5,443 $6,029 $5,443 $586 $6,029 
+Minisplit HP 
+Displacing Natural 
+Gas 
+Partial $0 $5,443 $6,029 $5,443 $586 $6,029 
+Minisplit HP 
+Displacing Oil Full $0 $5,443 $6,029 $5,443 $586 $6,029 
+Minisplit HP 
+Displacing 
+Propane 
+Full $0 $5,443 $6,029 $5,443 $586 $6,029 
+Minisplit HP 
+Displacing Natural 
+Gas 
+Full $0 $5,443 $6,029 $5,443 $586 $6,029 
+Source: Guidehouse analysis 
+ 
+[[page 6]]
+Heat Pump Incremental Cost Research 
+ 
+  6 
+ 
+1. Methodology 
+Guidehouse estimated heat pump equipment and installation costs using the results of a 
+2023 NMR draft memo1 which evaluated invoices from the Massachusetts Clean Energy 
+Center (MassCEC) public database, along with results from a subsequent NMR 
+Webscraping effort. 
+Guidehouse estimated baseline equipment costs using studies developed in 2018, including 
+the MA Water Heating, Boiler, and Furnace Cost Study (RES19)2, and MA Cost Study of 
+Heat Pump Installations for Dual Fuel Operation (RES23)3. 
+Once primary data sources were identified for each piece of equipment, Guidehouse used 
+inflation and price index values to update all costs to 2023 dollars. The team also estimated 
+costs at varying efficiency levels, leveraging regression analysis performed in the various 
+studies to correlate installed equipment prices with various equipment characteristics, such 
+as size and efficiency.  
+For the market rate scenarios, Guidehouse applied a series of baseline equipment cost 
+weights using the counterfactual condition: what equipment the customer would have 
+installed if they did not install the heat pump they did, which could have been install no unit 
+(for cooling), keep the existing cooling or heating units installed, installing an alternative 
+piece of equipment (assumed to be a new unit efficiency), or indicating that the installed 
+heat pump was the only unit type considered. For the income eligible scenario, the baseline 
+equipment type is assumed to be the pre-existing equipment type(s).  
+Incremental cost was defined as the difference between a baseline equipment cost and a 
+more-efficient equipment cost, inclusive of equipment labor, materials, taxes, and other 
+install-related costs. Incremental cost was calculated for several points, including the 
+blended baseline cost to the program-rebated efficient heat pump, blended baseline costs to 
+new unit heat pump, and new unit heat pump to program-rebated heat pump.  
+1.1 Heat Pump Cost Assumptions 
+The following section provides a detailed overview of data sources used and the underlying 
+analysis methodology within each source. 
+NMR MassCEC Heat Pump Invoice Analysis 
+In November 2023, NMR shared a draft memo with Guidehouse which included heat pump 
+project cost results as sourced from the MassCEC database.4 The review was conducted for 
+Ground Source Heat Pumps (GSHP), Central Heat Pumps (CHP), and Mini-Split Heat 
+Pumps (MSHP), and focused on publicly available MassCEC datasets. The study pulled 
+data from residential-scale projects within the commercial ASHP program and records from 
+the residential ASHP and whole home pilot programs. The final sample included 206 GSHP 
+ 
+1 2023 NMR MassCEC Invoice Analysis Memo Draft is not publicly available as of May 2024. 
+2 https://ma-eeac.org/wp-content/uploads/RES19_Assembled_Report_2018-09-27.pdf 
+3 https://ma-eeac.org/wp-content/uploads/RES23_Task2_AC-HP_Cost_Study_Results_Memo_v3_clean.pdf 
+4 https://www.masscec.com/public-records-requests 
+[[page 7]]
+Heat Pump Incremental Cost Research 
+ 
+  7 
+ 
+projects, 2,217 MSHP projects, and 11 CHP projects installed between 2019 and 2021. All 
+cost values were adjusted to December 2022 dollars.  
+Guidehouse used the study’s mean project cost per ton of installed HP cooling capacity for 
+each system type as a starting point to estimate typical heat pump equipment and 
+installation costs. The study also included regression coefficients for GSHP and MSHP unit 
+types (the CHP sample was too small to develop a coefficient), which Guidehouse used to 
+validate unit cost results and to estimate equipment costs based on variations in rated 
+equipment efficiency.  
+NMR Webscraping Data (January 2024) 
+Following the NMR MassCEC Heat Pump Invoice Analysis memo, NMR conducted an 
+online webscraping effort to collect cost data across multiple heat pump unit types and 
+retailer webpages. The webscraping task sourced cost information from thousands of online 
+records for GSHP, MSHP (ductless and ducted), and CHP units. NMR’s webscraping also 
+collected rated efficiency values and unit capacities. Guidehouse used this data for 
+developing and validating equipment efficiency cost regressions. 
+1.2 Baseline Equipment Cost Assumptions 
+The following studies were used to inform the baseline equipment costs. The costs from 
+each study were adjusted for 2023 dollars using Consumer Price Index (CPI) data.5 
+MA Water Heating, Boiler, and Furnace Cost Study – RES19 (2018) 
+This study evaluated the costs for single family installations of water heaters, boilers, and 
+furnaces rebated through the Massachusetts Residential Heating and Cooling program. It 
+assessed consumer costs for purchase and installation of these HVAC equipment types and 
+analyzed the relationship between cost and equipment efficiency.  
+Guidehouse used the RES19 study’s average itemized costs by category for each 
+equipment type and efficiency level to develop cost estimates for baseline gas-fired 
+equipment.  
+MA Cost Study of Heat Pump Installations for Dual Fuel Operation – RES23 (2018) 
+This study provides itemized install costs for residential central A/C and heat pump products 
+installed in Massachusetts. The authors analyzed 7,948 Mass Save rebate records 
+submitted between November 2016 and July 2017, and used a set of 200 total invoice 
+records to supplement the analysis.  
+Guidehouse used the RES23 study to source cost information for existing central AC 
+equipment. 
+ 
+5 https://data.bls.gov/timeseries/CUUR0000SA0L1E 
+[[page 8]]
+Heat Pump Incremental Cost Research 
+ 
+  8 
+ 
+1.3 Baseline and Program Rebated Equipment Efficiency 
+Assumptions 
+Table 1 shows efficiency assumptions for existing, new, and program rebated (EE) HVAC 
+equipment. These values are used in the incremental cost analysis to scale the equipment 
+costs based on the rated efficiency of the equipment. Several of the cost data sources 
+include regressions to adjust equipment costs based on efficiency, or lookup tables for 
+equipment costs based on different efficiency levels.  
+The following data sources and assumptions were used to inform these baseline and post-
+retrofit equipment efficiency assumptions:  
+• Existing unit efficiency values are sourced from the most recent Massachusetts 
+Residential Building Use and Equipment Characterization Study (RBUECS), updated in 
+2023.6 The existing unit efficiencies are the median unit efficiencies for all HVAC units 
+installed in the 2023 onsite metering sample (n=269 sites in onsite sample). The existing 
+unit efficiency values are used for customers who indicate that they would have left their 
+existing HVAC system in place if they did not install the heat pump they did.         
+• New unit efficiency values are sourced from the MA RBUECS survey data collection 
+and subsequent characterization analysis and are the median efficiency values for all 
+units installed from 2020-2023. These efficiency values are used for customers who 
+indicate that they would have installed an alternative HVAC system if they did not install 
+the heat pump they did. Based on discussions with the MA PAs and EEAC consultants, 
+the team assumes new unit efficiencies of 15 SEER and 8.8 HSPF for central heat pump 
+based on current code minimum values, and 17 SEER and 9.5 HSPF for mini-split heat 
+pumps to estimate typical standard efficiencies for mini-split heat pumps available on the 
+market.  
+• Program rebated (EE) unit efficiency values are sourced from 2022 Mass Save Fuel 
+Displacement program tracking dataset, delivered by DNV. The program average 
+efficiency values represent the median unit efficiency values for all units installed in 
+2022.  
+ 
+6 The Phase 7 RBUECS for Massachusetts has not been made publicly available at this time of this report submission. The 
+Phase 6 report is available on the MA Energy Efficiency Advisory Council webpage: https://ma-eeac.org/wp-
+content/uploads/Residential-Building-Use-and-Equipment-Characterization-Study-Comprehensive-Report-2022-
+03-01.pdf 
+[[page 9]]
+Heat Pump Incremental Cost Research 
+ 
+  9 
+ 
+Table 1: Heat Pump and Baseline Equipment Rated Efficiency Assumptions 
+HVAC Type Existing Unit Efficiency New Unit Efficiency Program Rebated Unit 
+Efficiency 
+Central AC 13.0 SEER 
+12.4 SEER2 
+15.0 SEER 
+14.3 SEER2 N/A 
+Central Heat Pump 
+13.0 SEER 
+12.4 SEER2 
+7.1 HSPF 
+6.1 HSPF2 
+15.0 SEER 
+14.3 SEER2 
+8.8 HSPF 
+7.5 HSPF2 
+18.0 SEER 
+17.1 SEER2 
+10.0 HSPF 
+8.5 HSPF2 
+Mini-Split Heat Pump 
+20.0 SEER 
+19.0 SEER2 
+11.0 HSPF 
+9.4 HSPF2 
+17.0 SEER 
+16.2 SEER2 
+9.5 HSPF 
+8.1 HSPF2 
+13.6 SEER 
+13.0 SEER2 
+7.6 HSPF 
+6.5 HSPF2 
+Window AC 11.0 CEER 11.3 CEER N/A 
+Gas Furnace 91.0% 96.0% N/A 
+Propane Furnace 91.0% 96.0% N/A 
+Oil Furnace 85.0% 86.2% N/A 
+Gas Boiler 83.1% 95.0% N/A 
+Propane Boiler 83.1% 95.0% N/A 
+Oil Boiler 85.0% 86.2% N/A 
+Electric Resistance 3.41 HSPF 3.41 HSPF N/A 
+*SEER2 estimated as SEER/1.05, HSPF2 estimated as HSPF/1.17 
+Source: MA Residential Building Use and Equipment Characterization Study (2023), Evaluation Team Analysis 
+1.4 Equipment Cost Normalization and Aggregation 
+Guidehouse used the NMR MassCEC memo to source post-retrofit equipment costs and 
+used the RES19 and RES23 studies to source baseline equipment costs, and then made 
+updates based on unit efficiency levels. The cost adjustment methodology is shown below: 
+Incremental Efficiency Cost Factor 
+The team applied an adjustment factor to scale the efficiency and related equipment costs 
+between the source dataset and the efficiency value assumptions used for this analysis. The 
+NMR webscraping data was used to develop adjustment factors for baseline existing and 
+new units as well as the program rebated heat pump equipment. The RES19 study was 
+used to develop adjustment factors for baseline existing and new unit fossil fuel equipment. 
+Incremental efficiency cost factor between two pieces of equipment (unit “a” and unit “b”), 
+expressed in dollars per ton per unit efficiency, is defined in Equation 1: 
+Equation 1. Incremental Efficiency Cost Factor (IECF) 
+𝐼𝐸𝐶𝐹 = 𝐶𝑜𝑠𝑡𝑃𝑒𝑟𝑇𝑜𝑛𝑎 − 𝐶𝑜𝑠𝑡𝑃𝑒𝑟𝑇𝑜𝑛𝑏
+(𝐶𝑜𝑜𝑙𝐸𝑓𝑓𝑎 −  𝐶𝑜𝑜𝑙𝐸𝑓𝑓𝑏)/3.412 + (𝐻𝑒𝑎𝑡𝐸𝑓𝑓𝑎 −  𝐻𝑒𝑎𝑡𝐸𝑓𝑓𝑏) 
+[[page 10]]
+Heat Pump Incremental Cost Research 
+ 
+  10 
+ 
+Where: 
+• CostPerTona and CostPerTonb are install costs per ton of installed unit cooling capacity 
+for new and program rebated heat pumps. For heating-only baseline and new fossil fuel 
+equipment, heating capacity was converted to ton-equivalent installed capacity 
+(MBH/12). 
+• CoolEffa and CoolEffb are equipment cooling efficiencies (EER, SEER, or SEER2), which 
+are converted from btu/watt to btu/btu (dimensionless) to be comparable to heating 
+efficiencies. Where possible, part-load efficiencies were used (SEER / SEER2) 
+• HeatEffa and HeatEffb are equipment heating efficiencies, expressed as COP, HSPF, or 
+HSPF2 (dimensionless). Where possible, part-load efficiencies were used (HSPF / 
+HSPF2) 
+Because this methodology relies on two pieces of similar equipment at different efficiency 
+levels and costs and interpolates between the two, it will be less accurate for large changes 
+in efficiency – especially for efficiency values outside the range of the two equipment values. 
+Table 2 shows source and adjusted equipment cost per ton, including the inflation 
+adjustment factor for each source vintage, and the efficiency adjustment factor based on 
+heating and cooling efficiency differences.
+[[page 11]]
+ 
+Heat Pump Incremental Cost Research 
+ 
+  11 
+Table 2: Equipment Cost Per Ton Adjustment for Inflation and Efficiency 
+Source Efficiency 
+Category Equipment Type 
+Source 
+Cost 
+Per 
+Ton [a] 
+Cooling Efficiency Heating Efficiency 
+Inflation 
+Adjustment 
+Factor [b] 
+Efficiency 
+Adjustment 
+Factor [c] 
+Adjusted 
+Cost Per 
+Ton 
+[a*b*c] 
+Source 
+Efficiency 
+Modified 
+Efficiency Metric Source 
+Efficiency 
+Modified 
+Efficiency Metric 
+Baseline (Existing/New Unit)                       
+RES23 New Unit Central AC $4,156 16.0  15.0  SEER - -  1.21  0.98  $4,918 
+NMR MassCEC Analysis New Unit CHP $7,678 19.0  15.0  SEER 10.6  8.8  HSPF 1.04  0.91  $7,294 
+RES19 New Unit Electric Radiant $357 - -  1.0  - COP 1.24  1.00  $444 
+NMR MassCEC Analysis New Unit GSHP $14,290 24.5  11.1  EER 4.3  3.6  COP 1.04  0.96  $14,238 
+NMR MassCEC Analysis New Unit MSHP $5,947 21.4  17.0  SEER 11.4  9.5  HSPF 1.04  0.88  $5,443 
+RES19 New Unit Natural Gas Boiler $659 - -  0.82  0.95  AFUE 1.24  1.47  $1,201 
+RES19 New Unit Natural Gas Furnace $595 - -  0.80  0.96  AFUE 1.24  1.44  $1,064 
+RES19 New Unit Oil Boiler $692 - -  0.84  0.86  AFUE 1.24  1.07  $920 
+RES19 New Unit Oil Furnace $667 - -  0.83  0.86  AFUE 1.24  1.13  $934 
+RES19 New Unit Propane Boiler $720 - -  0.82  0.95  AFUE 1.24  1.49  $1,331 
+RES19 New Unit Propane Furnace $538 - -  0.80  0.96  AFUE 1.24  1.38  $924 
+RES23 New Unit Room AC Unit $450 10.0  12.0  EER - -  1.21  1.46  $795 
+RES19 New Unit Wood Stove $357 - -  - -  1.24  1.00  $444 
+Program Rebated Heat Pump 
+NMR MassCEC Analysis Post Retrofit MSHP $5,947 21.4  20.4  SEER2 11.40  11.00  HSPF 1.04  0.97  $6,029 
+NMR MassCEC Analysis Post Retrofit CHP $7,678 19.0  18.0  SEER 10.60  10.00  HSPF 1.04  0.97  $7,781 
+NMR MassCEC Analysis Post Retrofit GSHP $14,290 24.5  24.5  EER 4.30  4.30  COP 1.04  1.00  $14,876 
+Source: Guidehouse analysis 
+[[page 12]]
+ 
+Heat Pump Incremental Cost Research 
+ 
+  12 
+Table 3 shows the total install cost per ton for each HVAC equipment type used in the 
+analysis, adjusted for heating and cooling efficiency levels as well as updated for inflation to 
+2023 dollars. For this incremental cost study, existing equipment was assumed to have a 
+cost of zero dollars and is not included in this table. 
+Table 3: Equipment Cost Per Ton Summary 
+Initial Cost Source Equipment Type 
+Cooling 
+Efficiency Heating Efficiency Total Cost 
+Per Ton 
+(Inflation 
+Adjusted) Value Metric Value Metric 
+Baseline (Existing / New Unit)             
+RES23 Central AC 16 SEER - - $4,918 
+NMR MassCEC Analysis CHP 19 SEER 10.60 HSPF $7,294 
+RES19 Electric Radiant - - 1.00 COP $444 
+NMR MassCEC Analysis GSHP 25 EER 4.30 COP $14,238 
+NMR MassCEC Analysis MSHP 21 SEER 11.40 HSPF $5,443 
+RES19 Natural Gas Boiler - - 0.82 AFUE $1,201 
+RES19 Natural Gas Furnace - - 0.80 AFUE $1,064 
+RES19 Oil Boiler - - 0.84 AFUE $920 
+RES19 Oil Furnace - - 0.83 AFUE $934 
+RES19 Propane Boiler - - 0.82 AFUE $1,331 
+RES19 Propane Furnace - - 0.80 AFUE $924 
+RES23 Room AC Unit 10 EER - - $795 
+RES19 Wood Stove - - - - $444 
+Program Rebated Heat Pump        
+NMR MassCEC Analysis MSHP 21 SEER2 11.40 HSPF $6,029 
+NMR MassCEC Analysis CHP 19 SEER 10.60 HSPF $7,781 
+NMR MassCEC Analysis GSHP 25 EER 4.30 COP $14,876 
+*Cost Per Ton includes updates for 2023 dollars, and cost per unit efficiency regressions. 
+Source: Guidehouse analysis 
+1.5 Baseline Equipment Weights and Strata Mapping 
+This section provides the baseline heating and cooling weights for the Market Rate 
+Prospective and Alternative scenarios, as well as the Income Eligible scenario. Table 4, 
+Table 5, and Table 6 show the baseline heating weights for the Market Rate Prospective, 
+Market Rate Alternative, and Income Eligible scenarios, respectively. Table 7, Table 8, and 
+Table 9 show the respective cooling weights.  
+ 
+ 
+[[page 13]]
+ 
+Heat Pump Incremental Cost Research 
+ 
+  13 
+Table 4: Heating Equipment Types and Weights by Heat Pump Type and Pre-Existing Fuel Type - Market Rate Program Data 
+Designation Scenario 
+  
+Central Heat Pump Mini-Split Heat Pump Ground Source Heat Pump 
+Unit 
+Type 
+Baseline Heating 
+Equipment Type  
+Electric 
+(n=34) 
+Gas 
+(n=96) 
+Oil 
+(n=139) 
+Propane 
+(n=28) 
+Electric 
+(n=79) 
+Gas 
+(n=53) 
+Oil 
+(n=89) 
+Propane 
+(n=13) 
+Electric* Gas* Oil 
+(n=19) 
+Propane* 
+Existing 
+Unit 
+CHP 21% 1% 0% 0% 1% 0% 0% 0% 21% 0% 0% 0% 
+MSHP 0% 0% 0% 0% 3% 0% 0% 6% 0% 0% 0% 0% 
+GSHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+Electric baseboard 21% 0% 0% 0% 58% 2% 0% 3% 21% 0% 0% 0% 
+Electric furnace 3% 0% 0% 0% 1% 2% 0% 3% 3% 0% 0% 0% 
+Natural gas boiler 3% 17% 1% 0% 0% 49% 0% 0% 3% 5% 0% 0% 
+Natural gas furnace 0% 49% 1% 7% 3% 26% 0% 3% 0% 47% 0% 0% 
+Oil boiler 12% 0% 25% 0% 4% 2% 42% 0% 12% 0% 16% 0% 
+Oil furnace 12% 1% 48% 4% 3% 0% 44% 3% 12% 0% 37% 0% 
+Propane/LPG boiler 3% 0% 0% 7% 0% 0% 1% 23% 3% 0% 0% 11% 
+Propane/LPG furnace 0% 0% 1% 54% 3% 0% 0% 26% 0% 0% 0% 42% 
+Wood stove/fireplace 3% 1% 1% 0% 9% 0% 1% 9% 3% 0% 0% 0% 
+New 
+Unit 
+CHP 6% 5% 3% 7% 1% 2% 3% 0% 6% 32% 32% 32% 
+MSHP 6% 5% 6% 0% 1% 2% 0% 3% 6% 11% 11% 11% 
+GSHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+Electric baseboard 0% 0% 0% 0% 4% 2% 0% 0% 0% 0% 0% 0% 
+Natural gas boiler 0% 0% 1% 0% 1% 6% 0% 3% 0% 0% 0% 0% 
+Natural gas furnace 3% 21% 2% 0% 1% 8% 2% 3% 3% 5% 0% 0% 
+Oil boiler 0% 0% 3% 0% 0% 0% 2% 0% 0% 0% 0% 0% 
+Oil furnace 3% 0% 6% 0% 5% 0% 2% 0% 3% 0% 5% 0% 
+Propane/LPG boiler 3% 0% 1% 0% 1% 0% 0% 6% 3% 0% 0% 0% 
+Propane/LPG furnace 3% 0% 2% 21% 1% 0% 0% 11% 3% 0% 0% 5% 
+Wood stove/fireplace 0% 0% 0% 0% 0% 0% 2% 0% 0% 0% 0% 0% 
+ Total 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 
+*Due to low sample, baseline weights for GSHPs with pre-existing oil were assigned to the gas and propane groups, adjusted for proportions of boilers/furnaces. 
+Baseline weights for GSHP with pre-existing electric resistance are assumed to be the same as those for central HPs with pre-existing electric resistance.  
+Source: Evaluation team analysis 
+ 
+[[page 14]]
+Heat Pump Incremental Cost Research 
+ 
+  14 
+ 
+Table 5: Heating Equipment Types and Weights by Heat Pump Type and Pre-Existing Fuel Type - Market Rate Alternate 
+Scenario 
+  
+Central Heat Pump Mini-Split Heat Pump Ground Source Heat Pump 
+Unit 
+Type 
+Baseline Heating 
+Equipment Type  
+Electric 
+(n=34) 
+Gas 
+(n=96) 
+Oil 
+(n=139) 
+Propane 
+(n=28) 
+Electric 
+(n=79) 
+Gas 
+(n=53) 
+Oil 
+(n=89) 
+Propane 
+(n=13) 
+Electric* Gas* Oil 
+(n=19) 
+Propane* 
+Existing 
+Unit 
+CHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+MSHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+GSHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+Electric baseboard 30% 0% 0% 0% 62% 2% 0% 3% 30% 0% 0% 0% 
+Electric furnace 4% 0% 0% 0% 1% 2% 0% 3% 4% 0% 0% 0% 
+Natural gas boiler 4% 19% 1% 0% 0% 51% 0% 0% 4% 9% 0% 0% 
+Natural gas furnace 0% 55% 1% 8% 3% 28% 0% 3% 0% 82% 0% 0% 
+Oil boiler 17% 0% 28% 0% 4% 2% 43% 0% 17% 0% 27% 0% 
+Oil furnace 17% 1% 53% 4% 3% 0% 45% 3% 17% 0% 64% 0% 
+Propane/LPG boiler 4% 0% 0% 8% 0% 0% 1% 25% 4% 0% 0% 18% 
+Propane/LPG furnace 0% 0% 1% 58% 3% 0% 0% 28% 0% 0% 0% 73% 
+Woodstove, pellet 
+stove, or fireplace 4% 1% 1% 0% 10% 0% 1% 9% 4% 0% 0% 0% 
+New 
+Unit 
+CHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+MSHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+GSHP 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 
+Electric baseboard 0% 0% 0% 0% 4% 2% 0% 0% 0% 0% 0% 0% 
+Natural gas boiler 0% 0% 2% 0% 1% 6% 0% 3% 0% 0% 0% 0% 
+Natural gas furnace 4% 24% 2% 0% 1% 8% 2% 3% 4% 9% 0% 0% 
+Oil boiler 0% 0% 3% 0% 0% 0% 2% 0% 0% 0% 0% 0% 
+Oil furnace 4% 0% 6% 0% 5% 0% 2% 0% 4% 0% 9% 0% 
+Propane/LPG boiler 4% 0% 1% 0% 1% 0% 0% 6% 4% 0% 0% 0% 
+Propane/LPG furnace 4% 0% 2% 23% 1% 0% 0% 13% 4% 0% 0% 9% 
+Woodstove, pellet 
+stove, or fireplace 0% 0% 0% 0% 0% 0% 2% 0% 0% 0% 0% 0% 
+ Total 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 
+*Due to low sample, baseline weights for GSHPs with pre-existing oil were assigned to the gas and propane groups, adjusted for proportions of boilers/furnaces. 
+Baseline weights for GSHP with pre-existing electric resistance are assumed to be the same as those for central HPs with pre-existing electric resistance.  
+Source: Evaluation team analysis
+[[page 15]]
+ 
+Heat Pump Incremental Cost Research - DRAFT 
+ 
+  15 
+Table 6: Heating Equipment Types and Weights by Heat Pump Type and Pre-Existing Fuel Type – Income Eligible Scenario 
+  
+Central Heat Pump Mini-Split Heat Pump Ground Source Heat Pump 
+Unit 
+Type 
+Baseline Heating 
+Equipment Type  
+Electric 
+(n=34) 
+Gas 
+(n=96) 
+Oil 
+(n=139) 
+Propane 
+(n=28) 
+Electric 
+(n=79) 
+Gas 
+(n=53) 
+Oil 
+(n=89) 
+Propane 
+(n=13) 
+Electric 
+(n=40) 
+Gas* Oil 
+(n=19) 
+Propane* 
+Existing 
+Unit 
+CHP                         
+MSHP                         
+GSHP                         
+Electric baseboard 100%       100%       100%       
+Electric furnace                         
+Natural gas boiler           100%             
+Natural gas furnace   100%               100%     
+Oil boiler             100%           
+Oil furnace     100%               100%   
+Propane/LPG boiler               100%         
+Propane/LPG furnace       100%               100% 
+Woodstove, pellet 
+stove, or fireplace                         
+New 
+Unit 
+CHP                         
+MSHP                         
+GSHP                         
+Electric baseboard                         
+Natural gas boiler                         
+Natural gas furnace                         
+Oil boiler                         
+Oil furnace                         
+Propane/LPG boiler                         
+Propane/LPG furnace                         
+Woodstove, pellet 
+stove, or fireplace                         
+ Total                         
+Source: Evaluation team analysis 
+[[page 16]]
+ 
+Heat Pump Incremental Cost Research - DRAFT 
+ 
+  16 
+Table 7: Cooling Equipment Types and Weights by Heat Pump Type - Market Rate 
+Program Data Designation Scenario 
+Existing or 
+New Unit Baseline Cooling Equipment Type 
+Central Heat 
+Pump 
+(n=300) 
+Mini-Split 
+Heat Pump 
+(n=246) 
+Ground Source 
+Heat Pump 
+(n=62) 
+Existing 
+Unit 
+None 16% 52% 8% 
+Central air conditioning 37% 8% 31% 
+Central heat pump 2% 0% 2% 
+Mini-split heat pump 0% 2% 0% 
+Room, window, or through the wall air conditioning 1% 13% 2% 
+Ground-source heat pump 0% 0% 11% 
+New Unit 
+Central air conditioning 30% 10% 19% 
+Central heat pump 2% 0% 15% 
+Mini-split heat pump 6% 3% 7% 
+Room, window, or through the wall air conditioning 6% 13% 7% 
+Total  100% 100% 100% 
+Source: Evaluation team analysis 
+Table 8: Cooling Equipment Types and Weights by Heat Pump Type - Market Rate 
+Alternate Scenario 
+Existing or 
+New Unit Baseline Cooling Equipment Type 
+Central Heat 
+Pump 
+(n=300) 
+Mini-Split 
+Heat Pump 
+(n=246) 
+Ground Source 
+Heat Pump 
+(n=62) 
+Existing 
+Unit 
+None 16% 52% 8% 
+Central air conditioning 42% 9% 49% 
+Central heat pump 0% 0% 0% 
+Mini-split heat pump 0% 0% 0% 
+Room, window, or through the wall air conditioning 2% 14% 3% 
+Ground-source heat pump 0% 0% 0% 
+New Unit 
+Central air conditioning 34% 11% 31% 
+Central heat pump 0% 0% 0% 
+Mini-split heat pump 0% 0% 0% 
+Room, window, or through the wall air conditioning 7% 15% 10% 
+Total  100% 100% 100% 
+Source: Evaluation team analysis 
+ 
+[[page 17]]
+Heat Pump Incremental Cost Research 
+ 
+  17 
+ 
+Table 9: Cooling Equipment Types and Weights by Heat Pump Type - Income Eligible 
+Scenario 
+Existing or 
+New Unit Baseline Cooling Equipment Type 
+Central Heat 
+Pump 
+(n=300) 
+Mini-Split 
+Heat Pump 
+(n=246) 
+Ground Source 
+Heat Pump 
+(n=62) 
+Existing 
+Unit 
+None    
+Central air conditioning 20% 20% 20% 
+Central heat pump    
+Mini-split heat pump    
+Room, window, or through the wall air conditioning 80% 80% 80% 
+Ground-source heat pump    
+New Unit 
+Central air conditioning    
+Central heat pump    
+Mini-split heat pump    
+Room, window, or through the wall air conditioning    
+Total     
+Source: Evaluation team analysis 
+ 
+[[page 18]]
+ 
+Heat Pump Incremental Cost Research - DRAFT 
+ 
+  18 
+1.6 Incremental Cost Comparison 
+Guidehouse compared incremental costs for “Blended Baseline to Heat Pump – Program 
+Rebated” against the MA 2022-2024 Plan BCR Model measure inputs.7 Table 10 shows the 
+results of this comparison, using the Market Rate Program Data Designation Scenario. 
+GSHP measure incremental cost is significantly higher in comparison to the 2022-2024 BCR 
+model, likely due to the prior assumption not accounting for the full installation costs of 
+GSHPs. Most of the remaining measures have similar incremental costs compared to the 
+previous BCR assumption, likely because the previous BCR Model includes a deferred 
+replacement credit which accounts for existing equipment being replaced before end of 
+useful life.  
+Table 10: Incremental Cost Comparison to Previous BCR Study – Market Rate 
+Program Data Designation Scenario 
+ 
+Source: Guidehouse analysis 
+ 
+ 
+7 https://ma-eeac.org/wp-content/uploads/Exh-5-2022-2024-Plan-BC-Model-NG-Electric-4-1-22.xlsx 

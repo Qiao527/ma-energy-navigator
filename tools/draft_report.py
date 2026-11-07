@@ -61,7 +61,8 @@ def main(only: list[str], name: str) -> None:
                 label = x.get("id") or x.get("name") or (f"{x['before']} → {x['after']}" if "before" in x else "DEC municipalities")
                 out.append(f"### {label}")
                 out.append("")
-                for k in ("summary", "leaseCheck", "disclaimer", "note", "reason", "label", "window", "bySize", "limit", "condition"):
+                for k in ("summary", "leaseCheck", "disclaimer", "note", "reason", "label", "window", "bySize", "limit", "condition",
+                          "description", "unit", "value", "confidence", "sampleSize", "dataset"):
                     if isinstance(x, dict) and k in x:
                         v = cond(x[k]) if k == "condition" else json.dumps(x[k]) if not isinstance(x[k], str) else x[k]
                         out.append(f"- {k}: {v}")

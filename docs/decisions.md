@@ -2,6 +2,47 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Tasks 16 and 16b: where heating need and heat pump size come from)
+
+- **Technical:** `engine/src/quantities.ts` estimates per unit, from the most
+  specific source:
+  - heating need: the user's fuel records, else ResStock fuel × vintage, else ResStock
+    fuel only;
+  - heat pump size: the contractor's quoted tons, else ResStock;
+  - heat pump cost = tons × $/ton.
+  Weatherization and solar have no sourced cost, so they stay missing (percentage only).
+- **Technical:** units gain `fuelRecords` (`year` = the heating season starting
+  that year; several deliveries in a season are added up) and `heatPumpTonsQuoted`.
+  - Records in a unit that doesn't fit the fuel aren't used, so the estimate falls back to
+    ResStock. Nothing is guessed.
+  - Two or more seasons → medium confidence; one → low.
+  - The reason text always says that records include hot water if the same boiler heats
+    it.
+- **Technical:** boiler efficiency is the EEAC new-baseline AFUE (oil 0.84; gas
+  and propane 0.82), at `confidence: medium`, and the description says an older boiler is
+  probably less efficient.
+  - Why medium: the fuel-bill side doesn't depend on efficiency at all (load ÷ efficiency
+    gives back the fuel used). Only the heat pump's electricity does. Medium keeps two
+    seasons of records at medium, as decided for Story 1.
+- **Technical:** heat pump cost per ton is $3,694 / $5,664 / $7,634. The earlier
+  $3,860 / $5,830 / $7,800 mixed two groups of the EEAC study.
+- **Technical:** assumption files (`assumptions.json`,
+  `assumptions-resstock.json`) go through the same drafting workflow, quote check and
+  approval ledger as the rules.
+- **Technical:** ResStock groups need at least 30 samples. Electric resistance
+  has no ResStock group (ResStock's "Electricity" mixes heat pumps and baseboard); such
+  units need records.
+  - Rerun result: oil 22.8 / 35.8 / 50.8 MMBtu and 1.97 / 2.48 / 3.29 tons (n = 349), the
+    same as the first pass. Oil before 1950 has a mid of 38.3 (first pass 38.4; the
+    quantile method differs).
+- **ResStock license resolved:** CC-BY-4.0 (`citation.txt`).
+- **Technical:** solar yield and solar cost assumptions wait for Phase 3. Without
+  a per-address system size they produce no number.
+- **Technical:** Story 1 scenario inputs now carry two seasons of oil records
+  per floor (fictional numbers). Expected results didn't change, because scenarios use
+  fixed quantities. Once the assumption files are approved, the scenarios switch to
+  computed quantities, which changes dollar values and needs Qiao's re-approval.
+
 ## 2026-11-07 (Qiao's review of milestone 4, first round)
 
 - **Missed paperwork deadlines depend on whether the work is done.** Already installed →

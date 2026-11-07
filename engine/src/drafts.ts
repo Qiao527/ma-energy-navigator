@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { fileSha256, ruleFiles } from './approvals.js'
 import { loadRuleSet } from './load-rules.js'
 import { findDataProblems } from './provenance.js'
+import { AssumptionsSchema } from './quantities.js'
 import {
   CapRuleSchema, DecFileSchema, IncomeTableSchema, LegalConstraintSchema, OfferSchema, PredicateSchema, ProgramSchema, SequenceEdgeSchema,
 } from './rules-schema.js'
@@ -58,6 +59,8 @@ const SCHEMAS: Record<string, z.ZodType> = {
   'caps.json': z.array(CapRuleSchema),
   'sequence.json': z.array(SequenceEdgeSchema),
   'legal.json': z.array(LegalConstraintSchema),
+  'assumptions.json': AssumptionsSchema,
+  'assumptions-resstock.json': AssumptionsSchema,
 }
 const schemaFor = (file: string): z.ZodType => SCHEMAS[file] ?? z.array(OfferSchema)
 

@@ -44,7 +44,7 @@ Phase 1 runs in milestones. The lead stops after each one and reports three thin
 | **M1 — core decisions** ✅ | 1–7 (+ working-assumption fix) | How three-valued conditions, roles and all-units participation decide |
 | **M2 — money, from the landlord's side** ✅ | 8, 9, 15, **15b** | How money is computed, especially the payer split and "is it worth it" |
 | **M3 — offers and plan** ✅ | 10, 11, 12 | How an offer's status, next steps and the shown list are decided |
-| **M4 — rules data and real quantities** | **12b**, 13, 14, 16, **16b** | The drafting workflow, the standard scenarios, and where heating need and heat pump size come from |
+| **M4 — rules data and real quantities** (12b, 14, 16, 16b ✅; 13 drafted, waiting for Qiao's approval) | **12b**, 13, 14, 16, **16b** | The drafting workflow, the standard scenarios, and where heating need and heat pump size come from |
 | **M5 — wrap-up** | 17, 18 | Final verification and review |
 
 Task numbers are kept stable, so tasks run in milestone order, not number order. Each milestone only uses what earlier milestones built. In M2, for example, Task 15 needs Tasks 2, 3 and 9, and Task 15b needs Task 15.

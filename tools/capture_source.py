@@ -32,7 +32,14 @@ def pdf_to_text(data: bytes) -> str:
     return "\n".join(f"[[page {i + 1}]]\n" + (page.extract_text() or "") for i, page in enumerate(reader.pages))
 
 
+TEXT_SUFFIXES = (".tsv", ".txt", ".md", ".csv")
+
+
 def fetch(url: str) -> str:
+    if url.lower().endswith(TEXT_SUFFIXES):  # plain data files (e.g. on S3): no browser needed
+        import urllib.request
+        with urllib.request.urlopen(url, timeout=60) as resp:
+            return resp.read().decode("utf-8")
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
         kwargs = {"headless": True}

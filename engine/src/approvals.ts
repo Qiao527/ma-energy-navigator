@@ -3,7 +3,10 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 /** Rule files at the top of a rules folder; offers live in offers/*.json. */
-export const RULE_FILES = ['programs.json', 'predicates.json', 'income-tables.json', 'dec.json', 'caps.json', 'sequence.json', 'legal.json'] as const
+export const RULE_FILES = [
+  'programs.json', 'predicates.json', 'income-tables.json', 'dec.json', 'caps.json', 'sequence.json', 'legal.json',
+  'assumptions.json', 'assumptions-resstock.json',
+] as const
 
 /** Every rule file present in a rules folder, as paths relative to it (drafts/ and sources/ are never included). */
 export function ruleFiles(dir: string): string[] {

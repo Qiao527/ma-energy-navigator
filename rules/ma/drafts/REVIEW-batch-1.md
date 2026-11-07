@@ -1,6 +1,6 @@
 # Draft rules for review — batch-1
 
-Automatic check: **passed** on 2026-11-07 (11 files). Every quote below was found verbatim in the saved snapshot in `rules/ma/sources/`.
+Automatic check: **passed** on 2026-11-07 (13 files). Every quote below was found verbatim in the saved snapshot in `rules/ma/sources/`.
 
 Approve with `python3 tools/approve_rules.py --by Qiao FILE ...` (files relative to `rules/ma/drafts/`).
 
@@ -216,6 +216,361 @@ sha256 `f2df4fa0e198…`
     — https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download (410.210, verified 2026-11-06)
   - > then such electricity or gas may be metered through meters which serve more than one dwelling unit.
     — https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download (410.200(B), verified 2026-11-06)
+
+## `assumptions.json`
+
+sha256 `26d671074d78…`
+
+### heat_pump_cost_per_ton
+
+- description: Installed cost of a ductless mini-split heat pump per ton in Massachusetts (Mass Save projects with only heat pump work, 2021–22, January 2024 dollars); range = mean ± 1 standard deviation
+- unit: USD per ton
+- value: {"low": 3694, "mid": 5664, "high": 7634}
+- confidence: medium
+- sampleSize: 376
+- sources:
+  - > Ductless MSHP only Multiple Measures n 376 31 Mean $5,664 $6,546 Standard Deviation $1,970 $3,104
+    — https://ma-eeac.org/wp-content/uploads/MA23X14-B-RHPINV-Residential-Heat-Pump-Invoice-Cost-Study-Web.pdf (Table 6: Ductless MSHP – Project Scope Cost Dependency (Jan. 2024$/ton), verified 2026-11-07)
+
+### oil_boiler_replacement_cost_per_ton
+
+- description: Cost of a new baseline oil boiler per ton (inflation adjusted), for the 'boiler needs replacing anyway' comparison; your own quote replaces it
+- unit: USD per ton
+- value: {"low": 920, "mid": 920, "high": 920}
+- confidence: low
+- sources:
+  - > RES19 Oil Boiler - - 0.84 AFUE $920
+    — https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf (Table 3: Equipment Cost Per Ton Summary, verified 2026-11-07)
+
+### heating_efficiency.oil
+
+- description: Efficiency of a new baseline oil boiler (AFUE 0.84); an older boiler is probably less efficient
+- unit: fraction
+- value: {"low": 0.84, "mid": 0.84, "high": 0.84}
+- confidence: medium
+- sources:
+  - > RES19 Oil Boiler - - 0.84 AFUE $920
+    — https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf (Table 3: Equipment Cost Per Ton Summary, verified 2026-11-07)
+
+### heating_efficiency.natural_gas
+
+- description: Efficiency of a new baseline gas boiler (AFUE 0.82); an older boiler is probably less efficient
+- unit: fraction
+- value: {"low": 0.82, "mid": 0.82, "high": 0.82}
+- confidence: medium
+- sources:
+  - > RES19 Natural Gas Boiler - - 0.82 AFUE $1,201
+    — https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf (Table 3: Equipment Cost Per Ton Summary, verified 2026-11-07)
+
+### heating_efficiency.propane
+
+- description: Efficiency of a new baseline propane boiler (AFUE 0.82); an older boiler is probably less efficient
+- unit: fraction
+- value: {"low": 0.82, "mid": 0.82, "high": 0.82}
+- confidence: medium
+- sources:
+  - > RES19 Propane Boiler - - 0.82 AFUE $1,331
+    — https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf (Table 3: Equipment Cost Per Ton Summary, verified 2026-11-07)
+
+### heat_content_mmbtu_per_unit.oil
+
+- description: Heat content of heating oil: 138,500 Btu per gallon
+- unit: MMBtu per gallon
+- value: {"low": 0.1385, "mid": 0.1385, "high": 0.1385}
+- confidence: high
+- sources:
+  - > Heating oil 1 gallon=138,500 Btu
+    — https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php (Sample Btu conversion factors, verified 2026-11-07)
+
+### heat_content_mmbtu_per_unit.propane
+
+- description: Heat content of propane: 91,452 Btu per gallon
+- unit: MMBtu per gallon
+- value: {"low": 0.091452, "mid": 0.091452, "high": 0.091452}
+- confidence: high
+- sources:
+  - > Propane 1 gallon=91,452 Btu
+    — https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php (Sample Btu conversion factors, verified 2026-11-07)
+
+### heat_content_mmbtu_per_unit.natural_gas
+
+- description: Heat content of natural gas: 100,000 Btu per therm
+- unit: MMBtu per therm
+- value: {"low": 0.1, "mid": 0.1, "high": 0.1}
+- confidence: high
+- sources:
+  - > 1 therm=100,000 Btu
+    — https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php (Sample Btu conversion factors, verified 2026-11-07)
+
+### heat_content_mmbtu_per_unit.electric_resistance
+
+- description: Electricity: 3,412 Btu per kilowatthour
+- unit: MMBtu per kWh
+- value: {"low": 0.003412, "mid": 0.003412, "high": 0.003412}
+- confidence: high
+- sources:
+  - > Electricity 1 kilowatthour=3,412 Btu
+    — https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php (Sample Btu conversion factors, verified 2026-11-07)
+
+## `assumptions-resstock.json`
+
+sha256 `ec2277dbb9eb…`
+
+### annual_heat_load_mmbtu.natural_gas
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 21.3, "mid": 33.4, "high": 50.0}
+- confidence: low
+- sampleSize: 1681
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.natural_gas
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 1.74, "mid": 2.43, "high": 3.25}
+- confidence: low
+- sampleSize: 1681
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.natural_gas.1950_1999
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 16.0, "mid": 24.0, "high": 36.2}
+- confidence: low
+- sampleSize: 440
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.natural_gas.1950_1999
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 1.47, "mid": 1.94, "high": 2.65}
+- confidence: low
+- sampleSize: 440
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.natural_gas.2000_plus
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat, built 2000 or later; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 6.1, "mid": 12.4, "high": 21.4}
+- confidence: low
+- sampleSize: 74
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.natural_gas.2000_plus
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat, built 2000 or later; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 0.79, "mid": 1.15, "high": 1.62}
+- confidence: low
+- sampleSize: 74
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.natural_gas.pre1950
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 26.3, "mid": 39.0, "high": 55.3}
+- confidence: low
+- sampleSize: 1167
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.natural_gas.pre1950
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 2.05, "mid": 2.68, "high": 3.52}
+- confidence: low
+- sampleSize: 1167
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.oil
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 22.8, "mid": 35.8, "high": 50.8}
+- confidence: low
+- sampleSize: 349
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.oil
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 1.97, "mid": 2.48, "high": 3.29}
+- confidence: low
+- sampleSize: 349
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.oil.1950_1999
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (oil heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 15.6, "mid": 23.9, "high": 35.8}
+- confidence: low
+- sampleSize: 71
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.oil.1950_1999
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (oil heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 1.33, "mid": 1.89, "high": 2.45}
+- confidence: low
+- sampleSize: 71
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.oil.pre1950
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (oil heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 27.6, "mid": 38.3, "high": 51.8}
+- confidence: low
+- sampleSize: 274
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.oil.pre1950
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (oil heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 2.08, "mid": 2.61, "high": 3.46}
+- confidence: low
+- sampleSize: 274
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### annual_heat_load_mmbtu.propane
+
+- description: Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (propane heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: MMBtu per year
+- value: {"low": 21.4, "mid": 31.0, "high": 53.3}
+- confidence: low
+- sampleSize: 36
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Total energy delivered by heating system includes HVAC distribution losses.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.load.heating.energy_delivered..kbtu, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### heat_pump_tons.propane
+
+- description: Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (propane heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: tons
+- value: {"low": 1.64, "mid": 2.1, "high": 3.07}
+- confidence: low
+- sampleSize: 36
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Size, Heating System Primary
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
 
 ## `offers/assessment.json`
 

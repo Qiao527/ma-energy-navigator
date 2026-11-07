@@ -11,6 +11,8 @@ export function unit(id: string, over: Partial<Unit> = {}): Unit {
     hasResidentialHeatingMeter: null,
     participating: null,
     occupiedAllWinter: null,
+    fuelRecords: null,
+    heatPumpTonsQuoted: null,
     ...over,
   }
 }
