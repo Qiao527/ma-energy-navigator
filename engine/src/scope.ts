@@ -10,6 +10,12 @@ export interface DecEntry {
   narrowedFor: string[]
 }
 
+/** A sourced, reusable definition. A working assumption is used only for hints, never for conclusions. */
+export interface NamedPredicate {
+  condition: Condition
+  workingAssumption: boolean
+}
+
 export interface Derived {
   isDec: boolean | null
   renterShare: number | null
@@ -24,7 +30,7 @@ export interface Scope {
   /** Income limit by household size (index = size − 1), keyed by table id. */
   incomeTables: Readonly<Record<string, readonly number[]>>
   /** Named predicates from rules data, keyed by id. */
-  predicates: Readonly<Record<string, Condition>>
+  predicates: Readonly<Record<string, NamedPredicate>>
 }
 
 /** The closed list of facts rules may use. Renaming one is a breaking change (schema §1). */

@@ -46,9 +46,19 @@ describe('combinators (Kleene logic)', () => {
 })
 
 describe('named predicates', () => {
-  test('ref evaluates the predicate', () => {
-    const s = scope(renter().input, { predicates: { is_renter: { fact: 'unit.occupancy', op: 'eq', value: 'renter' } } })
+  const isRenter: Condition = { fact: 'unit.occupancy', op: 'eq', value: 'renter' }
+  test('a confirmed predicate decides like any condition', () => {
+    const s = scope(renter().input, { predicates: { is_renter: { condition: isRenter, workingAssumption: false } } })
     expect(evaluate({ ref: 'is_renter' }, s).value).toBe('yes')
+  })
+  test('a working assumption never decides: yes and no both become unknown, naming the assumption', () => {
+    const s = scope(renter().input, { predicates: { is_renter: { condition: isRenter, workingAssumption: true } } })
+    expect(evaluate({ ref: 'is_renter' }, s)).toEqual({ value: 'unknown', missing: [], assumptions: ['is_renter'] })
+    expect(evaluate({ not: { ref: 'is_renter' } }, s).value).toBe('unknown')
+  })
+  test('a definite no elsewhere still decides an all, even next to a working assumption', () => {
+    const s = scope(renter().input, { predicates: { is_renter: { condition: isRenter, workingAssumption: true } } })
+    expect(evaluate({ all: [{ ref: 'is_renter' }, { fact: 'unit.occupancy', op: 'eq', value: 'owner' }] }, s).value).toBe('no')
   })
   test('unknown ref throws', () => {
     expect(() => evaluate({ ref: 'nope' }, renter())).toThrow(/unknown predicate/)

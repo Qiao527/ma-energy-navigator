@@ -2,11 +2,13 @@ import fc from 'fast-check'
 import { describe, expect, test } from 'vitest'
 import { evaluate, type Condition } from '../src/condition.js'
 import { InputSchema, type Input } from '../src/facts.js'
-import { derive, type DecEntry, type Scope } from '../src/scope.js'
+import { derive, type DecEntry, type NamedPredicate, type Scope } from '../src/scope.js'
 
 const DEC: DecEntry[] = [{ name: 'Boston', narrowedFor: ['unitil'] }]
 const TABLES = { t: [50_000, 70_000, 90_000] }
-const PREDICATES: Record<string, Condition> = { p: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true } }
+const METER: Condition = { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }
+const PREDICATES: Record<string, NamedPredicate> = { p: { condition: METER, workingAssumption: false } }
+const AS_ASSUMPTION: Record<string, NamedPredicate> = { p: { condition: METER, workingAssumption: true } }
 
 const leafArb = fc.constantFrom<Condition>(
   { fact: 'unit.occupancy', op: 'eq', value: 'renter' },
@@ -101,6 +103,13 @@ describe('condition properties', () => {
     fc.assert(fc.property(cond, fullInput, fc.array(fc.boolean(), { minLength: MASK_BITS, maxLength: MASK_BITS }), (c, full, mask) => {
       const partial = evaluate(c, scopeOf(blank(full, mask)))
       if (partial.value !== 'unknown') expect(evaluate(c, scopeOf(full)).value).toBe(partial.value)
+    }))
+  })
+
+  test('turning a definition into a working assumption can only remove conclusions, never change one', () => {
+    fc.assert(fc.property(cond, fullInput, (c, i) => {
+      const assumed = evaluate(c, { ...scopeOf(i), predicates: AS_ASSUMPTION })
+      if (assumed.value !== 'unknown') expect(evaluate(c, scopeOf(i)).value).toBe(assumed.value)
     }))
   })
 

@@ -21,11 +21,21 @@ export interface EvalResult {
   value: Tri
   /** Facts whose absence makes the value unknown. Empty unless value is 'unknown'. */
   missing: string[]
+  /** Working-assumption predicates that kept the value unknown. Present only when non-empty. */
+  assumptions?: string[]
 }
+
+/** strict: working assumptions never decide anything. assumed: use them (only for hints and ordering). */
+type Mode = 'strict' | 'assumed'
 
 const YES: EvalResult = { value: 'yes', missing: [] }
 const NO: EvalResult = { value: 'no', missing: [] }
-const unknown = (missing: string[]): EvalResult => ({ value: 'unknown', missing: [...new Set(missing)].sort() })
+function unknown(missing: string[], assumptions: string[] = []): EvalResult {
+  const r: EvalResult = { value: 'unknown', missing: [...new Set(missing)].sort() }
+  if (assumptions.length > 0) r.assumptions = [...new Set(assumptions)].sort()
+  return r
+}
+const assumptionsOf = (rs: EvalResult[]): string[] => rs.flatMap(r => r.assumptions ?? [])
 
 function holds(c: Leaf, v: Scalar): boolean {
   switch (c.op) {
@@ -47,13 +57,13 @@ function leaf(c: Leaf, s: Scope): EvalResult {
 function combineAll(rs: EvalResult[]): EvalResult {
   if (rs.some(r => r.value === 'no')) return NO
   const unknowns = rs.filter(r => r.value === 'unknown')
-  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing)) : YES
+  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing), assumptionsOf(unknowns)) : YES
 }
 
 function combineAny(rs: EvalResult[]): EvalResult {
   if (rs.some(r => r.value === 'yes')) return YES
   const unknowns = rs.filter(r => r.value === 'unknown')
-  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing)) : NO
+  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing), assumptionsOf(unknowns)) : NO
 }
 
 function income(s: Scope, tableId: string, mode: 'atMost' | 'above'): EvalResult {
@@ -75,42 +85,57 @@ function income(s: Scope, tableId: string, mode: 'atMost' | 'above'): EvalResult
 }
 
 export interface Participation {
-  /** Eligible units that have said no: the "units still needed". */
+  /** Units that are certainly eligible and have said no: the definite "units still needed". */
   needed: string[]
-  /** Units whose eligibility or answer is not known yet. */
+  /**
+   * Units that said no and count as eligible only under a working assumption. A hint, never a
+   * conclusion (e.g. a metered condo unit before Mass Save defines "eligible unit").
+   */
+  likelyNeeded: string[]
+  /** Units whose eligibility or answer isn't settled, including units the working assumption would leave out. */
   undecided: string[]
   missing: string[]
+  /** Working assumptions the count depends on. */
+  assumptions: string[]
 }
 
 /** Per-unit view of an all-units condition (research §2.3). Used for the "N more units needed" count. */
 export function participation(spec: { eligible: Condition; require: Condition }, s: Scope): Participation {
-  const out: Participation = { needed: [], undecided: [], missing: [] }
+  const out: Participation = { needed: [], likelyNeeded: [], undecided: [], missing: [], assumptions: [] }
   for (const unit of s.input.building.units) {
     const us: Scope = { ...s, unit }
     const e = evaluate(spec.eligible, us)
     if (e.value === 'no') continue
     const r = evaluate(spec.require, us)
     if (r.value === 'yes') continue
-    if (e.value === 'yes' && r.value === 'no') out.needed.push(unit.id)
+    out.assumptions.push(...(e.assumptions ?? []))
+    if (e.value === 'yes' && r.value === 'no') {
+      out.needed.push(unit.id)
+      continue
+    }
+    const assumed = e.value === 'unknown' && e.assumptions !== undefined ? evaluateIn(spec.eligible, us, 'assumed').value : null
+    if (assumed === 'yes' && r.value === 'no') out.likelyNeeded.push(unit.id)
     else {
       out.undecided.push(unit.id)
       out.missing.push(...e.missing, ...r.missing)
     }
   }
+  out.missing = [...new Set(out.missing)].sort()
+  out.assumptions = [...new Set(out.assumptions)].sort()
   return out
 }
 
 function allUnits(spec: { eligible: Condition; require: Condition }, s: Scope): EvalResult {
   const p = participation(spec, s)
   if (p.needed.length > 0) return NO
-  return p.undecided.length > 0 ? unknown(p.missing) : YES
+  return p.likelyNeeded.length > 0 || p.undecided.length > 0 ? unknown(p.missing, p.assumptions) : YES
 }
 
-export function evaluate(c: Condition, s: Scope): EvalResult {
-  if ('all' in c) return combineAll(c.all.map(x => evaluate(x, s)))
-  if ('any' in c) return combineAny(c.any.map(x => evaluate(x, s)))
+function evaluateIn(c: Condition, s: Scope, mode: Mode): EvalResult {
+  if ('all' in c) return combineAll(c.all.map(x => evaluateIn(x, s, mode)))
+  if ('any' in c) return combineAny(c.any.map(x => evaluateIn(x, s, mode)))
   if ('not' in c) {
-    const r = evaluate(c.not, s)
+    const r = evaluateIn(c.not, s, mode)
     if (r.value === 'unknown') return r
     return r.value === 'yes' ? NO : YES
   }
@@ -120,7 +145,15 @@ export function evaluate(c: Condition, s: Scope): EvalResult {
   if ('ref' in c) {
     const p = s.predicates[c.ref]
     if (p === undefined) throw new Error(`unknown predicate: ${c.ref}`)
-    return evaluate(p, s)
+    const r = evaluateIn(p.condition, s, mode)
+    if (!p.workingAssumption || mode === 'assumed') return r
+    // A working assumption can't produce a definite answer (Qiao, 2026-11-06).
+    return unknown(r.value === 'unknown' ? r.missing : [], [...(r.assumptions ?? []), c.ref])
   }
   return allUnits(c.allUnits, s)
+}
+
+/** Three-valued evaluation. Working-assumption predicates never decide the result. */
+export function evaluate(c: Condition, s: Scope): EvalResult {
+  return evaluateIn(c, s, 'strict')
 }
