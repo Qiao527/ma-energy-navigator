@@ -6,7 +6,7 @@ import type { Quantities } from './benefit.js'
 import { combine, estimate, type Estimate } from './estimate.js'
 import type { Fuel, Input } from './facts.js'
 import type { QuantitiesFor } from './offers.js'
-import { mul, point, range } from './range.js'
+import { complement, mul, point, range } from './range.js'
 import { SourceSchema } from './rules-schema.js'
 
 /** A sourced number the engine uses (principle 3). No source → it doesn't exist; the engine shows no dollar figure. */
@@ -62,8 +62,9 @@ function find(list: readonly Assumption[], id: string): Estimate | null {
  * Heat delivered per season from the user's fuel records: season totals (min / mean / max) × heat content × system
  * efficiency. Two or more seasons → medium, one → low (capped by the inputs' confidence). Records in a unit that
  * doesn't fit the fuel, or a fuel without sourced heat content and efficiency, give null.
+ * If the same boiler heats the hot water, the records include it: the sourced hot-water share is taken out (F2).
  */
-export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly Assumption[]): Estimate | null {
+export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly Assumption[], hotWaterFromBoiler: boolean | null = null): Estimate | null {
   const unit = RECORD_UNIT[fuel]
   if (unit === undefined || records.length === 0 || records.some(r => r.unit !== unit)) return null
   const heatContent = find(list, `heat_content_mmbtu_per_unit.${fuel}`)
@@ -79,8 +80,17 @@ export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly
     seasons >= 2 ? 'medium' : 'low',
     `from your fuel records: ${seasons} heating season${seasons === 1 ? '' : 's'}`,
   )
-  return combine(mul(mul(fuelUse.range, heatContent.range), efficiency.range), [fuelUse, heatContent, efficiency],
-    'If the same boiler also heats your hot water, these records include it, so the heating need may be overstated.')
+  const inputs = [fuelUse, heatContent, efficiency]
+  const all = mul(mul(fuelUse.range, heatContent.range), efficiency.range)
+  if (hotWaterFromBoiler === false) return combine(all, inputs)
+  if (hotWaterFromBoiler === null) {
+    return combine(all, inputs, 'If the same boiler also heats your hot water, these records include it, so the heating need may be overstated.')
+  }
+  const share = find(list, `hot_water_share_of_fuel.${fuel}`)
+  if (share === null) {
+    return { ...combine(all, inputs, `Your records include hot water, but there is no sourced hot-water share for ${fuel}, so the heating need may be overstated.`), confidence: 'low' }
+  }
+  return combine(mul(all, complement(share.range)), [...inputs, share], 'Your records include hot water from the same boiler, so the typical hot-water share was taken out.')
 }
 
 const RESSTOCK_FUEL: Partial<Record<Fuel, string>> = { oil: 'oil', natural_gas: 'natural_gas', propane: 'propane' }
@@ -102,7 +112,7 @@ export function quantitiesFor(input: Input, list: readonly Assumption[]): Quanti
   return unitId => {
     const u = input.building.units.find(x => x.id === unitId)
     if (u === undefined) return { cost: {}, heatPumpTons: null, solarKwhPerYear: null, communitySolarCreditsPerYear: null, heatLoadMMBtu: null }
-    const fromRecords = u.fuelRecords !== null && u.heatingFuel !== null ? heatLoadFromRecords(u.fuelRecords, u.heatingFuel, list) : null
+    const fromRecords = u.fuelRecords !== null && u.heatingFuel !== null ? heatLoadFromRecords(u.fuelRecords, u.heatingFuel, list, u.hotWaterFromBoiler) : null
     const tons = u.heatPumpTonsQuoted !== null
       ? estimate(point(u.heatPumpTonsQuoted), 'medium', "from the contractor's quote")
       : stock(list, 'heat_pump_tons', u.heatingFuel, band)

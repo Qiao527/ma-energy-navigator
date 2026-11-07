@@ -2,6 +2,33 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (F2: hot water from the boiler)
+
+- **Technical:** the hot-water share comes from ResStock 2025.1 MA, the same file as Task 16b. It uses
+  units in 2–4 unit buildings whose water heater burns the heating fuel. Share = hot-water fuel ÷ (heating + hot-water
+  fuel), weighted p25 / p50 / p75, with at least 30 samples, at confidence low.
+  - Oil: 0.145 / 0.182 / 0.272 (n = 157). Gas: 0.142 / 0.205 / 0.297 (n = 1,504). Propane (n = 20) is left out, so
+    propane records stay unadjusted at confidence low, with the reason.
+  - Why not EIA RECS: RECS publishes regional end-use totals, not Massachusetts 2–4 unit homes. ResStock is
+    already in the approved-source pipeline (license CC-BY-4.0).
+- **Technical:** the boiler's fixed cost is the DOER consumer tip sheet (2017): an annual oil burner
+  tune-up "approximately $120-150". Recorded as `boiler_annual_service_cost.oil`, 120 / 135 / 150 USD per year,
+  confidence low (2017 dollars, tune-up only). Gas and propane have no source, so they get no number; the view says
+  why.
+- **Technical:** units gain `hotWaterFromBoiler` and `hotWaterAfter`.
+  - `heatLoadFromRecords` takes the share out only when the answer is yes. Unanswered keeps the
+    "may be overstated" note.
+  - `navigate` asks the first question for units with a fuel-burning heating system or fuel records. There is no
+    boiler fact, so this stands in for "has a boiler". It asks the second question after a yes.
+- **Technical:** landlord view `hotWater`:
+  - `boiler` → the unit is listed in `boilerKept` with the hot-water fuel cost and fixed cost that remain. Totals
+    don't change: the bill change covers space heating only, and the fixed cost is paid before and after.
+  - an electric water heater → its bill changes are added to the unit. Its meter defaults to the heat pump's
+    meter. If the landlord paid the boiler fuel and a tenant pays that meter, its electricity is a shifted cost,
+    with the same 105 CMR 410 note and fair options (410.210 names oil "for heating and/or hot water").
+- **Scenarios:** all 10 baselines were re-recorded. The only change is the new `unit.hotWaterFromBoiler`
+  questions; no status, amount or step changed. Approvals were cleared and wait for Qiao.
+
 ## 2026-11-07 (Qiao's review of milestone 4, second round)
 
 - **Batch 1 rules: Qiao reviews first, then approves** with `tools/approve_rules.py`.

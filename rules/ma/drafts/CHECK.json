@@ -33,11 +33,11 @@
     },
     {
       "file": "assumptions.json",
-      "sha256": "26d671074d7820b91c7ca8450b4b91bd5b55a08595133acfed49e42b166f2c5a"
+      "sha256": "f8335eaacbdaa92793756389d6d4a76b3762d6e73f004c529065463b65a949ab"
     },
     {
       "file": "assumptions-resstock.json",
-      "sha256": "ec2277dbb9ebdf236a87fb2ed3eb07ef86b19868801a2646eb5b6198e224d597"
+      "sha256": "92abf36c7affb89d97820ddab5037254c544c7ee5677e2639acd88e25f60cdc5"
     },
     {
       "file": "offers/assessment.json",

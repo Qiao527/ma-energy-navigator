@@ -133,3 +133,43 @@ describe('landlordView: "the boiler needs replacing anyway" baseline', () => {
     expect(withBaseline.paybackYears?.range.mid).toBeLessThan(without.paybackYears?.range.mid ?? 0)
   })
 })
+
+describe('landlordView: hot water from the boiler (F2, Qiao 2026-11-07)', () => {
+  // The water heater switch: the hot-water oil goes, a water heater's electricity comes.
+  const hw = heatPumpSwitch({
+    load: e(8, 10, 12), fuelEfficiency: e(0.8, 0.8, 0.8), fuelPricePerMMBtu: e(30, 30, 30),
+    seasonalCop: e(3, 3, 3), electricityPricePerKwh: e(0.3, 0.3, 0.3),
+  })
+  const add = (a: { range: { mid: number } } | null | undefined, b: { range: { mid: number } }) => (a?.range.mid ?? NaN) + b.range.mid
+  const fixed = e(120, 135, 150)
+  test('the boiler stays for hot water: totals unchanged, the kept oil and the boiler’s fixed cost are listed', () => {
+    const units = story1().units.map(u => ({ ...u, hotWater: { after: 'boiler' as const, fuelCostKept: e(200, 300, 400), fixedCost: u.unitId === '1' ? fixed : null } }))
+    const v = landlordView(story1({ units }))
+    const base = landlordView(story1())
+    expect(v.landlordAnnual).toEqual(base.landlordAnnual)
+    expect(v.realSavings).toEqual(base.realSavings)
+    expect(v.boilerKept).toEqual([
+      { unitId: '1', fuelCostKept: e(200, 300, 400), fixedCost: fixed, fixedCostReason: null },
+      { unitId: '2', fuelCostKept: e(200, 300, 400), fixedCost: null, fixedCostReason: 'No sourced annual service cost for this boiler.' },
+      { unitId: '3', fuelCostKept: e(200, 300, 400), fixedCost: null, fixedCostReason: 'No sourced annual service cost for this boiler.' },
+    ])
+    expect(base.boilerKept).toEqual([])
+  })
+  test('an electric water heater on the tenant’s meter: its electricity is a shifted cost too, and the payer split follows', () => {
+    const units = story1().units.map(u => ({ ...u, hotWater: { after: 'heat_pump_water_heater' as const, bills: hw } }))
+    const v = landlordView(story1({ units }))
+    expect(v.realSavings?.range.mid).toBeCloseTo(3 * (sw.net.range.mid + hw.net.range.mid))
+    expect(v.shiftedToTenants.map(s => s.unitId)).toEqual(['2', '3'])
+    expect(v.shiftedToTenants[0]?.annual.range.mid).toBeCloseTo(sw.electricBill.range.mid + hw.electricBill.range.mid)
+    expect(v.rentals[0]?.landlord?.range.mid).toBeCloseTo(add(sw.fuelBill, hw.fuelBill))
+    expect(v.rentals[0]?.tenant?.range.mid).toBeCloseTo(add(sw.electricBill, hw.electricBill))
+    expect(v.ownUnit?.range.mid).toBeCloseTo(add(sw.net, hw.net))
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo((v.realSavings?.range.mid ?? NaN) - (v.shiftedTotal?.range.mid ?? NaN))
+  })
+  test('a water heater on an owner-paid meter: only the heat pump’s electricity shifts', () => {
+    const units = story1().units.map(u => ({ ...u, hotWater: { after: 'electric_resistance' as const, bills: hw, meterPaidBy: 'owner' as const } }))
+    const v = landlordView(story1({ units }))
+    expect(v.shiftedToTenants[0]?.annual.range.mid).toBeCloseTo(sw.electricBill.range.mid)
+    expect(v.rentals[0]?.landlord?.range.mid).toBeCloseTo(add(sw.fuelBill, hw.net))
+  })
+})

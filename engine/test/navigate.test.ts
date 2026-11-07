@@ -81,3 +81,23 @@ describe('navigate: only ask what is actually missing', () => {
     expect(ask({ participating: null, hasResidentialHeatingMeter: true })).toContainEqual({ fact: 'unit.participating', unitId: '2', about: 'other_unit' })
   })
 })
+
+describe('navigate: hot water questions (F2, Qiao 2026-11-07)', () => {
+  const ask = (units: ReturnType<typeof unit>[]) =>
+    navigate(input({ userUnitId: '1', building: { units } }), rules, { asOf: '2026-11-15', installDate: null }, () => NO_QUANTITIES)
+      .questions.filter(q => q.fact.startsWith('unit.hotWater'))
+  test('a unit with a fuel-burning system or fuel records is asked whether the boiler heats its hot water', () => {
+    expect(ask([unit('1', { heatingFuel: 'oil' }), unit('2', { fuelRecords: [{ year: 2024, quantity: 400, unit: 'gallons' }] })])).toEqual([
+      { fact: 'unit.hotWaterFromBoiler', unitId: '1', about: 'own_unit' },
+      { fact: 'unit.hotWaterFromBoiler', unitId: '2', about: 'other_unit' },
+    ])
+  })
+  test('no boiler fuel and no records → not asked', () => {
+    expect(ask([unit('1', { heatingFuel: 'electric_resistance' }), unit('2')])).toEqual([])
+  })
+  test('yes → ask what heats the water after the heat pump; both answered → nothing asked', () => {
+    expect(ask([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: true })])).toEqual([{ fact: 'unit.hotWaterAfter', unitId: '1', about: 'own_unit' }])
+    expect(ask([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: true, hotWaterAfter: 'boiler' })])).toEqual([])
+    expect(ask([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: false })])).toEqual([])
+  })
+})

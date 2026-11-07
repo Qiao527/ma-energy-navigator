@@ -13,6 +13,8 @@ export function unit(id: string, over: Partial<Unit> = {}): Unit {
     occupiedAllWinter: null,
     fuelRecords: null,
     heatPumpTonsQuoted: null,
+    hotWaterFromBoiler: null,
+    hotWaterAfter: null,
     ...over,
   }
 }

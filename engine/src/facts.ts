@@ -13,6 +13,9 @@ export type Payer = z.infer<typeof Payer>
 export const ElectricUtility = z.enum(['eversource', 'national_grid', 'unitil', 'cape_light_compact', 'municipal'])
 export const GasUtility = z.enum(['eversource', 'national_grid', 'unitil', 'liberty', 'berkshire_gas', 'municipal', 'none'])
 
+export const HotWaterAfter = z.enum(['boiler', 'electric_resistance', 'heat_pump_water_heater'])
+export type HotWaterAfter = z.infer<typeof HotWaterAfter>
+
 export const UnitSchema = z.strictObject({
   id: z.string().min(1),
   occupancy: z.enum(['owner', 'renter']).nullable(),
@@ -31,6 +34,10 @@ export const UnitSchema = z.strictObject({
     .default(null),
   /** Heat pump size from a contractor's quote, in tons. */
   heatPumpTonsQuoted: z.number().positive().nullable().default(null),
+  /** Does the heating boiler also heat this unit's hot water today? (F2, Qiao 2026-11-07) */
+  hotWaterFromBoiler: z.boolean().nullable().default(null),
+  /** After the heat pump, what heats the water. 'boiler' = the same boiler stays for hot water. */
+  hotWaterAfter: HotWaterAfter.nullable().default(null),
 })
 export type Unit = z.infer<typeof UnitSchema>
 

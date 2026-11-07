@@ -30,6 +30,7 @@ COLUMNS = {
     "load": "out.load.heating.energy_delivered..kbtu",
     "size": "out.params.size_heating_system_primary..kbtu_per_hr",
     "weight": "weight",
+    "water_heater_fuel": "in.water_heater_fuel",
 }
 TYPE = "Multi-Family with 2 - 4 Units"
 FUELS = {"Fuel Oil": "oil", "Natural Gas": "natural_gas", "Propane": "propane"}
@@ -112,8 +113,58 @@ def estimates(rows, min_samples: int = 30) -> list[dict]:
     return out
 
 
+COLUMN_FUEL = {"oil": "fuel_oil", "natural_gas": "natural_gas", "propane": "propane"}
+HOT_WATER_QUOTES = {
+    "oil": ("out.fuel_oil.hot_water.energy_consumption..kwh", "Fuel oil consumed by fuel oil hot water systems",
+            "out.fuel_oil.heating.energy_consumption..kwh", "Fuel oil consumed by fuel oil heating systems, excludes heat pump backup."),
+    "natural_gas": ("out.natural_gas.hot_water.energy_consumption..kwh", "Natural gas consumed by natural gas hot water systems.",
+                    "out.natural_gas.heating.energy_consumption..kwh", "Natural gas consumed by natural gas heating systems, excludes heat pump backup."),
+    "propane": ("out.propane.hot_water.energy_consumption..kwh", "Propane consumed by propane hot water systems.",
+                "out.propane.heating.energy_consumption..kwh", "Propane consumed by propane heating systems, excludes heat pump backup"),
+}
+
+
+def hot_water_shares(rows, min_samples: int = 30) -> list[dict]:
+    """Share of a unit's fuel that goes to hot water, among units whose water heater burns the heating fuel (F2)."""
+    groups: dict[str, list] = {}
+    for r in rows:
+        if r[COLUMNS["type"]] != TYPE or r[COLUMNS["fuel"]] not in FUELS or r[COLUMNS["water_heater_fuel"]] != r[COLUMNS["fuel"]]:
+            continue
+        fuel = FUELS[r[COLUMNS["fuel"]]]
+        c = COLUMN_FUEL[fuel]
+        heat = float(r[f"out.{c}.heating.energy_consumption..kwh"])
+        hot = float(r[f"out.{c}.hot_water.energy_consumption..kwh"])
+        if heat + hot > 0:
+            groups.setdefault(fuel, []).append((hot / (heat + hot), float(r[COLUMNS["weight"]])))
+    out = []
+    for fuel, pairs in sorted(groups.items()):
+        if len(pairs) < min_samples:
+            continue
+        low, mid, high = (round(weighted_quantile(pairs, q), 3) for q in (0.25, 0.5, 0.75))
+        hw_section, hw_quote, heat_section, heat_quote = HOT_WATER_QUOTES[fuel]
+        out.append({
+            "id": f"hot_water_share_of_fuel.{fuel}",
+            "description": "Share of the fuel that heats hot water when the same fuel heats the home: typical for similar "
+                           f"Massachusetts 2–4 unit homes ({FUEL_WORDS[fuel]}; ResStock, simulated), not measured for yours. "
+                           "Range = 25th / 50th / 75th percentile",
+            "unit": "fraction",
+            "value": {"low": low, "mid": mid, "high": high},
+            "confidence": "low",
+            "dataset": DATASET,
+            "sampleSize": len(pairs),
+            "sources": [
+                _source(hw_section, hw_quote),
+                _source(heat_section, heat_quote),
+                _source("in.water_heater_fuel", "The water heater fuel type."),
+                _source("weight", "Number of dwelling units this model represents in real life."),
+                {"url": CITATION, "section": "DATASET", "quote": "License CC-BY-4.0", "lastVerified": VERIFIED},
+            ],
+        })
+    return out
+
+
 def main(path: str) -> None:
-    result = estimates(read_rows(Path(path)))
+    result = estimates(read_rows(Path(path))) + hot_water_shares(read_rows(Path(path)))
     target = Path(__file__).resolve().parent.parent / "rules" / "ma" / "drafts" / "assumptions-resstock.json"
     target.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"wrote {target}: {len(result)} estimates")

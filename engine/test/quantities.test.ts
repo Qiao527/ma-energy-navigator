@@ -15,6 +15,7 @@ const LIST: Assumption[] = [
   a('annual_heat_load_mmbtu.oil', 22.8, 35.8, 50.8, 'low', 349),
   a('heat_pump_tons.oil.pre1950', 2.1, 2.6, 3.4, 'low', 274),
   a('heat_pump_tons.oil', 1.97, 2.48, 3.29, 'low', 349),
+  a('hot_water_share_of_fuel.oil', 0.145, 0.182, 0.272, 'low', 157),
 ]
 
 const building = (units: ReturnType<typeof unit>[], yearBuilt: number | null) =>
@@ -57,6 +58,39 @@ describe('heating need from the user’s fuel records (Task 16)', () => {
   })
   test('no heat content or efficiency for the fuel → null, never a guess', () => {
     expect(heatLoadFromRecords([{ year: 2024, quantity: 400, unit: 'gallons' }], 'propane', LIST)).toBeNull()
+  })
+})
+
+describe('hot water from the same boiler (F2, Qiao 2026-11-07)', () => {
+  const recs = [{ year: 2024, quantity: 400, unit: 'gallons' as const }, { year: 2025, quantity: 500, unit: 'gallons' as const }]
+  const k = 0.1385 * 0.84
+  test('hot water from the boiler: the hot-water share is taken out (widest share for the low end)', () => {
+    const e = heatLoadFromRecords(recs, 'oil', LIST, true)
+    expect(e?.range.low).toBeCloseTo(400 * k * (1 - 0.272), 6)
+    expect(e?.range.mid).toBeCloseTo(450 * k * (1 - 0.182), 6)
+    expect(e?.range.high).toBeCloseTo(500 * k * (1 - 0.145), 6)
+    expect(e?.why.join(' ')).toMatch(/hot-water share was taken out/)
+    expect(e?.why.join(' ')).not.toMatch(/may be overstated/)
+  })
+  test('hot water from the boiler but no sourced share for the fuel: no change, confidence low, says why', () => {
+    const list = [...LIST.filter(x => !x.id.startsWith('hot_water_share')), a('heat_content_mmbtu_per_unit.propane', 0.091452, 0.091452, 0.091452, 'high'), a('heating_efficiency.propane', 0.82, 0.82, 0.82, 'medium')]
+    const e = heatLoadFromRecords(recs, 'propane', list, true)
+    expect(e?.range.mid).toBeCloseTo(450 * 0.091452 * 0.82, 6)
+    expect(e?.confidence).toBe('low')
+    expect(e?.why.join(' ')).toMatch(/no sourced hot-water share/i)
+  })
+  test('hot water not from the boiler: records are all heating, no caveat', () => {
+    const e = heatLoadFromRecords(recs, 'oil', LIST, false)
+    expect(e?.range.mid).toBeCloseTo(450 * k, 6)
+    expect(e?.confidence).toBe('medium')
+    expect(e?.why.join(' ')).not.toMatch(/hot water/)
+  })
+  test('not yet answered: no change, the caveat stays', () => {
+    expect(heatLoadFromRecords(recs, 'oil', LIST, null)?.why.join(' ')).toMatch(/may be overstated/)
+  })
+  test('quantitiesFor passes the unit’s answer through', () => {
+    const i = building([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: true, fuelRecords: recs })], 1910)
+    expect(quantitiesFor(i, LIST)('1').heatLoadMMBtu?.range.mid).toBeCloseTo(450 * k * (1 - 0.182), 6)
   })
 })
 

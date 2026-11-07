@@ -56,7 +56,7 @@ Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then
   - When `installed`, `dec_rental_heat_pump_no_cost` still shows, sorted last in `shown`.
   - It carries a sourced confirmation: arranged by the turnkey contractor before installation; whether an installed project qualifies isn't published; ask Mass Save.
   - Quote the source verbatim. This is a rule change, so it goes through the drafting workflow.
-- **F2. Hot water.**
+- **F2. Hot water.** ✅ engine and data done 2026-11-07; the 10 scenario baselines are waiting for Qiao's re-approval.
   - New unit facts:
     - `hotWaterFromBoiler: boolean | null`;
     - `hotWaterAfter: 'boiler' | 'electric_resistance' | 'heat_pump_water_heater' | null`.
@@ -65,6 +65,18 @@ Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then
   - If `hotWaterAfter = boiler`, the landlord view keeps that oil plus the boiler's fixed costs, and the payer split follows.
   - Find the hot-water share in EIA RECS (or another dataset) and record it as an assumption with a verbatim quote. If no source is found: confidence low, with the reason.
   - The boiler's fixed costs need a source too.
+  - **Design (2026-11-07):**
+    - *Hot-water share source:* ResStock 2025.1 MA, the same file as Task 16b. Units in 2–4 unit buildings whose water heater uses the heating fuel. Share per unit = `out.<fuel>.hot_water.energy_consumption` ÷ (that + `out.<fuel>.heating.energy_consumption`), weighted p25/p50/p75, at least 30 samples. First run: oil 0.145 / 0.182 / 0.272 (n = 157); gas 0.142 / 0.205 / 0.297 (n = 1,504); propane n = 20, so it's left out. Why ResStock over RECS: it covers Massachusetts 2–4 unit homes specifically, and it's already in the approved-source pipeline. RECS publishes regional end-use totals, not this building type in this state. Confidence low (simulated).
+    - *Boiler fixed cost:* DOER consumer tip sheet (2017): annual oil burner tune-up "approximately $120-150". Recorded as `boiler_annual_service_cost.oil`, 120 / 135 / 150 USD per year (2017 $), confidence low. Gas and propane have no source, so they get no number and a reason.
+    - `heatLoadFromRecords(records, fuel, list, hotWaterFromBoiler)`:
+      - `true` → × (1 − share), with the reason text;
+      - `true` without a share → no adjustment, confidence low, with the reason;
+      - `false` → no adjustment and no hot-water caveat;
+      - `null` → no adjustment, keep the caveat (the question is asked).
+    - `navigate` asks `unit.hotWaterFromBoiler` for units with fuel records or a combustion fuel (oil, gas, propane). There's no boiler fact, so this is the proxy. It asks `unit.hotWaterAfter` once the answer is `true`. This changes the `questions` of the oil scenarios, so they need re-approval.
+    - Landlord view, `UnitProject.hotWater`:
+      - `{ after: 'boiler', fuelCostKept }` → the unit is listed in `boilerKept` with the kept hot-water fuel cost and the boiler's fixed cost (or the reason there is none). Totals don't change: the bill change covers space heating only, and the fixed cost is paid before and after.
+      - `{ after: electric, bills, meterPaidBy? }` → the water heater's bill changes are added to the unit's bills. The meter defaults to the heat pump's meter. If the landlord paid the boiler fuel and a tenant pays the water heater's meter, it's a shifted cost (105 CMR 410.210 names oil "for heating and/or hot water").
 - **F3. Demo-data label.**
   - Scenario and fixture inputs with fictional records carry a machine-readable `demoData: true`.
   - The UI (Phase 4) and the README (when written) say "demo data" wherever those numbers appear.

@@ -74,6 +74,13 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
     for (const p of r.prerequisites) for (const q of p.unitQuestions ?? []) ask(q.fact, q.unitId)
   }
   if (options.installDate === null && upcoming.length > 0) ask('project.installDate', null)
+  // Hot water (F2): fuel records include it when the same boiler heats the water. No boiler fact exists, so a
+  // fuel-burning heating system or fuel records stand in for "has a boiler".
+  for (const u of input.building.units) {
+    const burnsFuel = u.heatingFuel === 'oil' || u.heatingFuel === 'natural_gas' || u.heatingFuel === 'propane'
+    if (u.hotWaterFromBoiler === null && (burnsFuel || u.fuelRecords !== null)) ask('unit.hotWaterFromBoiler', u.id)
+    if (u.hotWaterFromBoiler === true && u.hotWaterAfter === null) ask('unit.hotWaterAfter', u.id)
+  }
 
   return {
     options,

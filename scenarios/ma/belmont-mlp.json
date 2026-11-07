@@ -376,6 +376,16 @@
         "fact": "project.installDate",
         "unitId": null,
         "about": "project"
+      },
+      {
+        "fact": "unit.hotWaterFromBoiler",
+        "unitId": "1",
+        "about": "own_unit"
+      },
+      {
+        "fact": "unit.hotWaterFromBoiler",
+        "unitId": "2",
+        "about": "other_unit"
       }
     ],
     "steps": [
@@ -391,8 +401,5 @@
       "ashp_whole_home@2027"
     ]
   },
-  "approved": {
-    "by": "Qiao",
-    "on": "2026-11-07"
-  }
+  "approved": null
 }

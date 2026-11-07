@@ -526,5 +526,95 @@
         "lastVerified": "2026-11-07"
       }
     ]
+  },
+  {
+    "id": "hot_water_share_of_fuel.natural_gas",
+    "description": "Share of the fuel that heats hot water when the same fuel heats the home: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "fraction",
+    "value": {
+      "low": 0.142,
+      "mid": 0.205,
+      "high": 0.297
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 1504,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.natural_gas.hot_water.energy_consumption..kwh",
+        "quote": "Natural gas consumed by natural gas hot water systems.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.natural_gas.heating.energy_consumption..kwh",
+        "quote": "Natural gas consumed by natural gas heating systems, excludes heat pump backup.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "in.water_heater_fuel",
+        "quote": "The water heater fuel type.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "hot_water_share_of_fuel.oil",
+    "description": "Share of the fuel that heats hot water when the same fuel heats the home: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "fraction",
+    "value": {
+      "low": 0.145,
+      "mid": 0.182,
+      "high": 0.272
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 157,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.fuel_oil.hot_water.energy_consumption..kwh",
+        "quote": "Fuel oil consumed by fuel oil hot water systems",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.fuel_oil.heating.energy_consumption..kwh",
+        "quote": "Fuel oil consumed by fuel oil heating systems, excludes heat pump backup.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "in.water_heater_fuel",
+        "quote": "The water heater fuel type.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
   }
 ]

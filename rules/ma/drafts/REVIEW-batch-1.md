@@ -219,7 +219,7 @@ sha256 `f2df4fa0e198…`
 
 ## `assumptions.json`
 
-sha256 `26d671074d78…`
+sha256 `f8335eaacbda…`
 
 ### heat_pump_cost_per_ton
 
@@ -241,6 +241,16 @@ sha256 `26d671074d78…`
 - sources:
   - > RES19 Oil Boiler - - 0.84 AFUE $920
     — https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf (Table 3: Equipment Cost Per Ton Summary, verified 2026-11-07)
+
+### boiler_annual_service_cost.oil
+
+- description: Annual oil burner tune-up and cleaning if not in a service contract (DOER, 2017 dollars; range = the published $120–150, mid = its midpoint). It stays as long as the boiler stays, for example to heat hot water
+- unit: USD per year
+- value: {"low": 120, "mid": 135, "high": 150}
+- confidence: low
+- sources:
+  - > Your oil burner should have an annual tune-up and cleaning. If this is not included in your contract it will cost approximately $120-150.
+    — https://www.mass.gov/doc/consumer-tip-sheet-oil-heat-maintenance/download (1. What kind of maintenance does my oil burner require?, verified 2026-11-07)
 
 ### heating_efficiency.oil
 
@@ -314,7 +324,7 @@ sha256 `26d671074d78…`
 
 ## `assumptions-resstock.json`
 
-sha256 `ec2277dbb9eb…`
+sha256 `92abf36c7aff…`
 
 ### annual_heat_load_mmbtu.natural_gas
 
@@ -567,6 +577,46 @@ sha256 `ec2277dbb9eb…`
 - sources:
   - > Size, Heating System Primary
     — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.params.size_heating_system_primary..kbtu_per_hr, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### hot_water_share_of_fuel.natural_gas
+
+- description: Share of the fuel that heats hot water when the same fuel heats the home: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: fraction
+- value: {"low": 0.142, "mid": 0.205, "high": 0.297}
+- confidence: low
+- sampleSize: 1504
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Natural gas consumed by natural gas hot water systems.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.natural_gas.hot_water.energy_consumption..kwh, verified 2026-11-07)
+  - > Natural gas consumed by natural gas heating systems, excludes heat pump backup.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.natural_gas.heating.energy_consumption..kwh, verified 2026-11-07)
+  - > The water heater fuel type.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (in.water_heater_fuel, verified 2026-11-07)
+  - > Number of dwelling units this model represents in real life.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
+  - > License CC-BY-4.0
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt (DATASET, verified 2026-11-07)
+
+### hot_water_share_of_fuel.oil
+
+- description: Share of the fuel that heats hot water when the same fuel heats the home: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile
+- unit: fraction
+- value: {"low": 0.145, "mid": 0.182, "high": 0.272}
+- confidence: low
+- sampleSize: 157
+- dataset: https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz
+- sources:
+  - > Fuel oil consumed by fuel oil hot water systems
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.fuel_oil.hot_water.energy_consumption..kwh, verified 2026-11-07)
+  - > Fuel oil consumed by fuel oil heating systems, excludes heat pump backup.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (out.fuel_oil.heating.energy_consumption..kwh, verified 2026-11-07)
+  - > The water heater fuel type.
+    — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (in.water_heater_fuel, verified 2026-11-07)
   - > Number of dwelling units this model represents in real life.
     — https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv (weight, verified 2026-11-07)
   - > License CC-BY-4.0

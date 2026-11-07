@@ -12,7 +12,19 @@ export interface UnitProject {
   bills: SwitchEstimates | null
   /** Who pays the meter the heat pump runs on. Defaults to electricPaidBy (the unit's own meter). */
   heatPumpMeterPaidBy?: Payer | null
+  /** Hot water that came from the heating boiler (F2, Qiao 2026-11-07). Omitted = not from the boiler, or not known. */
+  hotWater?: HotWaterProject
 }
+
+/**
+ * What heats the water after the heat pump, when the boiler heated it before. `bills` covers space heating only
+ * (the heat load excludes the hot-water share), so:
+ * - boiler: the boiler stays; its hot-water fuel and fixed cost are paid before and after, so totals don't change.
+ * - electric: the hot-water fuel goes and a water heater's electricity comes; that switch is added to the unit.
+ */
+export type HotWaterProject =
+  | { after: 'boiler'; fuelCostKept: Estimate | null; fixedCost: Estimate | null }
+  | { after: 'electric_resistance' | 'heat_pump_water_heater'; bills: SwitchEstimates; meterPaidBy?: Payer | null }
 
 /** "Project commitment terms" in the UI (Qiao, 2026-11-06): the no-rent-increase commitment some offers require. */
 export interface RentCommitment {
@@ -96,6 +108,11 @@ export interface LandlordView {
   paybackExcludesCommitment: boolean
   /** True when the "boiler needs replacing anyway" baseline was used. */
   usesReplacementBaseline: boolean
+  /**
+   * Units whose boiler stays for hot water, so the fuel bill doesn't go to zero: the hot-water fuel cost and the
+   * boiler's annual fixed cost that remain (null with a reason when not sourced). Not counted as savings.
+   */
+  boilerKept: { unitId: string; fuelCostKept: Estimate | null; fixedCost: Estimate | null; fixedCostReason: string | null }[]
 }
 
 const negate = (r: Range): Range => range(-r.high, -r.mid, -r.low)
@@ -103,6 +120,9 @@ const negate = (r: Range): Range => range(-r.high, -r.mid, -r.low)
 function sumEstimates(es: Estimate[]): Estimate | null {
   return es.length === 0 ? null : combine(sum(es.map(x => x.range)), es)
 }
+
+const plus = (a: Estimate | null, b: Estimate | null): Estimate | null =>
+  a === null ? b : b === null ? a : combine(add(a.range, b.range), [a, b])
 
 function commitment(c: RentCommitment | null): { cost: Estimate | null; reason: string | null } {
   if (c === null) return { cost: estimate(point(0), 'high', 'No project commitment applies'), reason: null }
@@ -119,15 +139,37 @@ export function landlordView(a: LandlordInput): LandlordView {
   const realParts: Estimate[] = []
   const shifted: ShiftedCost[] = []
   const rentals: LandlordView['rentals'] = []
+  const boilerKept: LandlordView['boilerKept'] = []
   for (const u of a.units) {
     if (u.bills === null) continue
     const meterPayer = u.heatPumpMeterPaidBy === undefined ? u.electricPaidBy : u.heatPumpMeterPaidBy
-    const split = splitByPayer(u.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: meterPayer, upfrontNet: null })
-    if (split.unallocated.length > 0) incomplete = true
-    if (split.owner.annual !== null) landlordParts.push(split.owner.annual)
-    if (u.heatPaidBy === 'owner') realParts.push(u.bills.net)
-    if (u.heatPaidBy === 'owner' && u.heatingFuel !== 'electric_resistance' && meterPayer === 'tenant') {
-      const annual = u.bills.electricBill
+    // Each switch (heat pump; electric water heater) is split by who pays its bills; the unit's parts are summed.
+    const switches: { bills: SwitchEstimates; meter: Payer | null }[] = [{ bills: u.bills, meter: meterPayer }]
+    const hw = u.hotWater
+    if (hw?.after === 'boiler') {
+      boilerKept.push({
+        unitId: u.unitId, fuelCostKept: hw.fuelCostKept, fixedCost: hw.fixedCost,
+        fixedCostReason: hw.fixedCost === null ? 'No sourced annual service cost for this boiler.' : null,
+      })
+    } else if (hw !== undefined) {
+      switches.push({ bills: hw.bills, meter: hw.meterPaidBy === undefined ? meterPayer : hw.meterPaidBy })
+    }
+    let owner: Estimate | null = null
+    let tenant: Estimate | null = null
+    let unknown = false
+    let shiftAnnual: Estimate | null = null
+    for (const sw of switches) {
+      const split = splitByPayer(sw.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: sw.meter, upfrontNet: null })
+      if (split.unallocated.length > 0) unknown = true
+      owner = plus(owner, split.owner.annual)
+      tenant = plus(tenant, split.tenant.annual)
+      if (u.heatPaidBy === 'owner') realParts.push(sw.bills.net)
+      if (u.heatPaidBy === 'owner' && u.heatingFuel !== 'electric_resistance' && sw.meter === 'tenant') shiftAnnual = plus(shiftAnnual, sw.bills.electricBill)
+    }
+    if (unknown) incomplete = true
+    if (owner !== null) landlordParts.push(owner)
+    if (shiftAnnual !== null) {
+      const annual = shiftAnnual
       shifted.push({
         unitId: u.unitId,
         annual,
@@ -136,8 +178,8 @@ export function landlordView(a: LandlordInput): LandlordView {
         fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'],
       })
     }
-    if (u.unitId === a.ownUnitId) ownUnit = split.owner.annual
-    else rentals.push({ unitId: u.unitId, landlord: split.owner.annual, tenant: split.tenant.annual, unknownPayer: split.unallocated.length > 0 })
+    if (u.unitId === a.ownUnitId) ownUnit = owner
+    else rentals.push({ unitId: u.unitId, landlord: owner, tenant, unknownPayer: unknown })
   }
   const landlordAnnual = sumEstimates(landlordParts)
   const realSavings = sumEstimates(realParts)
@@ -180,5 +222,6 @@ export function landlordView(a: LandlordInput): LandlordView {
     paybackIfCostShifted: shifted.length > 0 ? payback(landlordAnnual) : null,
     paybackExcludesCommitment: projectCommitment.cost === null,
     usesReplacementBaseline: a.avoidedReplacementCost !== null,
+    boilerKept,
   }
 }

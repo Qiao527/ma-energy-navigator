@@ -39,6 +39,25 @@
     ]
   },
   {
+    "id": "boiler_annual_service_cost.oil",
+    "description": "Annual oil burner tune-up and cleaning if not in a service contract (DOER, 2017 dollars; range = the published $120–150, mid = its midpoint). It stays as long as the boiler stays, for example to heat hot water",
+    "unit": "USD per year",
+    "value": {
+      "low": 120,
+      "mid": 135,
+      "high": 150
+    },
+    "confidence": "low",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/doc/consumer-tip-sheet-oil-heat-maintenance/download",
+        "section": "1. What kind of maintenance does my oil burner require?",
+        "quote": "Your oil burner should have an annual tune-up and cleaning. If this is not included in your contract it will cost approximately $120-150.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
     "id": "heating_efficiency.oil",
     "description": "Efficiency of a new baseline oil boiler (AFUE 0.84); an older boiler is probably less efficient",
     "unit": "fraction",
