@@ -63,17 +63,37 @@ supports]
 
 ## 3. Users
 
-Core users: people in **Massachusetts 1–4 unit residential buildings**. [Decided]
+**Core users: small landlords of Massachusetts 2–4 unit homes, especially owner-occupant
+landlords** who live on one floor and rent the others. [Decided 2026-11-06 — Qiao,
+replacing "people in 1–4 unit buildings"]
 
-The rules engine supports four roles. The v1 demo tells two stories: a **rental building**
-(tenant + landlord) and a **condo building** (unit owners). [Decided]
+Why (Qiao, 2026-11-06): the landlord decides and pays for the work, and the
+owner-occupant landlord feels every side at once. Their own unit saves, their rental
+bills change, and their tenants' bills change. The question the product answers for
+them is: **"Is this worth doing for me?"**
+
+**Tenants are the entry point, not the core user.** A tenant uses the product to:
+- discover that their building qualifies for something;
+- see what they can do alone (community solar, the discount rate);
+- generate a clear letter to their landlord.
+
+[Decided 2026-11-06]
+
+The rules engine still supports all four roles. **Demo stories:**
+1. **Owner-occupant landlord** (first story): lives on the 1st floor of a triple-decker
+   and rents the 2nd and 3rd.
+2. **Condo building** (second story): "N more units needed".
+3. The tenant appears as the entry point that leads into story 1 (the letter to the
+   landlord).
+
+[Decided 2026-11-06]
 
 | Role | Situation | What they need | In v1 demo |
 |---|---|---|---|
-| Tenant (e.g. Maria, 2nd floor of a triple-decker) | Doesn't control the building; may or may not pay for heat | Programs a renter can use alone (incl. community solar, income-eligible path), and a way to bring the landlord in | Yes (rental story) |
-| Renting landlord (owns, doesn't live there) | Pays for upgrades, tenants may get the savings | Net cost after incentives, who benefits, how to arrange access with every unit | Yes (rental story) |
-| Condo owner (unit in a 2–4 unit condo building) | Owns one unit; the building's discount depends on the other owners | "Units still needed" for the all-units insulation offer, messages to neighbors | Yes (condo story) |
-| Owner-occupant landlord (lives on one floor) | Own unit and rental units are on different offers | Which offer applies to which unit, combined picture | Engine only |
+| **Owner-occupant landlord** (core) | Lives on one floor; own unit and rental units are on different offers; pays for the work | **"Is it worth it for me?"**: what my own unit saves, who gains in the rental units (me or my tenants), how much incentives cover, and what a no-rent-increase commitment would cost me. Also which offer applies to which unit | **Story 1** |
+| Renting landlord (core) | Owns, doesn't live there; pays for upgrades; tenants may get the savings | The same "worth it" view, without an own unit | Engine only |
+| Condo owner | Owns one unit; the building's discount depends on the other owners | "Units still needed" for the all-units insulation offer, messages to neighbors | **Story 2** |
+| Tenant (entry point) | Doesn't control the building; may or may not pay for heat | Programs a renter can use alone, and a letter that gets the landlord to act | Entry into story 1 |
 
 Every unit records **who pays for heat** and **who pays for electricity** (tenant or
 owner). These are asked, never guessed, and savings are assigned to whoever pays.
@@ -108,7 +128,8 @@ Coordination is the signature feature. [Decided]
 ## 5. v1 scope
 
 **In v1** [Decided unless marked]
-- Four roles in the rules engine; two demo stories (rental, condo)
+- Four roles in the rules engine; demo stories: owner-occupant landlord (first), condo; the
+  tenant as the entry point (letter to the landlord) [Decided 2026-11-06]
 - Address → building profile, shown to the user to confirm or fill gaps
 - **The form is the only source of data for calculations.** An optional entry point lets
   the user describe their situation in a few sentences; the LLM pre-fills the form; the
@@ -139,6 +160,17 @@ Coordination is the signature feature. [Decided]
   eligible; the 100% tier shows "N more units needed" and is never shown as "not
   eligible" for lack of agreement [Decided 2026-11-06]
 - All money as **low / mid / high scenarios** with confidence labels [Decided]
+- **"Is it worth it for me?" — the landlord view** [Decided 2026-11-06 — Qiao]. For a
+  project, the engine answers:
+  - what the landlord's **own unit** saves or costs per year;
+  - **who gains in the rental units**, bill by bill (the landlord, the tenants, or a payer
+    we don't know yet);
+  - **how much incentives cover** of the project cost, plus the net upfront cost;
+  - **what a no-rent-increase commitment costs**: the forgone rent increase over the
+    commitment period. If the period or the increase isn't known, the cost is shown as
+    unknown with the reason.
+
+  All of these are estimates with confidence, computed by code.
 - **Who saves, who may pay more** [Decided 2026-11-06 — Qiao, top priority after review].
   For each unit, the report shows:
   - the heating-fuel bill change for whoever pays heat;
@@ -214,6 +246,34 @@ Design notes:
   and a test that fails if a shipped rule lacks `source_url` or is past `effective_until`.
   Programs changed mid-plan in 2025–2026 (federal credits ended, Mass Save heat-pump
   rebates revised, SMART 3.0). [Proposed — schema in Step 5]
+
+## 6a. Keeping rules and models honest as they change [Decided 2026-11-06 — Qiao]
+
+Stronger models make the project stronger only if every change is checked the same way.
+
+**1. Model-assisted rule drafting, human approval.**
+1. **Capture:** the official page or PDF is fetched (headless browser) and saved as a
+   text snapshot with URL, date and hash under `rules/<state>/sources/`.
+2. **Draft:** a model reads the snapshot and writes rule JSON into
+   `rules/<state>/drafts/`, with section and verbatim quote for every condition and
+   amount.
+3. **Check (automatic):** `npm run rules:check-drafts` validates the schema, resolves
+   every reference against the active rules, and checks that **every quote appears
+   verbatim in the saved snapshot**. A draft that fails never reaches review.
+4. **Approve (human):** Qiao reviews the draft, the check report and the standard
+   scenario diff. Only then is it moved into the active rules with a `review` record
+   (`draftedBy`, `checkedOn`, `approvedBy`, `approvedOn`). The loader refuses any active
+   rule without that record. Drafts are never loaded.
+
+**2. A fixed set of standard scenarios.**
+- `scenarios/<state>/*.json`: each scenario is a building, the user's answers, fixed
+  dates, and expected results (statuses, versions, units needed, payer split, landlord
+  view).
+- `npm run scenarios` runs them all.
+- **Any change to rules data, the engine, or, from Phase 2, prompts and models must
+  pass them first.** A changed expectation is itself a change Qiao approves.
+- From Phase 2 the same scenarios also check the LLM layer: no number or program that
+  the engine didn't return.
 
 ## 7. Technical difficulties
 

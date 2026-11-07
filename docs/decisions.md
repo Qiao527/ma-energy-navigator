@@ -2,6 +2,31 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-06 (Phase 1, after milestone 1)
+
+- **Working assumptions never produce definite results.** "Eligible condo unit = has a
+  heating meter" stays a working assumption until Mass Save confirms. A unit without a
+  meter counts as undecided; the all-units result shows as potential with the pending
+  definition. The assumption is used only for ordering and hints ("likely needed"). —
+  Qiao.
+- **Core user changed to small landlords of 2–4 unit homes, especially owner-occupant
+  landlords.** Tenants become the entry point (discover, then send a letter to the
+  landlord). Demo story 1 is the owner-occupant landlord; story 2 is the condo. Why: the
+  landlord decides and pays, and the owner-occupant feels every side of the split
+  incentive. — Qiao.
+- **Milestone 2 money answers the landlord's "is it worth it for me?":**
+  - own-unit savings;
+  - who gains in the rental units;
+  - incentive coverage;
+  - the cost of a no-rent-increase commitment.
+
+  — Qiao.
+- **Two governance designs added** (product.md §6a): model-drafted rules with verbatim
+  quotes, an automatic check and Qiao's approval before entering the active rules; and a
+  fixed suite of standard scenarios that every rules, engine, prompt or model change must
+  pass. Recorded in CONTRIBUTING.md. — Qiao.
+- **Node 24 pinned** (`.nvmrc`, `engines: >=24 <25`). — Qiao.
+
 ## 2026-11-06 (Checkpoint C: Phase 0 approved)
 
 - **Phase 0 approved.** Phase 1 starts from `docs/phase-1-plan.md` and
