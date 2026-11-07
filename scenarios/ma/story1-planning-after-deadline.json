@@ -1,7 +1,7 @@
 {
-  "id": "story1-deadline-passed",
-  "title": "Story 1 — 2026 install checked after the 2027-02-28 paperwork deadline",
-  "story": "Story 1: owner-occupant landlord in a Boston triple-decker (DEC). Lives on floor 1, rents floors 2–3. Oil heat paid by the landlord for all floors; tenants pay their own electricity. Built 1910; no assessment or weatherization yet.",
+  "id": "story1-planning-after-deadline",
+  "title": "Story 1 — still planning, checked after the 2026 paperwork deadline",
+  "story": "Story 1: owner-occupant landlord in a Boston triple-decker (DEC). Lives on floor 1, rents floors 2–3. Oil heat paid by the landlord for all floors; tenants pay their own electricity. Built 1910; no assessment or weatherization yet. No heat pump yet; the landlord checks on 2027-03-01 with no install date.",
   "input": {
     "role": "owner_occupant_landlord",
     "userUnitId": "1",
@@ -59,7 +59,7 @@
   },
   "options": {
     "asOf": "2027-03-01",
-    "installDate": "2026-12-01"
+    "installDate": null
   },
   "quantities": {
     "cost": {
@@ -84,64 +84,26 @@
   "expected": {
     "results": [
       {
-        "key": "ashp_basic@2026|1",
-        "status": "not_eligible",
+        "key": "ashp_partial_home@2027|1",
+        "status": "eligible",
         "shown": false,
-        "reason": "application_deadline_passed",
-        "prerequisites": {
-          "network_installer": "check",
-          "new_equipment": "check"
-        }
-      },
-      {
-        "key": "ashp_basic@2026|2",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
-        "prerequisites": {
-          "network_installer": "check",
-          "new_equipment": "check"
-        }
-      },
-      {
-        "key": "ashp_basic@2026|3",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
-        "prerequisites": {
-          "network_installer": "check",
-          "new_equipment": "check"
-        }
-      },
-      {
-        "key": "ashp_enhanced@2026|1",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
-        "confirmations": [
-          "enhanced_local_limit"
-        ],
-        "prerequisites": {
-          "network_installer": "check"
-        }
-      },
-      {
-        "key": "ashp_partial_home@2026|1",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
         "prerequisites": {
           "owner_approval": "done",
           "network_installer": "check",
           "cold_climate_equipment": "check",
           "integrated_control": "check"
+        },
+        "value": {
+          "low": 2000,
+          "mid": 2500,
+          "high": 3300,
+          "confidence": "low"
         }
       },
       {
-        "key": "ashp_partial_home@2026|2",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
+        "key": "ashp_partial_home@2027|2",
+        "status": "potential",
+        "shown": true,
         "confirmations": [
           "tenant_account_holder"
         ],
@@ -150,13 +112,18 @@
           "network_installer": "check",
           "cold_climate_equipment": "check",
           "integrated_control": "check"
+        },
+        "value": {
+          "low": 2000,
+          "mid": 2500,
+          "high": 3300,
+          "confidence": "low"
         }
       },
       {
-        "key": "ashp_partial_home@2026|3",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
+        "key": "ashp_partial_home@2027|3",
+        "status": "potential",
+        "shown": true,
         "confirmations": [
           "tenant_account_holder"
         ],
@@ -165,26 +132,36 @@
           "network_installer": "check",
           "cold_climate_equipment": "check",
           "integrated_control": "check"
+        },
+        "value": {
+          "low": 2000,
+          "mid": 2500,
+          "high": 3300,
+          "confidence": "low"
         }
       },
       {
-        "key": "ashp_whole_home@2026|1",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
+        "key": "ashp_whole_home@2027|1",
+        "status": "eligible",
+        "shown": true,
         "prerequisites": {
           "weatherized": "todo",
           "owner_approval": "done",
           "sole_source": "check",
           "network_installer": "check",
           "cold_climate_equipment": "check"
+        },
+        "value": {
+          "low": 4700,
+          "mid": 5875,
+          "high": 7500,
+          "confidence": "low"
         }
       },
       {
-        "key": "ashp_whole_home@2026|2",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
+        "key": "ashp_whole_home@2027|2",
+        "status": "potential",
+        "shown": true,
         "confirmations": [
           "tenant_account_holder"
         ],
@@ -194,13 +171,18 @@
           "sole_source": "check",
           "network_installer": "check",
           "cold_climate_equipment": "check"
+        },
+        "value": {
+          "low": 4700,
+          "mid": 5875,
+          "high": 7500,
+          "confidence": "low"
         }
       },
       {
-        "key": "ashp_whole_home@2026|3",
-        "status": "not_eligible",
-        "shown": false,
-        "reason": "application_deadline_passed",
+        "key": "ashp_whole_home@2027|3",
+        "status": "potential",
+        "shown": true,
         "confirmations": [
           "tenant_account_holder"
         ],
@@ -210,6 +192,12 @@
           "sole_source": "check",
           "network_installer": "check",
           "cold_climate_equipment": "check"
+        },
+        "value": {
+          "low": 4700,
+          "mid": 5875,
+          "high": 7500,
+          "confidence": "low"
         }
       },
       {
@@ -488,9 +476,7 @@
       "financing",
       "tax_credit"
     ],
-    "upcoming": [
-      "ashp_partial_home@2027",
-      "ashp_whole_home@2027"
-    ]
-  }
+    "upcoming": []
+  },
+  "approved": null
 }

@@ -1,6 +1,6 @@
 """Write rules/ma/drafts/REVIEW.md: a human-readable view of every draft rule for Qiao's review (product.md §6a, step 4).
 
-Usage: python3 tools/draft_report.py   (run after npm run rules:check-drafts)
+Usage: python3 tools/draft_report.py [--name batch-1] [FILE ...]   (run after npm run rules:check-drafts)
 """
 import json
 from pathlib import Path
@@ -32,9 +32,11 @@ def quotes(sources) -> list[str]:
     return [f"  - > {s['quote']}\n    — {s['url']} ({s['section']}, verified {s['lastVerified']})" for s in sources]
 
 
-def main() -> None:
+def main(only: list[str], name: str) -> None:
     check = json.loads((D / "CHECK.json").read_text())
-    out = ["# Draft rules for review", "",
+    if only:
+        check = {**check, "files": [f for f in check["files"] if f["file"] in only]}
+    out = [f"# Draft rules for review{' — ' + name if name else ''}", "",
            f"Automatic check: **{'passed' if check['ok'] else 'FAILED'}** on {check['checkedOn']} "
            f"({len(check['files'])} files). Every quote below was found verbatim in the saved snapshot in `rules/ma/sources/`.", "",
            "Approve with `python3 tools/approve_rules.py --by Qiao FILE ...` (files relative to `rules/ma/drafts/`).", ""]
@@ -69,9 +71,15 @@ def main() -> None:
                     if isinstance(x, dict) and x.get(k):
                         out += [f"- {k}:"] + quotes(x[k])
                 out.append("")
-    (D / "REVIEW.md").write_text("\n".join(out) + "\n", encoding="utf-8")
-    print(f"wrote {D / 'REVIEW.md'}: {len(out)} lines")
+    target = D / (f"REVIEW-{name}.md" if name else "REVIEW.md")
+    target.write_text("\n".join(out) + "\n", encoding="utf-8")
+    print(f"wrote {target}: {len(out)} lines")
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--name", default="", help="batch name, e.g. batch-1; writes REVIEW-<name>.md")
+    ap.add_argument("files", nargs="*", help="draft files to include (default: all)")
+    a = ap.parse_args()
+    main(a.files, a.name)

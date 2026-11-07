@@ -53,11 +53,16 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
   }
   const byKey = new Map(rules.offers.map(o => [offerKey(o), o]))
   const selected = rules.offers.filter(o => inWindow(o.effective, o.dateBasis === 'installation' ? date : options.asOf))
-  const upcoming = rules.offers
+  // An install date on or before today means the work is done (Qiao, 2026-11-07).
+  const installed = options.installDate !== null && options.installDate <= options.asOf
+  const upcoming = installed ? [] : rules.offers
     .filter(o => o.dateBasis === 'installation' && o.effective.from > date)
     .map(o => ({ offerId: o.id, version: o.version, from: o.effective.from }))
   const evaluated = selected.flatMap(o => evaluateOffer(o, base, quantitiesFor, options.asOf))
-  const shown = chooseBest(evaluated, byKey).filter(r => r.status !== 'not_eligible' || r.changes !== null)
+  // Installed: a missed paperwork deadline is shown with its date. Still planning: last year's versions
+  // aren't selected at all, so they never show.
+  const shown = chooseBest(evaluated, byKey).filter(r =>
+    r.status !== 'not_eligible' || r.changes !== null || (installed && r.reason === 'application_deadline_passed'))
 
   const questions = new Map<string, Question>()
   const ask = (fact: string, unitId: string | null) => {

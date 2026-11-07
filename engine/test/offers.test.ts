@@ -43,6 +43,10 @@ describe('evaluateOffer: status', () => {
     expect(r?.status).toBe('needs_info')
     expect(r?.missing).toEqual(['unit.heatingFuel'])
   })
+  test('deadline passed but not eligible anyway → plain not_eligible, no "missed deadline" reason', () => {
+    const o = offer({ applicationDeadline: '2027-02-28', eligibility: { fact: 'unit.occupancy', op: 'eq', value: 'owner' } })
+    expect(forUnit(run(o, base(), '2027-03-01'), '2')).toMatchObject({ status: 'not_eligible', reason: null })
+  })
   test('application deadline passed → not_eligible with the reason (review A4)', () => {
     const o = offer({ applicationDeadline: '2027-02-28' })
     expect(forUnit(run(o, base(), '2027-02-28'), '2')?.status).toBe('eligible')
@@ -101,7 +105,7 @@ describe('chooseBest', () => {
     return [offerKey(o), o]
   }))
   const r = (offerId: string, status: OfferResult['status'], mid: number | null, over: Partial<OfferResult> = {}): OfferResult => ({
-    offerId, version: '1', unitId: '1', status, reason: null, missing: [], confirmations: [], prerequisites: [],
+    offerId, version: '1', unitId: '1', status, reason: null, applicationDeadline: null, missing: [], confirmations: [], prerequisites: [],
     value: mid === null ? null : estimate(range(mid, mid, mid), 'medium', 'fixture'), recipient: 'property_owner', changes: null, ...over,
   })
   test('keeps the best eligible; hides worse eligible and worse potential; keeps better potential, not_eligible and ungrouped', () => {
@@ -143,7 +147,7 @@ describe('applyCaps', () => {
     return [offerKey(o), o]
   }))
   const res = (offerId: string, low: number, high: number): OfferResult => ({
-    offerId, version: '1', unitId: '1', status: 'eligible', reason: null, missing: [], confirmations: [], prerequisites: [],
+    offerId, version: '1', unitId: '1', status: 'eligible', reason: null, applicationDeadline: null, missing: [], confirmations: [], prerequisites: [],
     value: estimate(range(low, (low + high) / 2, high), 'medium', 'fixture'), recipient: 'property_owner', changes: null,
   })
   test('account money caps clip the per-unit sum and state the assumption (review A10)', () => {

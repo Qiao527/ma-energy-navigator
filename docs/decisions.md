@@ -2,6 +2,36 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Qiao's review of milestone 4, first round)
+
+- **Missed paperwork deadlines depend on whether the work is done.** Already installed →
+  show "application deadline passed" with the date. Still planning → don't show last
+  year's versions. — Qiao.
+  - **Consistency note:** both earlier statements were true at different layers. The
+    status was `not_eligible` with reason `application_deadline_passed`, while the
+    `shown` filter hid it. Both layers now follow the rule above.
+- **Technical:** "installed" means the install date is on or before today. A
+  past install date can only mean the work is done, so no extra input field is needed.
+- **Technical:** a result is "missed the deadline" only if eligibility isn't a no
+  anyway. Why: otherwise rebates the user never qualified for would read as missed.
+- **Standard scenarios: 8 approved** (Qiao). The deadline scenario became two:
+  `story1-installed-deadline-passed` and `story1-planning-after-deadline`, both waiting
+  for approval.
+- **Technical:**
+  - each scenario carries `approved: {by, on}`; a re-record that changes `expected`
+    clears it;
+  - `npm run scenarios` runs approved baselines against approved rules plus pending drafts
+    (named in the suite title), so engine changes are checked before every rule is
+    approved;
+  - unapproved baselines are skipped.
+- **Rules are reviewed in batches** (Qiao):
+  - batch 1 is Story 1's core: programs, predicates, income tables, DEC list, caps,
+    sequence, legal, assessment, weatherization, heat pumps, financing;
+  - batch 2 is solar, bill assistance, and the condo insulation offers (moved to
+    `offers/weatherization-condo.json` so approval by file works).
+- **Mass Save call list:** `docs/outreach/mass-save-call.md`, each question naming the
+  rules and scenarios it affects.
+
 ## 2026-11-07 (Phase 1, milestone 4: drafting workflow, rule drafts, standard scenarios)
 
 - **Technical:** approvals are a ledger `rules/ma/approvals.json` keyed by each

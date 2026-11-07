@@ -22,6 +22,8 @@ export const ScenarioSchema = z.strictObject({
     communitySolarCreditsPerYear: EstimateJson.nullable(),
   }),
   expected: z.unknown().nullable(),
+  /** Qiao's approval of this exact `expected`. Cleared whenever a re-record changes it (CONTRIBUTING.md). */
+  approved: z.strictObject({ by: z.string().min(1), on: z.iso.date() }).nullable().default(null),
 })
 export type Scenario = z.infer<typeof ScenarioSchema>
 
@@ -49,7 +51,7 @@ export function summarize(r: NavigateResult): unknown {
       key: `${x.offerId}@${x.version}|${x.unitId ?? '-'}`,
       status: x.status,
       shown: shown.has(x),
-      ...(x.reason ? { reason: x.reason } : {}),
+      ...(x.reason ? { reason: x.reason, applicationDeadline: x.applicationDeadline } : {}),
       ...(x.missing.length > 0 ? { missing: x.missing } : {}),
       ...(x.confirmations.length > 0 ? { confirmations: x.confirmations.map(c => c.id) } : {}),
       ...(x.prerequisites.length > 0 ? { prerequisites: Object.fromEntries(x.prerequisites.map(p => [p.id, p.state])) } : {}),

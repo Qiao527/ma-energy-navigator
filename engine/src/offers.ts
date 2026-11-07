@@ -32,6 +32,8 @@ export interface OfferResult {
   /** Precedence: not_eligible > needs_info > potential > eligible (schema §3). */
   status: Status
   reason: 'application_deadline_passed' | null
+  /** The paperwork deadline of this version, so a missed one can be shown with its date. */
+  applicationDeadline: string | null
   /** Facts to ask the user about (status needs_info). */
   missing: string[]
   /** What only the program can confirm (applies, or may apply). */
@@ -76,6 +78,8 @@ export function evaluateOffer(offer: Offer, base: Scope, quantitiesFor: Quantiti
       status = 'needs_info'
       missing = [...new Set([...e.missing, ...pending.flatMap(x => x.w?.missing ?? [])])].sort()
     } else status = applicable.length > 0 ? 'potential' : 'eligible'
+    // "Missed the deadline" only for a result that would otherwise not be a no.
+    const missedDeadline = deadlinePassed && e.value !== 'no'
     const unitId = s.unit?.id ?? null
     const lookForChanges = !deadlinePassed && (status === 'not_eligible' || status === 'needs_info')
     return {
@@ -83,7 +87,8 @@ export function evaluateOffer(offer: Offer, base: Scope, quantitiesFor: Quantiti
       version: offer.version,
       unitId,
       status,
-      reason: deadlinePassed ? 'application_deadline_passed' : null,
+      reason: missedDeadline ? 'application_deadline_passed' : null,
+      applicationDeadline: offer.applicationDeadline,
       missing,
       confirmations: [...applicable, ...pending.map(x => x.c)],
       prerequisites: offer.prerequisites.map(p => prerequisiteResult(p, s)),

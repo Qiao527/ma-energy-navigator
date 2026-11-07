@@ -52,8 +52,12 @@
       "sha256": "0e43446767c60e79ef4fe6d5510b9d442377794baae694f55609ab8d1038ee48"
     },
     {
+      "file": "offers/weatherization-condo.json",
+      "sha256": "57dbdeb7cd4965b8aa7fe19af81f09e594c5368330d4d123fdb6f3b055fbe945"
+    },
+    {
       "file": "offers/weatherization.json",
-      "sha256": "26b59588f1c0c4dedc0143636925358b38054dff9c78d7d67eeb33b65344b7ca"
+      "sha256": "e66ab94762d6478bb66b422c14857307c5df715cc774943b1bbe5bdfc4cdd08c"
     }
   ]
 }

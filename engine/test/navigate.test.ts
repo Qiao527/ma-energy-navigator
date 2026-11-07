@@ -33,6 +33,24 @@ describe('navigate: versions and deadlines (schema §5)', () => {
     const r = nav('2027-03-01', '2026-12-01')
     expect(r.evaluated.find(x => x.unitId === '1')).toMatchObject({ version: '2026', status: 'not_eligible', reason: 'application_deadline_passed' })
   })
+  test('already installed (install date on or before today): the missed deadline is shown with its date (Qiao, 2026-11-07)', () => {
+    const r = nav('2027-03-01', '2026-12-01')
+    expect(r.shown.find(x => x.unitId === '1')).toMatchObject({
+      version: '2026', status: 'not_eligible', reason: 'application_deadline_passed', applicationDeadline: '2027-02-28',
+    })
+  })
+  test('already installed: no upcoming versions and no install-date question', () => {
+    const r = nav('2027-03-01', '2026-12-01')
+    expect(r.upcoming).toEqual([])
+    expect(r.questions.some(q => q.fact === 'project.installDate')).toBe(false)
+  })
+  test('still planning: last year’s version is neither evaluated nor shown', () => {
+    for (const installDate of [null, '2027-04-01']) {
+      const r = nav('2027-03-01', installDate)
+      expect([...new Set(r.evaluated.map(x => x.version))]).toEqual(['2027'])
+      expect(r.shown.every(x => x.version === '2027')).toBe(true)
+    }
+  })
 })
 
 describe('navigate: questions say whose fact it is (review B13)', () => {

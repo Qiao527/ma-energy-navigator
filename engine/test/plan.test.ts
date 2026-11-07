@@ -11,7 +11,7 @@ const offers = new Map<string, Offer>(
   }),
 )
 const res = (offerId: string, status: OfferResult['status'] = 'eligible'): OfferResult => ({
-  offerId, version: '1', unitId: null, status, reason: null, missing: [], confirmations: [], prerequisites: [],
+  offerId, version: '1', unitId: null, status, reason: null, applicationDeadline: null, missing: [], confirmations: [], prerequisites: [],
   value: null, recipient: 'property_owner', changes: null,
 })
 const edge = (before: Measure, after: Measure) => SequenceEdgeSchema.parse({ before, after, reason: `${before} first`, sources: [SOURCE] })
