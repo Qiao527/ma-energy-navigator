@@ -195,3 +195,31 @@ export function report(rawInput: unknown, rules: RuleSet, options: ReportOptions
   }
   return { navigation, units, co2Total, landlord, landlordReason }
 }
+
+export type HeatSource = 'oil' | 'natural_gas' | 'propane' | 'electric_resistance' | 'heat_pump'
+
+/** What one MMBtu of heat delivered to the home costs with each source, at sourced Massachusetts prices. */
+export function heatCosts(list: readonly Assumption[]): { id: HeatSource; perMMBtu: Estimate }[] {
+  const out: { id: HeatSource; perMMBtu: Estimate }[] = []
+  for (const fuel of ['oil', 'natural_gas', 'propane', 'electric_resistance'] as const) {
+    const s = fuelSide(fuel, list)
+    if (s) out.push({ id: fuel, perMMBtu: combine(div(s.price.range, s.efficiency.range), [s.price, s.efficiency]) })
+  }
+  const elec = find(list, 'price.electricity')
+  const cop = find(list, 'heat_pump_seasonal_cop')
+  if (elec && cop) out.push({ id: 'heat_pump', perMMBtu: combine(div(scale(elec.range, KWH_PER_MMBTU), cop.range), [elec, cop]) })
+  return out
+}
+
+/**
+ * Where a heat pump costs the same as the current fuel, at typical (mid) values: the electricity price at today's
+ * heat pump efficiency, and the efficiency at today's electricity price.
+ */
+export function breakEven(list: readonly Assumption[], fuel: Fuel): { electricityPricePerKwh: number; seasonalCop: number } | null {
+  const s = fuelSide(fuel, list)
+  const elec = find(list, 'price.electricity')
+  const cop = find(list, 'heat_pump_seasonal_cop')
+  if (s === null || elec === null || cop === null) return null
+  const fuelPer = s.price.range.mid / s.efficiency.range.mid
+  return { electricityPricePerKwh: (fuelPer * cop.range.mid) / KWH_PER_MMBTU, seasonalCop: (elec.range.mid * KWH_PER_MMBTU) / fuelPer }
+}

@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { describe, expect, test } from 'vitest'
-import { report, unitEnergy } from '../src/energy.js'
+import { breakEven, heatCosts, report, unitEnergy } from '../src/energy.js'
 import { InputSchema } from '../src/facts.js'
 import { KWH_PER_MMBTU } from '../src/finance.js'
 import { AssumptionsSchema, type Assumption } from '../src/quantities.js'
@@ -116,5 +116,27 @@ describe('report (E6): Story 1 end to end on the draft rules', () => {
   })
   test('a tenant gets no landlord view', () => {
     expect(report({ ...i, role: 'tenant', userUnitId: '2' }, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false }, list).landlord).toBeNull()
+  })
+})
+
+describe('the price of one unit of heat, and the break-even point (why heat pumps may not save)', () => {
+  test('cost per MMBtu of heat delivered: fuel price ÷ heat content ÷ efficiency; heat pump: kWh per MMBtu ÷ COP × price', () => {
+    const t = heatCosts(LIST)
+    const oil = t.find(x => x.id === 'oil')
+    const hp = t.find(x => x.id === 'heat_pump')
+    expect(oil?.perMMBtu.range.mid).toBeCloseTo(3.1 / 0.1385 / 0.84, 6)
+    expect(hp?.perMMBtu.range.mid).toBeCloseTo(KWH_PER_MMBTU / 2.41 * 0.35, 6)
+    expect(hp?.perMMBtu.range.low).toBeCloseTo(KWH_PER_MMBTU / 2.8 * 0.33, 6)
+    expect(hp?.perMMBtu.range.high).toBeCloseTo(KWH_PER_MMBTU / 1.9 * 0.35, 6)
+  })
+  test('break-even vs oil: the electricity price, and the efficiency, at which a heat pump costs the same (typical values)', () => {
+    const b = breakEven(LIST, 'oil')
+    const oilPer = 3.1 / 0.1385 / 0.84
+    expect(b?.electricityPricePerKwh).toBeCloseTo(oilPer * 2.41 / KWH_PER_MMBTU, 6)
+    expect(b?.seasonalCop).toBeCloseTo(0.35 * KWH_PER_MMBTU / oilPer, 6)
+  })
+  test('a fuel without a sourced price gives no row and no break-even', () => {
+    expect(heatCosts(LIST).some(x => x.id === 'propane')).toBe(false)
+    expect(breakEven(LIST, 'propane')).toBeNull()
   })
 })

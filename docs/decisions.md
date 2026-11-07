@@ -26,6 +26,29 @@ Newest first. Format: date — decision — why — decided by.
     and a report, and it keeps WCAG control simple.
   - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
 
+## 2026-11-07 (Qiao's review of web v1)
+
+- **"Heat pumps may not save" is presented as it is** (option A). The headline states the yearly change, and the
+  page explains why: the price of one unit of heat, plus the break-even electricity price and heat pump
+  efficiency. — Qiao.
+- **The first web design was rejected: generic and unfocused.** The redesign leads with the answer for the user,
+  makes the visuals stronger, and adds a map. — Qiao.
+- **Technical, redesign:**
+  - It reads as an engineering sheet: the answer sits beside the building drawn in elevation (bay window,
+    stacked porches, flat cornice), one floor per row, with each bill's yearly change.
+  - Then come: the price of one unit of heat by system (engine `heatCosts` / `breakEven`, tested); today vs with
+    heat pumps per floor; the fairness options; the map; the plan in order; the method chain; and sources.
+  - The form moved into an "Edit the building" drawer.
+  - Two data colors (fuel, electricity) pass the dataviz palette validator in light and dark mode. Every chart
+    has a table.
+- **Technical, map:**
+  - Census 2023 county subdivisions (351 Massachusetts municipalities, the engine's municipality basis),
+    simplified to SVG by `analysis/ma_towns_svg.py` (standard library only).
+  - It shades Designated Equity Communities from the rules data, marks the six MassCEC navigator pilot cities,
+    and highlights the user's town.
+  - No map tiles: the page must run as one file with no outside requests. The caption says places are shown to
+    point to help, never to rank them (principle 6).
+
 ## 2026-11-07 (M4b built: energy chain and web v1)
 
 - **Technical:** sourced assumptions added to the drafts. All quotes pass the draft check.
