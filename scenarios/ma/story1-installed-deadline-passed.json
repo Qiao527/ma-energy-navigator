@@ -271,7 +271,8 @@
         "status": "not_eligible",
         "shown": false,
         "confirmations": [
-          "renter_energy_burden"
+          "renter_energy_burden",
+          "installed_before_program"
         ],
         "prerequisites": {
           "no_rent_increase_commitment": "check",
@@ -283,7 +284,8 @@
         "status": "potential",
         "shown": true,
         "confirmations": [
-          "renter_energy_burden"
+          "renter_energy_burden",
+          "installed_before_program"
         ],
         "prerequisites": {
           "no_rent_increase_commitment": "check",
@@ -301,7 +303,8 @@
         "status": "potential",
         "shown": true,
         "confirmations": [
-          "renter_energy_burden"
+          "renter_energy_burden",
+          "installed_before_program"
         ],
         "prerequisites": {
           "no_rent_increase_commitment": "check",

@@ -93,13 +93,15 @@ All 49 assumptions and every rule are listed in the page, with links and the dat
 - **Ask, don't guess.** Unknown facts (who pays a bill, whether the boiler heats water) become questions, never
   assumptions.
 
+The full worked example, from delivery records to bills, CO₂ and who pays, is in [`docs/methods.md`](docs/methods.md).
+
 Decisions and their reasons are logged in [`docs/decisions.md`](docs/decisions.md); the product definition is in
 [`docs/product.md`](docs/product.md); the working rules are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Repository
 
 ```
-engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check): 217 tests
+engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check): 235 tests
 rules/ma/   Approved rules and assumptions, source snapshots, approval ledger
 scenarios/  Standard scenarios with expected results
 web/        The page: a static build that runs the engine in the browser (esbuild)

@@ -51,10 +51,11 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
     incomeTables: Object.fromEntries(rules.incomeTables.map(t => [t.id, t.bySize])),
     predicates: Object.fromEntries(rules.predicates.map(p => [p.id, { condition: p.condition, workingAssumption: p.workingAssumption }])),
   }
-  const byKey = new Map(rules.offers.map(o => [offerKey(o), o]))
-  const selected = rules.offers.filter(o => inWindow(o.effective, o.dateBasis === 'installation' ? date : options.asOf))
   // An install date on or before today means the work is done (Qiao, 2026-11-07).
   const installed = options.installDate !== null && options.installDate <= options.asOf
+  base.installed = installed
+  const byKey = new Map(rules.offers.map(o => [offerKey(o), o]))
+  const selected = rules.offers.filter(o => inWindow(o.effective, o.dateBasis === 'installation' ? date : options.asOf))
   const upcoming = installed ? [] : rules.offers
     .filter(o => o.dateBasis === 'installation' && o.effective.from > date)
     .map(o => ({ offerId: o.id, version: o.version, from: o.effective.from }))
@@ -63,6 +64,12 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
   // aren't selected at all, so they never show.
   const shown = chooseBest(evaluated, byKey).filter(r =>
     r.status !== 'not_eligible' || r.changes !== null || (installed && r.reason === 'application_deadline_passed'))
+  // Installed (F1): an offer that only applies if the program arranged the work beforehand goes last.
+  if (installed) {
+    const afterInstall = (r: (typeof shown)[number]) => (byKey.get(offerKey({ id: r.offerId, version: r.version }))?.confirmations ?? [])
+      .some(c => c.when !== null && JSON.stringify(c.when).includes('"project.installed"') && r.confirmations.some(x => x.id === c.id))
+    shown.sort((a, b) => Number(afterInstall(a)) - Number(afterInstall(b)))
+  }
 
   const questions = new Map<string, Question>()
   const ask = (fact: string, unitId: string | null) => {

@@ -2,6 +2,23 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Dependency updates)
+
+- **Technical:** TypeScript 7.0.2 (engine, web) and Vitest 5.1.0 (engine) applied on the branch, with all checks
+  passing; Dependabot PRs #3, #4 and #5 closed as superseded. `@types/node` stays on 24 to match the Node 24
+  runtime: PR #2 closed, and Dependabot now skips its major updates.
+
+## 2026-11-07 (F1: an offer arranged before installation, on an installed project)
+
+- **Technical:** new fact `project.installed` (install date on or before today). A confirmation can use it in
+  `when`; on an installed project, offers carrying such a confirmation sort after the others in `shown`.
+- **Rule draft (waiting for Qiao):** `dec_rental_heat_pump_no_cost` gains the confirmation
+  `installed_before_program`. The offer is turnkey ("project coordination and installation managed for you";
+  "installed by approved contractors"), and whether finished work qualifies isn't published, so it stays
+  potential with "ask Mass Save before counting on it". Quote check passed.
+- **Scenario:** `story1-installed-deadline-passed` re-recorded with the new confirmation; waiting for Qiao's
+  approval together with the rule.
+
 ## 2026-11-07 (Seasonal heat pump rate)
 
 - **Technical:** heat pump electricity is priced at the standard statewide rate minus the electric company's

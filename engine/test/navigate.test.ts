@@ -101,3 +101,27 @@ describe('navigate: hot water questions (F2, Qiao 2026-11-07)', () => {
     expect(ask([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: false })])).toEqual([])
   })
 })
+
+describe('navigate: an offer arranged before installation, on an installed project (F1)', () => {
+  const turnkey = {
+    ...OFFER, id: 'turnkey', version: '1', dateBasis: 'as_of', effective: { from: '2025-01-01', until: null }, applicationDeadline: null, exclusiveGroup: null,
+    confirmations: [{ id: 'installed_project', question: 'Does an installed project qualify?', decidedBy: 'Mass Save', nextAction: 'Ask Mass Save.', when: { fact: 'project.installed', op: 'eq', value: true }, sources: [SOURCE] }],
+  }
+  const plain = { ...OFFER, id: 'plain', version: '1', dateBasis: 'as_of', effective: { from: '2025-01-01', until: null }, applicationDeadline: null, exclusiveGroup: null }
+  const r2 = RuleSetSchema.parse({ ...rules, offers: [turnkey, plain] })
+  const run = (asOf: string, installDate: string | null) => navigate(i, r2, { asOf, installDate }, () => NO_QUANTITIES)
+  test('installed: the offer stays, as potential, carrying the confirmation, and sorts after the others', () => {
+    const r = run('2027-03-01', '2026-12-01')
+    const t = r.shown.filter(x => x.offerId === 'turnkey' && x.unitId === '1')
+    expect(t.length).toBe(1)
+    expect(t.every(x => x.status === 'potential' && x.confirmations.some(c => c.id === 'installed_project'))).toBe(true)
+    const firstTurnkey = r.shown.findIndex(x => x.offerId === 'turnkey')
+    expect(r.shown.slice(firstTurnkey).every(x => x.offerId === 'turnkey')).toBe(true)
+  })
+  test('still planning, or no install date: the confirmation does not apply', () => {
+    for (const installDate of [null, '2027-04-01']) {
+      const t = run('2026-11-15', installDate).shown.find(x => x.offerId === 'turnkey' && x.unitId === '1')
+      expect(t?.confirmations.some(c => c.id === 'installed_project')).toBe(false)
+    }
+  })
+})

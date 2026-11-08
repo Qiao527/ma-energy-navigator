@@ -72,11 +72,11 @@ runs TDD, then `npm run scenarios`.
 ### Follow-ups from Qiao's second M4 review (2026-11-07, not started)
 
 Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then `npm run scenarios`. A changed expected result needs Qiao's approval again.
-- **F1. DEC no-cost heat pump on an installed project.**
+- **F1. DEC no-cost heat pump on an installed project.** ✅ engine done 2026-11-07; rule draft and scenario waiting for Qiao.
   - When `installed`, `dec_rental_heat_pump_no_cost` still shows, sorted last in `shown`.
   - It carries a sourced confirmation: arranged by the turnkey contractor before installation; whether an installed project qualifies isn't published; ask Mass Save.
   - Quote the source verbatim. This is a rule change, so it goes through the drafting workflow.
-- **F2. Hot water.** ✅ engine and data done 2026-11-07; the 10 scenario baselines are waiting for Qiao's re-approval.
+- **F2. Hot water.** ✅ done 2026-11-07; scenario baselines approved.
   - New unit facts:
     - `hotWaterFromBoiler: boolean | null`;
     - `hotWaterAfter: 'boiler' | 'electric_resistance' | 'heat_pump_water_heater' | null`.

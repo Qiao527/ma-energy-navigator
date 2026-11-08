@@ -1,0 +1,1162 @@
+[
+  {
+    "id": "ashp_whole_home",
+    "version": "2026",
+    "programId": "masssave_heat_pumps",
+    "title": "Whole-home heat pump rebate (installed in 2026)",
+    "measure": "heat_pump",
+    "appliesTo": "each_unit",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2026-01-01",
+      "until": "2026-12-31"
+    },
+    "applicationDeadline": "2027-02-28",
+    "eligibility": {
+      "all": [
+        {
+          "fact": "unit.occupiedAllWinter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "in",
+                  "value": [
+                    "oil",
+                    "propane",
+                    "electric_resistance"
+                  ]
+                },
+                {
+                  "fact": "building.electricIsMunicipal",
+                  "op": "eq",
+                  "value": false
+                }
+              ]
+            },
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "eq",
+                  "value": "natural_gas"
+                },
+                {
+                  "fact": "building.gasUtility",
+                  "op": "in",
+                  "value": [
+                    "eversource",
+                    "national_grid",
+                    "unitil",
+                    "liberty",
+                    "berkshire_gas"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "weatherized",
+        "kind": "action",
+        "description": "Make sure the home is sufficiently weatherized: built 2000 or later, or the assessment recommends under $1,000 of weatherization, or the recommended weatherization is done.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "building.yearBuilt",
+              "op": "gte",
+              "value": 2000
+            },
+            {
+              "fact": "building.weatherizationRecsDone",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Additional eligibility requirements for the Whole-home Rebate",
+            "quote": "Sufficient weatherization can be demonstrated by satisfying at least one of the following requirements: (A) home was built during or after 2000, (B) Home Energy Assessment report indicates less than $1,000 worth of weatherization recommended, or (C) weatherization recommendations made during or after 2013 have been completed.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "For rented units, the landlord approves the work.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "unit.occupancy",
+              "op": "eq",
+              "value": "owner"
+            },
+            {
+              "fact": "building.ownerApproval",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/for-renters",
+            "section": "Resources for renters",
+            "quote": "While larger measures like weatherization and heating and cooling system upgrades require property owner approval, there are actions you can take on your own.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "sole_source",
+        "kind": "requirement",
+        "description": "The heat pump must be the home's only heating and cooling source.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Rebates",
+            "quote": "Whole-home rebates are available to customers who install heat pumps as the sole source for heating and cooling.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "network_installer",
+        "kind": "requirement",
+        "description": "Use a contractor in the Mass Save Heat Pump Installer Network.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "To qualify, the heat pump system must be installed by a contractor participating in the Mass Save Heat Pump Installer Network.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "cold_climate_equipment",
+        "kind": "requirement",
+        "description": "Choose ENERGY STAR Cold Climate equipment from the Mass Save qualified list.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Equipment must meet ENERGY STAR® Cold Climate.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "tenant_account_holder",
+        "question": "The rebate is applied for with a residential electric account (replacing oil, propane or electric resistance) or a residential gas account (replacing gas). In a rental unit where the tenant holds that account and the landlord buys the heat pump, who applies?",
+        "decidedBy": "Mass Save rebate processing (Resource Innovations)",
+        "nextAction": "Ask at the assessment, or email MARebates@Resource-Innovations.com.",
+        "when": {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "renter"
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential electric account.",
+            "lastVerified": "2026-11-06"
+          },
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential gas account.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "per_ton",
+      "rate": 2650,
+      "cap": 8500
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [
+      "masssave_hp_account",
+      "masssave_whole_home"
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "2026 Air Source Heat Pump Rebates",
+        "quote": "Whole-Home $2,650 per ton * up to $8,500",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Eligibility",
+        "quote": "Rebate form and supporting documentation must be received by February 28, 2027.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "Only available to residences that are occupied full time during the winter heating season.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ashp_whole_home",
+    "version": "2027",
+    "programId": "masssave_heat_pumps",
+    "title": "Whole-home heat pump rebate (installed from 2027)",
+    "measure": "heat_pump",
+    "appliesTo": "each_unit",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2027-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "unit.occupiedAllWinter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "in",
+                  "value": [
+                    "oil",
+                    "propane",
+                    "electric_resistance"
+                  ]
+                },
+                {
+                  "fact": "building.electricIsMunicipal",
+                  "op": "eq",
+                  "value": false
+                }
+              ]
+            },
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "eq",
+                  "value": "natural_gas"
+                },
+                {
+                  "fact": "building.gasUtility",
+                  "op": "in",
+                  "value": [
+                    "eversource",
+                    "national_grid",
+                    "unitil",
+                    "liberty",
+                    "berkshire_gas"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "weatherized",
+        "kind": "action",
+        "description": "Make sure the home is sufficiently weatherized: built 2000 or later, or the assessment recommends under $1,000 of weatherization, or the recommended weatherization is done.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "building.yearBuilt",
+              "op": "gte",
+              "value": 2000
+            },
+            {
+              "fact": "building.weatherizationRecsDone",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Additional eligibility requirements for the Whole-home Rebate",
+            "quote": "Sufficient weatherization can be demonstrated by satisfying at least one of the following requirements: (A) home was built during or after 2000, (B) Home Energy Assessment report indicates less than $1,000 worth of weatherization recommended, or (C) weatherization recommendations made during or after 2013 have been completed.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "For rented units, the landlord approves the work.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "unit.occupancy",
+              "op": "eq",
+              "value": "owner"
+            },
+            {
+              "fact": "building.ownerApproval",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/for-renters",
+            "section": "Resources for renters",
+            "quote": "While larger measures like weatherization and heating and cooling system upgrades require property owner approval, there are actions you can take on your own.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "sole_source",
+        "kind": "requirement",
+        "description": "The heat pump must be the home's only heating and cooling source.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Rebates",
+            "quote": "Whole-home rebates are available to customers who install heat pumps as the sole source for heating and cooling.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "network_installer",
+        "kind": "requirement",
+        "description": "Use a contractor in the Mass Save Heat Pump Installer Network.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "To qualify, the heat pump system must be installed by a contractor participating in the Mass Save Heat Pump Installer Network.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "cold_climate_equipment",
+        "kind": "requirement",
+        "description": "Choose ENERGY STAR Cold Climate equipment from the Mass Save qualified list.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Equipment must meet ENERGY STAR® Cold Climate.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "tenant_account_holder",
+        "question": "The rebate is applied for with a residential electric account (replacing oil, propane or electric resistance) or a residential gas account (replacing gas). In a rental unit where the tenant holds that account and the landlord buys the heat pump, who applies?",
+        "decidedBy": "Mass Save rebate processing (Resource Innovations)",
+        "nextAction": "Ask at the assessment, or email MARebates@Resource-Innovations.com.",
+        "when": {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "renter"
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential electric account.",
+            "lastVerified": "2026-11-06"
+          },
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential gas account.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "per_ton",
+      "rate": 2350,
+      "cap": 7500
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [
+      "masssave_hp_account",
+      "masssave_whole_home"
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Rebates",
+        "quote": "For all Whole-Home projects installed on or after January 1, 2027, the rebate will decrease to $2,350 per ton, capped at $7,500.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "Only available to residences that are occupied full time during the winter heating season.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ashp_partial_home",
+    "version": "2026",
+    "programId": "masssave_heat_pumps",
+    "title": "Partial-home heat pump rebate (installed in 2026)",
+    "measure": "heat_pump",
+    "appliesTo": "each_unit",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2026-01-01",
+      "until": "2026-12-31"
+    },
+    "applicationDeadline": "2027-02-28",
+    "eligibility": {
+      "all": [
+        {
+          "fact": "unit.occupiedAllWinter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "in",
+                  "value": [
+                    "oil",
+                    "propane",
+                    "electric_resistance"
+                  ]
+                },
+                {
+                  "fact": "building.electricIsMunicipal",
+                  "op": "eq",
+                  "value": false
+                }
+              ]
+            },
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "eq",
+                  "value": "natural_gas"
+                },
+                {
+                  "fact": "building.gasUtility",
+                  "op": "in",
+                  "value": [
+                    "eversource",
+                    "national_grid",
+                    "unitil",
+                    "liberty",
+                    "berkshire_gas"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "For rented units, the landlord approves the work.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "unit.occupancy",
+              "op": "eq",
+              "value": "owner"
+            },
+            {
+              "fact": "building.ownerApproval",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/for-renters",
+            "section": "Resources for renters",
+            "quote": "While larger measures like weatherization and heating and cooling system upgrades require property owner approval, there are actions you can take on your own.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "network_installer",
+        "kind": "requirement",
+        "description": "Use a contractor in the Mass Save Heat Pump Installer Network.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "To qualify, the heat pump system must be installed by a contractor participating in the Mass Save Heat Pump Installer Network.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "cold_climate_equipment",
+        "kind": "requirement",
+        "description": "Choose ENERGY STAR Cold Climate equipment from the Mass Save qualified list.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Equipment must meet ENERGY STAR® Cold Climate.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "integrated_control",
+        "kind": "requirement",
+        "description": "Install an integrated control for zones where oil, propane or gas stays in use.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "An integrated control from the Mass Save Integrated Control Qualified Product List must be installed for heating zones where propane, oil, or natural gas will remain in use.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "tenant_account_holder",
+        "question": "The rebate is applied for with a residential electric account (replacing oil, propane or electric resistance) or a residential gas account (replacing gas). In a rental unit where the tenant holds that account and the landlord buys the heat pump, who applies?",
+        "decidedBy": "Mass Save rebate processing (Resource Innovations)",
+        "nextAction": "Ask at the assessment, or email MARebates@Resource-Innovations.com.",
+        "when": {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "renter"
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential electric account.",
+            "lastVerified": "2026-11-06"
+          },
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential gas account.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "per_ton",
+      "rate": 1125,
+      "cap": 8500
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [
+      "masssave_hp_account"
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "2026 Air Source Heat Pump Rebates",
+        "quote": "Partial-Home $1,125 per ton up to $8,500",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Eligibility",
+        "quote": "Rebate form and supporting documentation must be received by February 28, 2027.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "Only available to residences that are occupied full time during the winter heating season.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ashp_partial_home",
+    "version": "2027",
+    "programId": "masssave_heat_pumps",
+    "title": "Partial-home heat pump rebate (installed from 2027)",
+    "measure": "heat_pump",
+    "appliesTo": "each_unit",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2027-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "unit.occupiedAllWinter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "any": [
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "in",
+                  "value": [
+                    "oil",
+                    "propane",
+                    "electric_resistance"
+                  ]
+                },
+                {
+                  "fact": "building.electricIsMunicipal",
+                  "op": "eq",
+                  "value": false
+                }
+              ]
+            },
+            {
+              "all": [
+                {
+                  "fact": "unit.heatingFuel",
+                  "op": "eq",
+                  "value": "natural_gas"
+                },
+                {
+                  "fact": "building.gasUtility",
+                  "op": "in",
+                  "value": [
+                    "eversource",
+                    "national_grid",
+                    "unitil",
+                    "liberty",
+                    "berkshire_gas"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "For rented units, the landlord approves the work.",
+        "satisfiedWhen": {
+          "any": [
+            {
+              "fact": "unit.occupancy",
+              "op": "eq",
+              "value": "owner"
+            },
+            {
+              "fact": "building.ownerApproval",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/for-renters",
+            "section": "Resources for renters",
+            "quote": "While larger measures like weatherization and heating and cooling system upgrades require property owner approval, there are actions you can take on your own.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "network_installer",
+        "kind": "requirement",
+        "description": "Use a contractor in the Mass Save Heat Pump Installer Network.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "To qualify, the heat pump system must be installed by a contractor participating in the Mass Save Heat Pump Installer Network.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "cold_climate_equipment",
+        "kind": "requirement",
+        "description": "Choose ENERGY STAR Cold Climate equipment from the Mass Save qualified list.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Equipment must meet ENERGY STAR® Cold Climate.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "integrated_control",
+        "kind": "requirement",
+        "description": "Install an integrated control for zones where oil, propane or gas stays in use.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "An integrated control from the Mass Save Integrated Control Qualified Product List must be installed for heating zones where propane, oil, or natural gas will remain in use.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "tenant_account_holder",
+        "question": "The rebate is applied for with a residential electric account (replacing oil, propane or electric resistance) or a residential gas account (replacing gas). In a rental unit where the tenant holds that account and the landlord buys the heat pump, who applies?",
+        "decidedBy": "Mass Save rebate processing (Resource Innovations)",
+        "nextAction": "Ask at the assessment, or email MARebates@Resource-Innovations.com.",
+        "when": {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "renter"
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential electric account.",
+            "lastVerified": "2026-11-06"
+          },
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Eligibility",
+            "quote": "Customers must apply using a residential gas account.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "per_ton",
+      "rate": 1000,
+      "cap": 7500
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [
+      "masssave_hp_account"
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Rebates",
+        "quote": "For all The Partial-Home projects installed on or after January 1, 2027, the rebate will decrease to $1,000 per ton, capped at $7,500.",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "Only available to residences that are occupied full time during the winter heating season.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ashp_basic",
+    "version": "2026",
+    "programId": "masssave_heat_pumps",
+    "title": "Basic heat pump rebate (installed in 2026)",
+    "measure": "heat_pump",
+    "appliesTo": "each_unit",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2026-01-01",
+      "until": "2026-12-31"
+    },
+    "applicationDeadline": "2027-02-28",
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "any": [
+            {
+              "fact": "unit.heatingFuel",
+              "op": "eq",
+              "value": "heat_pump"
+            },
+            {
+              "fact": "unit.occupiedAllWinter",
+              "op": "eq",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "network_installer",
+        "kind": "requirement",
+        "description": "Use a contractor in the Mass Save Heat Pump Installer Network.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "To qualify, the heat pump system must be installed by a contractor participating in the Mass Save Heat Pump Installer Network.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "new_equipment",
+        "kind": "requirement",
+        "description": "The equipment must be new.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "Additional eligibility requirements for the Basic Rebate",
+            "quote": "Equipment must be new. There is no requirement to displace oil, propane, natural gas or electric baseboard (resistance).",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [],
+    "benefit": {
+      "type": "per_ton",
+      "rate": 250,
+      "cap": 2500
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [
+      "masssave_hp_account"
+    ],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "2026 Air Source Heat Pump Rebates",
+        "quote": "Basic $250 per ton up to $2,500",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Rebates",
+        "quote": "Basic rebates are available to customers who are NOT displacing fossil fuel or electric resistance heat in their home.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "ashp_enhanced",
+    "version": "2026",
+    "programId": "masssave_enhanced",
+    "title": "Income-based heat pump incentive: up to $16,000, or up to no cost through turnkey services (installed in 2026)",
+    "measure": "heat_pump",
+    "appliesTo": "user",
+    "dateBasis": "installation",
+    "effective": {
+      "from": "2026-10-01",
+      "until": "2026-12-31"
+    },
+    "applicationDeadline": "2027-02-28",
+    "eligibility": {
+      "all": [
+        {
+          "incomeAbove": "masssave_income_eligible_2026_27"
+        },
+        {
+          "incomeAtMost": "masssave_enhanced_2026_27"
+        },
+        {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "owner"
+        },
+        {
+          "fact": "unit.occupiedAllWinter",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "fact": "unit.heatingFuel",
+          "op": "in",
+          "value": [
+            "oil",
+            "propane",
+            "electric_resistance"
+          ]
+        },
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "network_installer",
+        "kind": "requirement",
+        "description": "Use a contractor in the Mass Save Heat Pump Installer Network.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+            "section": "How to Participate",
+            "quote": "To qualify, the heat pump system must be installed by a contractor participating in the Mass Save Heat Pump Installer Network.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "enhanced_local_limit",
+        "question": "Income limits vary by area. Does this household's income qualify where it lives?",
+        "decidedBy": "Mass Save income verification",
+        "nextAction": "Use Mass Save's online income qualification tool or call 888-714-3990.",
+        "when": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/residential/programs-and-services/income-based-offers",
+            "section": "Income Qualifications",
+            "quote": "Enter your zip code to find the household income limits specific to your area.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "percent_of_cost_capped",
+      "pct": 100,
+      "cap": 16000,
+      "costOf": "heat_pump"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "apply",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "2026 Air Source Heat Pump Rebates",
+        "quote": "Income-Based Enhanced Incentives ** Up to $16,000 or up to no cost through Turnkey Services",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Rebates footnote",
+        "quote": "Pre-existing fuel type must be oil, propane, or electric resistance.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "id": "dec_rental_heat_pump_no_cost",
+    "version": "2025_2027",
+    "programId": "masssave_dec",
+    "title": "Up to no-cost heat pump for a rental unit in a Designated Equity Community",
+    "measure": "heat_pump",
+    "appliesTo": "each_unit",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": "2027-12-31"
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "all": [
+        {
+          "fact": "building.isDec",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "fact": "unit.occupancy",
+          "op": "eq",
+          "value": "renter"
+        },
+        {
+          "fact": "unit.heatingFuel",
+          "op": "in",
+          "value": [
+            "oil",
+            "propane",
+            "electric_resistance"
+          ]
+        },
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        }
+      ]
+    },
+    "prerequisites": [
+      {
+        "id": "no_rent_increase_commitment",
+        "kind": "action",
+        "description": "The landlord signs a form committing not to raise the rent or evict for a period after receiving the incentive. The length of the period isn't published.",
+        "satisfiedWhen": null,
+        "sources": [
+          {
+            "url": "https://ma-eeac.org/wp-content/uploads/FINAL-MA-2025-2027-Plan-09-25-24-v2.pdf",
+            "section": "Section 1: Equity, designated equity communities (pp. 29–30, 117)",
+            "quote": "Landlords will be required to sign a form – like what is currently required in the Low-Income program—committing not to raise renter or evict tenants for a period following the receipt of program incentives.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "owner_approval",
+        "kind": "action",
+        "description": "The landlord approves the upgrade.",
+        "satisfiedWhen": {
+          "fact": "building.ownerApproval",
+          "op": "eq",
+          "value": true
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Offers for rental properties and landlords in Designated Equity Communities",
+            "quote": "Landlords must provide approval for upgrades.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      }
+    ],
+    "confirmations": [
+      {
+        "id": "renter_energy_burden",
+        "question": "Would a heat pump be expected to increase this renter's energy burden?",
+        "decidedBy": "the Mass Save turnkey vendor",
+        "nextAction": "Ask during the Home Energy Assessment.",
+        "when": null,
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Offers for rental properties and landlords in Designated Equity Communities",
+            "quote": "*Applies to households using delivered fuels or electric resistance heating only, and for projects where heat pumps are not expected to increase renters’ energy burden.",
+            "lastVerified": "2026-11-06"
+          }
+        ]
+      },
+      {
+        "id": "installed_before_program",
+        "question": "The heat pump is already installed. This offer is delivered turnkey, with the program coordinating and its approved contractors installing. Does an installation that is already done still qualify?",
+        "decidedBy": "Mass Save",
+        "nextAction": "Ask Mass Save (866-527-7283) before counting on it. The program does not publish an answer for installed projects.",
+        "when": {
+          "fact": "project.installed",
+          "op": "eq",
+          "value": true
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Offers for rental properties and landlords in Designated Equity Communities",
+            "quote": "A turnkey delivery experience, with project coordination and installation managed for you",
+            "lastVerified": "2026-11-07"
+          },
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Start with a no-cost Home Energy Assessment",
+            "quote": "If eligible, upgrades will be installed by approved contractors at no cost to you.",
+            "lastVerified": "2026-11-07"
+          }
+        ]
+      }
+    ],
+    "benefit": {
+      "type": "percent_of_cost",
+      "pct": 100,
+      "costOf": "heat_pump"
+    },
+    "qualification": "up_to",
+    "recipient": "property_owner",
+    "enrollment": "via_landlord",
+    "exclusiveGroup": "heat_pump",
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+        "section": "Offers for rental properties and landlords in Designated Equity Communities",
+        "quote": "Up to no-cost air source heat pumps*",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

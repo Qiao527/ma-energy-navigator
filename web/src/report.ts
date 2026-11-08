@@ -371,7 +371,7 @@ function engineering(r: Report, s: State): string {
     return `<div class="eng-col" data-floor="${e.unitId}"><h3>${FLOOR(e.unitId)}</h3><ol class="chain">${chain.join('')}</ol>${cmp}${notes}</div>`
   }).join('')
   return `<section aria-labelledby="h-eng"><h2 id="h-eng">How each number is worked out</h2>
-    <p class="lede">Each floor’s fuel records are scaled to a normal Massachusetts winter with NOAA degree days. When the boiler also heats water, the hot-water share comes out. The heat pump runs at the efficiency measured in real Massachusetts and New York homes.</p>
+    <p class="lede">Each floor’s fuel records are scaled to a normal Massachusetts winter with NOAA degree days. When the boiler also heats water, the hot-water share comes out. The heat pump runs at the efficiency measured in real Massachusetts and New York homes. The full worked example for the demo building is in the <a href="https://github.com/Qiao527/ma-energy-navigator/blob/main/docs/methods.md" target="_blank" rel="noopener">methods write-up</a>.</p>
     <div class="eng">${cols}</div></section>`
 }
 function node(label: string, value: string, note: string, e?: Estimate): string {
