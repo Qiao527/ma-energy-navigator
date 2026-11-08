@@ -163,7 +163,37 @@ export function unitEnergy(input: Input, unitId: string, list: readonly Assumpti
       if (fuelCostKept === null) notes.push('The hot-water fuel that stays on the bill is not estimated (needs fuel records and a sourced hot-water share).')
       out.hotWater = { after: 'boiler', fuelCostKept, fixedCost: find(list, `boiler_annual_service_cost.${u.heatingFuel}`) }
     } else if (u.hotWaterAfter !== null) {
-      notes.push('Switching hot water to an electric water heater is not estimated yet (no sourced water heater efficiency): the boiler fuel it saves and the electricity it uses are both left out.')
+      // The hot-water oil goes; a water heater's yearly electricity comes, on the floor's own meter, at the
+      // standard rate (it runs all year; the winter heat pump rate covers half of it, left out: conservative).
+      const share = find(list, `hot_water_share_of_fuel.${u.heatingFuel}`)
+      const price = find(list, `price.${u.heatingFuel}`)
+      const heat = find(list, `heat_content_mmbtu_per_unit.${u.heatingFuel}`)
+      const kgFuel = find(list, `co2_kg_per_mmbtu.${u.heatingFuel}`)
+      const kwh = find(list, `water_heater_annual_kwh.${u.hotWaterAfter}`)
+      const stdElec = find(list, 'price.electricity')
+      const seasons = new Map<number, number>()
+      for (const r of u.fuelRecords ?? []) seasons.set(r.year, (seasons.get(r.year) ?? 0) + r.quantity)
+      const mean = seasons.size === 0 ? null : [...seasons.values()].reduce((x, y) => x + y, 0) / seasons.size
+      if (share === null || price === null || heat === null || kgFuel === null || kwh === null || stdElec === null || mean === null) {
+        notes.push('Switching hot water to an electric water heater is not estimated (needs fuel records, a sourced hot-water share and a sourced water heater electricity use): the boiler fuel it saves and the electricity it uses are both left out.')
+      } else {
+        const gallons = scale(share.range, mean)
+        const oilCost = mul(gallons, price.range)
+        const fuelBill = combine(sub(point(0), oilCost), [share, price], 'hot-water oil no longer bought: your fuel records × the typical hot-water share')
+        const electricBill = combine(mul(kwh.range, stdElec.range), [kwh, stdElec], 'water heater electricity at the standard rate')
+        const net = combine(sub(electricBill.range, oilCost), [fuelBill, electricBill])
+        out.hotWater = { after: u.hotWaterAfter, bills: { fuelBill, electricBill, net }, meterPaidBy: u.electricPaidBy }
+        if (out.co2 !== null) {
+          const hwBefore = tonnes(mul(mul(gallons, heat.range), kgFuel.range))
+          const hwAfter = tonnes(mul(kwh.range, scale(gridLb.range, KG_PER_LB / 1000)))
+          const add = [share, heat, kgFuel, kwh, gridLb]
+          out.co2 = {
+            before: combine(sum([out.co2.before.range, hwBefore]), [out.co2.before, ...add]),
+            after: combine(sum([out.co2.after.range, hwAfter]), [out.co2.after, ...add]),
+            change: combine(sum([out.co2.change.range, sub(hwAfter, hwBefore)]), [out.co2.change, ...add]),
+          }
+        }
+      }
     }
   }
   return out

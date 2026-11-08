@@ -2,6 +2,21 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Hot water in the demo; heat pump water heater estimate)
+
+- **Demo answers** (Qiao, as recommended): each floor's boiler heats its water, and a heat pump water heater
+  takes over. Set in `web/src/demo.ts`; the standard scenario stays unchanged. — Qiao.
+- **Technical:** an electric water heater switch is now estimated when a sourced yearly electricity use exists:
+  the hot-water oil (share × mean gallons × price) goes, and kWh × the standard rate comes, on the floor's own
+  meter. CO₂ includes both. The winter heat pump rate's effect on half the year is left out (conservative).
+- **Rule draft (waiting for Qiao):** `water_heater_annual_kwh.heat_pump_water_heater` 426 / 862 / 1,534 kWh a
+  year, from Efficiency Maine's June 2026 impact evaluation (metered Maine homes). Typical: 862 kWh added where
+  the old water heater burned fuel. Low: the hot-water load at the rated UEF 3.6. High: the same load in
+  resistance mode. Confidence low. Quote check passed.
+- **Effect on the demo:** heat and hot water together, the building lands between saving $1,400 and paying $3,260
+  more a year. The page is published only after approval, because without the value the hot-water switch can't
+  be estimated.
+
 ## 2026-11-07 (Dependency updates)
 
 - **Technical:** TypeScript 7.0.2 (engine, web) and Vitest 5.1.0 (engine) applied on the branch, with all checks

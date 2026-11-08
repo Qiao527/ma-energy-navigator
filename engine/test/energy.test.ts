@@ -80,11 +80,35 @@ describe('unitEnergy: hot water (F2)', () => {
     expect(hw.fuelCostKept?.range.mid).toBeCloseTo(350 * 0.182 * 3.1, 6)
     expect(hw.fixedCost?.range).toEqual({ low: 120, mid: 135, high: 150 })
   })
-  test('electric water heater: not estimated yet (no sourced efficiency), and the note says what is left out', () => {
+  test('heat pump water heater without a sourced electricity figure: not estimated, and the note says what is left out', () => {
     const i = InputSchema.parse(input({ building: { units: [unit('1', { heatingFuel: 'oil', fuelRecords: RECS, hotWaterFromBoiler: true, hotWaterAfter: 'heat_pump_water_heater' })] } }))
     const u = unitEnergy(i, '1', LIST)
     expect(u.hotWater).toBeUndefined()
     expect(u.notes.join(' ')).toMatch(/water heater/)
+  })
+  describe('heat pump water heater with a sourced yearly electricity use', () => {
+    const HW = [...LIST, a('water_heater_annual_kwh.heat_pump_water_heater', 426, 862, 1534, 'low')]
+    const i = InputSchema.parse(input({ building: { units: [unit('1', { heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', fuelRecords: RECS, hotWaterFromBoiler: true, hotWaterAfter: 'heat_pump_water_heater' })] } }))
+    const u = unitEnergy(i, '1', HW)
+    const hw = u.hotWater
+    if (hw?.after !== 'heat_pump_water_heater') throw new Error('expected a heat pump water heater')
+    test('the hot-water oil goes (share × mean gallons × oil price) and the water heater electricity comes (kWh × standard price)', () => {
+      expect(hw.bills.fuelBill.range.low).toBeCloseTo(-350 * 0.272 * 3.43, 6)
+      expect(hw.bills.fuelBill.range.high).toBeCloseTo(-350 * 0.145 * 3.1, 6)
+      expect(hw.bills.electricBill.range.mid).toBeCloseTo(862 * 0.35, 6)
+      expect(hw.bills.electricBill.range.low).toBeCloseTo(426 * 0.33, 6)
+      expect(hw.bills.net.range.mid).toBeCloseTo(862 * 0.35 - 350 * 0.182 * 3.1, 6)
+    })
+    test('the water heater runs on the floor’s own meter', () => {
+      expect(hw.meterPaidBy).toBe('tenant')
+    })
+    test('CO₂ includes the hot-water switch: oil burned for hot water before, its grid electricity after', () => {
+      const base = unitEnergy(InputSchema.parse(input({ building: { units: [unit('1', { heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', fuelRecords: RECS, hotWaterFromBoiler: true, hotWaterAfter: null })] } })), '1', HW)
+      const oilKg = 350 * 0.182 * 0.1385 * 73.96
+      const elecKg = 862 * 537.2 * LB / 1000
+      expect((u.co2?.before.range.mid ?? 0) - (base.co2?.before.range.mid ?? 0)).toBeCloseTo(oilKg / 1000, 6)
+      expect((u.co2?.after.range.mid ?? 0) - (base.co2?.after.range.mid ?? 0)).toBeCloseTo(elecKg / 1000, 6)
+    })
   })
 })
 
