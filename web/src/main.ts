@@ -121,6 +121,7 @@ function render(announce = true): void {
   reportEl.innerHTML = reportHtml(state, view)
   if (!reduced.matches) play(old)
   syncControls()
+  $('edit-top').textContent = state.demo ? 'Check your building' : 'Edit your building'
   if (announce) {
     clearTimeout(announceTimer)
     announceTimer = window.setTimeout(() => { liveEl.textContent = document.getElementById('h-answer')?.textContent ?? '' }, 900)
@@ -130,6 +131,13 @@ function render(announce = true): void {
 const sticky = (): void => document.documentElement.style.setProperty('--sticky', `${($('whatif').getBoundingClientRect().height || 0) + 16}px`)
 window.addEventListener('resize', sticky)
 function renderForm(): void { formEl.innerHTML = formHtml(state) }
+// Phones: the what-if controls fold away so the answer comes first.
+const wiToggle = $<HTMLButtonElement>('wi-toggle')
+wiToggle.addEventListener('click', () => {
+  const open = $('whatif').classList.toggle('open')
+  wiToggle.setAttribute('aria-expanded', String(open))
+  wiToggle.textContent = open ? 'Hide the price controls ▴' : 'Try your own prices ▾'
+})
 
 // ---------- report interactions ----------
 

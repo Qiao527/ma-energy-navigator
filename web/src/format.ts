@@ -32,7 +32,7 @@ export const MEASURE: Record<string, string> = {
   financing: '0% financing', bill_assistance: 'Bill help', rooftop_solar: 'Rooftop solar', community_solar: 'Community solar', tax_credit: 'State tax credit',
 }
 export const STATUS: Record<OfferResult['status'], [string, string]> = {
-  eligible: ['Qualifies', 'ok'], potential: ['Likely; the program confirms', 'maybe'], needs_info: ['Needs an answer', 'ask'], not_eligible: ['Not eligible', 'no'],
+  eligible: ['Qualifies', 'ok'], potential: ['Likely', 'maybe'], needs_info: ['Needs an answer', 'ask'], not_eligible: ['Not eligible', 'no'],
 }
 export const QUESTION: Record<string, string> = {
   'unit.hotWaterFromBoiler': 'Does the boiler also heat this floor’s hot water?',

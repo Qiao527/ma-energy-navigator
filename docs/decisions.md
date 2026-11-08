@@ -2,6 +2,20 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-08 (Clarity pass for first-time visitors)
+
+- **Wrap-up direction:** no new features; polish so a landlord understands at a glance. — Qiao.
+- **Technical (design critique):**
+  - an "This is an example… Check your building" line on the demo, and the top button reads "Check your
+    building" (then "Edit your building");
+  - the headline leads with the likely result (typical value) and puts the range on the next line;
+  - "What if" becomes "Try your own numbers", folded behind a button on phones so the answer comes first;
+  - "Likely" replaces "Likely; the program confirms";
+  - "What to do, in order" moves ahead of the map;
+  - the price-of-heat section explains a million Btu (about 7 gallons of oil);
+  - a note every floor shares is shown once.
+  axe-core: 0 violations on desktop and phone.
+
 ## 2026-11-08 (Outside audit: three fixes)
 
 - **Town names match regardless of case and spaces** (`derive`). "boston" was not found as a Designated Equity
