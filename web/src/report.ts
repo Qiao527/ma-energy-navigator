@@ -73,14 +73,17 @@ const between = (lo: number, hi: number, f: (x: number) => string = usd): string
 
 // ---------- 1. the answer, beside the switch drawn as a mechanism ----------
 
-function headline(r: Report, s: State): { text: string; e: Estimate | null } {
+function headline(r: Report, s: State): { text: string; e: Estimate | null; range?: string } {
   if (r.buildingChange && s.input.role !== 'tenant') {
     const e = r.buildingChange
     const hw = r.units.some(u => u.hotWater && u.hotWater.after !== 'boiler')
     const costs = hw ? 'heat and hot water costs' : 'heating costs'
     if (e.range.low >= 0) return { e, text: `Heat pumps would <em>raise</em> this building’s ${costs} by ${rangeN('hl', e.range.low, e.range.high)} a year.` }
     if (e.range.high <= 0) return { e, text: `Heat pumps would <em>cut</em> this building’s ${costs} by ${rangeN('hl', -e.range.high, -e.range.low)} a year.` }
-    return { e, text: `Heat pumps would land between saving ${n('hl.lo', -e.range.low)} and paying ${n('hl.hi', e.range.high)} more a year on ${hw ? 'heat and hot water' : 'heating'}.` }
+    const range = `Anywhere from saving ${n('hl.lo', -e.range.low)} to paying ${n('hl.hi', e.range.high)} more a year, depending on prices and how well the heat pumps run.`
+    return e.range.mid >= 0
+      ? { e, range, text: `Heat pumps would probably <em>cost more</em> to run here: about ${n('hl.mid', e.range.mid)} a year more on ${hw ? 'heat and hot water' : 'heating'}.` }
+      : { e, range, text: `Heat pumps would probably <em>save</em> money here: about ${n('hl.mid', -e.range.mid)} a year on ${hw ? 'heat and hot water' : 'heating'}.` }
   }
   const mine = r.units.find(u => u.unitId === s.input.userUnitId)
   const tenant = s.input.role === 'tenant'
@@ -220,9 +223,11 @@ function hero(r: Report, s: State, v: View): string {
   const whatIf = Object.keys(v.whatIf).length > 0
   return `<section class="hero" aria-labelledby="h-answer">
     <div class="answer">
-      <p class="sheet">${esc(sheet)}${s.demo ? ' <span class="tag">demo data</span>' : ''}${whatIf ? ' <span class="tag whatif">what-if values</span>' : ''}</p>
+      ${s.demo ? `<div class="intro-line"><p><strong>This is an example:</strong> a Boston triple-decker with made-up oil records. Enter your own building to see which programs fit each floor, what heat pumps would cost to run, and who pays.</p><button type="button" data-action="edit">Check your building</button></div>` : ''}
+      <p class="sheet">${esc(sheet)}${s.demo ? ' <span class="tag">demo data</span>' : ''}${whatIf ? ' <span class="tag whatif">your numbers</span>' : ''}</p>
       <h1 id="h-answer" class="headline">${h.text}</h1>
-      ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using your what-if values.' : 'Statewide prices, winter 2025–26. Try your own in the bar above.'}</p>` : ''}
+      ${h.range ? `<p class="headline-range">${h.range}</p>` : ''}
+      ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using your own numbers.' : 'Massachusetts average prices, winter 2025–26.'}</p>` : ''}
       ${keyFigures(r)}
       ${r.landlordReason ? `<p class="muted">${esc(r.landlordReason)}</p>` : ''}
     </div>
@@ -261,7 +266,7 @@ function heatPrice(s: State, v: View): string {
   const standard = list.find(a => a.id === 'price.electricity')?.value.mid ?? 0
   const cop = list.find(a => a.id === 'heat_pump_seasonal_cop')?.value.mid ?? 0
   const lead = cur && hp
-    ? `One million Btu of heat from a heat pump costs about ${n('why.hp', hp.perMMBtu.range.mid, 'c2')}, against ${n('why.cur', cur.perMMBtu.range.mid, 'c2')} from ${SOURCE_LABEL[current].toLowerCase()}. ${hp.perMMBtu.range.mid > cur.perMMBtu.range.mid ? 'At these prices, electricity costs more than the heat pump’s efficiency saves.' : 'At these prices, the heat pump’s efficiency wins.'}`
+    ? `Heat from a heat pump costs about ${n('why.hp', hp.perMMBtu.range.mid, 'c2')} per million Btu. From ${current === 'electric_resistance' ? 'electric baseboard' : `an ${SOURCE_LABEL[current].toLowerCase()}`.replace('an propane', 'a propane').replace('an gas', 'a gas')}, about ${n('why.cur', cur.perMMBtu.range.mid, 'c2')}. ${hp.perMMBtu.range.mid > cur.perMMBtu.range.mid ? 'A heat pump is very efficient, but here electricity costs more than that efficiency makes up for.' : 'Here the heat pump’s efficiency more than makes up for the price of electricity.'}`
     : ''
   const verdict = be
     ? `<div class="be-grid">
@@ -273,7 +278,7 @@ function heatPrice(s: State, v: View): string {
     <caption>Cost per million Btu (MMBtu) of heat delivered</caption><thead><tr><th scope="col">System</th><th scope="col">Low</th><th scope="col">Typical</th><th scope="col">High</th><th scope="col">Confidence</th></tr></thead>
     <tbody>${rows.map(r => `<tr><th scope="row">${SOURCE_LABEL[r.id]}</th><td>$${num(r.perMMBtu.range.low, 2)}</td><td>$${num(r.perMMBtu.range.mid, 2)}</td><td>$${num(r.perMMBtu.range.high, 2)}</td><td>${CONF[r.perMMBtu.confidence]}${whyList(r.perMMBtu, 'Why')}</td></tr>`).join('')}</tbody></table></div></details>`
   return `<section class="band" aria-labelledby="h-why"><div class="band-text">
-      <h2 id="h-why">The price of one unit of heat</h2><p>${lead}</p>${verdict}
+      <h2 id="h-why">Why: the price of one unit of heat</h2><p>${lead}</p><p class="muted">One million Btu is about the heat in 7 gallons of heating oil.</p>${verdict}
       <p class="muted">${hpRate?.rate === 'seasonal'
         ? `Heat pump electricity is priced at the winter heat pump rate: ${fmt(standard, 'c2')}/kWh standard, ${fmt(elec, 'c2')}/kWh for a heat pump home from November to April. `
         : `${esc(hpRate?.note ?? '')} `}Test your own electricity price (the standard rate), ${fuelName(current)} price or heat pump efficiency in the bar above.</p>
@@ -410,6 +415,8 @@ function plan(r: Report): string {
 // ---------- 6. engineering notes ----------
 
 function engineering(r: Report, s: State): string {
+  // A note every floor shares is shown once, under the columns.
+  const shared = r.units.length > 1 ? (r.units[0]?.notes ?? []).filter(n => r.units.every(u => u.notes.includes(n))) : []
   const cols = r.units.map(e => {
     const u = s.input.building.units.find(x => x.id === e.unitId)
     if (!u) return ''
@@ -426,12 +433,12 @@ function engineering(r: Report, s: State): string {
     }
     if (e.co2) chain.push(node('CO₂', `${num(e.co2.before.range.mid, 1)} → ${num(e.co2.after.range.mid, 1)} t`, 'a year, typical'))
     const cmp = e.comparison ? `<p class="cmp" data-pos="${e.comparison.position}">${esc(e.comparison.message)}</p>` : ''
-    const notes = e.notes.map(n => `<p class="muted">${esc(n)}</p>`).join('')
+    const notes = e.notes.filter(n => !shared.includes(n)).map(n => `<p class="muted">${esc(n)}</p>`).join('')
     return `<div class="eng-col" data-floor="${e.unitId}"><h3>${FLOOR(e.unitId)}</h3><ol class="chain">${chain.join('')}</ol>${cmp}${notes}</div>`
   }).join('')
   return `<section aria-labelledby="h-eng"><h2 id="h-eng">How each number is worked out</h2>
     <p class="lede">Each floor’s fuel records are scaled to a normal Massachusetts winter with NOAA degree days. When the boiler also heats water, the hot-water share comes out. The heat pump runs at the efficiency measured in real Massachusetts and New York homes. The full worked example for the demo building is in the <a href="https://github.com/Qiao527/ma-energy-navigator/blob/main/docs/methods.md" target="_blank" rel="noopener">methods write-up</a>.</p>
-    <div class="eng">${cols}</div></section>`
+    <div class="eng">${cols}</div>${shared.map(n => `<p class="muted">${esc(n)}</p>`).join('')}</section>`
 }
 function node(label: string, value: string, note: string, e?: Estimate): string {
   return `<li><span class="n-label">${label}</span><span class="n-value">${value}</span><span class="n-note">${note}</span>${e ? whyList(e, 'Steps and sources') : ''}</li>`
@@ -459,5 +466,5 @@ export function reportHtml(s: State, v: View): string {
   }
   const { r, error } = compute(s, v)
   if (error || !r) return `<p class="error" role="alert">This building can’t be estimated yet: ${esc(error ?? 'unknown error')}. Check the details in “Edit the building”.</p>`
-  return `${hero(r, s, v)}${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r) : ''}${mapSection(s, v.zoom)}${plan(r)}${engineering(r, s)}${rest(r)}`
+  return `${hero(r, s, v)}${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r) : ''}${plan(r)}${mapSection(s, v.zoom)}${engineering(r, s)}${rest(r)}`
 }
