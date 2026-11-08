@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { describe, expect, test } from 'vitest'
-import { breakEven, heatCosts, report, unitEnergy, withOverrides } from '../src/energy.js'
+import { breakEven, heatCosts, heatPumpPrice, report, unitEnergy, withOverrides } from '../src/energy.js'
 import { InputSchema } from '../src/facts.js'
 import { KWH_PER_MMBTU } from '../src/finance.js'
 import { AssumptionsSchema, type Assumption } from '../src/quantities.js'
@@ -179,5 +179,52 @@ describe('report: heat pump meter option reaches the landlord view', () => {
     const r = report(i, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false, heatPumpMeter: 'owner' }, list)
     expect(r.landlord?.shiftedToTenants).toEqual([])
     expect(r.landlord?.landlordAnnual?.range.mid).toBeCloseTo(r.landlord?.realSavings?.range.mid ?? NaN, 6)
+  })
+})
+
+describe('seasonal heat pump rate: winter delivery discount by electric company', () => {
+  const RATED = [...LIST, a('heat_pump_rate_discount.eversource', 0.0783, 0.0783, 0.0783), a('heat_pump_rate_discount.national_grid', 0.0424, 0.0424, 0.0424)]
+  const at = (electricUtility: 'eversource' | 'national_grid' | 'unitil' | 'cape_light_compact' | 'municipal' | null) =>
+    InputSchema.parse(input({ userUnitId: '1', building: { electricUtility, units: [unit('1', { heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', fuelRecords: RECS, hotWaterFromBoiler: false })] } }))
+  const load = 350 * 0.1385 * 0.84
+  test('Eversource: heat pump kWh are priced at the statewide rate minus the winter discount', () => {
+    const u = unitEnergy(at('eversource'), '1', RATED)
+    expect(u.bills?.electricBill.range.mid).toBeCloseTo((load * KWH_PER_MMBTU / 2.41) * (0.35 - 0.0783), 6)
+    expect(u.bills?.electricBill.range.low).toBeCloseTo((load * KWH_PER_MMBTU / 2.8) * (0.33 - 0.0783), 6)
+    expect(u.notes.join(' ')).toMatch(/seasonal heat pump rate/)
+  })
+  test('Cape Light Compact towns are Eversource for delivery, so the same discount applies', () => {
+    expect(heatPumpPrice(RATED, 'cape_light_compact')?.rate).toBe('seasonal')
+  })
+  test('National Grid uses its own discount', () => {
+    expect(heatPumpPrice(RATED, 'national_grid')?.price.range.mid).toBeCloseTo(0.35 - 0.0424, 9)
+  })
+  test('a municipal utility, Unitil (no sourced figure yet) or an unknown company: the standard rate, and the page says why', () => {
+    for (const c of ['municipal', 'unitil', null] as const) {
+      const h = heatPumpPrice(RATED, c)
+      expect(h?.rate).toBe('standard')
+      expect(h?.price.range.mid).toBe(0.35)
+      expect(h?.note).toBeTruthy()
+    }
+    const u = unitEnergy(at('municipal'), '1', RATED)
+    expect(u.bills?.electricBill.range.mid).toBeCloseTo((load * KWH_PER_MMBTU / 2.41) * 0.35, 6)
+    expect(u.notes.join(' ')).toMatch(/municipal/i)
+  })
+  test('without the discount assumption the standard rate is used (no invented discount)', () => {
+    expect(heatPumpPrice(LIST, 'eversource')?.rate).toBe('standard')
+  })
+  test('the price of heat and the break-even efficiency use the building’s heat pump rate; the break-even price is the rate to beat', () => {
+    const hp = heatCosts(RATED, 'eversource').find(x => x.id === 'heat_pump')
+    expect(hp?.perMMBtu.range.mid).toBeCloseTo(KWH_PER_MMBTU / 2.41 * (0.35 - 0.0783), 6)
+    expect(heatCosts(RATED).find(x => x.id === 'heat_pump')?.perMMBtu.range.mid).toBeCloseTo(KWH_PER_MMBTU / 2.41 * 0.35, 6)
+    const b = breakEven(RATED, 'oil', 'eversource')
+    const oilPer = 3.1 / 0.1385 / 0.84
+    expect(b?.seasonalCop).toBeCloseTo((0.35 - 0.0783) * KWH_PER_MMBTU / oilPer, 6)
+    expect(b?.electricityPricePerKwh).toBeCloseTo(oilPer * 2.41 / KWH_PER_MMBTU, 6)
+    expect(b?.heatPumpPricePerKwh).toBeCloseTo(0.35 - 0.0783, 9)
+  })
+  test('a what-if electricity price is the standard rate; the discount still comes off it', () => {
+    const h = heatPumpPrice(withOverrides(RATED, { 'price.electricity': 0.3 }), 'eversource')
+    expect(h?.price.range.mid).toBeCloseTo(0.3 - 0.0783, 9)
   })
 })
