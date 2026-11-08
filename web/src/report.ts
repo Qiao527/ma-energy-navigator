@@ -191,7 +191,7 @@ function building(r: Report, s: State, v: View): string {
       <div class="callout">
         <p class="callout-head"><span class="floor-no">${FLOOR(u.id)}</span> ${who}${you ? ' <span class="you">you</span>' : ''}</p>
         ${lines.length ? `<ul>${lines.join('')}</ul>` : '<p class="muted">No estimate yet: add the heating fuel.</p>'}
-        ${shift ? `<p class="shift-note">${rangeN(`f${u.id}.shift`, shift.monthly.range.low, shift.monthly.range.high)} a month of heating moves to this tenant</p>` : ''}
+        ${shift ? `<p class="shift-note">${rangeN(`f${u.id}.shift`, shift.monthly.range.low, shift.monthly.range.high)} a month of ${e?.hotWater && e.hotWater.after !== 'boiler' ? 'heat and hot water cost' : 'heating'} moves to this tenant</p>` : ''}
       </div></li>`
   }).join('')
   const caption = v.mode === 'today'

@@ -35,6 +35,9 @@ No UI, no LLM.
 
 ---
 
+
+> **Phase 1 complete (2026-11-07).** All rules, assumptions and the 11 standard scenarios are approved by Qiao; the independent review's nine findings are fixed; the first public version is live.
+
 ## Milestones (decision 2026-11-06)
 
 Phase 1 runs in milestones. The lead stops after each one and reports three things to Qiao: what was done, the test results, and the next milestone.
@@ -69,7 +72,7 @@ runs TDD, then `npm run scenarios`.
   - Story 1 is preloaded and labeled "demo data" (F3).
   - Every chart has a table; WCAG 2.2 AA; works on a phone.
 
-### Follow-ups from Qiao's second M4 review (2026-11-07, not started)
+### Follow-ups from Qiao's second M4 review (2026-11-07, all done)
 
 Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then `npm run scenarios`. A changed expected result needs Qiao's approval again.
 - **F1. DEC no-cost heat pump on an installed project.** ✅ done 2026-11-07 (rule and scenario approved).
@@ -4635,12 +4638,12 @@ git commit -m "feat(analysis): reproducible MA energy burden from LEAD"
 
 ### Task 18: Full verification and review
 
-- [ ] **Step 1: Run everything**
+- [x] **Step 1: Run everything** (2026-11-07: 243 engine tests, 11 scenarios, Python tests, both builds)
 
 Run: `cd engine && npm run check && cd ../analysis && python3 -m pytest -q`
 Expected: typecheck clean; all Vitest suites pass; `3 passed` for pytest.
 
-- [ ] **Step 2: Check each principle and write the answers in the PR description**
+- [x] **Step 2: Check each principle and write the answers in the PR description**
   - Numbers only from code: every `Estimate` comes from `benefit.ts`, `finance.ts` or `quantities.ts`.
   - Ranges with confidence: no function in `engine/src` returns a bare money `number`. Every money value is an `Estimate` with `confidence` and `why`.
   - Sources: `rules-data.test.ts` passes, so every rule has a source and every reference resolves.
@@ -4648,7 +4651,7 @@ Expected: typecheck clean; all Vitest suites pass; `3 passed` for pytest.
   - Ask, don't pretend: `questions` lists the unknown user facts in both stories. `confirmations` list what only the program can confirm.
   - Prerequisites never change status. Story 1: the whole-home rebate shows `weatherized: todo` and stays `potential` (for the account-holder confirmation), not `not_eligible`. Story 2: the 100% condo tier shows "1 more unit needed" and is never `not_eligible`.
 
-- [ ] **Step 3: Request review** with requesting-code-review, then hand off for the independent end-of-phase review (CONTRIBUTING.md).
+- [x] **Step 3: Request review** (2026-11-07: independent review, 9 findings fixed; `docs/reviews/phase-1-review.md`) with requesting-code-review, then hand off for the independent end-of-phase review (CONTRIBUTING.md).
 
 ---
 

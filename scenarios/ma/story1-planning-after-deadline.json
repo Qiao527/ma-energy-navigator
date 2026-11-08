@@ -511,5 +511,8 @@
     ],
     "upcoming": []
   },
-  "approved": null
+  "approved": {
+    "by": "Qiao",
+    "on": "2026-11-07"
+  }
 }

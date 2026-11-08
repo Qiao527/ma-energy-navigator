@@ -2,6 +2,14 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Phase 1 closed)
+
+- **Approved:** the heat pump water heater electricity and the November–April season share ("批准数据"), and the
+  11 re-recorded scenario baselines ("批准场景"). Every rule, assumption and scenario is now approved. — Qiao.
+- **Phase 1 is closed.** The methods write-up and README are updated to the approved numbers. The demo now reads
+  between saving $1,250 and paying $3,530 more a year on heat and hot water. Next: messages for the other people
+  in the building (tenant → landlord, landlord → tenants), generated from engine results. — Qiao.
+
 ## 2026-11-07 (Phase 1 independent review)
 
 - **Nine findings, all confirmed and fixed** (`docs/reviews/phase-1-review.md`). Two are model changes:
