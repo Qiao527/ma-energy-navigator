@@ -18,7 +18,7 @@ const blankUnit = (id: string, occupancy: Unit['occupancy']): Unit => ({
 })
 
 export function demoState(): State {
-  return { input: InputSchema.parse(structuredClone(STORY1.input)), installDate: '', boilerNeedsReplacing: false, demo: true }
+  return { input: InputSchema.parse(structuredClone(STORY1.input)), installDate: '', boilerNeedsReplacing: false, demo: STORY1.demoData }
 }
 
 export function blankState(): State {

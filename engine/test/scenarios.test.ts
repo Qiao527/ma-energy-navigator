@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, test } from 'vitest'
 import { approvalProblems, ruleFiles } from '../src/approvals.js'
-import { loadRuleSet } from '../src/load-rules.js'
+import { loadAssumptions, loadRuleSet } from '../src/load-rules.js'
 import { diffSummaries, runScenario, ScenarioSchema } from '../src/scenarios.js'
 
 /**
@@ -20,10 +20,11 @@ describe(`standard scenarios (${pending.length} rule files still drafts${pending
     expect(approvalProblems(rulesDir)).toEqual([])
   })
   const rules = loadRuleSet(rulesDir, { requireApproval: false, overlayDir: `${rulesDir}drafts` })
+  const list = loadAssumptions(rulesDir, { requireApproval: false, overlayDir: `${rulesDir}drafts` })
   for (const f of files) {
     const s = ScenarioSchema.parse(JSON.parse(readFileSync(`${dir}${f}`, 'utf8')))
     test.skipIf(s.approved === null)(`${f}${s.approved === null ? ' (baseline waiting for Qiao’s approval)' : ''}`, () => {
-      expect(diffSummaries(s.expected, runScenario(s, rules))).toEqual([])
+      expect(diffSummaries(s.expected, runScenario(s, rules, list))).toEqual([])
     })
   }
 })

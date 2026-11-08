@@ -2,6 +2,15 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (F3, F4)
+
+- **Technical (F3):** `demoData` is a required field on every scenario; all ten are invented buildings, so all are
+  `true`. The page's demo label reads it.
+- **Technical (F4):** scenario fixture quantities are removed. Each run computes costs and heat pump size with
+  `quantitiesFor` from the assumptions in force, so an assumption change now shows in the scenarios. Re-recording
+  changed only heat pump rebate amounts (no eligibility, question or order changed); the ten baselines wait for
+  Qiao's re-approval.
+
 ## 2026-11-07 (Hot water in the demo; heat pump water heater estimate)
 
 - **Demo answers** (Qiao, as recommended): each floor's boiler heats its water, and a heat pump water heater

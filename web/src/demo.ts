@@ -7,6 +7,7 @@ import story1 from '../../scenarios/ma/story1-owner-occupant.json'
  */
 export const STORY1 = {
   title: 'Demo: an owner-occupied Boston triple-decker',
+  demoData: story1.demoData,
   story: `${story1.story} Each boiler also heats that floor's water; with heat pumps, a heat pump water heater takes over.`,
   input: {
     ...story1.input,

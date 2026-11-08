@@ -97,10 +97,10 @@ Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then
     - Landlord view, `UnitProject.hotWater`:
       - `{ after: 'boiler', fuelCostKept }` → the unit is listed in `boilerKept` with the kept hot-water fuel cost and the boiler's fixed cost (or the reason there is none). Totals don't change: the bill change covers space heating only, and the fixed cost is paid before and after.
       - `{ after: electric, bills, meterPaidBy? }` → the water heater's bill changes are added to the unit's bills. The meter defaults to the heat pump's meter. If the landlord paid the boiler fuel and a tenant pays the water heater's meter, it's a shifted cost (105 CMR 410.210 names oil "for heating and/or hot water").
-- **F3. Demo-data label.**
+- **F3. Demo-data label.** ✅ done 2026-11-07: every scenario carries `demoData: true` (schema-required); the page labels the demo from it.
   - Scenario and fixture inputs with fictional records carry a machine-readable `demoData: true`.
   - The UI (Phase 4) and the README (when written) say "demo data" wherever those numbers appear.
-- **F4.** After Qiao approves batch 1: switch the scenarios to computed quantities (re-approval), then batch 2.
+- **F4.** ✅ done 2026-11-07: scenarios use quantities computed from the assumptions in force; only heat pump rebate amounts changed, re-approval pending.
 
 ### Task 12b (M4): Rule drafting workflow — scope
 

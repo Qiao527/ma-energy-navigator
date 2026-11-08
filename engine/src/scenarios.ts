@@ -1,46 +1,26 @@
 import { z } from 'zod'
-import type { Quantities } from './benefit.js'
-import type { Estimate } from './estimate.js'
+import { InputSchema } from './facts.js'
 import { navigate, type NavigateResult } from './navigate.js'
-import { range } from './range.js'
-import { Measure, type RuleSet } from './rules-schema.js'
+import { quantitiesFor, type Assumption } from './quantities.js'
+import type { RuleSet } from './rules-schema.js'
 
-/** A standard scenario (product.md §6a): fixed input, fixed dates, fixed quantities, and the expected summary. */
-const EstimateJson = z.strictObject({
-  low: z.number(), mid: z.number(), high: z.number(), confidence: z.enum(['low', 'medium', 'high']), why: z.string().min(1),
-})
+/**
+ * A standard scenario (product.md §6a): fixed input and dates, and the expected summary. Quantities (costs, heat
+ * pump size) are computed by the engine from the assumptions in force (F4), so an assumption change shows up here.
+ */
 export const ScenarioSchema = z.strictObject({
   id: z.string().regex(/^[a-z0-9-]+$/),
   title: z.string().min(1),
   story: z.string().min(1),
+  /** The building and its records are invented for testing and demos; never present them as real (F3). */
+  demoData: z.boolean(),
   input: z.unknown(),
   options: z.strictObject({ asOf: z.iso.date(), installDate: z.iso.date().nullable() }),
-  quantities: z.strictObject({
-    cost: z.partialRecord(Measure, EstimateJson),
-    heatPumpTons: EstimateJson.nullable(),
-    solarKwhPerYear: EstimateJson.nullable(),
-    communitySolarCreditsPerYear: EstimateJson.nullable(),
-  }),
   expected: z.unknown().nullable(),
   /** Qiao's approval of this exact `expected`. Cleared whenever a re-record changes it (CONTRIBUTING.md). */
   approved: z.strictObject({ by: z.string().min(1), on: z.iso.date() }).nullable().default(null),
 })
 export type Scenario = z.infer<typeof ScenarioSchema>
-
-const toEstimate = (e: z.infer<typeof EstimateJson> | null): Estimate | null =>
-  e === null ? null : { range: range(e.low, e.mid, e.high), confidence: e.confidence, why: [e.why] }
-
-function quantitiesOf(s: Scenario): Quantities {
-  const cost: Quantities['cost'] = {}
-  for (const [m, e] of Object.entries(s.quantities.cost)) if (e) cost[m as Measure] = toEstimate(e) ?? undefined
-  return {
-    cost,
-    heatPumpTons: toEstimate(s.quantities.heatPumpTons),
-    solarKwhPerYear: toEstimate(s.quantities.solarKwhPerYear),
-    communitySolarCreditsPerYear: toEstimate(s.quantities.communitySolarCreditsPerYear),
-    heatLoadMMBtu: null,
-  }
-}
 
 const r2 = (x: number): number => Math.round(x * 100) / 100
 
@@ -75,9 +55,9 @@ export function summarize(r: NavigateResult): unknown {
   }
 }
 
-export function runScenario(s: Scenario, rules: RuleSet): unknown {
-  const q = quantitiesOf(s)
-  return summarize(navigate(s.input, rules, s.options, () => q))
+export function runScenario(s: Scenario, rules: RuleSet, list: readonly Assumption[]): unknown {
+  const input = InputSchema.parse(s.input)
+  return summarize(navigate(input, rules, s.options, quantitiesFor(input, list)))
 }
 
 /** Human-readable differences between the expected and actual summary (empty = scenario passes). */
