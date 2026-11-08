@@ -50,7 +50,7 @@ export function mapSection(s: State, zoom: 'state' | 'local'): string {
     : town ? `We couldn’t find “${esc(town)}” among Massachusetts’ 351 cities and towns. Check the spelling.` : 'Enter the city or town to place the building on the map.'
 
   return `<section class="map-band" aria-labelledby="h-map">
-    <div class="band-text"><h2 id="h-map">Where extra help reaches</h2><p>${summary}</p>
+    <div class="band-text"><h2 id="h-map">Where extra help is available</h2><p>${summary}</p>
       <ul class="map-legend">
         <li><span class="key dec" aria-hidden="true"></span>Designated Equity Community: enhanced offers for everyone who lives there</li>
         <li><span class="key part" aria-hidden="true"></span>Designated in its Environmental Justice block groups only, for some utilities</li>

@@ -117,7 +117,8 @@ function keyFigures(r: Report): string {
   if (L) out.push(fig(rangeN('up', L.netUpfront.range.low, L.netUpfront.range.high), L.incentivesKnown ? `upfront after ${between(L.incentivesKnown.range.low, L.incentivesKnown.range.high)} in rebates` : 'upfront; rebate amount not known yet', '', L.netUpfront))
   if (L?.paybackYears) out.push(fig(`${rangeN('pb', L.paybackYears.range.low, L.paybackYears.range.high, 'n0')}<small> yrs</small>`, 'payback on real savings', '', L.paybackYears))
   else if (L?.realSavings && r.buildingChange && r.buildingChange.range.high > 0) out.push(fig('No payback', 'running costs may rise at these prices', '', r.buildingChange))
-  if (r.co2Total) out.push(fig(`−${rangeN('co2', -r.co2Total.change.range.high, -r.co2Total.change.range.low, 'n1')}<small> t CO₂/yr</small>`, `from about ${num(r.co2Total.before.range.mid, 0)} t today`, 'co2', r.co2Total.change))
+  if (r.co2Total && r.co2Total.change.range.high < 0) out.push(fig(`${rangeN('co2', -r.co2Total.change.range.high, -r.co2Total.change.range.low, 'n1')}<small> tonnes</small>`, `less CO₂ a year, from about ${num(r.co2Total.before.range.mid, 0)} tonnes today`, 'co2', r.co2Total.change))
+  else if (r.co2Total) out.push(fig(`${signedN('co2', r.co2Total.change)}<small> tonnes</small>`, `change in CO₂ a year, from about ${num(r.co2Total.before.range.mid, 0)} tonnes today`, 'co2', r.co2Total.change))
   return out.length ? `<dl class="figures">${out.join('')}</dl>` : ''
 }
 
@@ -408,8 +409,8 @@ function plan(r: Report): string {
   const upcoming = r.navigation.upcoming.filter(u => !seen.has(u.offerId) && seen.add(u.offerId))
     .map(u => `<li>From ${esc(u.from)}: ${esc(OFFERS.get(`${u.offerId}@${u.version}`)?.title ?? u.offerId)}</li>`).join('')
   return `<section aria-labelledby="h-plan"><h2 id="h-plan">What to do, in order</h2>
-    <p class="lede">The programs decide eligibility. This shows what their published rules say, and what only they can confirm.</p><ol class="steps">${steps}</ol>
-    ${upcoming ? `<div class="upcoming"><h3>Changes already announced</h3><p class="muted">These replace today’s versions for installations from the date shown. Add your install date in “Edit the building” to see which applies.</p><ul>${upcoming}</ul></div>` : ''}</section>`
+    <p class="lede">Each program makes the final call. This is what their published rules say, and what you’ll need to check with them.</p><ol class="steps">${steps}</ol>
+    ${upcoming ? `<div class="upcoming"><h3>Changes already announced</h3><p class="muted">These replace today’s versions for anything installed from that date on. Add your install date (Edit your building) to see which one applies to you.</p><ul>${upcoming}</ul></div>` : ''}</section>`
 }
 
 // ---------- 6. engineering notes ----------
@@ -450,11 +451,11 @@ function rest(r: Report): string {
   const qs = r.navigation.questions
   const ids = new Set(r.navigation.shown.flatMap(x => { const o = OFFERS.get(`${x.offerId}@${x.version}`); return o ? [o.programId] : [] }))
   const ps = [...ids].flatMap(id => { const p = PROGRAMS.get(id); return p ? [p] : [] })
-  const questions = qs.length ? `<div><h3>Answers that would sharpen this</h3><ul class="plain">${qs.map(q => `<li>${esc(QUESTION[q.fact] ?? q.fact)}${q.unitId ? ` <span class="muted">${FLOOR(q.unitId)}${q.about === 'other_unit' ? ', ask the household' : ''}</span>` : ''}</li>`).join('')}</ul></div>` : ''
+  const questions = qs.length ? `<div><h3>Questions that would make this more precise</h3><ul class="plain">${qs.map(q => `<li>${esc(QUESTION[q.fact] ?? q.fact)}${q.unitId ? ` <span class="muted">${FLOOR(q.unitId)}${q.about === 'other_unit' ? ', ask the household' : ''}</span>` : ''}</li>`).join('')}</ul></div>` : ''
   const contacts = ps.length ? `<div><h3>Who to call next</h3><ul class="plain contacts">${ps.map(p => `<li><span>${esc(p.name)}</span><span>${p.handoff.phone ? `<span class="phone">${esc(p.handoff.phone)}</span> · ` : ''}<a href="${esc(p.handoff.url)}" target="_blank" rel="noopener">${esc(p.handoff.label)}</a></span></li>`).join('')}</ul></div>` : ''
   const rows = DATA.assumptions.map(a => `<tr><th scope="row">${esc(a.description)}</th><td class="nowrap">${a.value.low === a.value.high ? a.value.mid : `${a.value.low} / ${a.value.mid} / ${a.value.high}`} <span class="muted">${esc(a.unit)}</span></td><td>${CONF[a.confidence]}</td><td>${a.sources.slice(0, 2).map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.section)}</a> <span class="muted">${x.lastVerified}</span>`).join('<br>')}</td></tr>`).join('')
   return `<section class="two" aria-label="Next steps">${questions}${contacts}</section>
-    <section aria-labelledby="h-src"><h2 id="h-src" class="small-h">Every number has a source</h2><details class="data"><summary>All ${DATA.assumptions.length} assumptions, with their sources and the date each was checked</summary>
+    <section aria-labelledby="h-src"><h2 id="h-src" class="small-h">Where every number comes from</h2><details class="data"><summary>All ${DATA.assumptions.length} assumptions, with their sources and the date each was checked</summary>
     <div class="table-wrap"><table><caption>Low / typical / high</caption><thead><tr><th scope="col">What</th><th scope="col">Value</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>${rows}</tbody></table></div></details></section>`
 }
 

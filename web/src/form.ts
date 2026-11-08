@@ -67,24 +67,51 @@ function unitForm(u: Unit, i: number, condo: boolean): string {
   const records = recUnit
     ? `<fieldset class="sub"><legend>Fuel used, from delivery records or bills</legend><div class="grid2">${SEASONS.map(y =>
         numberField(`${id}-rec${y}`, `${p}.records.${y}`, `Winter ${y}–${String(y + 1).slice(2)}`, season(y), recUnit)).join('')}</div>
-        <p class="hint">Add up every delivery or bill from July to June. Two winters give medium confidence; leave blank to use typical Massachusetts homes instead.</p></fieldset>`
+        <p class="hint">Add up every delivery or bill from July to June. Two winters make the estimate firmer. Leave it blank and the page uses typical Massachusetts homes.</p></fieldset>`
     : ''
   const burns = u.heatingFuel === 'oil' || u.heatingFuel === 'natural_gas' || u.heatingFuel === 'propane' || u.fuelRecords !== null
   const hotWater = burns
     ? `<div class="grid2">${select(`${id}-hw`, `${p}.hotWaterFromBoiler`, 'Does the boiler also heat the hot water?', YES_NO, triVal(u.hotWaterFromBoiler), 'tri', true)}${
-        u.hotWaterFromBoiler ? select(`${id}-hwa`, `${p}.hotWaterAfter`, 'After the heat pump, hot water comes from', [['boiler', 'The same boiler'], ['electric_resistance', 'An electric water heater'], ['heat_pump_water_heater', 'A heat pump water heater']], u.hotWaterAfter) : ''}</div>`
+        u.hotWaterFromBoiler ? select(`${id}-hwa`, `${p}.hotWaterAfter`, 'After the heat pump, hot water comes from', [['boiler', 'The same boiler'], ['electric_resistance', 'An electric water heater'], ['heat_pump_water_heater', 'A heat pump water heater']], u.hotWaterAfter, 'enum', true) : ''}</div>`
     : ''
   return `<fieldset class="unit"><legend>${FLOOR(u.id)}</legend>
     <div class="grid2">
       ${select(`${id}-occ`, `${p}.occupancy`, 'Who lives here', [['owner', 'The owner'], ['renter', 'A renter']], u.occupancy, 'enum', true)}
       ${select(`${id}-fuel`, `${p}.heatingFuel`, 'Heating today', FUELS, u.heatingFuel, 'enum', true)}
-      ${select(`${id}-heat`, `${p}.heatPaidBy`, 'Who pays for heat', [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], u.heatPaidBy)}
-      ${select(`${id}-elec`, `${p}.electricPaidBy`, 'Who pays electricity', [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], u.electricPaidBy)}
-      ${select(`${id}-winter`, `${p}.occupiedAllWinter`, 'Lived in all winter', YES_NO, triVal(u.occupiedAllWinter), 'tri')}
+      ${select(`${id}-heat`, `${p}.heatPaidBy`, 'Who pays for heat', [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], u.heatPaidBy, 'enum', true)}
+      ${select(`${id}-elec`, `${p}.electricPaidBy`, 'Who pays electricity', [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], u.electricPaidBy, 'enum', true)}
+      ${select(`${id}-winter`, `${p}.occupiedAllWinter`, 'Lived in all winter', YES_NO, triVal(u.occupiedAllWinter), 'tri', true)}
       ${numberField(`${id}-tons`, `${p}.heatPumpTonsQuoted`, 'Heat pump size from a quote', u.heatPumpTonsQuoted, 'tons', 'num', 'Optional. Otherwise sized from similar homes.')}
     </div>${records}${hotWater}${condo ? `<div class="grid2">
       ${select(`${id}-meter`, `${p}.hasResidentialHeatingMeter`, 'Has its own residential heating meter', YES_NO, triVal(u.hasResidentialHeatingMeter), 'tri')}
       ${select(`${id}-join`, `${p}.participating`, 'Takes part in the all-units insulation offer', YES_NO, triVal(u.participating), 'tri')}</div>` : ''}</fieldset>`
+}
+
+/** One answer for every floor, when the floors agree. Shows the shared value, or "Mixed" when they differ. */
+const SHARED: { field: keyof Unit; label: string; pairs: [string, string][]; kind: Kind }[] = [
+  { field: 'heatingFuel', label: 'Heating today', pairs: FUELS, kind: 'enum' },
+  { field: 'heatPaidBy', label: 'Who pays for heat', pairs: [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], kind: 'enum' },
+  { field: 'electricPaidBy', label: 'Who pays electricity', pairs: [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], kind: 'enum' },
+  { field: 'hotWaterFromBoiler', label: 'Does the boiler also heat the hot water?', pairs: YES_NO, kind: 'tri' },
+  { field: 'occupiedAllWinter', label: 'Lived in all winter', pairs: YES_NO, kind: 'tri' },
+]
+function sharedForm(units: Unit[]): string {
+  const value = (f: keyof Unit): string | null | 'mixed' => {
+    const vs = units.map(u => { const v = u[f]; return typeof v === 'boolean' ? (v ? 'yes' : 'no') : (v as string | null) })
+    return vs.every(v => v === vs[0]) ? (vs[0] ?? null) : 'mixed'
+  }
+  const list = value('hotWaterFromBoiler') === 'yes'
+    ? [...SHARED.slice(0, 4), { field: 'hotWaterAfter' as const, label: 'After the heat pump, hot water comes from', pairs: [['boiler', 'The same boiler'], ['electric_resistance', 'An electric water heater'], ['heat_pump_water_heater', 'A heat pump water heater']] as [string, string][], kind: 'enum' as Kind }, ...SHARED.slice(4)]
+    : SHARED
+  const fields = list.map(({ field, label, pairs, kind }) => {
+    const v = value(field)
+    const id = `all-${field}`
+    const options = v === 'mixed' ? `<option value="" selected disabled>Differs by floor</option>${opt([['', 'Not sure'], ...pairs], '-')}` : opt([['', 'Not sure'], ...pairs], v)
+    return `<div class="field"><label for="${id}">${label}</label><select id="${id}" data-path="allUnits.${field}" data-kind="${kind}" data-structural>${options}</select></div>`
+  }).join('')
+  return `<fieldset class="unit shared"><legend>Every floor</legend>
+    <p class="hint">Answer once here if it’s the same on every floor. You can still change a single floor below.</p>
+    <div class="grid2">${fields}</div></fieldset>`
 }
 
 export function formHtml(s: State): string {
@@ -120,6 +147,7 @@ export function formHtml(s: State): string {
     ${select('wx', 'building.weatherizationRecsDone', 'Recommended insulation done', YES_NO, triVal(b.weatherizationRecsDone), 'tri')}
     ${select('approve', 'building.ownerApproval', 'The owner approves the upgrades', YES_NO, triVal(b.ownerApproval), 'tri')}
   </div></fieldset>
+  ${b.units.length > 1 ? sharedForm(b.units) : ''}
   ${units}
   <fieldset><legend>The project</legend><div class="grid2">
     <div class="field"><label for="install">Planned install date</label><input id="install" type="date" data-path="installDate" data-kind="text" value="${s.installDate}"></div>
@@ -158,6 +186,11 @@ export function setPath(s: State, path: string, kind: Kind, value: string): void
     const rest = (u.fuelRecords ?? []).filter(r => r.year !== year && r.unit === unit)
     const all = v === null || !(Number(v) >= 0) ? rest : [...rest, { year, quantity: Number(v), unit }]
     u.fuelRecords = all.length === 0 ? null : all.sort((a, b) => a.year - b.year)
+    return
+  }
+  const all = path.match(/^allUnits\.(\w+)$/)
+  if (all) {
+    for (let i = 0; i < s.input.building.units.length; i++) setPath(s, `building.units.${i}.${all[1]}`, kind, value)
     return
   }
   const keys = path.split('.')
