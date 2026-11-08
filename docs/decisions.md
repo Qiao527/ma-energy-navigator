@@ -2,6 +2,14 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Standard scenarios approved)
+
+- **Nine scenario baselines approved** (`approved: {by: Qiao}`); `npm run scenarios` now checks them. — Qiao.
+- **`story1-installed-deadline-passed` held:** an installed project still shows the DEC no-cost rental heat pump
+  as potential, which needs enrollment before installation. It is re-recorded and re-reviewed after F1. — Qiao.
+- **Tenant view keeps one free weatherization offer per unit** (best-of): an income-eligible tenant sees the
+  rental-unit 100% insulation offer, not also Income Eligible weatherization. — Qiao (kept as recommended).
+
 ## 2026-11-07 (Positioning: an energy engineering portfolio; first public version today)
 
 - **The project stays a portfolio project, now framed as an energy engineering portfolio.** Why: the goal is
