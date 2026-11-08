@@ -2,7 +2,7 @@
 
 Newest first. Format: date — decision — why — decided by.
 
-## 2026-11-07 (Seasonal heat pump rate, drafted)
+## 2026-11-07 (Seasonal heat pump rate)
 
 - **Technical:** heat pump electricity is priced at the standard statewide rate minus the electric company's
   winter heat pump discount (`heatPumpPrice`, engine). Eversource (and Cape Light Compact towns, which Eversource
@@ -13,8 +13,8 @@ Newest first. Format: date — decision — why — decided by.
   discount on the household's other winter electricity is left out (conservative).
 - **Effect on Story 1 (Boston, Eversource):** the answer moves from "+$870–4,820 a year" to "between saving $550
   and paying $2,690 more". A heat pump's heat costs about $33 per MMBtu against $27 from oil.
-- **Status:** the two assumptions are drafts (`rules/ma/drafts/assumptions.json`, quote check passed) waiting for
-  Qiao's approval. Until then the public page uses the standard rate.
+- **Approved:** the two assumptions (quote check passed) moved into `rules/ma/assumptions.json`; approval run at
+  Qiao's instruction ("好"). — Qiao.
 
 ## 2026-11-07 (Standard scenarios approved)
 
