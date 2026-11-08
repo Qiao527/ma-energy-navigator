@@ -512,10 +512,7 @@ Based on `docs/review-notes.md`.
 - **Docs mark statements as Decided / Proposed / Open** so later work can refine
   without discarding agreed decisions. — Qiao.
 
-## 2026-11-07 — License, public repository, attribution
+## 2026-11-07 (License and public repository)
 
-- **Decision:** The code is MIT licensed (© Qiao Long); data keeps its own terms. The repository becomes public.
-  Commits and pull requests carry no AI co-author trailer or "Generated with" footer; existing trailers were
-  removed from history before the repository went public.
-- **Why:** Qiao's portfolio, published under Qiao's name.
-- **Who:** Qiao.
+- **The code is MIT licensed** (© Qiao Long); data and quoted program text keep their own terms. — Qiao.
+- **The repository is public**, with `CONTRIBUTING.md` holding the working rules. — Qiao.

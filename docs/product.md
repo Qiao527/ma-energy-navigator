@@ -398,10 +398,10 @@ For the README / pitch:
 
 | Layer | Choice | Status | Why |
 |---|---|---|---|
-| Rules engine + finance | TypeScript package `engine/`, Node 24 LTS, Zod 4 for rules-data validation, Vitest + fast-check | [Decided 2026-11-06] | Same language as the app, so the browser and server share one engine. Zod gives types and runtime checks from one schema. fast-check covers the property tests in `docs/tooling.md`. Versions are pinned in `docs/phase-1-plan.md` |
+| Rules engine + finance | TypeScript package `engine/`, Node 24 LTS, Zod 4 for rules-data validation, Vitest + fast-check | [Decided 2026-11-06] | Same language as the app, so the browser and server share one engine. Zod gives types and runtime checks from one schema. fast-check covers the property tests. Versions are pinned in `docs/phase-1-plan.md` |
 | Rules data | JSON files in `rules/ma/`, one folder per state; schema in `docs/schema/rules-schema.md` | [Decided 2026-11-06] | Policy edits are data edits plus tests. Schema merged from two independent designs |
 | Data analysis | Python scripts in `analysis/` (standard library first) | [Proposed] | LEAD and MassGIS work is tabular/geospatial; it stays out of the app |
-| App | Next.js 16 (App Router) + TypeScript + Tailwind | [Proposed — confirm in Phase 3] | Server routes for the engine and LLM API calls; static pages for the demo. Mind Next.js writing its own CONTRIBUTING.md (tooling.md caveat) |
+| App | Next.js 16 (App Router) + TypeScript + Tailwind | [Proposed — confirm in Phase 3] | Server routes for the engine and LLM API calls; static pages for the demo. |
 | Charts | Hand-built SVG with D3 scales, each chart paired with a data table | [Proposed — confirm in Phase 3] | Only 4–5 simple charts. Hand-built SVG gives full control over WCAG 2.2 (text alternatives, patterns as well as colour, keyboard focus). Alternatives: Observable Plot (faster, weaker accessibility control), Recharts |
 | Map | MapLibre GL | [Proposed] | Supporting role only (confirm the building, show the roof); open source, no per-view fee |
 | LLM | LLM API, model chosen in Phase 2 | [Decided — provider; Open — model] | Explanations, form pre-fill and message drafts only |

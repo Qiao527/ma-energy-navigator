@@ -91,7 +91,7 @@ All 47 assumptions and every rule are listed in the page, with links and the dat
   assumptions.
 
 Decisions and their reasons are logged in [`docs/decisions.md`](docs/decisions.md); the product definition is in
-[`docs/product.md`](docs/product.md).
+[`docs/product.md`](docs/product.md); the working rules are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Repository
 
