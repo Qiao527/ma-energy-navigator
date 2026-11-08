@@ -2,6 +2,12 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Dependency updates)
+
+- **Technical:** TypeScript 7.0.2 (engine, web) and Vitest 5.1.0 (engine) applied on the branch, with all checks
+  passing; Dependabot PRs #3, #4 and #5 closed as superseded. `@types/node` stays on 24 to match the Node 24
+  runtime: PR #2 closed, and Dependabot now skips its major updates.
+
 ## 2026-11-07 (F1: an offer arranged before installation, on an installed project)
 
 - **Technical:** new fact `project.installed` (install date on or before today). A confirmation can use it in
