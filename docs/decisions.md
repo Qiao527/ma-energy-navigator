@@ -12,12 +12,11 @@ Newest first. Format: date — decision — why — decided by.
 
 - **Technical:** new fact `project.installed` (install date on or before today). A confirmation can use it in
   `when`; on an installed project, offers carrying such a confirmation sort after the others in `shown`.
-- **Rule draft (waiting for Qiao):** `dec_rental_heat_pump_no_cost` gains the confirmation
+- **Rule:** `dec_rental_heat_pump_no_cost` gains the confirmation
   `installed_before_program`. The offer is turnkey ("project coordination and installation managed for you";
   "installed by approved contractors"), and whether finished work qualifies isn't published, so it stays
   potential with "ask Mass Save before counting on it". Quote check passed.
-- **Scenario:** `story1-installed-deadline-passed` re-recorded with the new confirmation; waiting for Qiao's
-  approval together with the rule.
+- **Approved** (rule and scenario) at Qiao's instruction ("批准F1"). All 11 standard scenarios are now approved. — Qiao.
 
 ## 2026-11-07 (Seasonal heat pump rate)
 
