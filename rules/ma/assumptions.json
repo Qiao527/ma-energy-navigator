@@ -1,0 +1,602 @@
+[
+  {
+    "id": "heat_pump_cost_per_ton",
+    "description": "Installed cost of a ductless mini-split heat pump per ton in Massachusetts (Mass Save projects with only heat pump work, 2021–22, January 2024 dollars); range = mean ± 1 standard deviation",
+    "unit": "USD per ton",
+    "value": {
+      "low": 3694,
+      "mid": 5664,
+      "high": 7634
+    },
+    "confidence": "medium",
+    "sampleSize": 376,
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/MA23X14-B-RHPINV-Residential-Heat-Pump-Invoice-Cost-Study-Web.pdf",
+        "section": "Table 6: Ductless MSHP – Project Scope Cost Dependency (Jan. 2024$/ton)",
+        "quote": "Ductless MSHP only Multiple Measures n 376 31 Mean $5,664 $6,546 Standard Deviation $1,970 $3,104",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "oil_boiler_replacement_cost_per_ton",
+    "description": "Cost of a new baseline oil boiler per ton (inflation adjusted), for the 'boiler needs replacing anyway' comparison; your own quote replaces it",
+    "unit": "USD per ton",
+    "value": {
+      "low": 920,
+      "mid": 920,
+      "high": 920
+    },
+    "confidence": "low",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Oil Boiler - - 0.84 AFUE $920",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "boiler_annual_service_cost.oil",
+    "description": "Annual oil burner tune-up and cleaning if not in a service contract (DOER, 2017 dollars; range = the published $120–150, mid = its midpoint). It stays as long as the boiler stays, for example to heat hot water",
+    "unit": "USD per year",
+    "value": {
+      "low": 120,
+      "mid": 135,
+      "high": 150
+    },
+    "confidence": "low",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/doc/consumer-tip-sheet-oil-heat-maintenance/download",
+        "section": "1. What kind of maintenance does my oil burner require?",
+        "quote": "Your oil burner should have an annual tune-up and cleaning. If this is not included in your contract it will cost approximately $120-150.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_efficiency.oil",
+    "description": "Efficiency of a new baseline oil boiler (AFUE 0.84); an older boiler is probably less efficient",
+    "unit": "fraction",
+    "value": {
+      "low": 0.84,
+      "mid": 0.84,
+      "high": 0.84
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Oil Boiler - - 0.84 AFUE $920",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_efficiency.natural_gas",
+    "description": "Efficiency of a new baseline gas boiler (AFUE 0.82); an older boiler is probably less efficient",
+    "unit": "fraction",
+    "value": {
+      "low": 0.82,
+      "mid": 0.82,
+      "high": 0.82
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Natural Gas Boiler - - 0.82 AFUE $1,201",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_efficiency.propane",
+    "description": "Efficiency of a new baseline propane boiler (AFUE 0.82); an older boiler is probably less efficient",
+    "unit": "fraction",
+    "value": {
+      "low": 0.82,
+      "mid": 0.82,
+      "high": 0.82
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf",
+        "section": "Table 3: Equipment Cost Per Ton Summary",
+        "quote": "RES19 Propane Boiler - - 0.82 AFUE $1,331",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.oil",
+    "description": "Heat content of heating oil: 138,500 Btu per gallon",
+    "unit": "MMBtu per gallon",
+    "value": {
+      "low": 0.1385,
+      "mid": 0.1385,
+      "high": 0.1385
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "Heating oil 1 gallon=138,500 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.propane",
+    "description": "Heat content of propane: 91,452 Btu per gallon",
+    "unit": "MMBtu per gallon",
+    "value": {
+      "low": 0.091452,
+      "mid": 0.091452,
+      "high": 0.091452
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "Propane 1 gallon=91,452 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.natural_gas",
+    "description": "Heat content of natural gas: 100,000 Btu per therm",
+    "unit": "MMBtu per therm",
+    "value": {
+      "low": 0.1,
+      "mid": 0.1,
+      "high": 0.1
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "1 therm=100,000 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_content_mmbtu_per_unit.electric_resistance",
+    "description": "Electricity: 3,412 Btu per kilowatthour",
+    "unit": "MMBtu per kWh",
+    "value": {
+      "low": 0.003412,
+      "mid": 0.003412,
+      "high": 0.003412
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+        "section": "Sample Btu conversion factors",
+        "quote": "Electricity 1 kilowatthour=3,412 Btu",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "price.oil",
+    "description": "Massachusetts retail heating oil, statewide average (DOER): this winter's projection, up to last winter's average. Your dealer's price may differ",
+    "unit": "USD per gallon",
+    "value": {
+      "low": 3.1,
+      "mid": 3.1,
+      "high": 3.43
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/massachusetts-household-heating-costs",
+        "section": "Heating Oil",
+        "quote": "DOER estimates that retail heating oil in Massachusetts will average $3.10 per gallon this winter, down from $3.43 per gallon last winter.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "price.propane",
+    "description": "Massachusetts retail propane, statewide average (DOER): this winter's projection, up to last winter's average. Your dealer's price may differ",
+    "unit": "USD per gallon",
+    "value": {
+      "low": 3.17,
+      "mid": 3.17,
+      "high": 3.33
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/massachusetts-household-heating-costs",
+        "section": "Propane",
+        "quote": "For the 2025-26 winter season, DOER projects that retail propane prices will average $3.17/gallon, compared to $3.33 /gallon in the 2024/25 winter season",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "price.natural_gas",
+    "description": "Massachusetts residential natural gas, load-weighted statewide average (DOER): this winter's projection, up to last winter's. Your gas company's rate may differ",
+    "unit": "USD per therm",
+    "value": {
+      "low": 2.03,
+      "mid": 2.03,
+      "high": 2.24
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/massachusetts-household-heating-costs",
+        "section": "Natural Gas",
+        "quote": "For the 2025–26 winter season, DOER projects retail natural gas prices will average about $2.03 per therm, down from $2.24 last year.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "price.electricity",
+    "description": "Massachusetts statewide average electric rate (DOER): last winter to this winter's projection. The new winter heat pump rate lowers delivery charges for heat pump households, so heat pump costs here may be a little high",
+    "unit": "USD per kWh",
+    "value": {
+      "low": 0.33,
+      "mid": 0.35,
+      "high": 0.35
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/massachusetts-household-heating-costs",
+        "section": "Electricity",
+        "quote": "For the 2025–26 winter season, DOER projects the statewide average electric utility rate to be about $0.35 per kilowatt-hour (kWh). This is slightly higher than last year’s $0.33/kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/massachusetts-household-heating-costs",
+        "section": "Heat Pump Rate",
+        "quote": "These seasonal delivery rates, approved by the DPU, lower winter delivery charges for households that heat with air-source or ground-source heat pumps.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_seasonal_cop",
+    "description": "Measured seasonal heating efficiency of cold-climate heat pumps in whole-home use in Massachusetts and New York homes (Cadmus field study, 2020–21 winter, 23 homes): mixed systems 1.90, all whole-home 2.41, ductless 2.80. That winter was milder than average, so a cold winter may be lower",
+    "unit": "COP (heat out / electricity in)",
+    "value": {
+      "low": 1.9,
+      "mid": 2.41,
+      "high": 2.8
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://neep.org/sites/default/files/media-files/residential_ccashp_building_electrification_study_cadmus_final_031022_public.pdf",
+        "section": "Table: whole-home systems, measured average seasonal heating performance (sCOP)",
+        "quote": "Ductless 13 75% 0.89 1.12 2.80 3.28 84%",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://neep.org/sites/default/files/media-files/residential_ccashp_building_electrification_study_cadmus_final_031022_public.pdf",
+        "section": "Table: whole-home systems, measured average seasonal heating performance (sCOP)",
+        "quote": "Mixed 4 69% 0.99 1.15 1.90 3.33 57%",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://neep.org/sites/default/files/media-files/residential_ccashp_building_electrification_study_cadmus_final_031022_public.pdf",
+        "section": "Table: whole-home systems, measured average seasonal heating performance (sCOP)",
+        "quote": "Total 23 68% 0.82 1.03 2.41 3.26 72%",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "co2_kg_per_mmbtu.oil",
+    "description": "CO₂ from burning distillate fuel oil No. 2 (EPA)",
+    "unit": "kg CO2 per MMBtu",
+    "value": {
+      "low": 73.96,
+      "mid": 73.96,
+      "high": 73.96
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+        "section": "Table 1 Stationary Combustion",
+        "quote": "Distillate Fuel Oil No. 2 0.138 73.96 3.0 0.60 10.21 0.41 0.08",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "co2_kg_per_mmbtu.natural_gas",
+    "description": "CO₂ from burning natural gas (EPA)",
+    "unit": "kg CO2 per MMBtu",
+    "value": {
+      "low": 53.06,
+      "mid": 53.06,
+      "high": 53.06
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+        "section": "Table 1 Stationary Combustion",
+        "quote": "Natural Gas 0.001026 53.06 1.0 0.10 0.05444 0.00103 0.00010",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "co2_kg_per_mmbtu.propane",
+    "description": "CO₂ from burning propane (EPA)",
+    "unit": "kg CO2 per MMBtu",
+    "value": {
+      "low": 62.87,
+      "mid": 62.87,
+      "high": 62.87
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+        "section": "Table 1 Stationary Combustion",
+        "quote": "Propane 0.091 62.87 3.0 0.60 5.72 0.27 0.05",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "co2_lb_per_mwh.grid",
+    "description": "CO₂ per MWh of New England grid electricity, total output (EPA eGRID subregion NEWE). Grid losses and other gases not included",
+    "unit": "lb CO2 per MWh",
+    "value": {
+      "low": 537.2,
+      "mid": 537.2,
+      "high": 537.2
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://www.epa.gov/system/files/documents/2025-01/ghg-emission-factors-hub-2025.pdf",
+        "section": "Table 6 Electricity",
+        "quote": "NEWE NPCC New England 537.2 0.063 0.008 885.2 0.067 0.009 4.2%",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days.ma.2021",
+    "description": "Massachusetts population-weighted heating degree days, July 2021 – June 2022 (NOAA CPC)",
+    "unit": "°F-days",
+    "value": {
+      "low": 5702,
+      "mid": 5702,
+      "high": 5702
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2022/Jun%202022.txt",
+        "section": "ACCUMULATIONS ARE FROM JULY 1",
+        "quote": "ACCUMULATIONS ARE FROM JULY 1, 2021",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2022/Jun%202022.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 40 -22 13 5702 -705 -4 -11 0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days_normal.ma.2021",
+    "description": "Massachusetts normal heating degree days for the July 2021 – June 2022 season (NOAA CPC): the season total minus its departure from normal (5702 − (-705) = 6407)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6407,
+      "mid": 6407,
+      "high": 6407
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2022/Jun%202022.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 40 -22 13 5702 -705 -4 -11 0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days.ma.2022",
+    "description": "Massachusetts population-weighted heating degree days, July 2022 – June 2023 (NOAA CPC)",
+    "unit": "°F-days",
+    "value": {
+      "low": 5562,
+      "mid": 5562,
+      "high": 5562
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2023/Jun%202023.txt",
+        "section": "ACCUMULATIONS ARE FROM JULY 1",
+        "quote": "ACCUMULATIONS ARE FROM JULY 1, 2022",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2023/Jun%202023.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 87 25 47 5562 -845 -140 -13 -2",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days_normal.ma.2022",
+    "description": "Massachusetts normal heating degree days for the July 2022 – June 2023 season (NOAA CPC): the season total minus its departure from normal (5562 − (-845) = 6407)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6407,
+      "mid": 6407,
+      "high": 6407
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2023/Jun%202023.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 87 25 47 5562 -845 -140 -13 -2",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days.ma.2023",
+    "description": "Massachusetts population-weighted heating degree days, July 2023 – June 2024 (NOAA CPC)",
+    "unit": "°F-days",
+    "value": {
+      "low": 5571,
+      "mid": 5571,
+      "high": 5571
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2024/Jun%202024.txt",
+        "section": "ACCUMULATIONS ARE FROM JULY 1",
+        "quote": "ACCUMULATIONS ARE FROM JULY 1, 2023",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2024/Jun%202024.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 18 -44 -69 5571 -870 9 -14 0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days_normal.ma.2023",
+    "description": "Massachusetts normal heating degree days for the July 2023 – June 2024 season (NOAA CPC): the season total minus its departure from normal (5571 − (-870) = 6441)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6441,
+      "mid": 6441,
+      "high": 6441
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2024/Jun%202024.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 18 -44 -69 5571 -870 9 -14 0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days.ma.2024",
+    "description": "Massachusetts population-weighted heating degree days, July 2024 – June 2025 (NOAA CPC)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6014,
+      "mid": 6014,
+      "high": 6014
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2025/Jun%202025.txt",
+        "section": "ACCUMULATIONS ARE FROM JULY 1",
+        "quote": "ACCUMULATIONS ARE FROM JULY 1, 2024",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2025/Jun%202025.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 44 -18 26 6014 -393 443 -6 8",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days_normal.ma.2024",
+    "description": "Massachusetts normal heating degree days for the July 2024 – June 2025 season (NOAA CPC): the season total minus its departure from normal (6014 − (-393) = 6407)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6407,
+      "mid": 6407,
+      "high": 6407
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2025/Jun%202025.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 44 -18 26 6014 -393 443 -6 8",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days.ma.2025",
+    "description": "Massachusetts population-weighted heating degree days, July 2025 – June 2026 (NOAA CPC)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6327,
+      "mid": 6327,
+      "high": 6327
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Jun%202026.txt",
+        "section": "ACCUMULATIONS ARE FROM JULY 1",
+        "quote": "ACCUMULATIONS ARE FROM JULY 1, 2025",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Jun%202026.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 19 -43 -25 6327 -80 313 -1 5",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_degree_days_normal.ma.2025",
+    "description": "Massachusetts normal heating degree days for the July 2025 – June 2026 season (NOAA CPC): the season total minus its departure from normal (6327 − (-80) = 6407)",
+    "unit": "°F-days",
+    "value": {
+      "low": 6407,
+      "mid": 6407,
+      "high": 6407
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Jun%202026.txt",
+        "section": "MASSACHUSETTS (CUM TOTAL, CUM DEV FROM NORM)",
+        "quote": "MASSACHUSETTS 19 -43 -25 6327 -80 313 -1 5",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  }
+]

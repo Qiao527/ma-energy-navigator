@@ -1,0 +1,534 @@
+British thermal units (Btu) - U.S. Energy Information Administration (EIA)
+Skip to sub-navigation
+U.S. Energy Information Administration - EIA - Independent Statistics and Analysis
+Menu
+Statistics
+Analysis
+Tools
+Education
+News
+Enter Search Term(s):
+Search
+Units and calculators explained
+British thermal units (Btu)
+Basics
++Menu
+What is energy?
+Units and calculators
+U.S. energy facts
+Use of energy
+Energy and the environment
+Close
+Also in
+What is energy?
+What is energy?
+Forms of energy
+Sources of energy
+Laws of energy
+Close
+Also in
+Units and calculators explained
+Units and calculators
+Energy conversion calculators
+British thermal units (Btu)
+Degree days
+Close
+Also in
+U.S. energy facts explained
+Consumption and production
+Imports and exports
+Data and statistics
+Estimated primary energy consumption, 1635–1945
+State and U.S. territory data
+Close
+Also in
+Use of energy explained
+Use of energy
+Energy use in industry
+Energy use in manufacturing
+Energy use for transportation
+Electric vehicles
+Energy use in homes
+Electricity use in homes
+Energy use in commercial buildings
+Energy intensity in commercial buildings
+Energy efficiency and conservation
+Energy indicators
+Close
+Also in
+Energy and the environment explained
+Energy and the environment
+Greenhouse gases
+Greenhouse gases and the climate
+Where greenhouse gases come from
+Outlook for future emissions
+Recycling and energy
+Nonrenewable sources
+Oil and petroleum products
+Gasoline
+Diesel fuel
+Heating oil
+Close
+Also in
+Oil and petroleum products explained
+Oil and petroleum products
+Data and statistics
+Refining crude oil
+The refining process
+Inputs and outputs
+Refinery rankings
+Where oil is produced
+Where oil comes from
+Imports and exports
+Offshore oil and natural gas
+Offshore oil and natural gas production
+Use of oil
+Prices and outlook
+Oil and the environment
+Close
+Also in
+Gasoline explained
+Gasoline
+Octane in depth
+Where our gasoline comes from
+Use of gasoline
+Prices and outlook
+Factors affecting gasoline prices
+Regional price differences
+Price fluctuations
+History of gasoline
+Gasoline and the environment
+Leaded Gasoline
+Close
+Also in
+Diesel fuel explained
+Diesel fuel
+Where our diesel comes from
+Use of diesel
+Prices and outlook
+Factors affecting diesel prices
+Diesel fuel surcharges
+Diesel and the environment
+Close
+Also in
+Heating oil explained
+Heating oil
+Where our heating oil comes from
+Use of heating oil
+Prices and outlook
+Factors affecting heating oil prices
+Hydrocarbon Gas Liquids
+Natural gas
+Coal
+Nuclear
+Close
+Also in
+Hydrocarbon gas liquids explained
+Hydrocarbon gas liquids
+Where do hydrocarbon gas liquids come from?
+Propane production
+Transporting and storing
+Uses of hydrocarbon gas liquids
+Propane consumption
+Imports and exports
+Prices
+Propane prices
+Close
+Also in
+Natural gas explained
+Natural gas
+Data and statistics
+Delivery and storage
+Natural gas pipelines
+Liquefied natural gas
+Where our natural gas comes from
+Imports and exports
+How much gas is left
+Use of natural gas
+Prices
+Factors affecting natural gas prices
+Natural gas and the environment
+Customer choice programs
+Close
+Also in
+Coal explained
+Coal
+Data and statistics
+Mining and transportation
+Where our coal comes from
+Imports and exports
+How much coal is left
+Use of coal
+Prices and outlook
+Coal and the environment
+Close
+Also in
+Nuclear explained
+Nuclear
+Data and statistics
+Nuclear power plants
+Types of reactors
+The nuclear fuel cycle
+Where our uranium comes from
+U.S. nuclear industry
+Nuclear power and the environment
+Renewable sources
+Renewable energy
+Hydropower
+Biomass
+Biofuels
+Close
+Also in
+Renewable energy explained
+Renewable energy
+Types & usages
+Incentives
+Portfolio standards
+Close
+Also in
+Hydropower explained
+Hydropower
+Where hydropower is generated
+Hydropower and the environment
+Tidal power
+Wave power
+Ocean thermal energy conversion
+Close
+Also in
+Biomass explained
+Biomass
+Wood and wood waste
+Waste-to-energy (MSW)
+In depth
+Landfill gas and biogas
+Biomass and the environment
+Close
+Also in
+Biofuels explained
+Biofuels
+Data and statistics
+Ethanol
+Ethanol Use
+Ethanol Supply
+Biodiesel, renewable diesel, and other biofuels
+Use and supply
+Biofuels and the environment
+Wind
+Geothermal
+Solar
+Close
+Also in
+Wind explained
+Wind
+Electricity generation from wind
+Where wind power is harnessed
+Types of wind turbines
+History of wind power
+Wind energy and the environment
+Close
+Also in
+Geothermal explained
+Geothermal
+Where geothermal energy is found
+Use of geothermal energy
+Geothermal power plants
+Geothermal heat pumps
+Geothermal energy and the environment
+Close
+Also in
+Solar explained
+Solar
+Photovoltaics and electricity
+Where solar is found and used
+Solar thermal power plants
+Solar thermal collectors
+Solar energy and the environment
+Secondary sources
+Electricity
+Hydrogen
+Close
+Also in
+Electricity explained
+Electricity
+Data and statistics
+The science of electricity
+Magnets and electricity
+Batteries, circuits, and transformers
+Measuring electricity
+How electricity is generated
+Energy storage for electricity generation
+Electricity in the United States
+Generation, capacity, and sales
+Top 10
+Delivery to consumers
+Use of electricity
+Prices and factors affecting prices
+Electricity and the environment
+Close
+Also in
+Hydrogen explained
+Hydrogen
+Hydrogen production
+Use of hydrogen
+What is a British thermal unit?
+British thermal unit
+(Btu) measures the heat content of fuels or energy sources. One Btu is the amount of heat needed to raise the temperature of one pound of water by 1° Fahrenheit (F). A single Btu is very small in terms of the amount of energy a single household or an entire country uses.
+One British thermal unit (Btu) is approximately equal to the energy released by burning a match.
+Source: Stock photography (copyrighted)
+Although a single Btu represents a small amount of energy, the total energy consumed by households or entire nations typically reaches quadrillions of Btu (quad). For example, the United States' total energy consumption in recent years has often been in the quadrillions. A quadrillion is a substantial number: 1,000,000,000,000,000 (a 1 followed by 15 zeros).
+Why use British thermal units?
+Different energy sources and fuels use different units of measure. For example, heating oil is measured in gallons and natural gas is measured in cubic feet. If you wanted to compare the two, you would need to convert them to the same unit. You can use heat content to compare energy sources or fuels.
+We use the Btu as the standard unit for
+measuring and comparing energy content
+. We collect data on the volume or weight of energy sources produced, imported, exported, and consumed. We convert those amounts into Btu equivalents to compare them equally.
+Using conversion factors, we can compare different fuels and fuel costs. Each year, those factors are recalculated to account for changes in the quality and composition of the fuels. For example, historical physical volumes of fossil fuels consumed in the United States and their Btu equivalents were:
+Sample fossil fuel Btu conversion factors
+1
+Fossil fuel type
+Physical amount
+Btu equivalent
+Petroleum
+7.40 billion barrels
+35.43 quads
+Natural gas
+32.51 trillion cubic feet
+33.61 quads
+Coal
+425.92 million short tons
+8.17 quads
+1
+You can find current tables with heat content for fuels and electricity in
+Appendix A of the Monthly Energy Review
+.
+Sample Btu conversion factors
+1
+Energy source/fuel
+Physical units and Btu
+Electricity
+1 kilowatthour=3,412 Btu
+Natural gas
+1 cubic foot=1,036 Btu
+1 therm=100,000 Btu
+Motor gasoline
+1 gallon=120,214 Btu
+Diesel fuel
+1 gallon=137,381 Btu
+Heating oil
+1 gallon=138,500 Btu
+Propane
+1 gallon=91,452 Btu
+Wood
+1 cord=20,000,000 Btu
+1
+You can find current tables with heat content for fuels and electricity in
+Appendix A of the Monthly Energy Review
+.
+Also in
+Units and calculators explained
+Units and calculators
+Energy conversion calculators
+British thermal units (Btu)
+Degree days
+Also on Energy Explained
+What is energy?
+U.S. energy facts
+Use of energy
+Also on EIA.gov
+Monthly Energy Review,
+Heat contents for fuels and electricity
+Monthly Energy Review,
+Energy consumption by sector and energy source
+Frequently Asked Questions: Conversion and equivalents
+Frequently Asked Questions: General energy
+About EIA
+Open Data
+Legacy
+Contact Us
+U.S. Energy Information Administration
+1000 Independence Ave., SW
+Washington, DC 20585
+Policies
+Privacy/Security
+Copyright & Reuse
+Accessibility
+Information Quality
+Freedom of Information Act (FOIA)
+Related Sites
+usa.gov
+U.S. Department of Energy
+Stay Connected
+Facebook
+X
+Youtube
+LinkedIn
+Email Updates
+RSS Feeds
+Statistics
+Analysis
+Tools
+Education
+News
+Petroleum & Other Liquids
+Crude oil, gasoline, heating oil, diesel, propane, and other liquids including biofuels and natural gas liquids.
+Natural Gas
+Exploration and reserves, storage, imports and exports, production, prices, sales.
+Electricity
+Sales, revenue and prices, power plants, fuel use, stocks, generation, trade, demand & emissions.
+Coal
+Reserves, production, prices, employment and productivity, distribution, stocks, imports and exports.
+Nuclear & Uranium
+Uranium fuel, nuclear reactors, generation, spent fuel.
+Renewable & Alternative Fuels
+Includes hydropower, solar, wind, geothermal, biomass and ethanol.
+EIA Survey Forms
+Forms EIA uses to collect energy data including descriptions, links to survey instructions, and additional information.
+Total Energy
+Comprehensive data summaries, comparisons, analysis, and projections integrated across all energy sources.
+Monthly Energy Review
+Annual Energy Review
+Consumption & Efficiency
+Energy use in homes, commercial buildings, manufacturing, and transportation.
+Residential Energy Consumption Survey (RECS)
+Commercial Buildings Energy Consumption Survey (CBECS)
+Manufacturing Energy Consumption Survey (MECS)
+U.S. States
+State energy information, including overviews, rankings, data, and analyses.
+State Energy Data System (SEDS)
+International
+International energy information, including overviews, rankings, data, and analyses.
+International Energy Statistics
+Environment
+Greenhouse gas data, voluntary reporting, electric power plant emissions.
+U.S. Energy-Related Carbon Dioxide Emissions
+Energy-Related Carbon Dioxide Emissions at the State Level, 2005-2016
+Energy-Related Carbon Dioxide Emissions at the State Level
+Analysis and Projections
+Monthly and yearly energy forecasts, analysis of energy topics, financial analysis, congressional reports.
+Short-Term Energy Outlook
+Annual Energy Outlook
+Special Reports
+Special market analysis and/or data requests.
+EIA-112 Residential Utility Disconnections
+SHIP Act
+Energy & Financial Markets: What Drives Crude Oil Prices?
+International
+International energy analyses.
+Regional Analysis Briefs
+Country Analysis Briefs
+World Oil Transit Chokepoints
+OPEC Revenue
+Global Energy Security Data
+Glossary
+Data Tools, Apps, & Maps
+Tools to customize searches, view specific data sets, study detailed documentation, and access time-series data.
+Open Data
+EIA's free and open data available as API, Excel add-in, bulk files, and widgets
+EIA Beta
+Come test out some of the products still in development and let us know what you think!
+Open Source Code
+EIA's open source code, available on GitHub.
+All Reports & Products
+EIA Survey Forms
+Forms EIA uses to collect energy data including descriptions, links to survey instructions, and additional information.
+Email Updates
+Sign up for email subscriptions to receive messages about specific EIA products
+RSS Feeds
+Subscribe to feeds for updates on EIA products including Today in Energy and What's New.
+Follow us. . .
+A-Z Index
+A
+|
+B
+|
+C
+|
+D
+|
+E
+|
+F
+|
+G
+|
+H
+|
+I
+|
+J
+|
+K
+|
+L
+|
+M
+|
+N
+|
+O
+|
+P
+|
+Q
+|
+R
+|
+S
+|
+T
+|
+U
+|
+V
+|
+W
+|
+XYZ
+Today in Energy
+Short, timely articles with graphics on energy, facts, issues, and trends.
+Energy Explained
+What is Energy?
+Units & Calculators
+U.S. Energy Facts
+Use of Energy
+Energy & Environment
+Petroleum
+Hydrocarbon Gas Liquids
+Natural Gas
+Coal
+Nuclear
+Electricity
+Hydrogen
+Hydropower
+Biofuels
+Biomass
+Wind
+Geothermal
+Solar
+For Teachers
+Lesson plans, science fair experiments, field trips, teacher guide, and career corner.
+Glossary
+FAQs
+Coal
+Conversion & Equivalents
+Oil/Petroleum
+Diesel
+Electricity
+Environment
+Gasoline
+General Energy
+Natural Gas
+Nuclear
+Prices
+Renewables
+What's New?
+Petroleum Marketing Monthly
+Nov 02, 2026
+Natural Gas Monthly
+Oct 30, 2026
+Petroleum Supply Monthly
+Oct 30, 2026
+Press Room
+Press Releases
+Congressional Testimony
+Presentations
+Events

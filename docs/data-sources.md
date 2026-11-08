@@ -261,7 +261,14 @@ This supports the core-user choice with data. The original MassGIS analysis (pit
 - **Verdict:** practical for v1.5. Filter MA buildings by type (2–4 unit), vintage and
   heating fuel, then fit quantile regression of energy use on features we actually collect,
   to narrow low/mid/high ranges. Not needed for v1.
-- **[Open]** license text (OEDI datasets are usually CC BY 4.0; *verify*).
+- **License: CC-BY-4.0** (the release's `citation.txt`, read 2026-11-07; snapshot in
+  `rules/ma/sources/resstock-2025-1-citation.txt`). Cite as: National Renewable Energy
+  Laboratory (NREL). (2025). ResStock 2025 Release 1 (AMY 2018) [Data set]. OEDI.
+  https://doi.org/10.25984/1876417.
+- Stock estimates script: `analysis/resstock_estimates.py` (Task 16b). It writes
+  `rules/ma/drafts/assumptions-resstock.json`. Each ResStock model is one dwelling unit,
+  so values are per unit. `weight` = "Number of dwelling units this model represents in
+  real life."
 
 ## 9b. Installed-cost sources for Massachusetts (Step 5 follow-up, 2026-11-06)
 
@@ -282,8 +289,12 @@ otherwise show the percentage alone.
 - Spread (Table 6): ductless-only projects mean $5,664/ton, standard deviation $1,970
   (n = 376).
 - Region (Table 14): Boston-area counties average $6,313/ton; statewide $5,661 (n = 665).
-- **Proposed range:** ductless $3,860 / $5,830 / $7,800 per ton (mean ± 1 SD). Label it
-  "2021–22 projects, in Jan 2024 dollars" with `confidence: medium`.
+- **Used (2026-11-07):** ductless $3,694 / $5,664 / $7,634 per ton, which is Table 6's
+  ductless-only mean ± 1 SD (n = 376). Label it "2021–22 projects, in Jan 2024 dollars"
+  with `confidence: medium`.
+  - The earlier proposal ($3,860 / $5,830 / $7,800) mixed the overall mean with a
+    standard deviation from a different group. Corrected.
+  - Draft: `rules/ma/drafts/assumptions.json`.
 - **Gap:** the dollar total also needs **tons per unit**. No Massachusetts source for
   typical apartment tonnage was found. Until one is, show the rebate and cost for example
   sizes ("for a 2-ton system …") or for the contractor's quoted size, not a guessed size.
@@ -301,6 +312,50 @@ otherwise show the percentage alone.
   the label error when citing.]*
 - **Proposed range:** $3,010 / $3,750 / $3,775 per kWdc (PY2027 quartiles and median),
   `confidence: low` (N = 7). PY2026 is cross-checked in the description.
+
+**Oil boiler replacement ("the boiler needs replacing anyway"): found [Official evaluation
+study; low confidence]**
+- *Heat Pump Incremental Cost Research* (Guidehouse for the Mass Save PAs, published by
+  the EEAC, 2024-08-09), Table 3: new-unit **oil boiler $920 per ton**, gas boiler $1,201,
+  propane boiler $1,331 (2023 dollars). The figures come from the 2018 MA RES19 cost study
+  for single-family installs, adjusted for inflation and efficiency.
+  https://ma-eeac.org/wp-content/uploads/Massachusetts-Heat-Pump-Incremental-Cost-Research-Memo_Final_2024-08-09.pdf
+- Per ton means it needs the unit's capacity (see below). Use with **confidence low**;
+  the user can enter their own replacement quote instead, which takes precedence.
+
+**Heat pump tons per unit and annual heating need: no Massachusetts source yet**
+- Answer to Qiao (2026-11-06): **today there is no source for either.** The Phase 1 tests
+  use fixture values only.
+- Plan, in order of preference:
+  1. **Annual heating need from the user's own past fuel use** (gallons of oil or therms
+     × fuel energy content × system efficiency) → confidence **medium**, "from your
+     bills".
+  2. **Tons from the contractor's quote** (Manual J) → confidence **medium**, "from your
+     quote".
+  3. Otherwise a **stock estimate**: heating need and tons from NREL/NLR ResStock 2025
+     baseline results for Massachusetts 2–4 unit buildings of similar vintage and fuel
+     (§9) → confidence **low**, "typical for similar buildings, not measured for yours".
+     ResStock is a simulated building stock, not this building. **Moved into Phase 1**
+     (Qiao, 2026-11-06).
+     - First pass (2026-11-06, `MA_upgrade0.csv.gz`, weighted per dwelling unit,
+       `in.geometry_building_type_recs = Multi-Family with 2 - 4 Units`):
+       - oil heat (n = 349): delivered heating load p25/p50/p75 **22.8 / 35.8 /
+         50.8 MMBtu**; primary heating system size **1.97 / 2.48 / 3.29 tons**;
+       - oil heat, built before 1950 (n = 274): 27.6 / 38.4 / 51.8 MMBtu;
+       - gas heat (n = 1,681): 21.3 / 33.4 / 50.0 MMBtu and 1.74 / 2.43 / 3.25 tons.
+     - Heating-system size is the existing system's capacity, used as a **proxy** for heat
+       pump tons (a Manual J load would be better), which is one more reason for "low".
+- No value is used until one of these exists for the address.
+
+**From past fuel records to heating need [Proposed — Phase 1, Task 16]**
+- annual heating need (MMBtu delivered) = average annual fuel use × heat content × system
+  efficiency.
+- Heat content: EIA's figures for heating oil (≈ 0.1385 MMBtu/gal), propane and natural
+  gas. *[To read and cite in Task 16.]*
+- Efficiency: the user's value, otherwise the EEAC study's baseline oil boiler 84% AFUE
+  (Table 2).
+- Two or more years of records → confidence **medium**. One year → **low** (a single
+  winter can be unusual).
 
 **Weatherization: not found → percentage only**
 - No Massachusetts evaluation study with a per-home or per-unit weatherization cost was

@@ -1,0 +1,863 @@
+[[page 1]]
+
+[[page 2]]
+Dear Massachusetts Resident, 
+Across the Commonwealth of Massachusetts, more than a million households 
+rent their homes and tens of thousands of landlords work to provide safe and 
+stable housing to these tenants. 
+This guide is for both audiences: tenants and landlords. By helping tenants 
+and landlords understand their legal rights and their responsibilities, I hope to 
+avoid costly misunderstandings and unnecessary conflicts while upholding the 
+rights of people to live in safe and affordable homes, free from discrimination 
+and environmental hazards. 
+This guide discusses forming rental agreements and leases, types of tenancies, 
+payments, evictions, habitable living conditions, housing discrimination, and 
+methods for resolving conflicts between landlords and tenants. 
+I encourage you to review this guide and be aware of your rights and 
+responsibilities before entering into a rental agreement. I hope you will also 
+explore some of the resources developed by legal services organizations that 
+are included at the end of this guide. 
+Sincerely, 
+ 
+Andrea Joy Campbell 
+Massachusetts Attorney General
+2
+[[page 3]]
+Table of Contents 
+Table of Contents 3 
+Landlord Tenant Laws in Massachusetts 4 
+10 Things to Know Before You Rent 5 
+Working with a Broker or Real Estate Salesperson 8 
+Tenant Screening 9 
+The Terms of Tenancy 1 2 
+The State Sanitary Code and the Condition of an Apartment 16 
+Health at Home 1 7 
+Eviction 1 8 
+Special Types of Housing 20 
+Discrimination in Housing is Against the Law 2 1 
+Additional Resources from the Attorney General’s Office 22 
+Contact Us 24 
+Resources from Other State Agencies 25 
+Resources Provided by Legal Services Organizations 27 
+References 28
+3
+[[page 4]]
+Landlord-Tenant Laws in Massachusetts 
+There are many laws and regulations that govern the relationship between a landlord and a tenant in 
+Massachusetts. These laws apply whether the unit being rented is a single-family home, a single 
+apartment within a multi-family apartment building, or a cottage or in-law apartment connected to 
+someone’s home. Some laws outline the landlord’s obligations and others set forth what a tenant must 
+do. 
+This guide focuses on a typical landlord-tenant relationship, what the law calls a “residential tenancy.” 
+But there are also some special types of housing where the laws may be different, such as rooming 
+houses and  manufactured housing communities. Information about these special types of housing is 
+covered separately near the end of this guide.
+This guide also does not cover eligibility for housing subsidy programs or the 
+requirements imposed on landlords by federal and state housing subsidy programs. 
+Tenants and landlords with questions about housing subsidy programs are encouraged to reach out to 
+the housing provider, local public housing authority or regional housing agency. Information on finding 
+your local housing agency and other resources can be found through the Executive Office of Housing 
+and Livable Communities’ Resource Locator website.  
+ 
+This guide will discuss some of the most common situations and 
+the basic legal information that applies to residential tenancies 
+throughout the Commonwealth. Landlords and tenants are 
+encouraged to check with their city or town for additional 
+requirements that may apply. 
+Tenants and landlords with questions about a specific law or 
+how the law applies to a specific situation should speak with an 
+attorney. The Attorney General’s Office cannot represent 
+tenants or landlords and cannot provide legal advice to tenants 
+or landlords. Some information on how to find an attorney or 
+legal resources is available in the Resources Provided by Legal 
+Services Section of the guide.
+Throughout this guide and in the end notes you will see citations 
+to laws, such as M.G.L. c. 93A, and regulations, such as 940 
+C.M.R. § 3.1 7 . “M.G.L. c. 93A” means “Massachusetts 
+General Laws, chapter 93A.” 940 C.M.R. § 3.1 7 means: 
+“Chapter 940 of the Code of Massachusetts Regulations, 
+section 3. 1 7.” You can find copies of these Massachusetts laws 
+and regulations online at Mass.gov or at one of the 1 5 Trial 
+Court Law Libraries throughout Massachusetts. 
+Trial Court Law Library
+EOHLC Resource Locator
+4
+Understanding Legal Citations
+[[page 5]]
+10 Things to Know Before You Rent  
+There are many important issues that all prospective tenants and landlords should consider before 
+entering into a rental agreement. Here are ten of the most common questions that prospective tenants 
+and landlords should answer:  
+Is there an application fee or a fee to “hold” the unit?
+There shouldn’t be! Under Massachusetts law a landlord may never charge a tenant or prospective 
+tenant an application fee or require a deposit to hold, reserve, or take an apartment off the market.1 
+What is included in the advertised rent?
+The advertised rent must include all charges that the tenant will be required to pay. Fees for optional 
+“amenities” such as parking, pool, or fitness center do not need to be included in the advertised 
+price if the tenant can decline these amenities.2
+Does the rent cover heat and electricity?
+The landlord must pay for the heat, hot water, and electricity unless a term in the lease or 
+other written rental agreement requires the tenant to pay for these utilities. A tenant 
+cannot be required to pay for gas or electricity unless they are separately metered, and the gas or 
+electricity serves only the tenant’s unit including a light in the hallway or stairwell adjacent to the 
+tenant’s unit in certain circumstances. A tenant cannot be required to pay for heating oil unless there 
+is a separate tank that serves only the tenant’s unit.3
+When considering where to rent, tenants should ask about the historical costs of heating the unit to 
+better understand and budget for any utilities that are paid by the tenants.
+Does the rent cover water and sewer charges?
+A landlord may not charge or allow a tenant to be charged for water and sewer usage unless 
+the requirements of the water submetering law are met. The submetering law requires the 
+water provided to the tenant’s unit to be separately measured, a submeter must be installed by a 
+licensed plumber, the submeter must not include water provided to other tenants or common areas 
+of the building, water conservation devices must be installed in the unit, the agreement that requires 
+the tenant to pay for water must be in writing, and the agreement must clearly and conspicuously 
+disclose the details of the water submetering billing arrangement. Landlords considering charging 
+tenants for water are encouraged to review the submetering law and regulations in detail. Among 
+other requirements, the landlord must also file a certification with the local board of health, remain 
+the customer of record with the water company, provide detailed bills to the tenant for water usage, 
+and grant rebates to tenants for the cost of water lost due to leaks that the landlord was notified of.4
+Are repairs needed to the unit?
+It is the landlord’s responsibility to ensure that the dwelling unit being rented is in a safe and 
+habitable condition that complies with the State Sanitary Code, 105 C.M.R. § 400. Under 
+Massachusetts law a landlord and tenant cannot agree to rent a substandard apartment for a 
+discounted rate.5 
+1.
+2.
+3.
+4.
+5.
+5
+[[page 6]]
+Before the tenant moves into the unit, the landlord and the prospective tenant should check every 
+plumbing fixture, light switch, cupboard door, and appliance to make sure they all work properly. 
+If repairs are needed, both parties should discuss when the landlord will make the repairs. 
+A description of the repairs and the expected date by which the landlord agrees to complete the 
+repairs should be put in writing.
+What appliances are included with the unit?
+The lease or rental agreement should note if major appliances are included with the tenancy, such 
+as a refrigerator, stove, washing machine, etc. Landlords are required to provide a cooktop, oven, 
+and refrigerator unless the tenant agrees in writing to provide these appliances as part of the rental 
+agreement.6
+Who is responsible for clearing snow and ice?
+The State Sanitary Code makes it the landlord’s responsibility to clear snow and ice from the 
+common areas of a multi-unit property.7 But a tenant may be responsible for removing snow and 
+ice from areas under their exclusive control if a written rental agreement clearly identifies the 
+tenant’s responsibility for clearing snow.8 If a rental agreement includes parking, prospective 
+tenants should make sure the agreement also discusses who will shovel or plow the driveway and 
+parking spaces, and how tenants will be notified in time to move their cars. Your city or town may 
+also have an ordinance requiring that a landlord clear snow and ice from the public sidewalk that 
+abuts the property. 
+Are pets allowed? 
+A rental agreement may restrict the ability of a tenant to own a pet, or may restrict the type, size or 
+number of pets allowed. Landlords may charge higher rent to tenants with pets, or higher rates for 
+units that allow pets. However, the total monthly rent including these charges must be clearly and 
+conspicuously disclosed when the unit is advertised.9  Landlords may not charge a one-time “pet 
+fee” to tenants with pets.10
+Assistance animals are not pets. There are two types of assistance animals: (1) service animals 
+and (2) other animals that do work, perform tasks, provide assistance, and/or provide therapeutic 
+emotional support for individuals with disabilities. Landlords must not discriminate against 
+tenants with disabilities that use assistance animals.11 For more information about 
+reasonable accommodations involving assistance animals see the Department of Housing and 
+Urban Development’s guidance on assistance animals.
+ 
+HUD Guidance on 
+Assistance Animals
+6.
+7.
+8.
+6
+[[page 7]]
+Who will live in the unit?
+A rental agreement should make clear who has the right to live in the unit. If a tenant is planning to 
+have roommates, a landlord may require them to sign the rental agreement. If they don’t, they might 
+be considered “guests.” Some rental agreements set restrictions on the number of guests allowed to 
+visit at one time or specify how long guests are allowed to stay. Tenants are advised to check their 
+lease carefully before agreeing to add a roommate to an existing lease. 
+A landlord cannot refuse to rent to tenants because they have children or are pregnant.12
+Is a pre-rental inspection or rental registration required?
+Landlords are encouraged to check with their town or city to see if a pre-rental inspection or 
+rental registration is required. Many cities and towns require a pre-rental inspection for items such 
+as smoke and carbon monoxide detectors. Some cities and towns, including the City of Boston, 
+require landlords to register rental units with the city.
+ 
+Tenants should carefully consider how the rental agreement may 
+limit their ability to add or change occupants. A rental agreement 
+may limit a tenant’s ability to assign the lease or sublet the unit. 
+Even where an assignment or subletting is allowed, the original 
+tenant in a sublet or assignment remains responsible for all the 
+terms of their lease, including the obligations to keep the unit in 
+good condition and to pay the rent.  
+More information about subletting, including a sample subtenant 
+agreement can be found on MassLegalHelp.org, a website 
+of the Massachusetts Legal Assistance Corporation published in 
+partnership with the Massachusetts Law Reform Institute.
+MassLegalHelp.org, 
+Legal Tactics: Tenant’s 
+Rights in Massachusetts 
+9.
+10 .
+7
+[[page 8]]
+Working with a Broker or Real Estate 
+Salesperson
+Tenants looking for housing may find it helpful to use the services of a licensed real estate broker or 
+salesperson. A broker may help the tenant find a place to live, present an offer to a landlord, and 
+negotiate on behalf of the tenant. When a tenant hires a broker, the broker has a duty to represent the 
+interests of the tenant and must not represent the landlord.13
+Landlords may also find it helpful to use the services of a licensed 
+broker or salesperson to advertise a property, show the property to 
+prospective tenants, and negotiate a lease. However, landlords 
+should be aware that they may be held responsible for legal violations 
+committed by their broker, therefore they should carefully review any 
+advertisements or rental agreements used by their broker. 
+Real estate brokers and salespersons are licensed by the Board of 
+Real Estate Brokers and Salespersons. Tenants and landlords can 
+check the status of a license and see records of professional discipline 
+on the Division of Occupational Licensure website.   
+ 
+8
+Division of 
+Occupational Licensure 
+Find a License
+ Attorney General 
+Advisory on 
+Landlord-Tenant 
+Broker Fees
+A new law went into effect on August 1, 2025, pertaining to the 
+payment of broker fees by prospective tenants. The law prohibits 
+brokers and salespeople from charging fees to tenants when they 
+primarily provide services to the landlord.14  
+A landlord still may not charge a tenant or prospective tenant a 
+fee for services that a broker provided to the landlord.15
+[[page 9]]
+Tenant Screening 
+Historically, landlords have used a variety of methods to screen tenants for housing. Unfortunately, 
+tenant screening has also been a mechanism for unlawful discrimination that can harm vulnerable and 
+historically marginalized communities. For these reasons, there are several laws that landlords and 
+brokers must consider carefully before deciding how tenants will be screened. 
+Sealed Eviction Records 
+In 2024, Massachusetts enacted a new law that allows residential tenants to petition the court to seal 
+an eviction record.16 The law prohibits Consumer Reporting Agencies from disclosing the existence of a 
+sealed eviction record or including a sealed eviction record in calculating any score or 
+recommendation used to determine eligibility for housing or credit. 
+Any application for housing or credit in Massachusetts that asks prospective tenants about past 
+evictions must include the following notice: 
+An applicant for housing or credit with a sealed record on file with the court pursuant to section 
+16 of chapter 239 of the General Laws may answer ‘no record’ to an inquiry relative to that 
+sealed court record. 
+Tenants and advocates are encouraged to report any applications for housing or credit that ask about 
+prior evictions but fail to include this notice to the Attorney General’s Office by using the email address: 
+AGOApplicationReview@mass.gov.
+ 
+How to Seal an Eviction 
+Tenants interested in sealing a past eviction must file 
+a petition with the court. More information about 
+eviction sealing is available from the Housing Court 
+and from SealMyEviction.org, a website of the 
+Massachusetts Legal Assistance Corporation.
+SealMyEviction.org
+Housing Court: 
+Eviction Sealing
+9
+[[page 10]]
+Unlawful Income, Credit, and Employment Restrictions 
+Landlords may not require prospective tenants to have a particular type of income (such as income 
+from a job) or impose minimum rent-to-income ratios where these requirements have the purpose or 
+effect of excluding or disadvantaging people with housing subsidy or receiving public assistance.17
+The fair housing requirements in M.G.L. c.151B, also known as the Antidiscrimination Law, prohibit 
+discrimination against people who receive federal, state, or local public assistance (for 
+example, Social Security Income or SNAP benefits) and housing subsidies (for example, 
+Section 8 vouchers or RAFT). It is illegal under the Antidiscrimination Law for housing providers 
+to discriminate against someone because they participate in public assistance and housing subsidies 
+programs, or because of the requirements of those programs. 
+For example, a housing provider may not refuse to rent to a prospective tenant because they receive 
+a subsidy and may not move on to another prospective tenant while a housing subsidy administrator 
+is in the process of approving an apartment for a subsidy recipient. It is also unlawful for a landlord to 
+advertise a unit with language that suggests a preference for tenants without rental subsidies.   
+The following are examples of discriminatory language in advertising for housing: 
+•Proof of employment required; 
+•Not section 8 certified; 
+•Must have minimum annual income of $65K; 
+•Good credit, references, employment and income history needed; or  
+•Must have strong credit and verifiable employment to be considered. 
+It is important for landlords to understand that they may also be held liable for the conduct of their 
+broker or salesperson who is advertising their rental unit. Landlords are encouraged to review all 
+listings carefully and must ensure they do not discriminate against prospective tenants who receive 
+public assistance. 
+ 
+The requirements of the Antidiscrimination Law are discussed in more detail in the 
+Attorney General’s Guidance on Preventing Housing Discrimination Based on Source of 
+Income, available on our website.
+Find the Attorney General 
+Guidance on Preventing Housing Discrimination Based 
+on Source of Income here:
+10
+[[page 11]]
+Criminal Record Information 
+Although housing providers may in some cases refuse to rent to persons with criminal records, a 
+blanket rule that excludes all prospective tenants with a criminal history record may violate state and 
+federal civil rights laws, because using criminal records in this way can have a disproportionate effect 
+on protected groups such that it may result in an unlawful discriminatory impact.
+If a landlord wishes to use a criminal history record to evaluate an applicant for housing, they should 
+conduct an individual assessment of the applicant’s criminal history.  Any such individual assessment 
+must not discriminate against applicants on the basis of race, color, national origin, ancestry, gender, 
+marital status, religion, age, sexual orientation, source of income, gender identity or expression or 
+military background, or because the person is disabled.18
+Fair Credit Reporting Act 
+Landlords may only obtain credit or tenant screening reports if they have a permissible purpose for 
+doing so, which includes applying to rent housing or renewing a lease. If a landlord takes an adverse 
+action based on information in a credit or tenant screening report, they must give the applicant or 
+tenant an adverse action notice that includes information about the credit or tenant screening report 
+that the landlord reviewed and notice that the applicant or tenant has a right to access credit or 
+screening reports for free if the landlord takes adverse action against the tenant. Adverse action 
+includes denying the tenant’s housing application, requiring a cosigner, or only 
+agreeing to rent to them at a rent higher than what was advertised.19
+ 
+Landlords must also comply with requirements of 803 C.M.R. 5.00 
+concerning use of Criminal Offender Record Information (CORI). 
+Before denying housing based on a CORI or criminal history report 
+the landlord must notify the applicant of the reason for the denial, 
+provide a copy of the CORI or screening report, provide a copy of 
+the landlord’s CORI screening policy, identify the information on the 
+CORI or screening report that was used to deny the applicantion for 
+housing, and provide the applicant with an opportunity to dispute the 
+accuracy of the information used. If a screening report was obtained 
+from a credit reporting agency the applicant must also be provided  
+with a copy of “A Summary of Your Rights Under the Fair Credit 
+Reporting Act,” a publication of the Federal Trade Commission. 
+Federal Trade 
+Commission: 
+A Summary of Your 
+Rights Under the Fair 
+Credit Reporting Act
+11
+[[page 12]]
+The Terms of TenancyThe Terms of Tenancy  
+There are two main kinds of tenancy. The first is tenancy based on a lease. The second is 
+tenancy-at-will. The rights and responsibilities of both the landlord and the tenant depend partly on the 
+type of tenancy that is created. 
+Tenancy Based on a Lease  
+When a tenant signs a lease with a landlord, the landlord and tenant agree that the tenancy will last 
+for a certain amount of time, usually one year. During that time, the monthly rent will stay the same and 
+the landlord cannot end the tenancy (evict) unless the tenant fails to satisfy the conditions in the lease. 
+On the other hand, the tenant is committed to paying rent for the term of the lease. Usually, the tenant 
+may only end the tenancy before the close of the lease term (i.e., before the year is up) if the landlord 
+agrees to “early termination” of the lease. 
+A lease is a good option for tenants and landlords seeking stability in a tenancy. Because it is a 
+written agreement between the tenant and the landlord, it should contain all the rules that will apply to 
+the tenancy. 
+Tenancy-at-Will  
+The other kind of tenancy is called a tenancy-at-will, which means that the tenancy lasts until properly 
+terminated by either party. This is sometimes also referred to as a “month-to-month” tenancy. 
+Sometimes there is no written agreement at all in a tenancy-at-will. But, tenants are often asked to 
+sign a form that says “Rental Agreement” or “Tenancy-at-Will” at the top. This form should include the 
+amount of the rent and basic rules. 
+A tenancy-at-will does not last for any set amount of time and does not end on a certain date, the way 
+a lease does. In a tenancy-at-will, the tenant pays the agreed-upon rent each month for an indefinite 
+period. Where rent is paid monthly, either the landlord or the tenant can decide to end the tenancy by 
+giving the other party notice, either 30 days or one month before the due date of the next rent 
+payment, whichever is longer. The rent can change with notice according to the same terms (30 days 
+or one month before the next rent payment). 
+A tenancy where the tenant pays rent more than once a month (for example, every week) is also a 
+tenancy-at-will. However, the notice period for termination remains the same (the longer of 30 days or 
+one month before the next rent payment).
+ 
+12
+[[page 13]]
+Obligations of the Landlord and of the Tenant     
+Whether a tenancy is created by a lease or a tenancy-at-will, the tenant must pay rent, follow the rules 
+agreed upon with the landlord, and accept responsibility for any damage to the apartment that is more 
+than just “normal wear and tear”, whether caused by the tenant or caused by a guest of the tenant. 
+The landlord must provide an apartment that is safe, well-maintained, and in compliance with the 
+Massachusetts Sanitary Code, and they must live up to any promises in the lease or rental agreement. 
+The tenant has a right to occupy the apartment and the landlord may only enter under certain 
+circumstances. The landlord must arrange with the tenant in advance to enter the apartment to make 
+repairs, to inspect the condition of the apartment, or to show the apartment to prospective tenants, 
+buyers or real estate agents. However, the landlord may enter an apartment without a tenant’s 
+approval if there is a mechanical/repair emergency that has the potential to damage the whole 
+building, or if it appears that the tenant has abandoned the apartment.20  
+Lease Negotiations  
+Although not required by laws or regulations, it is important for both a landlord and a tenant to know 
+that they can negotiate with each other over the terms of a lease. In general, the landlord should not 
+rush a tenant to sign a lease, and both parties should be very clear about the terms and conditions 
+before either signs the lease. 
+Any agreed-upon changes to a lease should be written into the lease in pen, making sure to cross out 
+any sections that the landlord and tenant agree to remove. Both parties should sign their initials in the 
+margin of the lease near any hand-written changes. Initialing changes serves as evidence that both 
+parties were aware of the changes and agreed to them. 
+ 
+13
+[[page 14]]
+Terms of a Rental Agreement  
+Every rental agreement must have certain terms and is prohibited by law from containing certain other 
+terms.21   
+The lease must set forth the name, address, and phone number of the owner, the person responsible 
+for maintenance, and the person to whom the tenant can give copies of formal notices, complaints, or 
+court papers.22  
+If the landlord receives a security deposit, the lease or rental agreement must show the amount paid 
+and must explain the tenant’s rights to that security deposit money. 23
+The landlord must make sure that the tenant is given a legible copy of the lease or rental agreement.24 
+The lease must not include illegal terms such as: 
+• Requiring the tenant to pay the cost of repairing ordinary wear and tear to the apartment;25 
+• Requiring the tenant to have the apartment professionally cleaned at the end of the lease;26 
+• Requiring the tenant to pay for repairs to parts of the building beyond the tenant’s apartment;27 
+• Prohibiting the tenant from suing the landlord or reporting violations of the Sanitary Code;28
+• Prohibiting the tenant from joining a tenants’ union;29 or 
+• Requiring the tenant to pay a late fee if a rent payment is less than 30 days late.30
+Payments at the Start of a Tenancy Payments at the Start of a Tenancy 
+A landlord may only ask a tenant for the following up-front payments: 
+• The first month’s rent; 
+• A security deposit to cover the cost of any damage to the apartment beyond normal wear and tear 
+(which may not exceed the amount of one month’s rent); 
+• The last month’s rent (the month that will turn out to be the tenant’s last one in the apartment); and 
+• The actual cost of a new lock and key for the apartment.31  
+The landlord should provide a signed receipt for any payment that is made with cash or a money 
+order. The receipt must include the amount paid and the date the payment was made, and a 
+description of what the payment was for. The receipt should also include the landlord’s name, the 
+tenant’s name, and the name of the person to whom the payment was given.32
+Landlords may not charge tenants or prospective tenants up-front pet fees, broker fees, 
+or application fees at the start of a tenancy.33 Fees for the use of optional “amenities” such as 
+parking, pool, or fitness center do not need to be included in the advertised price if the tenant has the 
+option to decline them.
+14
+[[page 15]]
+Laws Governing the Security Deposit 
+All security deposits must be deposited in a Massachusetts bank, in an account that collects interest, 
+and within the first month of the tenancy. The deposit must be kept separate from the landlord’s money 
+in an account that is protected from the landlord’s creditors. The landlord must provide the tenant with 
+the name and address of the bank holding the security deposit, plus the actual account number. Each 
+year, the landlord must either pay the tenant the interest on the security deposit or let the tenant deduct 
+that amount from a rent payment. 
+The landlord should give the tenant a “statement of condition” within 10 days of beginning the tenancy 
+or upon receipt of the security deposit (whichever is later), which describes the condition of the 
+apartment and any damage that exists at that time. The tenant has 1 5 days to add to the “statement of 
+condition” or make changes to it. Both parties should keep copies of the final “statement of condition.” 
+When the tenancy ends, the landlord must return the security deposit, plus interest, within 30 days. 
+However, the landlord may keep any unpaid rent or the amount of money needed to repair damage 
+done to the apartment beyond normal wear and tear. If the lease provides for it, the landlord may also 
+deduct the tenant’s share of any increase in the landlord’s property taxes.34 
+If the landlord intends to keep all or a part of the security deposit for damages, then the landlord must 
+give the tenant a written description of the damage and an estimate of the repair cost within 30 days of 
+the tenant moving out. 
+Laws Governing the Last Month’s Rent 
+If the tenant provides the landlord with the last month’s rent at the commencement of the tenancy, then 
+the landlord must give the tenant a signed receipt. Like all receipts in the tenancy process, the receipt 
+must include the amount paid, the date the payment was made, a description of what the payment 
+was for, the landlord’s name, the tenant’s name, and the name of the person to whom the payment was 
+given. At the end of each year and when the tenancy ends, the tenant is entitled to any interest earned 
+on the last month’s rent.35
+ 
+15
+[[page 16]]
+The State Sanitary Code and the Condition of 
+an Apartment 
+In Massachusetts, the State Sanitary Code, 105 C.M.R. § 410, sets minimum standards for what it 
+means to provide a habitable place in which to live. In general, “habitable” means a place that is 
+comfortable and clean enough for a person to live safely.   
+A landlord is required to maintain a unit in a habitable condition throughout the tenancy.36  The right 
+to habitable housing applies to all occupants of a property, not just tenants. Tenants and occupants 
+can report problems directly to their landlord so that the landlord knows what is wrong and can make 
+prompt repairs. If necessary, a tenant or occupant may ask an inspector from the local board of health 
+to come to the unit, review the conditions, and order the landlord to fix any problems that violate the 
+Sanitary Code. A landlord may not punish a tenant or occupant for reporting Sanitary Code violations 
+to the government. A tenant who is having trouble getting a landlord to make repairs may be able to 
+withhold a portion of the rent or move out, even if there is a lease or rental agreement in place.37 
+However, before either withholding rent or moving out, tenants considering these options should 
+contact a private lawyer or legal services for more information and advice. 
+Under federal and state law, if the rental property was built before 1 978, the landlord and tenant must 
+sign and retain a copy of the Tenant Lead Law Notification and Tenant Certification.38  These forms are 
+to inform the Tenant of known risks and causes of lead poisoning and disclose if it is known that 
+lead-based paint is present in the rental unit. A landlord must also disclose documents related to any 
+lead inspection or risk assessment done on the rental unit, and a Letter of Interim Control or Letter of 
+Compliance issued by the local board of health. 
+If a child under six will be living in the rental property, the landlord is obligated to delead or bring 
+the lead hazards under interim control. A landlord cannot refuse to rent an apartment to a tenant with 
+young children because of the presence or possibility of lead paint or the costs of deleading. 
+You can find your local board of health through the website UpToCode.org, a website developed by 
+Northeast Legal Aid and LemmaLegal with input from partner legal services organizations.
+ 
+UpToCode.org – Find 
+Your Health Inspector
+16
+[[page 17]]
+Health at Home  
+The Massachusetts Attorney General’s Office works to ensure compliance with environmental and 
+public health laws and to ensure that landlords, tenants, and homeowners have accurate information 
+to ensure compliance with the law and safe and healthy homes. Home environmental health risks can 
+create significant sources of illness or injury and can affect residents’ ability to safely enjoy their homes, 
+whether they own or lease them. Many federal, state, and local agencies regulate and provide 
+assistance to address issues related to environmental health at home. 
+You can find more information about the most common environmental health risks such as lead, 
+asbestos, solid waste, mold, noise, unsafe drinking water, sewage and septic systems on the 
+Health at Home page of the Attorney General’s Office website. 
+ 
+Health at Home
+17
+[[page 18]]
+Eviction  
+To remove a tenant without the tenant’s agreement a landlord must get permission from 
+the court.39 A landlord cannot evict a tenant by physically removing the tenant or their 
+personal property, or by changing the locks. The landlord must provide notice to the tenant, in 
+most cases this is called a Notice to Quit. The length of the notice depends on the type of tenancy and 
+the reason for eviction. A landlord must then file a civil action (Summary Process Eviction) in court. The 
+tenant may present defenses or file counterclaims. 
+If the landlord prevails, the landlord may obtain a judgment from the court and, ultimately, an 
+execution document that allows a Sheriff or Constable to conduct a physical eviction. Any personal 
+property belonging to the tenant must be moved to a licensed public warehouse for storage. The 
+landlord is obligated to pay moving fees but is entitled to reimbursement from the tenant. The tenant is 
+allowed a one-time opportunity to claim items of personal or sentimental value from the storage 
+facility and can claim all personal property from the storage facility upon payment of any fees lawfully 
+charged by the storage facility.40
+ 
+Mediation as an Option Mediation as an Option 
+If the landlord and the tenant agree, they may utilize mediation services through the Attorney General’s 
+Face to Face Mediation Program to resolve a dispute that might otherwise result in an eviction. In 
+addition, the local housing court can provide help in resolving a dispute between a landlord and a 
+tenant through mediation.   
+Learn more about alternative dispute resolution in the housing court here:
+Landlords and Tenants may be able to take advantage of the 
+Lawyer for the Day program in some courts. Information about 
+Lawyer for the Day programs can be found through mass.gov. 
+ 
+Lawyer for the Day
+Housing Court 
+ADR Program
+18
+[[page 19]]
+The Eviction Process  
+The formal eviction process is called Summary Process. It begins when the landlord serves the tenant 
+with a court document called a Summons and Complaint. During the eviction process the tenant will 
+have the right to raise defenses to the eviction and present counterclaims for monetary damages. 
+Some common defenses to eviction include: 
+• Failure to properly terminate the tenancy. 
+• The landlord failed to correct known problems with the unit. 
+• The landlord is evicting you in retaliation for activities protected by law. 
+• Discrimination, including that the landlord failed to make a requested reasonable accommodation 
+necessary to allow a person with a disability to live in the home. 
+Defenses and counterclaims are filed with the Court (with a copy given to the landlord) in an Answer.  
+Tenants may also serve (present) the landlord with Discovery Requests, including requests for 
+information and documents that may be necessary at trial. Deadlines are important. Both landlords 
+and tenants should carefully read all notices received from the Court and are encouraged to seek legal 
+assistance as early in the process as possible. 
+Tenants and Landlords can find the court forms they need from 
+the Housing Court’s website:
+Massachusetts Defense for Eviction (MADE) is a free tool to help 
+tenants defend against eviction in court.  The website is hosted by 
+Greater Boston Legal Services but is available to tenants across 
+the Commonwealth.
+ 
+19
+Housing Court Forms
+Massachusetts 
+Defense for Eviction: 
+Self-Guided 
+Eviction Help
+[[page 20]]
+Special Types of Housing
+So far, this guide has focused on the laws and regulations that apply to a typical residential tenancy. 
+However, many people renting their housing in Massachusetts may find that they are covered by a 
+different set of laws and regulations because their housing is not considered an ordinary residential 
+tenancy.
+ 
+Rooming Houses 
+Rooming houses, also known as boarding houses, lodging houses, or single-room occupancy (SRO), 
+are regulated somewhat differently from traditional apartments, and are regulated differently from 
+hotels. A rooming house is a place where four or more rooms are rented out separately to people who 
+are not related to the person running the rooming house (regardless of how many people are renting 
+each room). Each room might or might not have its own bathroom. There is no requirement for rooming 
+houses to provide a kitchen, but if they do, it must meet certain building code requirements. 
+Operators of rooming houses must be licensed.41 
+The eviction rules for rooming houses are a little different than traditional apartments, but an owner 
+may not lock someone out without permission from a judge.42 The owner still must file for an eviction, 
+but the amount of notice they must give the renter is different depending on how long the renter has 
+lived there.
+Manufactured Housing (“Mobile Homes”) 
+When you purchase a manufactured home (sometimes called a “mobile home”) you may also become 
+a tenant of a manufactured housing community.  Because of the unique nature of these communities, 
+where the tenant owns the home, but rents the lot where the home is sited, these communities are 
+regulated differently from traditional landlord-tenant relationships. 
+The Manufactured Housing Unit within the Attorney General’s Office has published a separate guide 
+that provides a comprehensive discussion of the legal rights and responsibilities of residents and 
+owner/operators of manufactured housing communities. It discusses M.G.L. c. 140 §§ 32A-32S, 
+often called the Manufactured Housing Act, the Attorney General’s manufactured housing regulations, 
+and other relevant housing laws.
+ 
+Guide to Manufactured 
+Housing Community Law
+20
+[[page 21]]
+Discrimination in Housing is Against the Law Discrimination in Housing is Against the Law 
+It is against the law for a landlord to refuse to rent an apartment to 
+someone because of the person’s race, color, national origin, ancestry, 
+sex, marital status, religion, age, sexual orientation, source of income, 
+gender identity or expression or military background, or because the 
+person is disabled.43 With very limited exceptions, it is also illegal to refuse 
+to rent to someone with children. For more information about housing 
+discrimination, contact the Civil Rights Division of the Attorney General’s 
+Office or the Massachusetts Commission Against Discrimination. 
+Retaliation is Against the Law Retaliation is Against the Law 
+A landlord must not retaliate or threaten to retaliate against a tenant or occupant of housing for
+ exercising their rights. It is illegal for landlords to threaten or take reprisals against tenants or 
+occupants who engage in protected activity.44  
+Protected activity includes, but is not limited to: 
+• Reporting conditions to the landlord or property manager; 
+• Reporting conditions to the local board of health; 
+• Filing a complaint in court or with an administrative agency; 
+• Organizing or joining a tenant’s union. 
+Retaliation can take many forms, but the following are examples of conduct that would be illegal if 
+threatened or taken as a reprisal against a tenant or occupant of the property for engaging in 
+protected activity: 
+• Raising the rent; 
+• Terminating or failing to renew a lease; 
+• Changing the locks; 
+• Shutting off the heat or electricity; 
+• Starting an eviction proceeding;  
+• Reporting a tenant to the police or immigration officials; 
+• Harassing a tenant or occupant of the property. 
+Certain conduct by landlords will create a legal “presumption” that the conduct was retaliatory if it 
+occurs within six months of a tenant or occupant’s protected activity. 45 A presumption means that if the 
+tenant or occupant were to sue a landlord for retaliation, a court would assume the action was 
+retaliatory unless the landlord could prove otherwise. 
+AGO Civil Rights 
+Division: 
+Fair Housing Law
+21
+[[page 22]]
+Additional Resources from the Attorney Additional Resources from the Attorney 
+General’s Office General’s Office 
+Landlord-Tenant, Consumer Protection 
+Regulations 
+Pursuant to M.G.L. c. 93A, § (2)(c) the Attorney General may 
+make rules and regulations interpreting the provisions of the 
+Consumer Protection Act, M.G.L. c. 93A. The Attorney General’s 
+regulations related to Landlord-Tenant law can be found at 
+940 C.M.R. § 3.1 7. 
+Advisory on Broker Fees  
+On August 1, 2025, the Attorney General’s Office issued an 
+advisory on a new law prohibiting real estate brokers and 
+salespersons retained by landlords from charging broker fees 
+to prospective tenants.
+Guidance on Unfair and Deceptive 
+Fee Regulations (“Junk Fees”)  
+On July 29, 2025, the Attorney General’s Office issued updated 
+guidance to help businesses operating in Massachusetts comply 
+with the consumer protection regulations prohibiting “junk fees,” 
+found at 940 C.M.R. § 38.00. The junk fees regulations apply to 
+the rental of housing in Massachusetts, and the guidance 
+addresses how the “Total Price” of a rental listing must be 
+disclosed and the notice requirements of leases that contain 
+negative option features such as an auto-renewal provision in a 
+month-to-month lease.  
+ 
+Advisory on Broker Fees
+940 C.M.R. § 3.00
+Advisory on Junk Fees
+Unfair and 
+Deceptive Fees
+22
+[[page 23]]
+Guidance on Preventing 
+Housing Discrimination Based 
+on Source of Income  
+Health at Home
+This website from the Attorney General’s Office provides a This website from the Attorney General’s Office provides a 
+summary of laws, rules and regulations that ensure compliance summary of laws, rules and regulations that ensure compliance 
+with environmental and public health laws. with environmental and public health laws. 
+Guide to Manufactured Housing 
+Community Law    
+This guide provides a comprehensive discussion of the legal 
+rights and responsibilities of residents and owner/operators of 
+manufactured housing communities.  In particular, it discusses 
+M.G.L. c. 140, §§ 32A-32S, often called the Manufactured 
+Housing Act, the Attorney General’s manufactured housing 
+regulations, and other relevant housing laws.
+ 
+Health at Home
+Preventing Discrimination 
+Based on Source of 
+Income
+Guide to Manufactured 
+Housing Community Law
+23
+
+[[page 24]]
+Contact Us
+Office of the Attorney General 
+One Ashburton Place 
+Boston, MA 02 108 
+http://www.mass.gov/ago 
+(6 1 7) 727-8400 Consumer Hotline 
+(6 1 7) 963-29 1 7 Civil Rights Hotline
+File a Consumer Complaint File a Consumer Complaint 
+The Consumer Advocacy and Response Division (CARD) of the Attorney 
+General’s Office provides a free consumer assistance service to 
+individuals who file complaints. Not all complaints are appropriate 
+for consumer assistance, but many landlord-tenant disputes are. 
+Even if a dispute is not appropriate for assistance, filing a complaint can 
+help the AGO identify unfair and deceptive business practices that will 
+inform our enforcement and policy work. 
+File a Civil Rights Complaint  
+If you believe a company, business, organization has violated your rights, 
+you can file a civil rights complaint with the Civil Rights Division of the 
+Attorney General’s Office. 
+ 
+File a Consumer 
+Complaint
+File a Civil Rights 
+Complaint
+24
+[[page 25]]
+Resources from Other State Agencies Resources from Other State Agencies 
+Massachusetts Executive Office of Housing and Livable 
+Communities    
+The Executive Office of Housing and Livable Communities (EOHLC) 
+was established in 2023 to create more homes and lower housing costs 
+for Massachusetts residents. EOHLC also distributes funding to 
+municipalities, oversees the state-aided public housing portfolio, and 
+operates the state’s Emergency Family Shelter (EA) program. 
+100 Cambridge St., Suite 300 
+Boston, MA 02 1 1 4 
+(6 1 7) 573-1 100
+Massachusetts Housing Court
+The Housing Court Department handles all matters involving residential 
+housing such as eviction cases, small claims cases, and civil actions 
+involving personal injury, property damage, breach of contract, 
+discrimination, as well as code enforcement actions and appeals of local 
+zoning board decisions that affect residential housing. 
+Administrative Office of the Housing Court 
+Edward W. Brooke Courthouse, 24 New Chardon St. 
+6th Floor 
+Boston, MA 02 1 1 4 
+(6 1 7) 788-6500 
+Massachusetts Commission Against Discrimination  
+The Massachusetts Commission Against Discrimination (MCAD) is the 
+independent state agency that enforces the Massachusetts 
+anti-discrimination laws by investigating complaints of discrimination 
+in employment, housing, public accommodations, and other aspects of 
+everyday life. 
+MCAD Boston, 1 Ashburton Place, Suite 601, Boston, MA 02 108 
+MCAD Springfield, 436 Dwight Street, Room 220, Springfield, MA 01 103 
+MCAD Worcester, 1 8 Chestnut Street. Room 520, Worcester, MA 01608 
+Executive Office of 
+Housing and Livable 
+Communities
+Housing Court
+Massachusetts 
+Commission Against 
+Discrimination
+25
+[[page 26]]
+Massachusetts Department of Public Health, 
+Childhood Lead Poising Prevention Program  
+The Childhood Lead Poisoning Prevention Program (CLPPP) helps prevent, 
+screen, diagnose, and treat childhood lead poisoning. CLPPP works to 
+eliminate sources of poisoning through research and educational, 
+epidemiological, and clinical and environmental activities. 
+Trial Court Law Library 
+The Trial Court Law Library provides legal information about landlord and 
+tenant issues, and other housing issues on its website. 
+Childhood Lead 
+Poisoning Prevention 
+Program
+Massachusetts law 
+about housing and 
+real estate
+26
+[[page 27]]
+Resources Provided by Legal Services Resources Provided by Legal Services 
+Organizations Organizations 
+Mass Legal Help  
+MassLegalHelp is a website run by the Legal Aid Websites Project at the 
+Massachusetts Law Reform Institute with support from the Massachusetts 
+Legal Assistance Corporation.  The website includes resources on a wide 
+range of legal topics, including: 
+The Massachusetts Legal Resource Finder, a directory of contact information 
+for legal aid offices, government agencies and court programs.
+Legal Tactics: Tenants’ Rights in Massachusetts, a free e-book that provides 
+practical information about tenants’ rights in private housing.
+Massachusetts Defense for Eviction (MADE) 
+MADE is a website of Greater Boston Legal Services (GBLS) that helps 
+tenants facing eviction prepare key forms needed to defend against an 
+eviction in court. The website is free and uses a self-guided online interview 
+available in English and Spanish.  
+UpToCode.org  
+UpToCode.org is a free online tool to help Massachusetts tenants solve 
+problems with bad conditions in their home. The website provides 
+step-by-step instructions that can help create a letter to a landlord, a 
+complaint to the local board of health, or prepare court documents to address 
+housing conditions. UpToCode.org was developed by Northeast Legal Aid 
+and LemmaLegal with input from partner legal services organizations, 
+support from the Legal Services Corporation and the Massachusetts Law 
+Reform Institute and help from community partners such as La Colaborativa.
+Legal Resource Finder
+Legal Tactics
+GBLS.org/MADE
+UpToCode.org
+27
+[[page 28]]
+ReferencesReferences
+1M.G.L. c. 1 86, §1 5B(1)(b); see also M.G.L. c. 93A, § 2 and Attorney General’s Office, Consumer Protection: General Regulations, 940 C.M.R. § 
+3. 1 7(4)(a) (“It shall be an unfair or deceptive practice for an owner to: (a) require a tenant or prospective tenant, at or prior to the commencement 
+of any tenancy, to pay any amount in excess of the following: 1. rent for the first full month of occupancy; and 2. rent for the last full month of 
+occupancy calculated at the same rate as the first month; and 3. a security deposit equal to the first month’s rent; and, 4. the purchase and 
+installation cost for a key and lock.”)(emphasis added).
+2M.G.L. c. 93A, § 2; 940 C.M.R. § 38.01; and 940 C.M.R. § 38.04.
+3See State Sanitary Code, 104 CMR §§ 410.200, 410.2 10, and 410.300F.
+4M.G.L. c. 1 86, § 22.
+5105 C.M.R. § 410; and Haddad v. Gonzalez, 410 Mass. 855 (1 99 1).
+6105 C.M.R. § 410. 100(A)(5-6).
+7105 C.M.R. § 410.260(D).
+8105 C.M.R. § 410.260(D)(4).
+9See M.G.L. c. 93A, § 2 and 940 C.M.R. § 38.04(1) (“In connection with any Advertising or marketing, solicitation, or offer of Sale that is Targeted 
+to or results in a Sale in Massachusetts, the following shall constitute an unfair and deceptive practice under M.G.L. c. 93A, § 2: (1) 
+Misrepresenting or failing to disclose Clearly and Conspicuously, at the time of the initial presentation of the price of any Product, or any subsequent 
+presentation thereafter, the Total Price of that Product . . . ”).
+10M.G.L. c. 1 86, §1 5B; and 940 C.M.R. § 3. 1 7(4)(a).
+11See Americans with Disabilities Act at 42 U.S.C. §§ 1 2 101 et seq. and The Fair Housing Act at 42 U.S.C. §§ 3601-36 1 9; see also JOINT 
+STATEMENT OF THE DEPARTMENT OF HOUSING AND URBAN DEVELOPMENT AND THE DEPARTMENT OF JUSTICE, REASONABLE 
+ACCOMMODATIONS UNDER THE FAIR HOUSING ACT, available at: https://www.hud.gov/sites/documents/huddojstatement.pdf.
+12M.G.L. c. 1 5 1B, § 4 ¶ 1 1; see also M.G.L. c. 1 99A (concerning unlawful practices in selling, renting, or leasing premises containing lead in pant, 
+plaster or materials.).
+13M.G.L. c. 1 1 2, § 87DDD1/2.
+14AN ACT MAKING APPROPRIATIONS FOR THE FISCAL YEAR 2026, Chapter 9 of the Acts of 2025, §§ 43, 54, 55 and 1 36.
+15M.G.L. c. 1 86, § 1 5B; 940 C.M.R. § 3. 1 7(4)(a).
+16Affordable Homes Act, Chapter 1 50 of the Acts of 2024 codified at M.G.L. c. 239, § 16.
+17M.G.L. c. 1 5 1B, § (4)(7B).
+18M.G.L. c. 1 5 1B, § (4)(6).
+19Federal Trade Commission, Using Consumer Reports: What Landlords Need to Know (July 2023), https://www.ftc.gov/business-guidance/re-
+sources/using-consumer-reports-what-landlords-need-know. 
+20M.G.L. c. 1 86, § 1 5A-F, §16.
+21M.G.L. c. 1 86, §§ 1 5-1 5F, §16.
+22940 C.M.R. § 3. 1 7(3)(b)(1)-(2).
+23940 C.M.R. § 3. 1 7(3)(b)(3).
+24M.G.L. c. 1 86, § 1 5D.
+25M.G.L. c 1 86, § 1 5B(4)(iii).
+26M.G.L. c 1 86, § 1 5B(4)(iii); and Peebles v. JRK Property Holdings, No. SJC-1 3702 (2025).
+27M.G.L. c 1 86, § 1 5B(4)(iii).
+28M.G.L. c. 1 86, § 1 8.
+29M.G.L. c. 1 86, § 1 8.
+30M.G.L. c. 1 86, § 1 5B(c).
+31M.G.L. c. 1 86, § 1 5B(1)(b).
+32M.G.L. c. 1 86, § 1 5B(3)(a).
+33940 C.M.R. 3. 1 7(4)(a).
+34M.G.L. c. 1 86, § 1 5B(4).
+35M.G.L. c. 1 86, § 1 5B(2)(a).
+36105 C.M.R. § 410.003(A-D); see also M.G.L. c. 93, § 2 and 940 C.M.R. 3. 1 7(1)(a). 
+37M.G.L. c 239, § 8A.
+38Department of Public Health, Lead Poisoning and Control Regulations, 105 C.M.R. § 460.
+39M.G.L. c. 239; M.G.L. c. 93A, § 2 and 940 C.M.R. § 3. 1 7(5).
+40M.G.L. c. 239; M.G.L. c. 1 86, § 1 1; M.G.L. c. 105.
+41M.G.L. c. 1 40 § 24.
+42M.G.L. c. 1 86 § 1 7.
+4342 U.S.C. §§ 3601-36 1 9 and M.G.L. c. 1 5 1B, § (4)(6).
+44M.G.L. c. 1 86, § 1 8 and M.G.L. c. 239, § 1 8; see also M.G.L. c. 93A and 940 C.M.R. § 3. 1 7(6)(b) (“It shall be an unfair and deceptive practice 
+for an owner to: . . . (b) Retaliate or threaten to retaliate in any manner against a tenant for exercising or attempting to exercise any legal rights as 
+set forth in M.G.L. c. 1 86, § 1 8.”)
+45See M.G.L. c. 1 86, § 1 8 ¶ 2 (establishing a rebuttable presumption of reprisal in context of affirmative claim for retaliation); see also G.L. c. 239, 
+§ 2A (establishing a rebuttable presumption of reprisal in context of defense against eviction.). 
+28
+[[page 29]]
+Office of Attorney General 
+One Ashburton Place, Boston, MA 02 108 
+(6 1 7) 727-2200 
+www.mass.gov/ago

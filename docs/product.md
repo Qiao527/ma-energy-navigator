@@ -50,6 +50,16 @@ supports]
 
 ## 2. Positioning
 
+- **An energy engineering portfolio** [Decided 2026-11-07 — Qiao]. It started from a hackathon brief on
+  Massachusetts buildings (energy waste, retrofit prioritization, building performance, tenant and owner
+  incentives, access to energy savings). The hackathon has ended; this project finishes the idea. The showcase
+  is a sourced, tested energy chain:
+  - fuel records → weather normalization → hot water removed → heat load;
+  - → heat pump size → seasonal efficiency → bills and CO₂;
+  - → who pays and who saves.
+
+  The way the story is told: what an energy consultant decides for a triple-decker, made sourced and testable.
+  It is not a business that replaces service companies [Decided 2026-11-07 — Qiao].
 - Portfolio project, not a startup. Optimize for: a sharp problem, one flow that works
   end-to-end beautifully, a defensible technical core, visible product judgment, and at
   least one real user's feedback. [Decided]
@@ -63,17 +73,39 @@ supports]
 
 ## 3. Users
 
-Core users: people in **Massachusetts 1–4 unit residential buildings**. [Decided]
+**Core users: small landlords of Massachusetts 2–4 unit homes, especially owner-occupant
+landlords** who live on one floor and rent the others. [Decided 2026-11-06 — Qiao,
+replacing "people in 1–4 unit buildings"]
 
-The rules engine supports four roles. The v1 demo tells two stories: a **rental building**
-(tenant + landlord) and a **condo building** (unit owners). [Decided]
+Why (Qiao, 2026-11-06): the landlord decides and pays for the work, and the
+owner-occupant landlord feels every side at once. Their own unit saves, their rental
+bills change, and their tenants' bills change. The question the product answers for
+them is: **"Is this worth doing for me?"**
+
+**Tenants are the entry point, not the core user.** A tenant uses the product to:
+- discover that their building qualifies for something;
+- see what they can do alone (community solar, the discount rate);
+- generate a clear letter to their landlord.
+
+[Decided 2026-11-06]
+
+The rules engine still supports all four roles. **Demo stories:**
+1. **Owner-occupant landlord** (first story): lives on the 1st floor of a triple-decker
+   and rents the 2nd and 3rd. The landlord pays the oil heat for all three floors and has
+   **two years of oil delivery records**, so the heating need comes from real use
+   (confidence medium). The tenants pay their own electricity.
+2. **Condo building** (second story): "N more units needed".
+3. The tenant appears as the entry point that leads into story 1 (the letter to the
+   landlord).
+
+[Decided 2026-11-06]
 
 | Role | Situation | What they need | In v1 demo |
 |---|---|---|---|
-| Tenant (e.g. Maria, 2nd floor of a triple-decker) | Doesn't control the building; may or may not pay for heat | Programs a renter can use alone (incl. community solar, income-eligible path), and a way to bring the landlord in | Yes (rental story) |
-| Renting landlord (owns, doesn't live there) | Pays for upgrades, tenants may get the savings | Net cost after incentives, who benefits, how to arrange access with every unit | Yes (rental story) |
-| Condo owner (unit in a 2–4 unit condo building) | Owns one unit; the building's discount depends on the other owners | "Units still needed" for the all-units insulation offer, messages to neighbors | Yes (condo story) |
-| Owner-occupant landlord (lives on one floor) | Own unit and rental units are on different offers | Which offer applies to which unit, combined picture | Engine only |
+| **Owner-occupant landlord** (core) | Lives on one floor; own unit and rental units are on different offers; pays for the work | **"Is it worth it for me?"**: what my own unit saves, my real energy savings vs any heating cost moved onto my tenants, how much incentives cover, the project commitment terms, and whether replacing my boiler anyway changes the answer. Also which offer applies to which unit | **Story 1** |
+| Renting landlord (core) | Owns, doesn't live there; pays for upgrades; tenants may get the savings | The same "worth it" view, without an own unit | Engine only |
+| Condo owner | Owns one unit; the building's discount depends on the other owners | "Units still needed" for the all-units insulation offer, messages to neighbors | **Story 2** |
+| Tenant (entry point) | Doesn't control the building; may or may not pay for heat | Programs a renter can use alone, and a letter that gets the landlord to act | Entry into story 1 |
 
 Every unit records **who pays for heat** and **who pays for electricity** (tenant or
 owner). These are asked, never guessed, and savings are assigned to whoever pays.
@@ -108,7 +140,8 @@ Coordination is the signature feature. [Decided]
 ## 5. v1 scope
 
 **In v1** [Decided unless marked]
-- Four roles in the rules engine; two demo stories (rental, condo)
+- Four roles in the rules engine; demo stories: owner-occupant landlord (first), condo; the
+  tenant as the entry point (letter to the landlord) [Decided 2026-11-06]
 - Address → building profile, shown to the user to confirm or fill gaps
 - **The form is the only source of data for calculations.** An optional entry point lets
   the user describe their situation in a few sentences; the LLM pre-fills the form; the
@@ -130,6 +163,11 @@ Coordination is the signature feature. [Decided]
   up". [Decided 2026-11-06]
 - **No federal tax credits.** §25C and §25D are not allowed for expenditures after
   2025-12-31 (P.L. 119-21). The FAQ explains this. [Decided]
+- **Heating need and heat pump size for everyone** [Decided 2026-11-06 — Qiao]. These
+  come from the user's past fuel records where available (confidence medium). Otherwise
+  they come from a **ResStock-based Massachusetts estimate** for similar 2–4 unit
+  buildings (confidence low, "typical for similar buildings, not measured for yours").
+  This is built in Phase 1, so most users still get a number.
 - Rooftop solar module only for users who can install (Google Solar API, PVWatts fallback).
   It must say which meter(s) get the benefit, since each unit usually has its own meter.
   [Proposed — Step 3 verifies net-metering credit allocation]
@@ -139,6 +177,42 @@ Coordination is the signature feature. [Decided]
   eligible; the 100% tier shows "N more units needed" and is never shown as "not
   eligible" for lack of agreement [Decided 2026-11-06]
 - All money as **low / mid / high scenarios** with confidence labels [Decided]
+- **"Is it worth it for me?" — the landlord view** [Decided 2026-11-06 — Qiao]. For a
+  project, the engine answers:
+  - what the landlord's **own unit** saves or costs per year;
+  - **who gains in the rental units**, bill by bill (the landlord, the tenants, or a payer
+    we don't know yet);
+  - **how much incentives cover** of the project cost, plus the net upfront cost;
+  - **real energy savings vs cost shifted to tenants**: the landlord's apparent saving
+    is split into the real energy saving and the heating cost that would move onto
+    tenants' electric bills. Any shift is shown in dollars per year and per month, with
+    fair options: lower the rent accordingly, an electricity allowance, or an owner-paid
+    meter for the heat pump. Under 105 CMR 410.200/410.210 the landlord can't shift heat
+    costs without a written rental agreement (research §18). Payback is computed on real
+    savings. [Decided 2026-11-06 — Qiao]
+    - **We never interpret the law for the user.** The report says "Check your written
+      rental agreement" and names the exact thing to look for: does it say the tenant
+      pays for **heat** (or heating fuel), not only "electricity"? It lists where to get
+      help (the Attorney General's Guide to Landlord-Tenant Rights, MassLegalHelp's
+      utilities chapter, the local Board of Health) and says "This is not legal advice."
+    - **The recommended payback is always the no-shift one.** The "if costs were shifted"
+      payback appears only as a comparison, always with the 105 CMR 410 note, never in a
+      recommendation slot.
+    - **Fair options (four):**
+      1. lower the rent by the shifted amount;
+      2. an electricity allowance;
+      3. an owner-paid meter for the heat pump;
+      4. negotiate at renewal or a new lease and write it down. This must explain the
+         electricity change openly; renewal must not be used to shift the cost
+         unannounced.
+  - **project commitment terms** (UI label; formerly "cost of a no-rent-increase
+    commitment"): the forgone rent increase over the commitment period. If the period or
+    the increase isn't known, it is shown as unknown with the reason.
+  - **comparison baseline "the boiler needs replacing anyway"**: if chosen, the payback
+    subtracts the replacement cost the landlord would have paid regardless. It comes from
+    the user's quote, otherwise the EEAC study's $/ton (low confidence).
+
+  All of these are estimates with confidence, computed by code.
 - **Who saves, who may pay more** [Decided 2026-11-06 — Qiao, top priority after review].
   For each unit, the report shows:
   - the heating-fuel bill change for whoever pays heat;
@@ -177,8 +251,7 @@ can be added later. [Proposed]
 
 **v2 ideas** [Proposed]
 - Portfolio mode
-- Expose the rules engine as an MCP server so any AI agent can ask
-  "which MA programs does this building qualify for?"
+- (An MCP server was considered and dropped — Qiao, 2026-11-07.)
 
 ## 6. Architecture
 
@@ -214,6 +287,34 @@ Design notes:
   and a test that fails if a shipped rule lacks `source_url` or is past `effective_until`.
   Programs changed mid-plan in 2025–2026 (federal credits ended, Mass Save heat-pump
   rebates revised, SMART 3.0). [Proposed — schema in Step 5]
+
+## 6a. Keeping rules and models honest as they change [Decided 2026-11-06 — Qiao]
+
+Stronger models make the project stronger only if every change is checked the same way.
+
+**1. Model-assisted rule drafting, human approval.**
+1. **Capture:** the official page or PDF is fetched (headless browser) and saved as a
+   text snapshot with URL, date and hash under `rules/<state>/sources/`.
+2. **Draft:** a model reads the snapshot and writes rule JSON into
+   `rules/<state>/drafts/`, with section and verbatim quote for every condition and
+   amount.
+3. **Check (automatic):** `npm run rules:check-drafts` validates the schema, resolves
+   every reference against the active rules, and checks that **every quote appears
+   verbatim in the saved snapshot**. A draft that fails never reaches review.
+4. **Approve (human):** Qiao reviews the draft, the check report and the standard
+   scenario diff. Only then is it moved into the active rules with a `review` record
+   (`draftedBy`, `checkedOn`, `approvedBy`, `approvedOn`). The loader refuses any active
+   rule without that record. Drafts are never loaded.
+
+**2. A fixed set of standard scenarios.**
+- `scenarios/<state>/*.json`: each scenario is a building, the user's answers, fixed
+  dates, and expected results (statuses, versions, units needed, payer split, landlord
+  view).
+- `npm run scenarios` runs them all.
+- **Any change to rules data, the engine, or, from Phase 2, prompts and models must
+  pass them first.** A changed expectation is itself a change Qiao approves.
+- From Phase 2 the same scenarios also check the LLM layer: no number or program that
+  the engine didn't return.
 
 ## 7. Technical difficulties
 
@@ -259,6 +360,8 @@ For the README / pitch:
 3. A WCAG 2.2 AA audit passes.
 4. At least one real tenant, landlord or condo owner has tried it, and their feedback is
    written down.
+5. A methods write-up explains every step of the energy chain: assumption, source, range and why, plus a
+   validation of records-based heat loads against ResStock. [Decided 2026-11-07 — Qiao]
 
 ## 10. Open questions for Phase 0
 
@@ -277,6 +380,14 @@ For the README / pitch:
 8. Real users: outreach to All In Energy / the navigator program and to a tenant or landlord
    near BC. Drafts in `docs/outreach/emails.md`; Qiao sends them. [Decided — start now]
 9. ~~Massachusetts energy burden figure~~ → computed from LEAD (§1). Confirm ACS vintage.
+11. **[Open] Cooling and the electric bill.** Heat pumps also cool. Where there was no AC
+    before, summer electricity rises (Mass Save heat pump page says so). How should the
+    bill estimate treat cooling: leave it out, or add it as a separate, clearly labelled
+    line? Needs a sourced cooling-load assumption.
+12. **[Open] Winter heat pump electric rates.** Eversource, National Grid and Unitil offer
+    seasonal heat pump rates (Nov–Apr) per the Mass Save page (research §8). Amounts,
+    eligibility and whether they apply to tenant-held accounts aren't read yet. They change
+    the tenant's bill in the cost-shift case.
 10. Tenant concern that upgrades lead to rent increases. For DEC rental projects, the
     2025–2027 Plan requires landlords to sign a form "committing not to raise renter or
     evict tenants for a period" after receiving incentives (`docs/data-sources.md` §5).
@@ -287,10 +398,10 @@ For the README / pitch:
 
 | Layer | Choice | Status | Why |
 |---|---|---|---|
-| Rules engine + finance | TypeScript package `engine/`, Node 24 LTS, Zod 4 for rules-data validation, Vitest + fast-check | [Decided 2026-11-06] | Same language as the app, so the browser and server share one engine. Zod gives types and runtime checks from one schema. fast-check covers the property tests in `docs/tooling.md`. Versions are pinned in `docs/phase-1-plan.md` |
+| Rules engine + finance | TypeScript package `engine/`, Node 24 LTS, Zod 4 for rules-data validation, Vitest + fast-check | [Decided 2026-11-06] | Same language as the app, so the browser and server share one engine. Zod gives types and runtime checks from one schema. fast-check covers the property tests. Versions are pinned in `docs/phase-1-plan.md` |
 | Rules data | JSON files in `rules/ma/`, one folder per state; schema in `docs/schema/rules-schema.md` | [Decided 2026-11-06] | Policy edits are data edits plus tests. Schema merged from two independent designs |
 | Data analysis | Python scripts in `analysis/` (standard library first) | [Proposed] | LEAD and MassGIS work is tabular/geospatial; it stays out of the app |
-| App | Next.js 16 (App Router) + TypeScript + Tailwind | [Proposed — confirm in Phase 3] | Server routes for the engine and LLM API calls; static pages for the demo. Mind Next.js writing its own CONTRIBUTING.md (tooling.md caveat) |
+| App | Next.js 16 (App Router) + TypeScript + Tailwind | [Proposed — confirm in Phase 3] | Server routes for the engine and LLM API calls; static pages for the demo. |
 | Charts | Hand-built SVG with D3 scales, each chart paired with a data table | [Proposed — confirm in Phase 3] | Only 4–5 simple charts. Hand-built SVG gives full control over WCAG 2.2 (text alternatives, patterns as well as colour, keyboard focus). Alternatives: Observable Plot (faster, weaker accessibility control), Recharts |
 | Map | MapLibre GL | [Proposed] | Supporting role only (confirm the building, show the roof); open source, no per-view fee |
 | LLM | LLM API, model chosen in Phase 2 | [Decided — provider; Open — model] | Explanations, form pre-fill and message drafts only |

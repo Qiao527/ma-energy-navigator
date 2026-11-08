@@ -2,6 +2,355 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Positioning: an energy engineering portfolio; first public version today)
+
+- **The project stays a portfolio project, now framed as an energy engineering portfolio.** Why: the goal is
+  to show that the energy work is done right and explained clearly, not to run a business. — Qiao.
+- **Origin:** a hackathon brief on Massachusetts buildings (energy waste, retrofit prioritization, building
+  performance, tenant and owner incentives, access to energy savings). The hackathon has ended. The project
+  finishes the original idea, and the README says so. — Qiao.
+- **Not pursued:** an MCP server (removed from the v2 ideas), and a business that replaces traditional service
+  companies. "What an energy consultant decides for a triple-decker, made sourced and testable" stays as the
+  way the story is told, not as a business. — Qiao.
+- **Emphasis:** energy engineering first, human-centered second. The showcase is the chain: fuel records →
+  weather normalization → hot water removed → heat load → heat pump size → seasonal efficiency → bills and
+  CO₂ → who pays and who saves. The rules engine and the fairness framing support it. — Qiao.
+- **Scope added to Phase 1 (milestone M4b):** sourced fuel prices, heat pump seasonal efficiency, weather
+  normalization (heating degree days), CO₂, and a comparison with similar buildings. These come before the
+  polished UI. A methods write-up (assumptions, sources, uncertainty, validation) is a deliverable. — Qiao.
+- **A first public version today** (Qiao). It ships only with rules and assumptions Qiao has approved
+  (principle 3, §6a).
+  - Technical: a static site. The engine runs in the browser, with no LLM, no accounts and no stored
+    data.
+  - Built with esbuild + TypeScript and plain semantic HTML (changed from Vite while building: one dependency, and the output is one standalone HTML file, so any static host or a shared link can serve it). Why: it's the smallest thing that works for a form
+    and a report, and it keeps WCAG control simple.
+  - Next.js stays [Proposed] for Phase 3, when server routes are needed for the LLM.
+
+## 2026-11-07 (Rules approved; first public release prepared)
+
+- **All 16 rule and assumption files approved** (batches 1 and 2) by Qiao in chat ("approve"). The approval
+  command was run at Qiao's explicit instruction; the ledger records `approvedBy: Qiao`. — Qiao.
+- **Scenario baselines: not yet reviewed** (all 10 wait for Qiao). Not a release blocker. — Qiao.
+- **Publishing rule:** everything on GitHub is published under Qiao's account (Qiao527); recorded in `CONTRIBUTING.md`.
+  — Qiao.
+- **Technical, accessibility pass (WCAG 2.2 AA):**
+  - axe-core reports no violations in light or dark mode.
+  - Fixed during the pass:
+    - the answer is the page's `h1`;
+    - a skip link;
+    - scroll padding so the sticky what-if bar never covers focus (2.4.11);
+    - spoken slider values (`aria-valuetext`);
+    - named bar segments;
+    - Escape dismisses tooltips (1.4.13);
+    - the map pulse stops after three cycles (2.2.2);
+    - 24 px targets on disclosure summaries (2.5.8);
+    - a live region that reads the new answer after a pause;
+    - an inline favicon.
+  - All text tokens are at 4.5:1 or above in both themes.
+- **Technical, repository:**
+  - README with the energy chain, sources, the honest finding and the demo-data label;
+  - CI: engine tests, draft check, scenarios, Python tests, web build;
+  - GitHub Pages workflow (builds from approved rules on `main`);
+  - generated files (`__pycache__`, `web/dist`) removed from git.
+
+
+## 2026-11-07 (Interactive version)
+
+- **Technical:**
+  - A what-if bar sits above the report: electricity price, the building's fuel price, heat pump efficiency,
+    and whose meter the heat pumps run on. One row of controls scopes every number below it.
+  - What-if values replace a sourced range with the user's exact value (engine `withOverrides`, tested), and the
+    page labels them "what-if values".
+  - The meter option is engine `heatPumpMeter: 'owner'` (tested). It removes the shifted cost, which is fair
+    option 3.
+- **Technical, the elevation shows the switch itself:**
+  - Today: the basement boiler and oil tank, a shared riser, and radiators.
+  - With heat pumps: outdoor units on each porch, line sets to wall heads, and each floor's meter, or one owner
+    meter bus.
+  - The boiler stays, drawn dashed, when it keeps heating the hot water.
+- **Technical, motion and highlighting:**
+  - Between renders, bars glide, numbers count, and the map pans or zooms ("Around <town>").
+  - A floor is highlighted everywhere it appears.
+  - One tooltip, value first, works on hover and keyboard focus.
+  - All motion is off under `prefers-reduced-motion`.
+
+## 2026-11-07 (Qiao's review of web v1)
+
+- **"Heat pumps may not save" is presented as it is** (option A). The headline states the yearly change, and the
+  page explains why: the price of one unit of heat, plus the break-even electricity price and heat pump
+  efficiency. — Qiao.
+- **The first web design was rejected: generic and unfocused.** The redesign leads with the answer for the user,
+  makes the visuals stronger, and adds a map. — Qiao.
+- **Technical, redesign:**
+  - It reads as an engineering sheet: the answer sits beside the building drawn in elevation (bay window,
+    stacked porches, flat cornice), one floor per row, with each bill's yearly change.
+  - Then come: the price of one unit of heat by system (engine `heatCosts` / `breakEven`, tested); today vs with
+    heat pumps per floor; the fairness options; the map; the plan in order; the method chain; and sources.
+  - The form moved into an "Edit the building" drawer.
+  - Two data colors (fuel, electricity) pass the dataviz palette validator in light and dark mode. Every chart
+    has a table.
+- **Technical, map:**
+  - Census 2023 county subdivisions (351 Massachusetts municipalities, the engine's municipality basis),
+    simplified to SVG by `analysis/ma_towns_svg.py` (standard library only).
+  - It shades Designated Equity Communities from the rules data, marks the six MassCEC navigator pilot cities,
+    and highlights the user's town.
+  - No map tiles: the page must run as one file with no outside requests. The caption says places are shown to
+    point to help, never to rank them (principle 6).
+
+## 2026-11-07 (M4b built: energy chain and web v1)
+
+- **Technical:** sourced assumptions added to the drafts. All quotes pass the draft check.
+  - Prices: DOER winter 2025–26 outlook vs last winter. Oil $3.10–3.43/gal, propane $3.17–3.33/gal, gas
+    $2.03–2.24/therm, electricity $0.33–0.35/kWh. Confidence medium; these are statewide averages. The winter
+    heat pump rate is not modeled yet.
+  - Heat pump seasonal COP: Cadmus field study, whole-home systems in MA and NY. Mixed 1.90, all whole-home
+    2.41, ductless 2.80. Confidence medium; the study winter was mild.
+  - CO₂: EPA 2025 Emission Factors Hub. Oil 73.96, gas 53.06, propane 62.87 kg/MMBtu; New England grid 537.2
+    lb/MWh (total output, CO₂ only).
+  - Heating degree days: NOAA CPC Massachusetts population-weighted season totals for 2021–2025 and each
+    season's normal. The normal is 6,407 in every season except 2023–24, which is 6,441.
+- **Technical:** `report()` is the single entry point. Electric water heaters are not estimated
+  (there's no sourced efficiency), and the report says so. The landlord view counts only eligible owner
+  incentives.
+- **Engineering finding, for Qiao:** at these statewide prices, oil → heat pump raises running costs in Story 1.
+  Per MMBtu of heat delivered, oil costs about $32 and a heat pump at COP 2.41 about $42. The report says so
+  and shows no payback. This matches DOER's own caution: "households should not assume that switching fuels
+  will automatically lead to savings."
+
+## 2026-11-07 (F2: hot water from the boiler)
+
+- **Technical:** the hot-water share comes from ResStock 2025.1 MA, the same file as Task 16b. It uses
+  units in 2–4 unit buildings whose water heater burns the heating fuel. Share = hot-water fuel ÷ (heating + hot-water
+  fuel), weighted p25 / p50 / p75, with at least 30 samples, at confidence low.
+  - Oil: 0.145 / 0.182 / 0.272 (n = 157). Gas: 0.142 / 0.205 / 0.297 (n = 1,504). Propane (n = 20) is left out, so
+    propane records stay unadjusted at confidence low, with the reason.
+  - Why not EIA RECS: RECS publishes regional end-use totals, not Massachusetts 2–4 unit homes. ResStock is
+    already in the approved-source pipeline (license CC-BY-4.0).
+- **Technical:** the boiler's fixed cost is the DOER consumer tip sheet (2017): an annual oil burner
+  tune-up "approximately $120-150". Recorded as `boiler_annual_service_cost.oil`, 120 / 135 / 150 USD per year,
+  confidence low (2017 dollars, tune-up only). Gas and propane have no source, so they get no number; the view says
+  why.
+- **Technical:** units gain `hotWaterFromBoiler` and `hotWaterAfter`.
+  - `heatLoadFromRecords` takes the share out only when the answer is yes. Unanswered keeps the
+    "may be overstated" note.
+  - `navigate` asks the first question for units with a fuel-burning heating system or fuel records. There is no
+    boiler fact, so this stands in for "has a boiler". It asks the second question after a yes.
+- **Technical:** landlord view `hotWater`:
+  - `boiler` → the unit is listed in `boilerKept` with the hot-water fuel cost and fixed cost that remain. Totals
+    don't change: the bill change covers space heating only, and the fixed cost is paid before and after.
+  - an electric water heater → its bill changes are added to the unit. Its meter defaults to the heat pump's
+    meter. If the landlord paid the boiler fuel and a tenant pays that meter, its electricity is a shifted cost,
+    with the same 105 CMR 410 note and fair options (410.210 names oil "for heating and/or hot water").
+- **Scenarios:** all 10 baselines were re-recorded. The only change is the new `unit.hotWaterFromBoiler`
+  questions; no status, amount or step changed. Approvals were cleared and wait for Qiao.
+
+## 2026-11-07 (Qiao's review of milestone 4, second round)
+
+- **Batch 1 rules: Qiao reviews first, then approves** with `tools/approve_rules.py`.
+  Nothing is approved yet. — Qiao.
+- **Scenarios `story1-installed-deadline-passed` and `story1-planning-after-deadline`
+  approved.** All 10 standard scenarios now have an approved baseline. — Qiao.
+- **Demo data is labeled.** Story 1's fuel records are fictional. Wherever they appear,
+  the interface and the README must say "demo data". (There is no README or UI yet. The
+  scenario `story` text already says "fictional demo numbers".) — Qiao.
+- **DEC no-cost heat pump on an already-installed rental unit: keep showing it, last in
+  the list.** It must state the sourced fact: the project is arranged by the turnkey
+  contractor before installation, and the website doesn't say whether an installed
+  project still qualifies, so this needs confirming. Why: don't decide for the user, and
+  don't hide a possible offer (Mass Save call, question 5). — Qiao.
+- **Hot water from the boiler: ask two questions.**
+  1. Does the hot water come from the boiler today?
+  2. After the heat pump, what heats the water: the same boiler, an electric water
+     heater, or a heat pump water heater?
+
+  If the boiler stays for hot water, the oil bill doesn't go to zero. Keep the hot-water
+  share of the oil and the boiler's fixed costs, and adjust the payer split to match.
+  - Take the hot-water share from a sourced dataset (for example EIA RECS).
+  - If none is found, mark the confidence low and say why.
+
+  Why: fuel records include hot water, so the heating need and the heat pump savings
+  would otherwise be too high. — Qiao.
+- **Follow-ups :** these become tasks in `docs/phase-1-plan.md` ("Follow-ups from
+  Qiao's second M4 review"). Each one that changes a scenario result needs Qiao's
+  approval again.
+
+## 2026-11-07 (Tasks 16 and 16b: where heating need and heat pump size come from)
+
+- **Technical:** `engine/src/quantities.ts` estimates per unit, from the most
+  specific source:
+  - heating need: the user's fuel records, else ResStock fuel × vintage, else ResStock
+    fuel only;
+  - heat pump size: the contractor's quoted tons, else ResStock;
+  - heat pump cost = tons × $/ton.
+  Weatherization and solar have no sourced cost, so they stay missing (percentage only).
+- **Technical:** units gain `fuelRecords` (`year` = the heating season starting
+  that year; several deliveries in a season are added up) and `heatPumpTonsQuoted`.
+  - Records in a unit that doesn't fit the fuel aren't used, so the estimate falls back to
+    ResStock. Nothing is guessed.
+  - Two or more seasons → medium confidence; one → low.
+  - The reason text always says that records include hot water if the same boiler heats
+    it.
+- **Technical:** boiler efficiency is the EEAC new-baseline AFUE (oil 0.84; gas
+  and propane 0.82), at `confidence: medium`, and the description says an older boiler is
+  probably less efficient.
+  - Why medium: the fuel-bill side doesn't depend on efficiency at all (load ÷ efficiency
+    gives back the fuel used). Only the heat pump's electricity does. Medium keeps two
+    seasons of records at medium, as decided for Story 1.
+- **Technical:** heat pump cost per ton is $3,694 / $5,664 / $7,634. The earlier
+  $3,860 / $5,830 / $7,800 mixed two groups of the EEAC study.
+- **Technical:** assumption files (`assumptions.json`,
+  `assumptions-resstock.json`) go through the same drafting workflow, quote check and
+  approval ledger as the rules.
+- **Technical:** ResStock groups need at least 30 samples. Electric resistance
+  has no ResStock group (ResStock's "Electricity" mixes heat pumps and baseboard); such
+  units need records.
+  - Rerun result: oil 22.8 / 35.8 / 50.8 MMBtu and 1.97 / 2.48 / 3.29 tons (n = 349), the
+    same as the first pass. Oil before 1950 has a mid of 38.3 (first pass 38.4; the
+    quantile method differs).
+- **ResStock license resolved:** CC-BY-4.0 (`citation.txt`).
+- **Technical:** solar yield and solar cost assumptions wait for Phase 3. Without
+  a per-address system size they produce no number.
+- **Technical:** Story 1 scenario inputs now carry two seasons of oil records
+  per floor (fictional numbers). Expected results didn't change, because scenarios use
+  fixed quantities. Once the assumption files are approved, the scenarios switch to
+  computed quantities, which changes dollar values and needs Qiao's re-approval.
+
+## 2026-11-07 (Qiao's review of milestone 4, first round)
+
+- **Missed paperwork deadlines depend on whether the work is done.** Already installed →
+  show "application deadline passed" with the date. Still planning → don't show last
+  year's versions. — Qiao.
+  - **Consistency note:** both earlier statements were true at different layers. The
+    status was `not_eligible` with reason `application_deadline_passed`, while the
+    `shown` filter hid it. Both layers now follow the rule above.
+- **Technical:** "installed" means the install date is on or before today. A
+  past install date can only mean the work is done, so no extra input field is needed.
+- **Technical:** a result is "missed the deadline" only if eligibility isn't a no
+  anyway. Why: otherwise rebates the user never qualified for would read as missed.
+- **Standard scenarios: 8 approved** (Qiao). The deadline scenario became two:
+  `story1-installed-deadline-passed` and `story1-planning-after-deadline`, both waiting
+  for approval.
+- **Technical:**
+  - each scenario carries `approved: {by, on}`; a re-record that changes `expected`
+    clears it;
+  - `npm run scenarios` runs approved baselines against approved rules plus pending drafts
+    (named in the suite title), so engine changes are checked before every rule is
+    approved;
+  - unapproved baselines are skipped.
+- **Rules are reviewed in batches** (Qiao):
+  - batch 1 is Story 1's core: programs, predicates, income tables, DEC list, caps,
+    sequence, legal, assessment, weatherization, heat pumps, financing;
+  - batch 2 is solar, bill assistance, and the condo insulation offers (moved to
+    `offers/weatherization-condo.json` so approval by file works).
+- **Mass Save call list:** `docs/outreach/mass-save-call.md`, each question naming the
+  rules and scenarios it affects.
+
+## 2026-11-07 (Phase 1, milestone 4: drafting workflow, rule drafts, standard scenarios)
+
+- **Technical:** approvals are a ledger `rules/ma/approvals.json` keyed by each
+  file's sha256. `loadRuleSet` refuses any active rule file whose content has no
+  approval, so a one-byte change needs re-approval. `drafts/` is never loaded except in
+  the check's preview mode. Why: "never add an active rule directly" becomes enforced, not
+  a convention.
+- **Technical:** `tools/approve_rules.py` (run by Qiao only) approves a file only
+  if its hash matches a passing `npm run rules:check-drafts` (`drafts/CHECK.json`).
+- **Technical:** the quote check compares against saved text snapshots in
+  `rules/ma/sources/` (captured with `tools/capture_source.py`). Normalization: NFKC,
+  collapsed whitespace, no space before punctuation (links in web pages leave one).
+  Nothing else is fuzzy.
+- **Technical:** standard scenarios live in `scenarios/ma/*.json` with fixed dates
+  and fixed quantities. `npm run scenarios` compares a stable summary (status, shown,
+  reason, missing, prerequisites, coordination counts, value, questions, steps, upcoming).
+  Baselines are recorded from the drafts and need Qiao's approval along with them. The
+  suite skips until approved rules exist.
+- **Technical:** `tools/draft_report.py` writes `rules/ma/drafts/REVIEW.md`, the
+  human-readable view Qiao approves from.
+
+## 2026-11-06 (Phase 1, milestone 3: offers and plan)
+
+- **Technical:** milestone 3 implemented (Tasks 10–12) as planned.
+- **Technical:** coordination prerequisites ask only for the facts that would
+  settle each undecided unit (`missingByUnit` → `unitQuestions`). Why: a unit without a
+  heating meter that already said no is undecided only because the definition is open,
+  so asking it again would be wrong.
+
+## 2026-11-06 (cost shifting: Qiao's three decisions)
+
+- **Never interpret the lease or the law for the user.** Show "Check your written rental
+  agreement: does it say the tenant pays for heat (or heating fuel), not only
+  electricity?", list resources (the AG's 2025 guide, MassLegalHelp ch. 6, the local
+  Board of Health), and say "This is not legal advice." — Qiao.
+- **The recommended payback is the no-shift one.** The cost-shifted payback is
+  comparison-only, always with the 105 CMR 410 note, never in a recommendation slot. —
+  Qiao.
+- **Fourth fair option:** negotiate at renewal or a new lease, in writing, with the
+  electricity change explained openly. Never a disguised shift at renewal. — Qiao.
+- **ResStock estimates moved into Phase 1** (Task 16b, M4). First pass for oil-heated
+  Massachusetts 2–4 unit homes: 22.8 / 35.8 / 50.8 MMBtu heating load and 1.97 / 2.48 /
+  3.29 tons, confidence low. — Qiao asked; computed.
+- **Demo Story 1 has two years of oil delivery records** (heating need from records,
+  confidence medium). — Qiao.
+- **Technical:** fuel records go per unit as `fuelRecords`. Estimate precedence:
+  records → contractor tons → ResStock fuel × vintage → ResStock fuel only. A group needs
+  at least 30 samples.
+
+## 2026-11-06 (Phase 1, after milestone 2: cost shifting)
+
+- **Escalation rule** (CONTRIBUTING.md): The lead decides technical details and records them here.
+  Only product direction, policy interpretation, and ethics/fairness go to Qiao. Each
+  milestone ends with commit, push, and a report listing only Qiao's decisions. — Qiao.
+- **Landlord view splits real energy savings from cost shifted to tenants.** Any shift is
+  shown per year and per month, with fair options (lower rent, electricity allowance,
+  owner-paid meter). — Qiao (top priority).
+- **105 CMR 410 verified** (Mass. Register #1498, 6/23/2023; research §18):
+  - the owner provides heat, oil, electricity and gas unless there is a single-unit meter
+    or tank **and** a written rental agreement says the occupant pays;
+  - an owner-paid meter may serve several units.
+
+  Encoded as the sourced constraint `ma_105_cmr_410_written_rental_agreement` that the
+  landlord view attaches to every shift. Whether an existing "tenant pays electricity"
+  lease clause covers heat-pump electricity is a **policy-interpretation question for
+  Qiao**. — verified.
+- **Technical:**
+  - Payback defaults to **real** savings. `paybackIfCostShifted` is reported separately,
+    and only when a shift exists.
+  - `heatPumpMeterPaidBy` per unit defaults to the unit's electric payer.
+  - Field renamed to `projectCommitment` ("project commitment terms" in the UI); same
+    calculation.
+- **"Boiler needs replacing anyway" baseline** added. Cost from the user's quote,
+  otherwise the EEAC incremental cost study's oil boiler $920/ton (2023 $, confidence
+  low). — Qiao asked; source found.
+- **Tons per unit and annual heating need have no source yet.** Planned order: the user's
+  bills and the contractor's quote (medium), else a ResStock stock estimate (low, labelled
+  "typical for similar buildings"). No value is used without one. — technical.
+- **Two [Open] questions added:** cooling and the electric bill; seasonal heat pump rates.
+  — Qiao.
+
+## 2026-11-06 (Phase 1, after milestone 1)
+
+- **Working assumptions never produce definite results.** "Eligible condo unit = has a
+  heating meter" stays a working assumption until Mass Save confirms. A unit without a
+  meter counts as undecided; the all-units result shows as potential with the pending
+  definition. The assumption is used only for ordering and hints ("likely needed"). —
+  Qiao.
+- **Core user changed to small landlords of 2–4 unit homes, especially owner-occupant
+  landlords.** Tenants become the entry point (discover, then send a letter to the
+  landlord). Demo story 1 is the owner-occupant landlord; story 2 is the condo. Why: the
+  landlord decides and pays, and the owner-occupant feels every side of the split
+  incentive. — Qiao.
+- **Milestone 2 money answers the landlord's "is it worth it for me?":**
+  - own-unit savings;
+  - who gains in the rental units;
+  - incentive coverage;
+  - the cost of a no-rent-increase commitment.
+
+  — Qiao.
+- **Two governance designs added** (product.md §6a): model-drafted rules with verbatim
+  quotes, an automatic check and Qiao's approval before entering the active rules; and a
+  fixed suite of standard scenarios that every rules, engine, prompt or model change must
+  pass. Recorded in CONTRIBUTING.md. — Qiao.
+- **Node 24 pinned** (`.nvmrc`, `engines: >=24 <25`). — Qiao.
+
 ## 2026-11-06 (Checkpoint C: Phase 0 approved)
 
 - **Phase 0 approved.** Phase 1 starts from `docs/phase-1-plan.md` and
@@ -162,3 +511,8 @@ Based on `docs/review-notes.md`.
 - **Workflow: written plan, test-driven implementation, and an independent review at the end of each phase.** — Qiao.
 - **Docs mark statements as Decided / Proposed / Open** so later work can refine
   without discarding agreed decisions. — Qiao.
+
+## 2026-11-07 (License and public repository)
+
+- **The code is MIT licensed** (© Qiao Long); data and quoted program text keep their own terms. — Qiao.
+- **The repository is public**, with `CONTRIBUTING.md` holding the working rules. — Qiao.

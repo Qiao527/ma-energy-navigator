@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": [
+      "node"
+    ],
+    "noEmit": true
+  },
+  "include": [
+    "src",
+    "test",
+    "status",
+    "vitest.config.ts",
+    "vitest.status.config.ts",
+    "vitest.drafts.config.ts",
+    "vitest.record.config.ts"
+  ]
+}

@@ -1,0 +1,40 @@
+CITATION -- 2025/resstock_amy2018_release_1
+========================================================================
+
+Generated from catalog.json. Identifies one release of the End Use Load
+Profiles for the U.S. Building Stock repository.
+
+DATASET
+  Name         ResStock 2025 Release 1 (AMY 2018)
+  Release      2025/resstock_amy2018_release_1
+  Published    2025
+  Publisher    National Renewable Energy Laboratory (NREL)
+  Repository   https://doi.org/10.25984/1876417
+  Landing page https://data.openei.org/submissions/4520
+  Location     s3://oedi-data-lake/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/
+  License      CC-BY-4.0
+
+SUGGESTED CITATION (APA)
+  National Renewable Energy Laboratory (NREL). (2025). ResStock 2025 Release 1 (AMY 2018) [Data set].
+  Open Energy Data Initiative (OEDI). https://doi.org/10.25984/1876417
+
+AS PUBLISHED IN THIS RELEASE'S README
+  When citing this dataset, please cite both the specific dataset and the technical reference guide, as shown below. Users are welcome to also cite the measure documents directly (when published). ResStock 2025 Release 1 Dataset in APA format Parker, A., Adhikari, R., Brossman, J., Liu, L., Lou, Y., Maguire, J., Phoung, S., Robertson, J., Speake, A., Stenger, K., White, P., Clark, K., Fontanini, A., Horowitz, S., Present, E., Reyna, J., Swindler, A., Wilson, E., Bianchi, C., Chintala, R., Harris, C., Merket, N., Moore N., Munankarmi, P., & Sandoval, N. (2025). ResStock 2025 Release 1 [Dataset]. Open Energy Data Initiative (OEDI). National Laboratory of the Rockies (NLR). https://data.openei.org/s3_viewer?bucket=oedi-data-lake&prefix=nrel-pds-building-stock%2Fend-use-load-profiles-for-us-building-stock%2F2025%2Fresstock_amy2018_release_1%2F ResStock 2025 Release 1 Technical Reference Guide in APA format Reyna, J., Fontanini, A., Parker, A., Present, E., Liu, L., Adhikari, R., Bianchi, C., Brossman, J., Chintala, R., Clark, K., Harris, C., Horowitz, S., Lou, Y., Maguire, J., Merket, N., Moore, N., Munankarmi, P., Phoung, S., Robertson, J., Sandoval, N., Speake, A., Stenger, K., White, P., Wilson, E. (2025). ResStock Technical Reference Documentation, Active Development Version [Technical report]. National Laboratory of the Rockies (NLR). Retrieved from https://natlabrockies.github.io/ResStock.github.io/assets/trd/ResStockTechnicalReferenceGuide_2025_1.pdf
+
+ATTRIBUTION
+  "Data includes information from the ResStock™ dataset
+  developed by the National Renewable Energy Laboratory (NREL) with funding from the
+  U.S. Department of Energy (DOE)."
+
+PROJECT METHODOLOGY REPORT
+  Wilson, E. J. H., Parker, A., Fontanini, A., Present, E., Reyna, J. L., et al.
+  (2022). End-Use Load Profiles for the U.S. Building Stock: Methodology and
+  Results of Model Calibration, Validation, and Uncertainty Quantification.
+  https://doi.org/10.2172/1854582
+
+NOTES
+  - The DOI identifies the repository, not this individual release. Cite the
+    release path above so the specific release used is identifiable.
+  - The publisher is the organisation name at the time of publication. The
+    laboratory was renamed to the National Laboratory of the Rockies (NLR) in
+    December 2025; releases published before then cite NREL.

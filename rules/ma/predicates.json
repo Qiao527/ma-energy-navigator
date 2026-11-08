@@ -1,0 +1,20 @@
+[
+  {
+    "id": "condo_eligible_unit",
+    "condition": {
+      "fact": "unit.hasResidentialHeatingMeter",
+      "op": "eq",
+      "value": true
+    },
+    "workingAssumption": true,
+    "note": "Working assumption until Mass Save answers (outreach/emails.md §3a): a condo unit counts as 'eligible' for the all-units rule if it has a residential heating meter. The confirmation 'condo_eligible_definition' keeps the all-units result 'potential' meanwhile.",
+    "sources": [
+      {
+        "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties",
+        "section": "Condo Owners footnote",
+        "quote": "*Unit must have a residential heating meter",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

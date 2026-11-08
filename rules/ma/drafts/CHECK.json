@@ -1,0 +1,71 @@
+{
+  "checkedOn": "2026-11-07",
+  "ok": true,
+  "problems": [],
+  "files": [
+    {
+      "file": "programs.json",
+      "sha256": "433451db2d6e28986b43228838d18aa13c0eababf7db5e9a8f58da13e9edfba6"
+    },
+    {
+      "file": "predicates.json",
+      "sha256": "41964ec3a55f8165e8d7099f2c55cafcf4facddbbb86c07a4901f6129b952c3d"
+    },
+    {
+      "file": "income-tables.json",
+      "sha256": "cb4ce201700d1ed214178c468033cf20acb45fe63bd90a601e77868739a5401e"
+    },
+    {
+      "file": "dec.json",
+      "sha256": "3eed29d4290904e0110c2c989d066aef8ad4e54a2fe45cfb4bcccb34f710bfdb"
+    },
+    {
+      "file": "caps.json",
+      "sha256": "90b3547970edfe7c3f09e46e72d6fdf28f8194040bfafcd3f55d336a6a0ade9a"
+    },
+    {
+      "file": "sequence.json",
+      "sha256": "0ac25f57609a08fd8d9dcd87b1ca0dfdc0bd556f9adb773ff1a51cea6d1b00b2"
+    },
+    {
+      "file": "legal.json",
+      "sha256": "f2df4fa0e1987fce0570e66b6da2e9148880f50aa73eb6912b82269c93f62149"
+    },
+    {
+      "file": "assumptions.json",
+      "sha256": "edd4097cdbce724dade8eb7325e3d01b8704ebd1104986cb01ceb2ed671e772a"
+    },
+    {
+      "file": "assumptions-resstock.json",
+      "sha256": "92abf36c7affb89d97820ddab5037254c544c7ee5677e2639acd88e25f60cdc5"
+    },
+    {
+      "file": "offers/assessment.json",
+      "sha256": "1845dc28e3c04839716748538e8a83246a5904a9312f4174e80e896af6005263"
+    },
+    {
+      "file": "offers/bill-assistance.json",
+      "sha256": "19a34c0463ca9e80d96ace070c74e69a7c0b10c60e43fcbba30683185168fce0"
+    },
+    {
+      "file": "offers/financing.json",
+      "sha256": "61e7264f797d134ea6f2f64df2a0dc78484749b4fd051c6f71ec1de749a71040"
+    },
+    {
+      "file": "offers/heat-pumps.json",
+      "sha256": "3806584d1d30f1ede39bc080a4aa9bd87a2051b960200ef65c8b0a1f02e6686a"
+    },
+    {
+      "file": "offers/solar.json",
+      "sha256": "0e43446767c60e79ef4fe6d5510b9d442377794baae694f55609ab8d1038ee48"
+    },
+    {
+      "file": "offers/weatherization-condo.json",
+      "sha256": "57dbdeb7cd4965b8aa7fe19af81f09e594c5368330d4d123fdb6f3b055fbe945"
+    },
+    {
+      "file": "offers/weatherization.json",
+      "sha256": "e66ab94762d6478bb66b422c14857307c5df715cc774943b1bbe5bdfc4cdd08c"
+    }
+  ]
+}

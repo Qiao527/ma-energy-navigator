@@ -1,0 +1,180 @@
+{
+  "municipalities": [
+    {
+      "name": "Boston",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Brockton",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Chelsea",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Everett",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Fall River",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Framingham",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Fitchburg",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Lawrence",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Lowell",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Lynn",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Malden",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "New Bedford",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Oak Bluffs",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Pittsfield",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Quincy",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Revere",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Salem",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Springfield",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Tisbury",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Woburn",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    },
+    {
+      "name": "Worcester",
+      "narrowedFor": [
+        "unitil",
+        "berkshire_gas",
+        "liberty"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://ma-eeac.org/wp-content/uploads/FINAL-MA-2025-2027-Plan-09-25-24-v2.pdf",
+      "section": "p. 29–30, footnote 2; Figure 23 p. 117",
+      "quote": "The process resulted in selection of 21 communities, including: Boston, Brockton, Chelsea, Everett, Fall River, Framingham, Fitchburg, Lawrence, Lowell, Lynn, Malden, New Bedford, Oak Bluffs, Pittsfield, Quincy, Revere, Salem, Springfield, Tisbury, Woburn, and Worcester. Unitil, Berkshire Gas, and Liberty may further limit eligibility within these communities in their service territories by focusing on certain environmental justice census blocks.",
+      "lastVerified": "2026-11-06"
+    }
+  ]
+}

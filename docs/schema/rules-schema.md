@@ -90,7 +90,8 @@ Condition = { all: Condition[] } | { any: Condition[] } | { not: Condition }
 
 - **Status precedence:** `not_eligible` > `needs_info` > `potential` > `eligible`.
 - A version whose `applicationDeadline` has passed (as of today) is `not_eligible` with
-  reason `application_deadline_passed` (review A4).
+  reason `application_deadline_passed` (review A4), unless eligibility is a no anyway (then
+  plain `not_eligible`). The result carries the deadline date.
 - **Prerequisites vs sequence edges** (review B10): sequence edges order **measures** in the
   roadmap (assessment → weatherization → heat pump). Prerequisites are the steps for **one
   offer**.
@@ -111,7 +112,11 @@ Condition = { all: Condition[] } | { any: Condition[] } | { not: Condition }
 - `navigate` returns:
   - `evaluated`: everything, for tests and audit;
   - `shown`: eligible, potential and needs_info, plus `not_eligible` only when a
-    realistic change would flip it (review B15).
+    realistic change would flip it (review B15);
+  - **missed deadlines (Qiao, 2026-11-07):** if the install date is on or before today
+    (already installed), a missed paperwork deadline is shown with its date. While still
+    planning, last year's versions aren't selected, so they never show. An installed
+    project gets no `upcoming` versions and no install-date question.
 
 ## 5. Dates and versions
 

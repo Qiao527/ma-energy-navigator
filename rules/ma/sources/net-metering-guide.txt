@@ -1,0 +1,772 @@
+Net metering guide | Mass.gov
+An official website of the Commonwealth of Massachusetts
+Here's how you know
+Official websites use .mass.gov
+A .mass.gov website belongs to an official government
+organization in Massachusetts.
+Secure websites use HTTPS
+A lock icon or https:// means you've safely connected
+to the official website. Share sensitive information
+only on official, secure websites.
+Skip to main content
+Mass.gov
+Menu
+Close
+menu
+Access to search
+Language
+Select language
+Afrikaans
+Albanian - Shqip
+Amharic - አማርኛ
+Arabic - العربية
+Armenian - Հայերեն
+Chinese (Simplified) - 简体中文
+Chinese (Traditional) - 繁體中文
+English
+Filipino
+French - Français
+German - Deutsch
+Greek - Ελληνικά
+Gujarati - ગુજરાતી
+Haitian Creole - Kreyòl Ayisyen
+Hebrew - עברית
+Hindi - हिन्दी
+Hmong - Hmoob
+Italian - Italiano
+Japanese - 日本語
+Khmer - ភាសាខ្មែរ
+Kinyarwanda
+Korean - 한국어
+Lao - ລາວ
+Malayalam - മലയാളം
+Myanmar (Burmese) - မြန်မာ
+Nepali - नेपाली
+Pashto - پښتو
+Persian - فارسی
+Polish - Polski
+Portuguese (Brazil) - Português
+Romanian - Română
+Russian - Русский
+Somali - Soomaali
+Spanish - Español
+Swahili - Kiswahili
+Tamil - தமிழ்
+Telugu - తెలుగు
+Thai - ไทย
+Tigrinya - ትግርኛ
+Turkish - Türkçe
+Ukrainian - Українська
+Urdu - اردو
+Vietnamese - Tiếng Việt
+Disclaimer: This feature uses the Google Translate Widget. Due to the limitation of machine translation, some pages or content may not be translated accurately.
+Translate
+Show original
+Select Language
+​
+▼
+State Organizations
+Mass.gov
+Search terms
+Search
+Living
+Health & Social Services
+Families & Children
+Housing & Property
+Transportation
+Legal & Justice
+Public Safety
+Energy
+Climate Action
+Environment
+Taxes
+Unclaimed Property
+Vital & Public Records
+Voting
+Working
+Doing Business in Massachusetts
+Professional Licenses & Permits
+Unemployment
+Finding a Job
+Taxes
+Workers' Rights & Safety
+Industry Regulations
+For State Employees
+Learning
+Early Childhood Education & Care
+Elementary & Secondary Schools
+Higher Education
+Continuing Education
+For Educators & Administrators
+Visiting & Exploring
+Parks & Recreation
+Fishing & Hunting
+Historic Sites
+Arts
+Family Fun
+Travel Options
+Seasonal Activities
+Your Government
+Executive
+Constitutionals & Independents
+Legislative
+Judicial
+Cities & Towns
+State Offices & Courts A-Z
+State Organizations
+Mass.gov
+Search terms
+search
+search
+in Electric Power Division
+search
+in Department of Public Utilities
+Search
+EEA
+…
+This page is located more than 3 levels deep within a topic. Some page levels are currently hidden. Use this button to show and access all levels.
+Department of Public Utilities
+Electric Power Division
+Net Metering
+Net metering guide
+This page, Net metering guide, is
+offered by
+Electric Power Division
+Show
+more
+Net metering guide
+Net metering allows customers to offset their energy use and transfer energy back to their electric company in exchange for a bill credit. If you have an eligible generation facility such as a solar facility, and you are a customer of an electric company, you may be able to net meter. Read this guide to learn more about how net metering works.
+Skip table of contents
+Table of Contents
+table of contents
++
+Table of Contents
+Hide Table of contents
+×
+1. Net metering basics
+2. Net metering credit calculation and billing
+3. Designing net metering facilities
+4. Common mistakes
+5. Minimum monthly reliability contribution
+6. MassACA
+7. Additional resources
+8. Contact information
+Contact
+Show More
+Table of contents
+top
+Table of Contents
+You skipped the table of contents section.
+1. Net metering basics
+Overview
+If you are a customer of a regulated electric company (Eversource, National Grid, or Unitil), you may net meter.  Net metering allows you to generate your own electricity to offset your electricity usage.  Common examples of net metering facilities include solar panels on a home or a wind turbine at a school.  These facilities are connected to a meter, which measure the net quantity of electricity that you use.  When you use electricity from the electric company, your meter spins forward.  When you generate excess electricity and “export” electricity to the electric grid, your meter spins backward.  In exchange for sending electricity back to the electric grid, participating host customers receive credits on their electric bill for billing periods during which they “export” more electricity than they consume.
+Massachusetts does not differentiate between behind-the-meter net metering (electricity generation consumed on the same site it is generated) versus virtual net metering (electricity generation consumed at a site other than where the electricity is generated).
+Applicable laws and DPU orders are linked throughout the net metering guide
+Maximum facility capacity by technology
+Any type of generating technology, regardless of whether it is a renewable technology, can net meter if it is smaller than or equal to 60 kilowatts (kW).
+G.L. c. 164, section 138
+;
+220 CMR 18.00
+.  If your net metering facility uses wind, solar, or anaerobic digestion technology, then it must be:
+2 megawatts (MW) or less for a private facility
+10 MW or less for a public facility.
+G.L. c. 164, section 138
+.
+If your net metering facility is hydroelectric, it must be equal to or less than 2 MW.
+Class sizes in the general net metering program
+The table below defines Class I, Class II, and Class III net metering facilities.  A facility’s class is determined by its size for the purposes of net metering.  The class of a net metering facility is important because the rules are sometimes different across classes.
+Class Number
+Size of Private Facility
+Size of Public Facility
+Class I net metering facility
+60 kW or less
+60kW or less
+Class II net metering facility
+more than 60 kW but less than or equal to 1 MW
+more than 60 kW but less than or equal to 1 MW
+Class III net metering facility
+more than 1 MW but less than or equal to 2 MW
+more than 1 MW but less than or equal to 10 MW
+Class Number
+Size of Private Facility
+Size of Public Facility
+General program net metering caps
+Participation in the general net metering program (GP) is limited, or capped, at a total amount of generation specific to each electric company service territory.  The electric companies must have separate net metering caps for public and private net metering facilities in the GP.
+St. 2010, c. 359, section 29.00
+.  Each GP cap is equal to a percentage of each electric company’s highest historical peak load, which is the most electricity consumed by the electric company’s customers at any one time.
+GP caps as of December 2024
+Distribution Company
+Private Cap (7%)
+Public Cap (8%)
+Eversource
+408.24 MW
+466.56 MW
+National Grid Massachusetts Electric Company
+359.191 MW
+410.504 MW
+National Grid Nantucket Electric Company
+4.069 MW
+4.650 MW
+Unitil
+7.167 MW
+8.191 MW
+Distribution Company
+Private Cap (7%)
+Public Cap (8%)
+Under the GP, once an electric company fills its net metering cap, new customers that require space under that cap cannot participate in net metering.
+Cap exempt facilities
+Cap exempt facilities can net meter even if the relevant cap is full.
+220 CMR 18.02, 18.07(5)
+.  For a facility to qualify as cap exempt, it must be one of the following:
+A
+nameplate cap exempt facility
+, which is a Class I net metering facility that is:
+An
+eligible renewable energy generating facility pursuant to
+G.L. c. 164, section 138
+, and
+Has a nameplate capacity rating equal to or less than 25 kilowatts.
+220 CMR 18.02
+;
+D.P.U. 23-140-A
+A
+cap exempt facility serving on-site load
+, which is a Class I net metering facility with a nameplate capacity greater than 25 kW, a Class II net metering facility, or a Class III net metering facility that:
+Has an executed interconnection service agreement with a distribution company dated on or after January 1, 2021,
+Is an eligible renewable energy generating facility pursuant to
+G.L. c. 164, section 138
+,
+Serves on-site load, and
+Is not a net metering facility of a municipality or other governmental entity.
+220 CMR 18.02
+,
+D.P.U. 21-100-A
+,
+D.P.U. 23-140-A
+Small hydroelectric net metering caps
+State law also requires that the electric companies have a separate cap for facilities participating in the small hydroelectric power (SHP) net metering program that has a combined capacity of 60 MW.
+St. 2016, c. 188, section 10
+. Each electric company’s share of the total SHP cap is allocated based on that company’s load measured in megawatt-hours in calendar year 2016.
+D.P.U. 17-10-A
+.
+Distribution Company
+SHP Cap
+National Grid and National Grid Nantucket
+27 MW
+Eversource Energy
+32.4 MW
+Unitil
+0.6 MW
+Distribution Company
+SHP Cap
+Under the SHP, new customers must obtain a cap allocation to participate even if they are less than 25 kW.  Under the SHP, once an electric company fills its net metering cap, new customers that seek to participate in net metering must apply for a cap allocation from the relevant GP cap unless they are a cap exempt facility.
+Net metering overview
+View the video below for a net metering overview that DPU staff gave at the Distributed Generation Workshop on May 3, 2024.
+Video: Net Metering 101 presentation
+View transcript
+of Net Metering 101 presentation
+Skip this video
+Net Metering 101 presentation
+.
+You skipped the video, Net Metering 101 presentation.
+2. Net metering credit calculation and billing
+Overview
+Net metering credits can offset the delivery and supply portions of your electric bill, as well as customer charges.  You may use net metering credits to decrease your electricity bill to zero dollars and zero kilowatt hour (kWh) usage.
+G.L. c. 164, sections 138
+,
+139
+.
+220 CMR 18.04
+.
+Customers who net meter are billed for their net consumption of electricity.
+Net monthly consumption = (total electricity consumed in a month) - (total electricity generated in a month).
+If your net consumption is positive, you must pay an electricity bill to your electric company for the excess consumption at the end of the billing period.
+220 CMR 18.03(4)
+.
+If your net consumption is negative, you will receive a net metering credit on your electricity bill.  Therefore, you will not owe the electric company money during that billing period.
+220 CMR 18.03(3)
+.  The net metering credits appear as a dollar amount (not as kilowatt hours) on your bill.
+Net metering credits never expire and will rollover to the next billing period
+unless
+your facility is a cap exempt facility serving on-site load.  If you have a cap exempt facility serving on-site load, please refer to “Receiving a cash‑out rather than net metering credits” in Section 2, below, for further information.
+Credit calculation
+To determine your credit value:
+View the applicable mathematical formula in
+220 CMR 18.04
+to determine which inputs you should include in the net metering credit calculation.  Appendix A of your electric company’s net metering tariff provides the information in a visual format.  Some formula inputs vary between the electric companies and the type of host customer.
+Consult your electric company’s current schedule of rates or your electric bill.  Your rate schedule will be determined by the host customer’s rate class (e.g., residential, commercial, etc.).
+Plug the values into the credit formula and determine the value of a credit for each unit of excess electricity (in kWhs) produced by your net metering facility.
+For example, the net metering credit of a Class I cap exempt facility in August 2024 in Eversource East for an R-1 customer was approximately 27 cents per kWh:
+Component
+Amount (in cents)
+Basic service
+15.772
+Distribution
+7.820
+Transmission
+4.052
+Transition
+-0.037
+Total
+27.607
+Component
+Amount (in cents)
+Based on this customer’s class and facility size, there are 4 components included as part of the net metering credit (see for example page 30 of
+Eversource’s tariff
+).  The basic service rate is available on the
+DPU's basic service webpage
+in a downloadable spreadsheet.
+View the August 1, 2024 Eversource distribution, transmission, and transition rates
+, which were also listed on Eversource's website.
+The above amount is an example only.  Note that you should not rely on these numbers to estimate your future net metering credit since the electric companies’ schedule of rates changes often.  For example, basic service rates for residential customers change every 6 months.  Also, each electric company has its own schedule of rates.  Please refer to your electric company's net metering tariff and schedule of rates for a more accurate estimation.
+The following rates are never included in the calculation of net metering credits:
+Fixed customer charges
+System benefit charges, including both the energy efficiency (also known as demand side management charges) and renewable energy charges
+Demand charges (e.g., $/kW or $/kVa charges)
+The energy efficiency reconciliation factor (EERF)
+G.L. c. 164, § 138
+The net metering recovery surcharge
+220 CMR 18.04(7)
+;
+D.P.U. 21-100-A
+pages 88-89.
+Net metering credit components for common configurations
+In April 2016, the Solar Energy Act created different net metering credits values for solar net metering facilities. Before the Solar Energy Act, solar net metering facilities generated
+standard net metering credits
+under the old regime. After the Solar Energy Act, certain solar net metering facilities generate
+market net metering credits
+under the new regime.
+220 CMR 18.04
+and Appendix A of your electric company’s net metering tariff will tell you:
+Whether your facility will generate standard net metering credits or market net metering credits
+Whether your net metering credits will be equal to 60% or 100% of net excess generation.
+Below, are the net metering credit components for common configurations.  For specific information about net metering credits for your net metering facility, consult the net metering tariff or contact your electric company.
+Facilities eligible for standard net metering credits
+Facility type
+Net metering credit based on per kWh charges for:
+basic service, distribution, transmission, and transition
+Net metering credit based on per kWh charges for:
+basic service, transmission, and transition
+Nameplate cap exempt
+Yes
+No
+Class I (solar, wind, anaerobic digestion, agricultural)
+Yes
+No
+Class II (solar, wind, anaerobic digestion, agricultural)
+Yes
+No
+Class III (solar, wind, anaerobic digestion, agricultural)
+No
+Yes
+Host customer is a municipality or other governmental entity
+Yes
+No
+Facility type
+Net metering credit based on per kWh charges for:
+basic service, distribution, transmission, and transition
+Net metering credit based on per kWh charges for:
+basic service, transmission, and transition
+Facilities eligible for market net metering credits
+Facility type
+Net metering credit based on 60% of net excess generation and per-kWh rates for: basic service, distribution, transmission, & transition
+Net metering credit based on 100% of net excess generation and per kWh rates for:  basic service, distribution, transmission, & transition
+New Solar cap exempt serving on-site load
+Yes
+No
+New Solar Class I
+(between 25-60 kW)
+Yes
+No
+New Solar Class II
+Yes
+No
+New Solar Class III
+Yes
+No
+New Solar where host customer is a municipality or other governmental entity
+No
+Yes
+Facility type
+Net metering credit based on 60% of net excess generation and per-kWh rates for: basic service, distribution, transmission, & transition
+Net metering credit based on 100% of net excess generation and per kWh rates for:  basic service, distribution, transmission, & transition
+Receiving a cash out rather than net metering credits
+There are two scenarios where a host customer may receive a cash out instead of net metering credits:
+If your net metering facility is a
+Class III net metering facility
+(has a capacity of more than 1 MW) or is in the
+SHP
+, your electric company may pay the host customer for the value of some or all of its net metering credits from excess generation, instead of applying the credits to the electric account(s).  This decision is left entirely to the electric company.  The electric company must notify the host customer whether it will purchase the value of the credits (cash out) or allocate net metering credits to future bills before the facility is operational.
+G.L. c. 164, section 139(b)(1)
+;
+G.L. c. 164, section 139A(b)
+,
+220 CMR 18.05(4)
+.
+If your net metering facility is a
+cap exempt facility serving on-site load
+, your electric company
+will
+cash out or carry over any net metering credits on the electric account at the end of March each year.  The value of the net metering credits for this annual cash out is the company’s avoided cost rate (ACR).  The ACR is based on the
+locational marginal price
+from Independent System Operator – New England (ISO-NE) and results in a lower credit value.
+220 CMR 18.05(5)
+,
+D.P.U. 21-100-A
+page 48.  To determine your facility’s ACR, please
+contact your electric company
+directly
+.
+When creating these limited opportunities for a cash out, the Legislature did not provide the DPU with the authority to allow other net metering facilities to cash out.
+Credit allocation
+As a host customer, you may use net metering credits to offset your bill from your electric company.  You may also assign net metering credits to other accounts (even if they are not your accounts).
+The host customer must fill out a form called Schedule Z to let the electric company know which account(s) the net metering credits should go to.  A host customer may change Schedule Z no more than 4 times in one calendar year, unless there is a mutual agreement to change it more often.
+D.P.U. 21-100-A
+.  Contact your electric company for more information about Schedule Z or find more information at your electric company's website:
+Eversource's Schedule Z information
+National Grid's Schedule Z information
+Unitil's Schedule Z information
+There are some limitations on credit allocation depending on where the net metering facility is located, when the facility was interconnected, and whether the facility is cap exempt serving on-site load.
+Facility Type
+Net metering credits may only be allocated to other accounts that are in: the same electric distribution company territory, and the same ISO-NE load zone
+Net metering credits may be allocated to: any electric distribution company account in the Commonwealth
+Nameplate cap exempt facility
+Yes
+No
+Class I, Class II, or Class III facility that
+is not
+a new solar facility*
+Yes
+No
+New solar net metering facility*
+No
+Yes
+Cap exempt facility serving on-site load
+No
+Yes
+Facility Type
+Net metering credits may only be allocated to other accounts that are in: the same electric distribution company territory, and the same ISO-NE load zone
+Net metering credits may be allocated to: any electric distribution company account in the Commonwealth
+*A new solar net metering facility is a solar facility that (1) submitted an application for a cap allocation (ACA) to MassACA after September 26, 2016, or (2) received a cap allocation from MassACA after January 8, 2017.
+220 CMR 18.02
+. Nameplate cap exempt facilities are
+not
+included in the definition of new solar net metering facility.
+D.P.U. 23-140-A
+page 18.
+Nameplate cap exempt facilities
+cannot
+allocate excess net metering credits to host customer accounts served by different electric company service territories or different ISO-NE load zones.
+Credit allocation and public entities
+If you allocate net metering credits to a public entity, there is no effect on the public entity’s 10 MW capacity limit.  A public entity may receive an unlimited amount of net metering credits with no effect on its 10 MW limit.  The capacity of a net metering facility within the public cap only affects the host customer’s 10 MW limit.
+Limited-time opportunity to transfer accrued net metering credits and alternative on-bill credits
+Through December 31, 2026, if you have accrued net metering credits and/or alternative on-bill credits (AOBC) balances, you can transfer those credits to other electric accounts.  Here are some of the most important rules you need to know:
+You can transfer all or some of your net metering credit balance;
+You can only make one request to transfer your credit balance.  However, in that single request, you can split up your credits and send them to multiple different accounts;
+The same net metering credit allocation rules apply to the transfer (e.g., if you cannot allocate net metering credits to another electric account with a different electric company, the same rule applies to the transfer);
+If you are an offtaker (you received net metering credits from someone else), you can transfer the balance to other electric accounts within your same electric company;
+There is no minimum balance requirement for initiating a transfer.
+D.P.U. 25-117 hearing officer memorandum
+, page 3.  Contact your electric distribution company if you have questions or wish to initiate a transfer:
+Eversource website and contact information for the transfer
+National Grid website and contact information for the transfer
+Account closure
+If there are net metering credits on an account when the account is closed, the net metering customer can request the electric company to perform
+a one-time transfer of the accrued balance.  The transfer can be to one or more electric accounts.  The net metering customer may request the transfer up to 1 year after the closure of the account.
+D.P.U. 21-100-A
+page 67.
+Time of use rates
+Time of use (TOU) rates are rate designs with pricing that varies at different times of day and/or seasonally.  Commercial and industrial electric customers may be on a TOU rate, provided that the customer meets the requirements to be on the TOU rate.  For more information on the TOU rate, consult the electric company’s TOU tariff.  Only Unitil offers an
+electric vehicle TOU rate for residential customers
+.  If you are on a TOU rate, you will generate net metering credits based on the TOU rate.
+3. Designing net metering facilities
+Overview
+The design, installation, and interconnection of a net metering facility is complex.  We recommend that you consult a professional familiar with Massachusetts rules.  The DPU does not regulate installers and developers and cannot endorse any companies.
+It is your responsibility to make sure that your net metering facility complies with the net metering rules and regulations.  We highlight some of the important rules below.  However, you should read the Important Resources provided below to make sure you understand all of the rules and regulations associated with net metering.
+Designing a net metering facility to comply with DPU rules
+There is an open proceeding (D.P.U. 23‑20) before the DPU to implement 5 statutory exceptions to the Single Parcel Rule, included in the 2022 Clean Energy Act, which will further impact the net metering program.  This net metering guide is in the process of being updated to provide more information about those decisions.
+The Single Parcel Rule defines a net metering facility as “the energy generating equipment associated with a single parcel of land, interconnected with the electric distribution system at a single point, behind a single meter.”
+For the parcel of land, use the latest property boundaries recorded with the Registry of Deeds.
+D.P.U. 23-20-A
+page 65.
+To design a net metering facility participating in the GP that complies with the DPU’s rules and regulations, please keep the following information in mind:
+You may have a qualifying facility (QF) and a net metering facility on the same parcel of land but they must be wholly separate from each other. The QF and the net metering facility cannot share an interconnection point or a meter.
+D.P.U. 11-11-E
+page 19-20, footnote 15.
+The net metering facility capacity is calculated in alternating current (AC).
+220 CMR 18.09(6)
+.
+The electric companies and the Administrator of MassACA may use the de-rated value of a net metering facility as the nameplate capacity of that facility for the purposes of net metering if:
+The de-rating of a facility is performed by the manufacturer on the inverters and the de-rating changes the amount of energy that the equipment (e.g., inverter) can produce such that the maximum output of the inverter listed by the manufacturer reflects the de-rated value; and
+The de-rating is accompanied by an acknowledgement from the manufacturer of the limitation.
+D.P.U. 23‑140‑A
+page 15.
+For cap allocations with MassACA, AC capacity is calculated as 80% of the facility’s direct current (DC) rating at standard test conditions.
+D.P.U. 17-34
+page 1.
+You may expand an existing net metering facility or develop your net metering facility in phases.
+D.P.U. 11-11-E
+page 19.  However, if you seek to expand your net metering facility the value of your net metering credits may change.
+D.P.U. 16-64-C
+pages 25-29.  The DPU provides clarification on the value of credits for net metering facilities that seek to expand in
+D.P.U. 16-64-H
+.
+You may not build 2 net metering facilities on a single parcel of land unless you receive an exception from the DPU.  Refer to the "Exceptions" section below for more information.
+You may not net meter a portion of a generating facility.
+D.P.U. 11-11-E
+page 19.
+Small hydroelectric net metering facilities participating in the SHP are not subject to the Single Parcel Rule.
+Exceptions
+If you cannot design a net metering facility that complies with the DPU’s net metering rules and regulations, you may be eligible for an exception:
+Electric company exception for optimal interconnection
+: The electric companies may grant exceptions to the Single Parcel Rule on the basis of optimal interconnection.  The exceptions may include multiple interconnection points and multiple meters for a single facility.
+D.P.U. 11-11-E
+.
+Multiple technologies blanket exception
+: Facilities may be eligible for a
+multiple technologies blanket exception
+.
+D.P.U. 17-22-A
+pages 11-42.  D.P.U. 23-20-A.  The rooftop cap exempt exception is no longer available as of March 2025.  D.P.U. 23-20-A.
+Statutory exception to the Single Parcel Rule
+: There are
+5 statutory exceptions
+implemented through D.P.U. 23-20-A:
+Government-owned parcel
+Low‑ or moderate‑income housing
+Separate and distinct rooftops
+Separate customers under the same rooftop
+Additional facility not less than 1 year
+Petition exception
+: If your facility is not eligible for any of the exceptions listed above, you may
+file a petition for a net metering exception with the DPU
+.
+Important resources
+Before designing your net metering facility, please review the following resources:
+Massachusetts general laws governing net metering.
+G.L. c.164, §139(f)
+;
+The DPU’s net metering regulations.
+220 CMR 18.00
+;
+The DPU's
+net metering guide
+(this current webpage);
+The DPU's
+net metering statutory exceptions guide
+;
+The
+Massachusetts System of Assurance of Net Metering Eligibility
+webpage if applying for a cap allocation with MassACA;
+Important net metering dockets:
+D.P.U. 11-11-C
+- establishes important definitions and rules for net metering, such as the Single Parcel and Subdivision Rules.
+D.P.U. 11-11-E
+Allows the electric companies to grant exceptions to the Single Parcel Rule for optimal interconnection reasons, and
+Clarifies that all non-net metering facilities must be separately interconnected and separately meters from all net metering facilities
+D.P.U. 17-22-A
+Creates the multiple technologies blanket exception to the Single Parcel Rule, and
+Addresses certain net metering credit allocation procedures.
+D.P.U. 21-100-A
+Allows Class I facilities to apply for a cap allocation in the public cap with MassACA,
+Allows Class II and Class III facilities to net meter without a cap allocation if the facility serves on-site load, has an interconnection agreement dated January 1, 2021 or later, and is an eligible renewable energy generating facility,
+Allows certain customers to allocate solar net metering credits across electric company service territories and load zones, and
+Removes the net metering recovery surcharge from the calculation of net metering credits.
+D.P.U. 23-20-A
+– implements 5 statutory exceptions created through the
+2022 Clean Energy Act
+.
+D.P.U. 23‑140‑A
+Increases the nameplate capacity threshold for a net metering facility to generate net metering credits without a cap allocation from 10 kW to 25 kW, and
+Allows Class I facilities greater than 25 kW to net meter without a cap allocation so long as the facility serves on-site load, has an interconnection agreement dated January 1, 2021 or later, and is an eligible renewable energy generating facility.
+D.P.U. 23‑140‑C
+Clarifies that all capacity behind a single retail meter and interconnection point, regardless of SMART Program participation or whether the capacity was installed in phases over time, is a single facility for the purpose of net metering eligibility, and
+Clarifies that additional capacity installed behind the same retail meter that serves an existing net metering facility, regardless of the number of interconnecting customers, is a single facility for the purpose of net metering.
+Public facilities in the GP
+To be in the public cap under the GP, your facility must be a facility:
+That is owned or operated by a municipality or other governmental entity;
+or
+Of which is the municipality or other governmental entity:
+Is assigned 100% of the output;
+Is the host customer; and
+If allocating net metering credits, allocates only to municipalities and other governmental entities.
+D.P.U. 23-20-B Attachment C, page 6
+.
+If your facility cannot meet the criteria listed above, your facility belongs in the private net metering cap under the GP.  A facility cannot be in both caps at the same time.
+Only the DPU can classify participants as “municipalities” or “other governmental entities,” that is to say, as public entities.  There is no self-designation.  To receive this classification (also called a public ID number), a participant must file an Application for Municipality or Other Governmental Entity with the DPU electronically.  View the list of
+approved public entities
+.
+There are 2 different situations where a public entity (either municipality or other governmental entity) would need to obtain a public ID classification number:
+A public entity that wants to start net metering in the public cap.
+A public entity that is going to receive net metering credits from a separate public entity (through Schedule Z).
+The Single Parcel Rule defines a net metering facility as “the energy generating equipment associated with a single parcel of land, interconnected with the electric distribution system at a single point, behind a single meter.”
+4. Common mistakes
+Calculating the capacity of a solar net metering facility with MassACA
+When applying for a cap allocation with
+MassACA
+, the AC capacity of a solar net metering facility is 80% of the facility’s DC rating at standard test conditions.  This means that the AC capacity that is used to determine your net metering cap allocation may be different than the “as-built” AC capacity.
+Qualifying as a public facility under the net metering cap
+Both the host customer and all offtakers must be public entities with a public ID number provided by the DPU.
+Parcel boundaries
+The DPU relies on the registry of deeds to determine parcel boundaries.  The DPU does not rely on GIS documentation to determine parcel boundaries.  If you have questions about whether and how your parcel boundary changes affect your net metering facility, contact your electric company first before contacting DPU staff.
+Application of the 60 percent market net metering credit
+If you are receiving market net metering credits, the 60 percent only applies to excess kilowatt hours generated.
+Net metering credits and alternative on-bill credits (AOBCs)
+Your solar facility cannot generate AOBCs through the Department of Energy Resources’ solar Massachusetts renewable target (SMART) program at the same time it is generating net metering credits under the net metering program.  Your solar facility may generate AOBCs through the SMART program while you are on the waitlist for a cap allocation to participate in the net metering program.  See definition of alternative on-bill credit generation unit under
+225 CMR 20.02
+.
+5. Minimum monthly reliability contribution
+A MMRC is a monthly fee that may appear on an electric customer’s utility bill.  The purpose of a MMRC is for all electric company customers to contribute to the fixed costs of ensuring reliability, proper maintenance, and safety of the electric distribution system.
+St. 2016, c. 75, section 9
+.  In 2016, the Legislature passed the Solar Energy Act which allows electric companies to petition the DPU for permission to implement a MMRC.
+St. 2016, c. 75, section 9
+.  In 2018, the Legislature changed the statutory requirements for a MMRC.
+St. 2018, c. 227, section 15-27, 24
+.
+The DPU opened D.P.U. 16-64 to establish parameters surrounding an MMRC.
+The DPU approved Eversource Energy's request for a modified MMRC for net metering host customers in
+D.P.U. 17-05-B
+pages 100-156.  On August 29, 2018, the DPU informed Eversource Energy that it would need to file a petition and proposed tariffs in D.P.U. 18‑72 to comply with the order and amended statute.
+D.P.U. 17-05, Hearing Officer Memorandum
+.  Eversource Energy has not refiled a MMRC to date.
+National Grid requested an MMRC in
+D.P.U. 18‑150
+pages 519‑542.  The DPU declined to approve National Grid’s MMRC.  D.P.U. 18‑150 page 541.  The DPU also stated that we encourage National Grid, Eversource Energy, and Unitil to file a joint proposal that (1) is uniform across the electric companies, and (2) is consistent with the DPU’s long-standing rate structure goals.  D.P.U. 18‑150 pages 541-542.
+6. MassACA
+Cap allocations
+Before you begin construction, if your facility is not cap exempt, you must secure a cap allocation to ensure your facility will be eligible to net meter once constructed.
+MassACA
+(also known as the System of Assurance) was created by the DPU. MassACA started accepting applications for cap allocations (ACAs) on January 24, 2013.  Visit the MassACA webpage to:
+Submit an ACA
+,
+View the aggregate capacity of all net metering facilities in the GP
+,
+View the aggregate capacity of all net metering facilities in the SHP
+, and
+View each municipality or governmental entity's remaining 10 MW net metering capacity
+.
+Visit the
+Apply for a cap allocation with MassACA
+webpage for more information on project eligibility and how to apply.
+Self-certification forms for statutory exceptions
+There are 5 statutory exceptions to the Single Parcel Rule, which allow for more than 1 facility on a single parcel of land to receive net metering service.  MassACA started accepting the Self-Certification Forms on March 14, 2025. Visit the MassACA webpage to:
+Submit a self-certification Form
+,
+View the status of submitted self-certification Forms
+, and
+View summary information about submitted self-certification Forms
+.
+Visit the
+Submit a self-certification form for a statutory exception webpage
+for more information on project eligibility and how to complete the Form.
+7. Additional resources
+This net metering guide was created to provide an overview of net metering.  For more information on net metering visit the
+net metering homepage
+.  You may also find the following resources helpful:
+Net metering eligibility
+Net metering glossary
+Net metering laws and regulations
+Apply for a cap allocation with MassACA
+Apply for a public ID number
+Approved public entities
+View net metering filings and tariffs
+File a petition for a net metering exception
+Submit a self-certification form for a statutory exception
+Submit a multiple technologies blanket exception
+8. Contact information
+Many net metering questions can or must be answered by your electric company (e.g., installing net meters, the interconnection process, qualifying for an optimal interconnection exception, etc.).  Visit our
+who to contact
+page for more information on which entity to contact with your question and for contact information.
+Disputes
+If you have an interconnection dispute, you must try to resolve it directly with your electric company.  If the dispute cannot be resolved, fill out the
+dispute resolution process form
+and someone from the DPU will contact you.
+If you have a dispute with an installer, seller, or developer and wish to take formal action, contact
+the Attorney General’s Office
+, the
+Better Business Bureau
+, or
+consider your legal options
+.
+Additional Resources
+Who to contact about my renewable energy question or concern
+Contact
+DPU distributed generation team
++
+Online
+Email address
+Email DPU distributed generation team at
+dpu.netmetering@mass.gov
+Last updated:
+July 13, 2026
+Related
+Net Metering
+Net metering glossary
+Net metering eligibility
+Net metering laws and regulations
+Apply for a net metering public ID number
+Apply for a cap allocation with MassACA
+Qualifying facilities and on-site generating facilities
+Contact
+DPU distributed generation team
+Online
+Email address
+Email DPU distributed generation team at
+dpu.netmetering@mass.gov
+Related
+Net Metering
+Net metering glossary
+Net metering eligibility
+Net metering laws and regulations
+Apply for a net metering public ID number
+Apply for a cap allocation with MassACA
+Qualifying facilities and on-site generating facilities
+Help Us Improve Mass.gov
+with your feedback
+Did you find what you were looking for on this webpage?
+Yes
+No
+If you have any suggestions for the website, please let us know.
+How can we improve the page?
+*
+Please do not include personal or contact information.
+You will not get a response
+The feedback will only be used for improving the website. If you need assistance, please
+Find out how to contact the Department
+.
+Please limit your input to 500 characters.
+alert
+Need to report abuse or request urgent assistance?
+Use these contacts instead
+500
+/500
+500 characters remaining
+Please remove any contact information or personal data from your feedback.
+You will NOT get a response
+.
+If you need assistance, please
+Find out how to contact the Department
+.
+500
+/500
+500 characters remaining
+Please let us know how we can improve this page.
+Please remove any contact information or personal data from your feedback.
+You will NOT get a response
+.
+If you need assistance, please
+Find out how to contact the Department
+.
+Thank you for your website feedback! We will use this information to improve this page.
+If you would like to continue helping us improve Mass.gov,
+join our user panel
+to test new features for the site.
+Mass.gov
+State Organizations
+Digital Accessibility Statement
+Privacy Policy
+Site Policies
+Public Records Requests
+© 2026 Commonwealth of Massachusetts.
+Mass.gov® is a registered service mark of the Commonwealth of Massachusetts.
+Feedback

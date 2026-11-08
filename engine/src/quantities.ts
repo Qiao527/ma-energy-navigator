@@ -1,0 +1,125 @@
+import { z } from 'zod'
+import type { Quantities } from './benefit.js'
+import { combine, estimate, type Estimate } from './estimate.js'
+import type { Fuel, Input } from './facts.js'
+import type { QuantitiesFor } from './offers.js'
+import { complement, mul, point, range } from './range.js'
+import { SourceSchema } from './rules-schema.js'
+
+/** A sourced number the engine uses (principle 3). No source → it doesn't exist; the engine shows no dollar figure. */
+export const AssumptionSchema = z.strictObject({
+  id: z.string().regex(/^[a-z0-9_.]+$/),
+  /** Shown to the user as the reason for the number. */
+  description: z.string().min(1),
+  unit: z.string().min(1),
+  value: z
+    .strictObject({ low: z.number(), mid: z.number(), high: z.number() })
+    .refine(v => v.low <= v.mid && v.mid <= v.high, { message: 'value must satisfy low <= mid <= high' }),
+  confidence: z.enum(['low', 'medium', 'high']),
+  /** Computed values: the dataset file and the number of samples behind it. */
+  dataset: z.url().optional(),
+  sampleSize: z.number().int().positive().optional(),
+  sources: z.array(SourceSchema).min(1),
+})
+export const AssumptionsSchema = z.array(AssumptionSchema)
+export type Assumption = z.infer<typeof AssumptionSchema>
+
+export type VintageBand = 'pre1950' | '1950_1999' | '2000_plus'
+export const vintageBand = (yearBuilt: number | null): VintageBand | null =>
+  yearBuilt === null ? null : yearBuilt < 1950 ? 'pre1950' : yearBuilt < 2000 ? '1950_1999' : '2000_plus'
+
+const RECORD_UNIT: Partial<Record<Fuel, 'gallons' | 'therms' | 'kwh'>> = {
+  oil: 'gallons', propane: 'gallons', natural_gas: 'therms', electric_resistance: 'kwh',
+}
+
+type Records = NonNullable<Input['building']['units'][number]['fuelRecords']>
+
+export function find(list: readonly Assumption[], id: string): Estimate | null {
+  const a = list.find(x => x.id === id)
+  if (!a) return null
+  const n = a.sampleSize === undefined ? '' : ` (n = ${a.sampleSize})`
+  return estimate(range(a.value.low, a.value.mid, a.value.high), a.confidence, `${a.description}${n}`)
+}
+
+/**
+ * Heat delivered per season from the user's fuel records: season totals (min / mean / max) × heat content × system
+ * efficiency. Two or more seasons → medium, one → low (capped by the inputs' confidence). Records in a unit that
+ * doesn't fit the fuel, or a fuel without sourced heat content and efficiency, give null.
+ * If the same boiler heats the hot water, the records include it: the sourced hot-water share is taken out (F2).
+ */
+export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly Assumption[], hotWaterFromBoiler: boolean | null = null): Estimate | null {
+  const unit = RECORD_UNIT[fuel]
+  if (unit === undefined || records.length === 0 || records.some(r => r.unit !== unit)) return null
+  const heatContent = find(list, `heat_content_mmbtu_per_unit.${fuel}`)
+  // Electric resistance turns all electricity into heat, by definition.
+  const efficiency = fuel === 'electric_resistance' ? estimate(point(1), 'high', 'electric resistance heat is 100% efficient') : find(list, `heating_efficiency.${fuel}`)
+  if (heatContent === null || efficiency === null) return null
+  const bySeason = new Map<number, number>()
+  for (const r of records) bySeason.set(r.year, (bySeason.get(r.year) ?? 0) + r.quantity)
+  // Weather normalization (E3): scale each season to a normal winter by heating degree days. The hot-water part
+  // is scaled too, which overstates its weather effect slightly (about 1% of the total at an 18% share).
+  const unnormalized: number[] = []
+  const totals = [...bySeason.entries()].sort(([a], [b]) => a - b).map(([year, total]) => {
+    const actual = find(list, `heating_degree_days.ma.${year}`)
+    const normal = find(list, `heating_degree_days_normal.ma.${year}`)
+    if (actual === null || normal === null || actual.range.mid <= 0) {
+      unnormalized.push(year)
+      return total
+    }
+    return (total * normal.range.mid) / actual.range.mid
+  })
+  const seasons = totals.length
+  const fuelUse = estimate(
+    range(Math.min(...totals), totals.reduce((s, x) => s + x, 0) / seasons, Math.max(...totals)),
+    seasons >= 2 ? 'medium' : 'low',
+    `from your fuel records: ${seasons} heating season${seasons === 1 ? '' : 's'}`,
+  )
+  if (unnormalized.length < seasons) fuelUse.why.push('each season scaled to a normal winter using Massachusetts heating degree days (NOAA)')
+  if (unnormalized.length > 0) fuelUse.why.push(`season${unnormalized.length === 1 ? '' : 's'} ${unnormalized.join(', ')} not weather-normalized (no degree-day data)`)
+  const inputs = [fuelUse, heatContent, efficiency]
+  const all = mul(mul(fuelUse.range, heatContent.range), efficiency.range)
+  if (hotWaterFromBoiler === false) return combine(all, inputs)
+  if (hotWaterFromBoiler === null) {
+    return combine(all, inputs, 'If the same boiler also heats your hot water, these records include it, so the heating need may be overstated.')
+  }
+  const share = find(list, `hot_water_share_of_fuel.${fuel}`)
+  if (share === null) {
+    return { ...combine(all, inputs, `Your records include hot water, but there is no sourced hot-water share for ${fuel}, so the heating need may be overstated.`), confidence: 'low' }
+  }
+  return combine(mul(all, complement(share.range)), [...inputs, share], 'Your records include hot water from the same boiler, so the typical hot-water share was taken out.')
+}
+
+const RESSTOCK_FUEL: Partial<Record<Fuel, string>> = { oil: 'oil', natural_gas: 'natural_gas', propane: 'propane' }
+
+/** ResStock stock estimate: fuel × vintage group, else the fuel-only group (Task 16b). */
+export function stock(list: readonly Assumption[], quantity: string, fuel: Fuel | null, band: VintageBand | null): Estimate | null {
+  const f = fuel === null ? undefined : RESSTOCK_FUEL[fuel]
+  if (f === undefined) return null
+  return (band === null ? null : find(list, `${quantity}.${f}.${band}`)) ?? find(list, `${quantity}.${f}`)
+}
+
+/**
+ * Quantities per unit, from the most specific source: the user's records, then a contractor's quote, then ResStock.
+ * Measures with no sourced cost (weatherization, solar) stay missing, so the report shows a percentage only.
+ */
+export function quantitiesFor(input: Input, list: readonly Assumption[]): QuantitiesFor {
+  const band = vintageBand(input.building.yearBuilt)
+  const costPerTon = find(list, 'heat_pump_cost_per_ton')
+  return unitId => {
+    const u = input.building.units.find(x => x.id === unitId)
+    if (u === undefined) return { cost: {}, heatPumpTons: null, solarKwhPerYear: null, communitySolarCreditsPerYear: null, heatLoadMMBtu: null }
+    const fromRecords = u.fuelRecords !== null && u.heatingFuel !== null ? heatLoadFromRecords(u.fuelRecords, u.heatingFuel, list, u.hotWaterFromBoiler) : null
+    const tons = u.heatPumpTonsQuoted !== null
+      ? estimate(point(u.heatPumpTonsQuoted), 'medium', "from the contractor's quote")
+      : stock(list, 'heat_pump_tons', u.heatingFuel, band)
+    const cost: Quantities['cost'] = {}
+    if (tons && costPerTon) cost.heat_pump = combine(mul(tons.range, costPerTon.range), [tons, costPerTon])
+    return {
+      cost,
+      heatPumpTons: tons,
+      solarKwhPerYear: null,
+      communitySolarCreditsPerYear: null,
+      heatLoadMMBtu: fromRecords ?? stock(list, 'annual_heat_load_mmbtu', u.heatingFuel, band),
+    }
+  }
+}

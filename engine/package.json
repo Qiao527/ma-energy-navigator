@@ -1,0 +1,27 @@
+{
+  "name": "@navigator/engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test",
+    "data:status": "vitest run --config vitest.status.config.ts",
+    "rules:check-drafts": "vitest run --config vitest.drafts.config.ts",
+    "scenarios": "vitest run test/scenarios.test.ts",
+    "scenarios:record": "vitest run --config vitest.record.config.ts"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "fast-check": "4.10.2",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}

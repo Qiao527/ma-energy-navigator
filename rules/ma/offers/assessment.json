@@ -1,0 +1,60 @@
+[
+  {
+    "id": "masssave_hea",
+    "version": "1",
+    "programId": "masssave_hea",
+    "title": "No-cost Home Energy Assessment",
+    "measure": "assessment",
+    "appliesTo": "user",
+    "dateBasis": "as_of",
+    "effective": {
+      "from": "2025-01-01",
+      "until": null
+    },
+    "applicationDeadline": null,
+    "eligibility": {
+      "any": [
+        {
+          "fact": "building.electricIsMunicipal",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "fact": "building.gasUtility",
+          "op": "in",
+          "value": [
+            "eversource",
+            "national_grid",
+            "unitil",
+            "liberty",
+            "berkshire_gas"
+          ]
+        }
+      ]
+    },
+    "prerequisites": [],
+    "confirmations": [],
+    "benefit": {
+      "type": "none"
+    },
+    "qualification": "exact",
+    "recipient": "household",
+    "enrollment": "apply",
+    "exclusiveGroup": null,
+    "capGroups": [],
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/insulation-and-windows/insulation-and-air-sealing",
+        "section": "Eligibility",
+        "quote": "Customers must live in a 1- to 4-unit home",
+        "lastVerified": "2026-11-06"
+      },
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/insulation-and-windows/insulation-and-air-sealing",
+        "section": "How to Participate",
+        "quote": "Your municipal utility is not part of the Mass Save program.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]

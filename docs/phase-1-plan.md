@@ -35,6 +35,123 @@ No UI, no LLM.
 
 ---
 
+## Milestones (decision 2026-11-06)
+
+Phase 1 runs in milestones. The lead stops after each one and reports three things to Qiao: what was done, the test results, and the next milestone.
+
+| Milestone | Tasks | Stop-and-explain topic |
+|---|---|---|
+| **M1 — core decisions** ✅ | 1–7 (+ working-assumption fix) | How three-valued conditions, roles and all-units participation decide |
+| **M2 — money, from the landlord's side** ✅ | 8, 9, 15, **15b** | How money is computed, especially the payer split and "is it worth it" |
+| **M3 — offers and plan** ✅ | 10, 11, 12 | How an offer's status, next steps and the shown list are decided |
+| **M4 — rules data and real quantities** (12b, 14, 16, 16b ✅; 13 drafted, waiting for Qiao's approval) | **12b**, 13, 14, 16, **16b** | The drafting workflow, the standard scenarios, and where heating need and heat pump size come from |
+| **M4b — energy chain + first public version** (Qiao, 2026-11-07) | E1–E7 below | How each energy step is computed and sourced |
+| **M5 — wrap-up** | 17, 18 | Final verification and review |
+
+Task numbers are kept stable, so tasks run in milestone order, not number order. Each milestone only uses what earlier milestones built. In M2, for example, Task 15 needs Tasks 2, 3 and 9, and Task 15b needs Task 15.
+
+### M4b: energy chain and first public version (Qiao, 2026-11-07)
+
+Every number is a sourced assumption: snapshot, verbatim quote, the draft check, then Qiao's approval. Each step
+runs TDD, then `npm run scenarios`.
+- **E1. Prices:** heating oil, propane, natural gas and electricity for Massachusetts residential customers,
+  as low / mid / high with sources.
+- **E2. Heat pump seasonal efficiency** (cold-climate air-source heat pumps in Massachusetts).
+- **E3. Weather normalization:** each season's fuel use is scaled to a normal winter using heating degree days.
+- **E4. CO₂:** fuel and grid emission factors; tonnes per year before and after.
+- **E5. Comparison with similar buildings:** the records-based heat load vs the ResStock p25 / p50 / p75 for
+  the same fuel and vintage. Wording says "room to save", never "wasteful" (principle 6).
+- **E6. `report()`:** input → navigate + per-unit bills (heat pump, hot water) + landlord view + CO₂ +
+  comparison. This is the one entry point the web page calls.
+- **E7. Web v1** (`web/`): a static Vite + TypeScript site.
+  - Form → confirm → report. The engine runs in the browser.
+  - Only approved rules are bundled; the build fails otherwise.
+  - Story 1 is preloaded and labeled "demo data" (F3).
+  - Every chart has a table; WCAG 2.2 AA; works on a phone.
+
+### Follow-ups from Qiao's second M4 review (2026-11-07, not started)
+
+Decisions: `docs/decisions.md`, 2026-11-07 second round. Each one runs TDD, then `npm run scenarios`. A changed expected result needs Qiao's approval again.
+- **F1. DEC no-cost heat pump on an installed project.**
+  - When `installed`, `dec_rental_heat_pump_no_cost` still shows, sorted last in `shown`.
+  - It carries a sourced confirmation: arranged by the turnkey contractor before installation; whether an installed project qualifies isn't published; ask Mass Save.
+  - Quote the source verbatim. This is a rule change, so it goes through the drafting workflow.
+- **F2. Hot water.** ✅ engine and data done 2026-11-07; the 10 scenario baselines are waiting for Qiao's re-approval.
+  - New unit facts:
+    - `hotWaterFromBoiler: boolean | null`;
+    - `hotWaterAfter: 'boiler' | 'electric_resistance' | 'heat_pump_water_heater' | null`.
+  - Ask the first question only when the unit has fuel records or a boiler.
+  - `heatLoadFromRecords` takes out the hot-water share when hot water comes from the boiler.
+  - If `hotWaterAfter = boiler`, the landlord view keeps that oil plus the boiler's fixed costs, and the payer split follows.
+  - Find the hot-water share in EIA RECS (or another dataset) and record it as an assumption with a verbatim quote. If no source is found: confidence low, with the reason.
+  - The boiler's fixed costs need a source too.
+  - **Design (2026-11-07):**
+    - *Hot-water share source:* ResStock 2025.1 MA, the same file as Task 16b. Units in 2–4 unit buildings whose water heater uses the heating fuel. Share per unit = `out.<fuel>.hot_water.energy_consumption` ÷ (that + `out.<fuel>.heating.energy_consumption`), weighted p25/p50/p75, at least 30 samples. First run: oil 0.145 / 0.182 / 0.272 (n = 157); gas 0.142 / 0.205 / 0.297 (n = 1,504); propane n = 20, so it's left out. Why ResStock over RECS: it covers Massachusetts 2–4 unit homes specifically, and it's already in the approved-source pipeline. RECS publishes regional end-use totals, not this building type in this state. Confidence low (simulated).
+    - *Boiler fixed cost:* DOER consumer tip sheet (2017): annual oil burner tune-up "approximately $120-150". Recorded as `boiler_annual_service_cost.oil`, 120 / 135 / 150 USD per year (2017 $), confidence low. Gas and propane have no source, so they get no number and a reason.
+    - `heatLoadFromRecords(records, fuel, list, hotWaterFromBoiler)`:
+      - `true` → × (1 − share), with the reason text;
+      - `true` without a share → no adjustment, confidence low, with the reason;
+      - `false` → no adjustment and no hot-water caveat;
+      - `null` → no adjustment, keep the caveat (the question is asked).
+    - `navigate` asks `unit.hotWaterFromBoiler` for units with fuel records or a combustion fuel (oil, gas, propane). There's no boiler fact, so this is the proxy. It asks `unit.hotWaterAfter` once the answer is `true`. This changes the `questions` of the oil scenarios, so they need re-approval.
+    - Landlord view, `UnitProject.hotWater`:
+      - `{ after: 'boiler', fuelCostKept }` → the unit is listed in `boilerKept` with the kept hot-water fuel cost and the boiler's fixed cost (or the reason there is none). Totals don't change: the bill change covers space heating only, and the fixed cost is paid before and after.
+      - `{ after: electric, bills, meterPaidBy? }` → the water heater's bill changes are added to the unit's bills. The meter defaults to the heat pump's meter. If the landlord paid the boiler fuel and a tenant pays the water heater's meter, it's a shifted cost (105 CMR 410.210 names oil "for heating and/or hot water").
+- **F3. Demo-data label.**
+  - Scenario and fixture inputs with fictional records carry a machine-readable `demoData: true`.
+  - The UI (Phase 4) and the README (when written) say "demo data" wherever those numbers appear.
+- **F4.** After Qiao approves batch 1: switch the scenarios to computed quantities (re-approval), then batch 2.
+
+### Task 12b (M4): Rule drafting workflow — scope
+
+Design: `docs/product.md` §6a. The full TDD steps are written at the start of M4, after M3 is reviewed, so they build on the real M3 code. Scope fixed now:
+- `rules/ma/sources/<slug>.txt` + `<slug>.meta.json` `{ url, fetchedOn, sha256 }`: text snapshots, written by a capture script using headless Chromium (mass.gov blocks plain HTTP clients).
+- `rules/ma/drafts/*.json`: model-written drafts. The loader never reads them.
+- `OfferSchema` gains `review: { draftedBy, checkedOn, approvedBy, approvedOn }`. `findDataProblems` rejects an active offer without `approvedBy`.
+- `npm run rules:check-drafts` checks four things:
+  - the schema;
+  - references against active rules plus drafts;
+  - that every quote appears verbatim, after whitespace normalization, in the snapshot of its URL;
+  - the standard scenarios.
+
+  It prints a report for Qiao.
+- Tests: a draft with a quote missing from its snapshot fails; an approved rule loads; an active rule without approval is a data problem; a draft is never loaded.
+- Task 13's rules then go through this workflow: drafted from the saved snapshots, checked, and approved by Qiao.
+
+### Task 16b (M4): ResStock stock estimates — scope (Qiao, 2026-11-06: moved into Phase 1)
+
+Without this, most users get no dollar figure. Scope fixed now; the full TDD steps are written at the start of M4.
+- `analysis/resstock_estimates.py` reads `MA_upgrade0.csv.gz` (ResStock 2025 release 1, AMY2018), downloaded into an empty folder outside the repo.
+  - Filter: `in.geometry_building_type_recs = "Multi-Family with 2 - 4 Units"`.
+  - Group by `in.heating_fuel` × vintage band (before 1950 / 1950–1999 / 2000+).
+  - Write **weighted** p25 / p50 / p75 of `out.load.heating.energy_delivered..kbtu` (→ MMBtu) and of `out.params.size_heating_system_primary..kbtu_per_hr` (→ tons, ÷ 12), each with its sample count.
+- Output: `rules/ma/assumptions-resstock.json`, entries like `annual_heat_load_mmbtu|fuel_oil|pre1950`, each with `confidence: "low"`, `why: "typical for similar Massachusetts 2–4 unit buildings (ResStock, simulated), not measured for yours"`, the S3 URL as source and the sample size.
+  - A group with fewer than 30 samples falls back to the fuel-only group.
+  - If even that has fewer than 30 samples, it is omitted.
+- First pass (2026-11-06): oil heat 22.8 / 35.8 / 50.8 MMBtu, 1.97 / 2.48 / 3.29 tons (n = 349). The Task 16b tests check the script reproduces these from a small fixture with the same columns.
+- `quantitiesFromAssumptions` (Task 16) picks the most specific estimate: the user's fuel records (Task 16), then the contractor's tons, then ResStock fuel × vintage, then ResStock fuel only. The chosen source and its `why` travel in the `Estimate`.
+
+**Task 16 additions (M4):**
+- `UnitSchema` gains `fuelRecords: { year: number; quantity: number; unit: 'gallons' | 'therms' | 'kwh' }[] | null`.
+- `heatLoadFromRecords()` = average annual quantity × EIA heat content × efficiency. Efficiency is the user's value, otherwise the 84% AFUE baseline from the EEAC study. Two or more years → medium; one year → low.
+- Read and cite EIA's heat-content values before encoding them.
+
+### Task 14 (M4): Standard scenarios — scope
+
+Design: `docs/product.md` §6a. It turns the scenario tests into data, so that rule, engine, prompt and model changes all run against the same fixed set:
+- `scenarios/ma/*.json`: `{ id, title, story, input, options: { asOf, installDate }, quantities, expect }`. `expect` lists, per offer and unit, the status, version, reason, prerequisite states, units needed / likely needed / undecided, plus the payer split and landlord view where relevant.
+- `engine/test/scenarios.test.ts` runs every file. `npm run scenarios` runs only those.
+- Starting set:
+  1. **owner-occupant landlord, Boston triple-decker** (Story 1): lives on floor 1, rents floors 2–3, oil heat; landlord pays heat, tenants pay electricity. The landlord has **two years of oil delivery records** (heating need from records, confidence medium). The expected landlord view shows real savings vs heating cost shifted to units 2–3 (per year and per month), the 105 CMR 410 constraint, the fair options, and payback on real savings; a variant puts the heat pumps on an owner-paid meter (no shift), and another uses the "boiler needs replacing anyway" baseline;
+  2. the same building seen by a **tenant** (entry point);
+  3. **Somerville condo** with unit 3 agreed / declined / undecided / no meter;
+  4. **Belmont MLP**;
+  5. **deadline edge** (2027-02-28 vs 2027-03-01);
+  6. **2027 install**.
+
+  The expectations from the current Task 14 test code move into these files.
+- Keeps the coordination property test (`scenarios.pbt.test.ts`).
+
 ## File structure
 
 ```
@@ -55,6 +172,7 @@ engine/
     navigate.ts         # entry point: versions, deadlines, shown vs evaluated, scoped questions
     load-rules.ts       # read + validate rules/<state>/ (Node only)
     finance.ts          # bill changes per payer, weatherization, payback, credit sharing
+    landlord.ts         # "is it worth it for me?": own unit, rentals, coverage, rent commitment
     quantities.ts       # assumptions.json → Quantities (with confidence)
   test/                 # one *.test.ts per module, plus scenarios and property tests
   status/data-status.test.ts   # non-blocking report on today's date (npm run data:status)
@@ -588,6 +706,12 @@ export interface DecEntry {
   narrowedFor: string[]
 }
 
+/** A sourced, reusable definition. A working assumption is used only for hints, never for conclusions. */
+export interface NamedPredicate {
+  condition: Condition
+  workingAssumption: boolean
+}
+
 export interface Derived {
   isDec: boolean | null
   renterShare: number | null
@@ -602,7 +726,7 @@ export interface Scope {
   /** Income limit by household size (index = size − 1), keyed by table id. */
   incomeTables: Readonly<Record<string, readonly number[]>>
   /** Named predicates from rules data, keyed by id. */
-  predicates: Readonly<Record<string, Condition>>
+  predicates: Readonly<Record<string, NamedPredicate>>
 }
 
 /** The closed list of facts rules may use. Renaming one is a breaking change (schema §1). */
@@ -749,9 +873,19 @@ describe('combinators (Kleene logic)', () => {
 })
 
 describe('named predicates', () => {
-  test('ref evaluates the predicate', () => {
-    const s = scope(renter().input, { predicates: { is_renter: { fact: 'unit.occupancy', op: 'eq', value: 'renter' } } })
+  const isRenter: Condition = { fact: 'unit.occupancy', op: 'eq', value: 'renter' }
+  test('a confirmed predicate decides like any condition', () => {
+    const s = scope(renter().input, { predicates: { is_renter: { condition: isRenter, workingAssumption: false } } })
     expect(evaluate({ ref: 'is_renter' }, s).value).toBe('yes')
+  })
+  test('a working assumption never decides: yes and no both become unknown, naming the assumption', () => {
+    const s = scope(renter().input, { predicates: { is_renter: { condition: isRenter, workingAssumption: true } } })
+    expect(evaluate({ ref: 'is_renter' }, s)).toEqual({ value: 'unknown', missing: [], assumptions: ['is_renter'] })
+    expect(evaluate({ not: { ref: 'is_renter' } }, s).value).toBe('unknown')
+  })
+  test('a definite no elsewhere still decides an all, even next to a working assumption', () => {
+    const s = scope(renter().input, { predicates: { is_renter: { condition: isRenter, workingAssumption: true } } })
+    expect(evaluate({ all: [{ ref: 'is_renter' }, { fact: 'unit.occupancy', op: 'eq', value: 'owner' }] }, s).value).toBe('no')
   })
   test('unknown ref throws', () => {
     expect(() => evaluate({ ref: 'nope' }, renter())).toThrow(/unknown predicate/)
@@ -812,11 +946,21 @@ export interface EvalResult {
   value: Tri
   /** Facts whose absence makes the value unknown. Empty unless value is 'unknown'. */
   missing: string[]
+  /** Working-assumption predicates that kept the value unknown. Present only when non-empty. */
+  assumptions?: string[]
 }
+
+/** strict: working assumptions never decide anything. assumed: use them (only for hints and ordering). */
+type Mode = 'strict' | 'assumed'
 
 const YES: EvalResult = { value: 'yes', missing: [] }
 const NO: EvalResult = { value: 'no', missing: [] }
-const unknown = (missing: string[]): EvalResult => ({ value: 'unknown', missing: [...new Set(missing)].sort() })
+function unknown(missing: string[], assumptions: string[] = []): EvalResult {
+  const r: EvalResult = { value: 'unknown', missing: [...new Set(missing)].sort() }
+  if (assumptions.length > 0) r.assumptions = [...new Set(assumptions)].sort()
+  return r
+}
+const assumptionsOf = (rs: EvalResult[]): string[] => rs.flatMap(r => r.assumptions ?? [])
 
 function holds(c: Leaf, v: Scalar): boolean {
   switch (c.op) {
@@ -838,13 +982,13 @@ function leaf(c: Leaf, s: Scope): EvalResult {
 function combineAll(rs: EvalResult[]): EvalResult {
   if (rs.some(r => r.value === 'no')) return NO
   const unknowns = rs.filter(r => r.value === 'unknown')
-  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing)) : YES
+  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing), assumptionsOf(unknowns)) : YES
 }
 
 function combineAny(rs: EvalResult[]): EvalResult {
   if (rs.some(r => r.value === 'yes')) return YES
   const unknowns = rs.filter(r => r.value === 'unknown')
-  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing)) : NO
+  return unknowns.length > 0 ? unknown(unknowns.flatMap(r => r.missing), assumptionsOf(unknowns)) : NO
 }
 
 function income(s: Scope, tableId: string, mode: 'atMost' | 'above'): EvalResult {
@@ -866,42 +1010,60 @@ function income(s: Scope, tableId: string, mode: 'atMost' | 'above'): EvalResult
 }
 
 export interface Participation {
-  /** Eligible units that have said no: the "units still needed". */
+  /** Units that are certainly eligible and have said no: the definite "units still needed". */
   needed: string[]
-  /** Units whose eligibility or answer is not known yet. */
+  /**
+   * Units that said no and count as eligible only under a working assumption. A hint, never a
+   * conclusion (e.g. a metered condo unit before Mass Save defines "eligible unit").
+   */
+  likelyNeeded: string[]
+  /** Units whose eligibility or answer isn't settled, including units the working assumption would leave out. */
   undecided: string[]
   missing: string[]
+  /** Per undecided unit: the facts that would settle it (empty when only the working assumption is in the way). */
+  missingByUnit: Record<string, string[]>
+  /** Working assumptions the count depends on. */
+  assumptions: string[]
 }
 
 /** Per-unit view of an all-units condition (research §2.3). Used for the "N more units needed" count. */
 export function participation(spec: { eligible: Condition; require: Condition }, s: Scope): Participation {
-  const out: Participation = { needed: [], undecided: [], missing: [] }
+  const out: Participation = { needed: [], likelyNeeded: [], undecided: [], missing: [], missingByUnit: {}, assumptions: [] }
   for (const unit of s.input.building.units) {
     const us: Scope = { ...s, unit }
     const e = evaluate(spec.eligible, us)
     if (e.value === 'no') continue
     const r = evaluate(spec.require, us)
     if (r.value === 'yes') continue
-    if (e.value === 'yes' && r.value === 'no') out.needed.push(unit.id)
+    out.assumptions.push(...(e.assumptions ?? []))
+    if (e.value === 'yes' && r.value === 'no') {
+      out.needed.push(unit.id)
+      continue
+    }
+    const assumed = e.value === 'unknown' && e.assumptions !== undefined ? evaluateIn(spec.eligible, us, 'assumed').value : null
+    if (assumed === 'yes' && r.value === 'no') out.likelyNeeded.push(unit.id)
     else {
       out.undecided.push(unit.id)
       out.missing.push(...e.missing, ...r.missing)
+      out.missingByUnit[unit.id] = [...new Set([...e.missing, ...r.missing])].sort()
     }
   }
+  out.missing = [...new Set(out.missing)].sort()
+  out.assumptions = [...new Set(out.assumptions)].sort()
   return out
 }
 
 function allUnits(spec: { eligible: Condition; require: Condition }, s: Scope): EvalResult {
   const p = participation(spec, s)
   if (p.needed.length > 0) return NO
-  return p.undecided.length > 0 ? unknown(p.missing) : YES
+  return p.likelyNeeded.length > 0 || p.undecided.length > 0 ? unknown(p.missing, p.assumptions) : YES
 }
 
-export function evaluate(c: Condition, s: Scope): EvalResult {
-  if ('all' in c) return combineAll(c.all.map(x => evaluate(x, s)))
-  if ('any' in c) return combineAny(c.any.map(x => evaluate(x, s)))
+function evaluateIn(c: Condition, s: Scope, mode: Mode): EvalResult {
+  if ('all' in c) return combineAll(c.all.map(x => evaluateIn(x, s, mode)))
+  if ('any' in c) return combineAny(c.any.map(x => evaluateIn(x, s, mode)))
   if ('not' in c) {
-    const r = evaluate(c.not, s)
+    const r = evaluateIn(c.not, s, mode)
     if (r.value === 'unknown') return r
     return r.value === 'yes' ? NO : YES
   }
@@ -911,16 +1073,24 @@ export function evaluate(c: Condition, s: Scope): EvalResult {
   if ('ref' in c) {
     const p = s.predicates[c.ref]
     if (p === undefined) throw new Error(`unknown predicate: ${c.ref}`)
-    return evaluate(p, s)
+    const r = evaluateIn(p.condition, s, mode)
+    if (!p.workingAssumption || mode === 'assumed') return r
+    // A working assumption can't produce a definite answer (Qiao, 2026-11-06).
+    return unknown(r.value === 'unknown' ? r.missing : [], [...(r.assumptions ?? []), c.ref])
   }
   return allUnits(c.allUnits, s)
+}
+
+/** Three-valued evaluation. Working-assumption predicates never decide the result. */
+export function evaluate(c: Condition, s: Scope): EvalResult {
+  return evaluateIn(c, s, 'strict')
 }
 ```
 
 - [ ] **Step 4: Run to verify pass**
 
 Run: `cd engine && npx vitest run test/condition.test.ts && npm run typecheck`
-Expected: PASS (13 tests); typecheck clean.
+Expected: PASS (15 tests); typecheck clean.
 
 - [ ] **Step 5: Commit**
 
@@ -933,7 +1103,7 @@ git commit -m "feat(engine): add three-valued condition evaluator"
 
 ### Task 6: All-units participation (the signature feature)
 
-The code exists from Task 5. These tests pin its behavior (research §2.3).
+The code exists from Task 5. These tests pin its behavior (research §2.3). The "eligible unit" definition is a **working assumption** until Mass Save confirms it. A working assumption never produces a definite answer: an unmetered unit counts as undecided, and a metered unit that said no is only "likely needed". Once the definition is confirmed, the same data gives definite answers (decision 2026-11-06).
 
 **Files:**
 - Test: `engine/test/participation.test.ts`
@@ -944,50 +1114,67 @@ The code exists from Task 5. These tests pin its behavior (research §2.3).
 import { describe, expect, test } from 'vitest'
 import { evaluate, participation, type Condition } from '../src/condition.js'
 import type { Unit } from '../src/facts.js'
+import type { NamedPredicate } from '../src/scope.js'
 import { input, scope, unit } from './fixtures.js'
 
-const PREDICATES = { condo_eligible_unit: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true } } as const
-const ALL_UNITS_SPEC = { eligible: { ref: 'condo_eligible_unit' }, require: { fact: 'unit.participating', op: 'eq', value: true } } as const
-const ALL_UNITS: Condition = { allUnits: ALL_UNITS_SPEC }
-const run = (units: Unit[]) => evaluate(ALL_UNITS, scope(input({ building: { units } }), { unit: null, predicates: PREDICATES }))
+const METER: Condition = { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }
+/** Today: "eligible unit" = has a heating meter is only a working assumption (research §2.3). */
+const ASSUMED: Record<string, NamedPredicate> = { condo_eligible_unit: { condition: METER, workingAssumption: true } }
+/** After Mass Save confirms a definition, the same predicate becomes confirmed. */
+const CONFIRMED: Record<string, NamedPredicate> = { condo_eligible_unit: { condition: METER, workingAssumption: false } }
+const SPEC = { eligible: { ref: 'condo_eligible_unit' }, require: { fact: 'unit.participating', op: 'eq', value: true } } as const
+const ALL_UNITS: Condition = { allUnits: SPEC }
+
+const at = (units: Unit[], predicates: Record<string, NamedPredicate>) =>
+  scope(input({ building: { units } }), { unit: null, predicates })
 const m = (id: string, participating: boolean | null, meter: boolean | null = true) =>
   unit(id, { hasResidentialHeatingMeter: meter, participating })
 
-describe('allUnits', () => {
-  test('everyone eligible agreed → yes', () => {
-    expect(run([m('1', true), m('2', true), m('3', true)]).value).toBe('yes')
+describe('allUnits with the definition still a working assumption (today)', () => {
+  test('everyone agreed → yes: the definition doesn’t matter', () => {
+    expect(evaluate(ALL_UNITS, at([m('1', true), m('2', true), m('3', true)], ASSUMED)).value).toBe('yes')
   })
-  test('one eligible unit said no → no', () => {
-    expect(run([m('1', true), m('2', true), m('3', false)]).value).toBe('no')
+  test('a metered unit said no → unknown, not no: it is only "likely needed"', () => {
+    expect(evaluate(ALL_UNITS, at([m('1', true), m('2', true), m('3', false)], ASSUMED)))
+      .toEqual({ value: 'unknown', missing: [], assumptions: ['condo_eligible_unit'] })
   })
-  test('an undecided eligible unit → unknown, asks for participation', () => {
-    expect(run([m('1', true), m('2', null)])).toEqual({ value: 'unknown', missing: ['unit.participating'] })
+  test('a unit with NO heating meter said no → unknown, and it counts as undecided (Qiao, 2026-11-06)', () => {
+    const s = at([m('1', true), m('2', true), m('3', false, false)], ASSUMED)
+    expect(evaluate(ALL_UNITS, s)).toEqual({ value: 'unknown', missing: [], assumptions: ['condo_eligible_unit'] })
+    expect(participation(SPEC, s)).toEqual({
+      needed: [], likelyNeeded: [], undecided: ['3'], missing: [], missingByUnit: { '3': [] }, assumptions: ['condo_eligible_unit'],
+    })
   })
-  test('an ineligible unit is not needed', () => {
-    expect(run([m('1', true), m('2', false, false)]).value).toBe('yes')
-  })
-  test('unknown eligibility of a non-participating unit → unknown, asks for the meter', () => {
-    expect(run([m('1', true), m('2', false, null)])).toEqual({ value: 'unknown', missing: ['unit.hasResidentialHeatingMeter'] })
-  })
-  test('a definite no beats another unit being undecided', () => {
-    expect(run([m('1', false), m('2', null)]).value).toBe('no')
+  test('an undecided answer asks for participation', () => {
+    expect(evaluate(ALL_UNITS, at([m('1', true), m('2', null)], ASSUMED)))
+      .toEqual({ value: 'unknown', missing: ['unit.participating'], assumptions: ['condo_eligible_unit'] })
   })
 })
 
-describe('participation (the "N more units needed" count)', () => {
-  const count = (units: Unit[]) =>
-    participation(ALL_UNITS_SPEC, scope(input({ building: { units } }), { unit: null, predicates: PREDICATES }))
-  test('a metered unit that said no is needed', () => {
-    expect(count([m('1', true), m('2', true), m('3', false)])).toEqual({ needed: ['3'], undecided: [], missing: [] })
+describe('participation counts (the "N more units needed" hint)', () => {
+  test('metered unit said no → likely needed, not needed', () => {
+    expect(participation(SPEC, at([m('1', true), m('2', true), m('3', false)], ASSUMED))).toEqual({
+      needed: [], likelyNeeded: ['3'], undecided: [], missing: [], missingByUnit: {}, assumptions: ['condo_eligible_unit'],
+    })
   })
-  test('an unmetered unit that said no is not needed (under the working definition)', () => {
-    expect(count([m('1', true), m('2', false, false)])).toEqual({ needed: [], undecided: [], missing: [] })
+  test('unknown meter and said no → undecided, and we ask about the meter', () => {
+    expect(participation(SPEC, at([m('1', true), m('2', false, null)], ASSUMED))).toEqual({
+      needed: [], likelyNeeded: [], undecided: ['2'], missing: ['unit.hasResidentialHeatingMeter'], missingByUnit: { '2': ['unit.hasResidentialHeatingMeter'] }, assumptions: ['condo_eligible_unit'],
+    })
   })
-  test('a unit with an unknown meter that said no is undecided, and we ask about the meter', () => {
-    expect(count([m('1', true), m('2', false, null)])).toEqual({ needed: [], undecided: ['2'], missing: ['unit.hasResidentialHeatingMeter'] })
+})
+
+describe('once the definition is confirmed, the same data gives definite answers', () => {
+  test('a metered unit said no → no, and it is needed', () => {
+    const s = at([m('1', true), m('2', true), m('3', false)], CONFIRMED)
+    expect(evaluate(ALL_UNITS, s).value).toBe('no')
+    expect(participation(SPEC, s)).toEqual({ needed: ['3'], likelyNeeded: [], undecided: [], missing: [], missingByUnit: {}, assumptions: [] })
   })
-  test('an eligible unit that has not answered is undecided', () => {
-    expect(count([m('1', true), m('2', null)])).toEqual({ needed: [], undecided: ['2'], missing: ['unit.participating'] })
+  test('an unmetered unit is not needed', () => {
+    expect(evaluate(ALL_UNITS, at([m('1', true), m('2', false, false)], CONFIRMED)).value).toBe('yes')
+  })
+  test('a definite no beats another unit being undecided', () => {
+    expect(evaluate(ALL_UNITS, at([m('1', false), m('2', null)], CONFIRMED)).value).toBe('no')
   })
 })
 ```
@@ -995,7 +1182,7 @@ describe('participation (the "N more units needed" count)', () => {
 - [ ] **Step 2: Run**
 
 Run: `cd engine && npx vitest run test/participation.test.ts`
-Expected: PASS (10 tests). If one fails, fix `participation` in `engine/src/condition.ts`, not the test.
+Expected: PASS (9 tests). If one fails, fix `participation` in `engine/src/condition.ts`, not the test.
 
 - [ ] **Step 3: Commit**
 
@@ -1018,11 +1205,13 @@ import fc from 'fast-check'
 import { describe, expect, test } from 'vitest'
 import { evaluate, type Condition } from '../src/condition.js'
 import { InputSchema, type Input } from '../src/facts.js'
-import { derive, type DecEntry, type Scope } from '../src/scope.js'
+import { derive, type DecEntry, type NamedPredicate, type Scope } from '../src/scope.js'
 
 const DEC: DecEntry[] = [{ name: 'Boston', narrowedFor: ['unitil'] }]
 const TABLES = { t: [50_000, 70_000, 90_000] }
-const PREDICATES: Record<string, Condition> = { p: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true } }
+const METER: Condition = { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }
+const PREDICATES: Record<string, NamedPredicate> = { p: { condition: METER, workingAssumption: false } }
+const AS_ASSUMPTION: Record<string, NamedPredicate> = { p: { condition: METER, workingAssumption: true } }
 
 const leafArb = fc.constantFrom<Condition>(
   { fact: 'unit.occupancy', op: 'eq', value: 'renter' },
@@ -1120,6 +1309,13 @@ describe('condition properties', () => {
     }))
   })
 
+  test('turning a definition into a working assumption can only remove conclusions, never change one', () => {
+    fc.assert(fc.property(cond, fullInput, (c, i) => {
+      const assumed = evaluate(c, { ...scopeOf(i), predicates: AS_ASSUMPTION })
+      if (assumed.value !== 'unknown') expect(evaluate(c, scopeOf(i)).value).toBe(assumed.value)
+    }))
+  })
+
   test('with every fact known (exact income), nothing is unknown', () => {
     const exact = fullInput.map(i => ({
       ...i,
@@ -1137,7 +1333,7 @@ The third property uses an exact income (`low === high`), because a known income
 - [ ] **Step 2: Run**
 
 Run: `cd engine && npx vitest run test/condition.pbt.test.ts`
-Expected: PASS (3 tests).
+Expected: PASS (4 tests).
 
 - [ ] **Step 3: Commit**
 
@@ -1192,7 +1388,7 @@ export const OFFER = {
 
 ```ts
 import { describe, expect, test } from 'vitest'
-import { CapRuleSchema, OfferSchema } from '../src/rules-schema.js'
+import { CapRuleSchema, OfferSchema, PredicateSchema } from '../src/rules-schema.js'
 import { OFFER, SOURCE } from './fixtures.js'
 
 describe('OfferSchema', () => {
@@ -1243,6 +1439,14 @@ describe('CapRuleSchema', () => {
     const base = { id: 'c', capGroup: 'g', scope: 'account', window: { from: '2026-01-01', until: null }, sources: [SOURCE] }
     expect(CapRuleSchema.parse({ ...base, limit: { type: 'money', amount: 8500 } }).limit.type).toBe('money')
     expect(CapRuleSchema.parse({ ...base, limit: { type: 'count', count: 1 } }).limit.type).toBe('count')
+  })
+})
+
+describe('PredicateSchema', () => {
+  const p = { id: 'condo_eligible_unit', condition: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }, note: 'n', sources: [SOURCE] }
+  test('must say whether it is a working assumption', () => {
+    expect(() => PredicateSchema.parse(p)).toThrow()
+    expect(PredicateSchema.parse({ ...p, workingAssumption: true }).workingAssumption).toBe(true)
   })
 })
 ```
@@ -1490,6 +1694,8 @@ export type Program = z.infer<typeof ProgramSchema>
 export const PredicateSchema = z.strictObject({
   id: Id,
   condition: ConditionSchema,
+  /** true until the program confirms the definition: then it never decides a result (Task 5). */
+  workingAssumption: z.boolean(),
   note: z.string().min(1),
   sources: Sources,
 })
@@ -1693,7 +1899,7 @@ export function freshness(o: Offer, rules: RuleSet): string {
 - [ ] **Step 7: Run to verify pass**
 
 Run: `cd engine && npx vitest run test/rules-schema.test.ts test/provenance.test.ts && npm run typecheck`
-Expected: PASS (11 + 14 tests); typecheck clean.
+Expected: PASS (12 + 14 tests); typecheck clean.
 
 - [ ] **Step 8: Commit**
 
@@ -1905,9 +2111,12 @@ The engine never edits the real input. It tries realistic changes on a copy and 
 import { describe, expect, test } from 'vitest'
 import type { Condition } from '../src/condition.js'
 import { findChanges } from '../src/counterfactual.js'
+import type { NamedPredicate } from '../src/scope.js'
 import { input, scope, unit } from './fixtures.js'
 
-const PREDICATES: Record<string, Condition> = { condo_eligible_unit: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true } }
+const PREDICATES: Record<string, NamedPredicate> = {
+  condo_eligible_unit: { condition: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }, workingAssumption: false },
+}
 const ALL_UNITS: Condition = {
   allUnits: { eligible: { ref: 'condo_eligible_unit' }, require: { fact: 'unit.participating', op: 'eq', value: true } },
 }
@@ -1969,7 +2178,7 @@ function mentions(c: Condition, s: Scope, fact: string, seen = new Set<string>()
     if ('ref' in node && !seen.has(node.ref)) {
       seen.add(node.ref)
       const p = s.predicates[node.ref]
-      if (p !== undefined && mentions(p, s, fact, seen)) found = true
+      if (p !== undefined && mentions(p.condition, s, fact, seen)) found = true
     }
   })
   return found
@@ -2118,7 +2327,10 @@ describe('evaluateOffer: prerequisites never change status (Qiao, 2026-11-06)', 
     }), { unit: null })
     const r = forUnit(run(offer({ prerequisites }), s), '1')
     expect(r?.status).toBe('eligible')
-    expect(r?.prerequisites[0]).toMatchObject({ kind: 'coordination', state: 'todo', unitsNeeded: ['2'], unitsUndecided: ['3'] })
+    expect(r?.prerequisites[0]).toMatchObject({
+      kind: 'coordination', state: 'todo', unitsNeeded: ['2'], unitsLikelyNeeded: [], unitsUndecided: ['3'],
+      unitQuestions: [{ unitId: '3', fact: 'unit.participating' }],
+    })
   })
 })
 
@@ -2152,7 +2364,7 @@ describe('chooseBest', () => {
   })
   test('an offer waiting on other units never hides the others (condo 75% stays)', () => {
     const waiting = r('a', 'eligible', 100, {
-      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'd', state: 'todo', unitsNeeded: ['3'], unitsUndecided: [] }],
+      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'd', state: 'todo', unitsNeeded: ['3'], unitsLikelyNeeded: [], unitsUndecided: [], unitQuestions: [] }],
     })
     expect(chooseBest([waiting, r('b', 'eligible', 75)], offers).map(x => x.offerId)).toEqual(['a', 'b'])
   })
@@ -2225,10 +2437,14 @@ export interface PrerequisiteResult {
   description: string
   /** done / todo / unknown from the facts; 'check' = we can't check it (checklist item). */
   state: 'done' | 'todo' | 'unknown' | 'check'
-  /** Coordination only: eligible units that said no ("N more units needed"). */
+  /** Coordination only: units certainly eligible that said no ("N more units needed"). */
   unitsNeeded: string[] | null
-  /** Coordination only: units whose eligibility or answer is unknown. */
+  /** Coordination only: units that said no and count only under a working assumption (a hint). */
+  unitsLikelyNeeded: string[] | null
+  /** Coordination only: units whose eligibility or answer isn't settled. */
   unitsUndecided: string[] | null
+  /** Coordination only: what to ask about each undecided unit (nothing when only the working assumption is open). */
+  unitQuestions: { unitId: string; fact: string }[] | null
 }
 
 export interface OfferResult {
@@ -2254,12 +2470,13 @@ const STATE: Record<Tri, PrerequisiteResult['state']> = { yes: 'done', no: 'todo
 export const keyOf = (r: OfferResult): string => offerKey({ id: r.offerId, version: r.version })
 
 function prerequisiteResult(p: Prerequisite, s: Scope): PrerequisiteResult {
-  const base = { id: p.id, kind: p.kind, description: p.description, unitsNeeded: null, unitsUndecided: null }
+  const base = { id: p.id, kind: p.kind, description: p.description, unitsNeeded: null, unitsLikelyNeeded: null, unitsUndecided: null, unitQuestions: null }
   if (p.satisfiedWhen === null) return { ...base, state: 'check' }
   const state = STATE[evaluate(p.satisfiedWhen, s).value]
   if (p.kind === 'coordination' && 'allUnits' in p.satisfiedWhen) {
     const pt = participation(p.satisfiedWhen.allUnits, s)
-    return { ...base, state, unitsNeeded: pt.needed, unitsUndecided: pt.undecided }
+    const unitQuestions = Object.entries(pt.missingByUnit).flatMap(([unitId, facts]) => facts.map(fact => ({ unitId, fact })))
+    return { ...base, state, unitsNeeded: pt.needed, unitsLikelyNeeded: pt.likelyNeeded, unitsUndecided: pt.undecided, unitQuestions }
   }
   return { ...base, state }
 }
@@ -2488,6 +2705,29 @@ describe('navigate: questions say whose fact it is (review B13)', () => {
     expect(nav('2026-11-15', null).questions).toContainEqual({ fact: 'unit.occupancy', unitId: '2', about: 'other_unit' })
   })
 })
+
+describe('navigate: only ask what is actually missing', () => {
+  const coordination = RuleSetSchema.parse({
+    ...rules,
+    offers: [{
+      ...OFFER, id: 'condo_all', exclusiveGroup: null, eligibility: { fact: 'unit.occupancy', op: 'eq', value: 'owner' },
+      prerequisites: [{ id: 'all_agree', kind: 'coordination', description: 'Every eligible unit takes part.',
+        satisfiedWhen: { allUnits: { eligible: { ref: 'condo_eligible_unit' }, require: { fact: 'unit.participating', op: 'eq', value: true } } },
+        sources: [SOURCE] }],
+    }],
+    predicates: [{ id: 'condo_eligible_unit', condition: { fact: 'unit.hasResidentialHeatingMeter', op: 'eq', value: true }, workingAssumption: true, note: 'n', sources: [SOURCE] }],
+  })
+  const ask = (third: { participating: boolean | null; hasResidentialHeatingMeter: boolean | null }) => navigate(input({
+    userUnitId: '1',
+    building: { units: [unit('1', { occupancy: 'owner', hasResidentialHeatingMeter: true, participating: true }), unit('2', { occupancy: 'owner', ...third })] },
+  }), coordination, { asOf: '2026-11-15', installDate: null }, () => NO_QUANTITIES).questions
+  test('a unit without a meter that already said no is not asked again (only the definition is open)', () => {
+    expect(ask({ participating: false, hasResidentialHeatingMeter: false })).toEqual([])
+  })
+  test('a unit that hasn’t answered is asked, as another unit’s question', () => {
+    expect(ask({ participating: null, hasResidentialHeatingMeter: true })).toContainEqual({ fact: 'unit.participating', unitId: '2', about: 'other_unit' })
+  })
+})
 ```
 
 - [ ] **Step 3: Run to verify failure**
@@ -2594,7 +2834,7 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
     unit: null,
     derived: derive(input, rules.dec.municipalities),
     incomeTables: Object.fromEntries(rules.incomeTables.map(t => [t.id, t.bySize])),
-    predicates: Object.fromEntries(rules.predicates.map(p => [p.id, p.condition])),
+    predicates: Object.fromEntries(rules.predicates.map(p => [p.id, { condition: p.condition, workingAssumption: p.workingAssumption }])),
   }
   const byKey = new Map(rules.offers.map(o => [offerKey(o), o]))
   const selected = rules.offers.filter(o => inWindow(o.effective, o.dateBasis === 'installation' ? date : options.asOf))
@@ -2611,7 +2851,7 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
   }
   for (const r of shown) {
     if (r.status === 'needs_info') for (const f of r.missing) ask(f, r.unitId)
-    for (const p of r.prerequisites) for (const u of p.unitsUndecided ?? []) ask('unit.participating', u)
+    for (const p of r.prerequisites) for (const q of p.unitQuestions ?? []) ask(q.fact, q.unitId)
   }
   if (options.installDate === null && upcoming.length > 0) ask('project.installDate', null)
 
@@ -2628,12 +2868,12 @@ export function navigate(rawInput: unknown, rules: RuleSet, options: NavigateOpt
 }
 ```
 
-Note on `ask('unit.participating', u)`: a coordination prerequisite with undecided units asks about those units' agreement. The question goes to the user as "has unit N agreed?", marked `other_unit`. It doesn't change any status.
+Note on coordination questions: a coordination prerequisite asks only for the facts that would settle each undecided unit (`unitQuestions`, e.g. "has unit N agreed?" or "does unit N have a heating meter?"), marked `other_unit`. A unit that is undecided only because of the working assumption produces no question. Questions never change a status.
 
 - [ ] **Step 6: Run to verify pass**
 
 Run: `cd engine && npx vitest run test/plan.test.ts test/navigate.test.ts && npm run typecheck`
-Expected: PASS (3 + 4 tests); typecheck clean.
+Expected: PASS (3 + 6 tests); typecheck clean.
 
 - [ ] **Step 7: Commit**
 
@@ -2807,6 +3047,7 @@ export function loadRuleSet(dir: string): RuleSet {
 [
   { "id": "condo_eligible_unit",
     "condition": { "fact": "unit.hasResidentialHeatingMeter", "op": "eq", "value": true },
+    "workingAssumption": true,
     "note": "Working assumption until Mass Save answers (outreach/emails.md §3a): a condo unit counts as 'eligible' for the all-units rule if it has a residential heating meter. The confirmation 'condo_eligible_definition' keeps the all-units result 'potential' meanwhile.",
     "sources": [{ "url": "https://www.masssave.com/saving/energy-assessments/landlords-with-1-4-unit-properties", "section": "Condo Owners footnote", "quote": "*Unit must have a residential heating meter", "lastVerified": "2026-11-06" }] }
 ]
@@ -2975,6 +3216,8 @@ The window dates are an **inference**: the page says only "2026 – 2027 Heating
     "eligibility": { "all": [ { "fact": "building.isDec", "op": "eq", "value": true },
       { "any": [ { "fact": "building.electricIsMunicipal", "op": "eq", "value": false }, { "fact": "building.gasUtility", "op": "in", "value": ["eversource", "national_grid", "unitil", "liberty", "berkshire_gas"] } ] } ] },
     "prerequisites": [
+      { "id": "no_rent_increase_commitment", "kind": "action", "description": "For rented units, the landlord signs a form committing not to raise the rent or evict for a period after receiving the incentive. The length of the period isn't published.", "satisfiedWhen": { "fact": "unit.occupancy", "op": "eq", "value": "owner" },
+        "sources": [ { "url": "https://ma-eeac.org/wp-content/uploads/FINAL-MA-2025-2027-Plan-09-25-24-v2.pdf", "section": "Section 1: Equity, designated equity communities (pp. 29–30, 117)", "quote": "Landlords will be required to sign a form – like what is currently required in the Low-Income program—committing not to raise renter or evict tenants for a period following the receipt of program incentives.", "lastVerified": "2026-11-06" } ] },
       { "id": "owner_approval", "kind": "action", "description": "For rented units, the landlord approves the work.",
         "satisfiedWhen": { "any": [ { "fact": "unit.occupancy", "op": "eq", "value": "owner" }, { "fact": "building.ownerApproval", "op": "eq", "value": true } ] },
         "sources": [ { "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities", "section": "Offers for rental properties and landlords in Designated Equity Communities", "quote": "Landlords must provide approval for upgrades.", "lastVerified": "2026-11-06" } ] } ],
@@ -3106,6 +3349,8 @@ Finally, add the DEC entry:
     "eligibility": { "all": [ { "fact": "building.isDec", "op": "eq", "value": true }, { "fact": "unit.occupancy", "op": "eq", "value": "renter" },
       { "fact": "unit.heatingFuel", "op": "in", "value": ["oil", "propane", "electric_resistance"] }, { "fact": "building.electricIsMunicipal", "op": "eq", "value": false } ] },
     "prerequisites": [
+      { "id": "no_rent_increase_commitment", "kind": "action", "description": "The landlord signs a form committing not to raise the rent or evict for a period after receiving the incentive. The length of the period isn't published.", "satisfiedWhen": null,
+        "sources": [ { "url": "https://ma-eeac.org/wp-content/uploads/FINAL-MA-2025-2027-Plan-09-25-24-v2.pdf", "section": "Section 1: Equity, designated equity communities (pp. 29–30, 117)", "quote": "Landlords will be required to sign a form – like what is currently required in the Low-Income program—committing not to raise renter or evict tenants for a period following the receipt of program incentives.", "lastVerified": "2026-11-06" } ] },
       { "id": "owner_approval", "kind": "action", "description": "The landlord approves the upgrade.",
         "satisfiedWhen": { "fact": "building.ownerApproval", "op": "eq", "value": true },
         "sources": [ { "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities", "section": "Offers for rental properties and landlords in Designated Equity Communities", "quote": "Landlords must provide approval for upgrades.", "lastVerified": "2026-11-06" } ] } ],
@@ -3212,6 +3457,29 @@ Finally, add the DEC entry:
 Notes on dates:
 - The ECSAP `effective.from` is the month of the June 2024 DPU order; read D.P.U. 24-104 if the exact date matters.
 - SMART PY2026 retires on 2027-01-01. Add PY2027 versions once DOER finalizes the PY2027 rates (expected around December 2026), or CI fails.
+
+- [ ] **Step 15b: Create `rules/ma/legal.json`** (research §18), the sourced legal constraints that the landlord view refers to by id.
+  - Add `legal: LegalConstraint[]` to `RuleSetSchema`: `{ id, summary, leaseCheck, resources: Source[], disclaimer, sources }`.
+  - Load it in `loadRuleSet`.
+  - Add a data check that `HEAT_COST_SHIFT_CONSTRAINT` from `landlord.ts` exists in it.
+  - The UI shows `leaseCheck` and `resources` next to every shifted cost and never interprets the lease (Qiao, 2026-11-06).
+
+```json
+[
+  { "id": "ma_105_cmr_410_written_rental_agreement",
+    "summary": "The owner provides heat, oil, electricity and gas unless the unit has its own meter or tank and a written rental agreement says the occupant pays. A landlord can't move heating cost onto a tenant unilaterally.",
+    "leaseCheck": "Check your written rental agreement: does it say the tenant pays for heat (or heating fuel), not only electricity?",
+    "disclaimer": "This is not legal advice.",
+    "resources": [
+      { "url": "https://www.mass.gov/doc/2025-guide-to-landlord-tenant-rights-11182025/download", "section": "Does the rent cover heat and electricity?", "quote": "The landlord must pay for the heat, hot water, and electricity unless a term in the lease or other written rental agreement requires the tenant to pay for these utilities.", "lastVerified": "2026-11-06" },
+      { "url": "https://www.masslegalhelp.org/sites/default/files/2025-02/06%20Utilities%202025_0.pdf", "section": "Who pays for utilities", "quote": "Fuel for hot water and heat: Landlord pays unless you signed a written document saying that the tenant must pay.", "lastVerified": "2026-11-06" } ],
+    "sources": [
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(A)", "quote": "The owner shall provide the electricity or gas used in each dwelling unit unless: (1) Such electricity or gas is metered through a meter which serves only the dwelling unit", "lastVerified": "2026-11-06" },
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(A)(2)", "quote": "A written rental agreement provides for payment by the occupant.", "lastVerified": "2026-11-06" },
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.210", "quote": "The owner shall provide for the oil used for heating and/or hot water in each dwelling unit unless:", "lastVerified": "2026-11-06" },
+      { "url": "https://www.mass.gov/doc/105-cmr-410-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii/download", "section": "410.200(B)", "quote": "then such electricity or gas may be metered through meters which serve more than one dwelling unit.", "lastVerified": "2026-11-06" } ] }
+]
+```
 
 - [ ] **Step 16: Create `rules/ma/offers/bill-assistance.json`** (research §4, §10)
 
@@ -3357,13 +3625,14 @@ const allUnits = (r: NavigateResult) => find(r, 'masssave_insulation_condo_all_u
 const agree = (r: NavigateResult) => allUnits(r)?.prerequisites.find(p => p.id === 'all_eligible_units_agree')
 
 describe('Story 2: condo building (coordination)', () => {
-  test('unit 3 says no → 75% is eligible; 100% shows "1 more unit needed", never "not eligible" (Qiao)', () => {
+  test('unit 3 says no → 75% is eligible; 100% is potential with "1 more unit likely needed", never "not eligible" (Qiao)', () => {
     const r = run(condo(false))
     expect(shownIn(r, 'insulation', '1').map(x => `${x.offerId}:${x.status}`)).toEqual([
       'masssave_insulation_condo_all_units:potential',
       'masssave_insulation_condo_some_units:eligible',
     ])
-    expect(agree(r)).toMatchObject({ kind: 'coordination', state: 'todo', unitsNeeded: ['3'], unitsUndecided: [] })
+    // The definition is still a working assumption, so the count is a hint, not a conclusion.
+    expect(agree(r)).toMatchObject({ kind: 'coordination', state: 'unknown', unitsNeeded: [], unitsLikelyNeeded: ['3'], unitsUndecided: [] })
     expect(find(r, 'masssave_insulation_condo_some_units', '1')?.value?.range).toEqual(range(4500, 6750, 9000))
   })
   test('the count depends on Mass Save’s definition, and the result says so', () => {
@@ -3371,11 +3640,11 @@ describe('Story 2: condo building (coordination)', () => {
   })
   test('unit 3 undecided → asked as another unit’s question', () => {
     const r = run(condo(null))
-    expect(agree(r)).toMatchObject({ state: 'unknown', unitsNeeded: [], unitsUndecided: ['3'] })
+    expect(agree(r)).toMatchObject({ state: 'unknown', unitsNeeded: [], unitsLikelyNeeded: [], unitsUndecided: ['3'] })
     expect(r.questions).toContainEqual({ fact: 'unit.participating', unitId: '3', about: 'other_unit' })
   })
-  test('unit 3 has no heating meter → not needed under the working definition (review A1)', () => {
-    expect(agree(run(condo(false, false)))).toMatchObject({ state: 'done', unitsNeeded: [] })
+  test('unit 3 has no heating meter and said no → undecided, pending Mass Save’s definition (review A1; Qiao)', () => {
+    expect(agree(run(condo(false, false)))).toMatchObject({ state: 'unknown', unitsNeeded: [], unitsLikelyNeeded: [], unitsUndecided: ['3'] })
   })
   test('everyone agrees → coordination done; 100% still potential until Mass Save confirms; 75% still shown', () => {
     const r = run(condo(true))
@@ -3440,7 +3709,7 @@ import { input, RULES_DIR, unit } from './fixtures.js'
 
 const rules = loadRuleSet(RULES_DIR)
 
-/** "N more units needed" for unit 1's 100% condo offer, plus the 75% tier's status. */
+/** "N more units likely needed" for unit 1's 100% condo offer, plus both tiers' status. */
 function view(participation: (boolean | null)[]) {
   const i = input({
     role: 'condo_owner', userUnitId: '1',
@@ -3455,13 +3724,13 @@ function view(participation: (boolean | null)[]) {
   const all = r.evaluated.find(x => x.offerId === 'masssave_insulation_condo_all_units' && x.unitId === '1')
   const some = r.evaluated.find(x => x.offerId === 'masssave_insulation_condo_some_units' && x.unitId === '1')
   return {
-    needed: all?.prerequisites.find(p => p.kind === 'coordination')?.unitsNeeded?.length ?? -1,
+    needed: all?.prerequisites.find(p => p.kind === 'coordination')?.unitsLikelyNeeded?.length ?? -1,
     allStatus: all?.status,
     someStatus: some?.status,
   }
 }
 
-test('one more unit agreeing lowers "units needed" by exactly one, and never changes either tier’s status', () => {
+test('one more unit agreeing lowers "units likely needed" by exactly one, and never changes either tier’s status', () => {
   const p = fc.constantFrom<boolean | null>(true, false, null)
   fc.assert(fc.property(fc.array(p, { minLength: 2, maxLength: 4 }), fc.nat(), (parts, k) => {
     const idx = k % parts.length
@@ -3704,6 +3973,370 @@ git commit -m "feat(engine): payer split (who saves, who may pay more), payback,
 
 ---
 
+### Task 15b: The landlord view — "Is it worth it for me?"
+
+The core user is the owner-occupant landlord (decision 2026-11-06). For one project (e.g. heat pumps in every unit), the engine answers these questions:
+- What are my **real energy savings**, and how much heating cost would move onto my **tenants'** bills (shown per year and per month, with fair options, and flagged as needing a written rental agreement under 105 CMR 410)? Payback uses real savings.
+- Does the answer change if **the boiler needs replacing anyway**?
+- What does **my own unit** save?
+- **Who gains in the rental units**, bill by bill?
+- **How much do incentives cover**?
+- What does a **no-rent-increase commitment** cost me?
+
+Everything is an `Estimate` with confidence. Sign convention: positive = pays more, negative = saves.
+
+**Files:**
+- Create: `engine/src/landlord.ts`
+- Test: `engine/test/landlord.test.ts`
+
+- [ ] **Step 1: Write the failing tests**
+
+```ts
+import { describe, expect, test } from 'vitest'
+import { estimate } from '../src/estimate.js'
+import { heatPumpSwitch } from '../src/finance.js'
+import { landlordView, type LandlordInput } from '../src/landlord.js'
+import { range } from '../src/range.js'
+
+const e = (low: number, mid: number, high: number) => estimate(range(low, mid, high), 'medium', 'fixture')
+const sw = heatPumpSwitch({
+  load: e(50, 60, 70), fuelEfficiency: e(0.8, 0.8, 0.8), fuelPricePerMMBtu: e(30, 30, 30),
+  seasonalCop: e(2.5, 2.5, 2.5), electricityPricePerKwh: e(0.3, 0.3, 0.3),
+})
+// Story 1: the owner lives in unit 1 and pays both bills there. In units 2 and 3 the landlord pays the oil heat
+// and the tenants pay electricity — the classic split.
+const story1 = (over: Partial<LandlordInput> = {}): LandlordInput => ({
+  ownUnitId: '1',
+  units: [
+    { unitId: '1', heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'owner', bills: sw },
+    { unitId: '2', heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', bills: sw },
+    { unitId: '3', heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', bills: sw },
+  ],
+  projectCost: e(45000, 55000, 65000),
+  incentives: [{ offerId: 'ashp_whole_home', value: e(15900, 23850, 25500) }, { offerId: 'dec_weatherization', value: null }],
+  rentCommitment: { months: null, forgoneIncreasePerUnitMonth: e(25, 50, 75), rentedUnits: 2 },
+  avoidedReplacementCost: null,
+  ...over,
+})
+
+describe('landlordView: whose bills change (Story 1)', () => {
+  const v = landlordView(story1())
+  test('own unit: the landlord gets the net change of both bills', () => {
+    expect(v.ownUnit).toBe(sw.net)
+  })
+  test('rental units: the landlord saves the oil bill, the tenant’s electric bill goes up', () => {
+    expect(v.rentals).toEqual([
+      { unitId: '2', landlord: sw.fuelBill, tenant: sw.electricBill, unknownPayer: false },
+      { unitId: '3', landlord: sw.fuelBill, tenant: sw.electricBill, unknownPayer: false },
+    ])
+    expect(v.tenantsPayingMore).toEqual(['2', '3'])
+  })
+  test('the landlord’s total annual change adds the own unit and the rental bills the landlord pays', () => {
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo(sw.net.range.mid + 2 * sw.fuelBill.range.mid)
+    expect(v.landlordAnnual?.range.high).toBeLessThan(0)
+    expect(v.landlordAnnualIncomplete).toBe(false)
+  })
+})
+
+describe('landlordView: incentives and upfront cost', () => {
+  const v = landlordView(story1())
+  test('known incentives are summed; ones without a dollar amount are listed, not guessed', () => {
+    expect(v.incentivesKnown?.range).toEqual(range(15900, 23850, 25500))
+    expect(v.incentivesWithoutAmount).toEqual(['dec_weatherization'])
+  })
+  test('coverage = incentives / project cost, never above 100%', () => {
+    expect(v.coverage?.range.mid).toBeCloseTo(23850 / 55000)
+    const rich = landlordView(story1({ incentives: [{ offerId: 'x', value: e(90000, 90000, 90000) }] }))
+    expect(rich.coverage?.range.high).toBe(1)
+  })
+  test('net upfront cost is never negative', () => {
+    expect(v.netUpfront.range.low).toBeGreaterThanOrEqual(0)
+    expect(v.netUpfront.range.mid).toBeCloseTo(55000 - 23850)
+  })
+})
+
+describe('landlordView: project commitment terms (the no-rent-increase commitment)', () => {
+  test('unknown period → no cost, with the reason; payback says it leaves the commitment out', () => {
+    const v = landlordView(story1())
+    expect(v.projectCommitment).toEqual({ cost: null, reason: 'The length of the project commitment period is not published.' })
+    expect(v.paybackExcludesCommitment).toBe(true)
+  })
+  test('known period → forgone rent = months × increase × rented units, and it is added to the payback cost', () => {
+    const v = landlordView(story1({ rentCommitment: { months: e(12, 12, 12), forgoneIncreasePerUnitMonth: e(25, 50, 75), rentedUnits: 2 } }))
+    expect(v.projectCommitment.cost?.range).toEqual(range(600, 1200, 1800))
+    expect(v.paybackExcludesCommitment).toBe(false)
+    expect(v.paybackYears).not.toBeNull()
+  })
+  test('no commitment required → zero cost', () => {
+    expect(landlordView(story1({ rentCommitment: null })).projectCommitment.cost?.range).toEqual(range(0, 0, 0))
+  })
+})
+
+describe('landlordView: honesty about unknowns', () => {
+  test('an unknown payer is flagged and makes the landlord total incomplete', () => {
+    const units = story1().units.map(u => (u.unitId === '3' ? { ...u, heatPaidBy: null } : u))
+    const v = landlordView(story1({ units }))
+    expect(v.rentals.find(r => r.unitId === '3')?.unknownPayer).toBe(true)
+    expect(v.landlordAnnualIncomplete).toBe(true)
+  })
+  test('no payback when the landlord doesn’t save', () => {
+    const units = story1().units.map(u => ({ ...u, heatPaidBy: 'tenant' as const, electricPaidBy: 'tenant' as const }))
+    const v = landlordView(story1({ ownUnitId: null, units }))
+    expect(v.landlordAnnual).toBeNull()
+    expect(v.paybackYears).toBeNull()
+  })
+})
+
+describe('landlordView: real savings vs cost shifted to tenants (Qiao, 2026-11-06)', () => {
+  test('Story 1: the landlord’s apparent saving = real energy saving + heating cost moved onto tenants’ electric bills', () => {
+    const v = landlordView(story1())
+    expect(v.realSavings?.range.mid).toBeCloseTo(3 * sw.net.range.mid)
+    expect(v.shiftedToTenants.map(s => s.unitId)).toEqual(['2', '3'])
+    expect(v.shiftedTotal?.range.mid).toBeCloseTo(2 * sw.electricBill.range.mid)
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo((v.realSavings?.range.mid ?? NaN) - (v.shiftedTotal?.range.mid ?? NaN))
+  })
+  test('each shift shows its amount per month and that it needs a written rental agreement (105 CMR 410.200)', () => {
+    const s = landlordView(story1()).shiftedToTenants[0]
+    expect(s?.monthly.range.mid).toBeCloseTo(sw.electricBill.range.mid / 12)
+    expect(s?.constraint).toBe('ma_105_cmr_410_written_rental_agreement')
+    expect(s?.fairOptions).toEqual(['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'])
+  })
+  test('heat pumps on an owner-paid meter: nothing shifts, and the landlord’s change equals the real saving', () => {
+    const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPumpMeterPaidBy: 'owner' as const }))
+    const v = landlordView(story1({ units }))
+    expect(v.shiftedToTenants).toEqual([])
+    expect(v.landlordAnnual?.range.mid).toBeCloseTo(v.realSavings?.range.mid ?? NaN)
+    expect(v.paybackIfCostShifted).toBeNull()
+  })
+  test('tenants already paying for heat: no shift by the landlord', () => {
+    const units = story1().units.map(u => (u.unitId === '1' ? u : { ...u, heatPaidBy: 'tenant' as const }))
+    expect(landlordView(story1({ units })).shiftedToTenants).toEqual([])
+  })
+})
+
+describe('landlordView: "the boiler needs replacing anyway" baseline', () => {
+  const rich = (avoided: ReturnType<typeof e> | null) => landlordView(story1({
+    rentCommitment: null,
+    avoidedReplacementCost: avoided,
+    units: story1().units.map(u => ({ ...u, bills: { ...sw, net: e(-2000, -1500, -1000) } })),
+  }))
+  test('the avoided replacement cost shortens the payback', () => {
+    const without = rich(null)
+    const withBaseline = rich(e(7000, 9000, 11000))
+    expect(withBaseline.usesReplacementBaseline).toBe(true)
+    expect(withBaseline.paybackYears?.range.mid).toBeLessThan(without.paybackYears?.range.mid ?? 0)
+  })
+})
+```
+
+- [ ] **Step 2: Run to verify failure**
+
+Run: `cd engine && npx vitest run test/landlord.test.ts`
+Expected: FAIL — module not found.
+
+- [ ] **Step 3: Implement `engine/src/landlord.ts`**
+
+```ts
+import { combine, estimate, type Estimate } from './estimate.js'
+import type { Fuel, Payer } from './facts.js'
+import { simplePaybackYears, splitByPayer, type SwitchEstimates } from './finance.js'
+import { add, capAt, div, floorAt, mul, point, range, scale, sub, sum, type Range } from './range.js'
+
+export interface UnitProject {
+  unitId: string
+  heatingFuel: Fuel
+  heatPaidBy: Payer | null
+  electricPaidBy: Payer | null
+  /** Bill changes for this unit; null when the project doesn't change its heating. */
+  bills: SwitchEstimates | null
+  /** Who pays the meter the heat pump runs on. Defaults to electricPaidBy (the unit's own meter). */
+  heatPumpMeterPaidBy?: Payer | null
+}
+
+/** "Project commitment terms" in the UI (Qiao, 2026-11-06): the no-rent-increase commitment some offers require. */
+export interface RentCommitment {
+  /** Length of the commitment period in months; null = not published (data-sources §5). */
+  months: Estimate | null
+  /** The monthly rent increase per rented unit the landlord would otherwise have made: the landlord's own input. */
+  forgoneIncreasePerUnitMonth: Estimate | null
+  rentedUnits: number
+}
+
+export interface LandlordInput {
+  /** The landlord's own unit (owner-occupant); null for a landlord who doesn't live there. */
+  ownUnitId: string | null
+  units: UnitProject[]
+  projectCost: Estimate
+  /** Incentives paid to the property owner for this project; value null = no dollar amount available. */
+  incentives: { offerId: string; value: Estimate | null }[]
+  /** null = no commitment applies. */
+  rentCommitment: RentCommitment | null
+  /**
+   * Comparison baseline: "the boiler needs replacing anyway". The cost of the replacement the landlord would
+   * have paid regardless; subtracted from the upfront cost for payback. null = not chosen.
+   */
+  avoidedReplacementCost: Estimate | null
+}
+
+/** 105 CMR 410.200 / 410.210: the owner pays for heat unless a separate meter or tank AND a written rental agreement say otherwise. */
+export const HEAT_COST_SHIFT_CONSTRAINT = 'ma_105_cmr_410_written_rental_agreement' as const
+
+export interface ShiftedCost {
+  unitId: string
+  /** Heating cost that moves onto the tenant's electric bill (positive = tenant pays more). */
+  annual: Estimate
+  /** The same per month: the size of a fair rent reduction or electricity allowance. */
+  monthly: Estimate
+  /** The landlord can't do this unilaterally (research §18). */
+  constraint: typeof HEAT_COST_SHIFT_CONSTRAINT
+  /**
+   * Fair ways to handle it; UI copy explains each (Qiao, 2026-11-06). negotiate_at_lease_renewal means agreeing
+   * in writing at renewal or a new lease, with the electricity change explained openly — never a disguised shift.
+   */
+  fairOptions: ('lower_rent' | 'electricity_allowance' | 'owner_paid_meter' | 'negotiate_at_lease_renewal')[]
+}
+
+export interface LandlordView {
+  /** Annual change on the landlord's own unit. */
+  ownUnit: Estimate | null
+  /**
+   * Real energy savings on the heating the landlord paid for before: the net change across both bills
+   * (fuel saved minus the new electricity), whoever ends up paying the electricity. Negative = saves.
+   */
+  realSavings: Estimate | null
+  /** Heating cost that would move onto tenants' electric bills (Qiao, 2026-11-06: show it, with fair options). */
+  shiftedToTenants: ShiftedCost[]
+  shiftedTotal: Estimate | null
+  /** Rental units: annual change for the landlord and for the tenant. */
+  rentals: { unitId: string; landlord: Estimate | null; tenant: Estimate | null; unknownPayer: boolean }[]
+  /** Own unit plus rental bills the landlord pays = realSavings + shiftedTotal (mid). Only fair with tenant agreement. */
+  landlordAnnual: Estimate | null
+  /** True when some bill's payer is unknown, so the total leaves it out. */
+  landlordAnnualIncomplete: boolean
+  /** Rental units whose tenant may pay more (the high end of their change is above zero). */
+  tenantsPayingMore: string[]
+  incentivesKnown: Estimate | null
+  incentivesWithoutAmount: string[]
+  /** Share of the project cost covered by known incentives, 0–1. */
+  coverage: Estimate | null
+  netUpfront: Estimate
+  /** UI label: "project commitment terms". */
+  projectCommitment: { cost: Estimate | null; reason: string | null }
+  /**
+   * Payback on REAL savings: (net upfront + commitment − avoided replacement) / −realSavings.
+   * Null when the landlord doesn't save for sure.
+   */
+  paybackYears: Estimate | null
+  /**
+   * COMPARISON ONLY. Payback if the shifted cost were left on tenants: only possible with a written rental
+   * agreement. Never shown in a recommendation slot (Qiao, 2026-11-06); always shown with the 105 CMR 410 note.
+   */
+  paybackIfCostShifted: Estimate | null
+  paybackExcludesCommitment: boolean
+  /** True when the "boiler needs replacing anyway" baseline was used. */
+  usesReplacementBaseline: boolean
+}
+
+const negate = (r: Range): Range => range(-r.high, -r.mid, -r.low)
+
+function sumEstimates(es: Estimate[]): Estimate | null {
+  return es.length === 0 ? null : combine(sum(es.map(x => x.range)), es)
+}
+
+function commitment(c: RentCommitment | null): { cost: Estimate | null; reason: string | null } {
+  if (c === null) return { cost: estimate(point(0), 'high', 'No project commitment applies'), reason: null }
+  if (c.months === null) return { cost: null, reason: 'The length of the project commitment period is not published.' }
+  if (c.forgoneIncreasePerUnitMonth === null) return { cost: null, reason: 'Enter the rent increase you would otherwise have made.' }
+  const perUnit = mul(c.months.range, c.forgoneIncreasePerUnitMonth.range)
+  return { cost: combine(range(perUnit.low * c.rentedUnits, perUnit.mid * c.rentedUnits, perUnit.high * c.rentedUnits), [c.months, c.forgoneIncreasePerUnitMonth]), reason: null }
+}
+
+export function landlordView(a: LandlordInput): LandlordView {
+  let ownUnit: Estimate | null = null
+  let incomplete = false
+  const landlordParts: Estimate[] = []
+  const realParts: Estimate[] = []
+  const shifted: ShiftedCost[] = []
+  const rentals: LandlordView['rentals'] = []
+  for (const u of a.units) {
+    if (u.bills === null) continue
+    const meterPayer = u.heatPumpMeterPaidBy === undefined ? u.electricPaidBy : u.heatPumpMeterPaidBy
+    const split = splitByPayer(u.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: meterPayer, upfrontNet: null })
+    if (split.unallocated.length > 0) incomplete = true
+    if (split.owner.annual !== null) landlordParts.push(split.owner.annual)
+    if (u.heatPaidBy === 'owner') realParts.push(u.bills.net)
+    if (u.heatPaidBy === 'owner' && u.heatingFuel !== 'electric_resistance' && meterPayer === 'tenant') {
+      const annual = u.bills.electricBill
+      shifted.push({
+        unitId: u.unitId,
+        annual,
+        monthly: combine(scale(annual.range, 1 / 12), [annual]),
+        constraint: HEAT_COST_SHIFT_CONSTRAINT,
+        fairOptions: ['lower_rent', 'electricity_allowance', 'owner_paid_meter', 'negotiate_at_lease_renewal'],
+      })
+    }
+    if (u.unitId === a.ownUnitId) ownUnit = split.owner.annual
+    else rentals.push({ unitId: u.unitId, landlord: split.owner.annual, tenant: split.tenant.annual, unknownPayer: split.unallocated.length > 0 })
+  }
+  const landlordAnnual = sumEstimates(landlordParts)
+  const realSavings = sumEstimates(realParts)
+  const shiftedTotal = sumEstimates(shifted.map(s => s.annual))
+
+  const known = a.incentives.flatMap(i => (i.value === null ? [] : [i.value]))
+  const incentivesKnown = sumEstimates(known)
+  const netUpfront = incentivesKnown
+    ? combine(floorAt(sub(a.projectCost.range, incentivesKnown.range), 0), [a.projectCost, incentivesKnown])
+    : a.projectCost
+  const coverage = incentivesKnown && a.projectCost.range.low > 0
+    ? combine(capAt(div(incentivesKnown.range, a.projectCost.range), 1), [incentivesKnown, a.projectCost])
+    : null
+
+  const projectCommitment = commitment(a.rentCommitment)
+  const withCommitment = projectCommitment.cost
+    ? combine(add(netUpfront.range, projectCommitment.cost.range), [netUpfront, projectCommitment.cost])
+    : netUpfront
+  const paybackCost = a.avoidedReplacementCost
+    ? combine(floorAt(sub(withCommitment.range, a.avoidedReplacementCost.range), 0), [withCommitment, a.avoidedReplacementCost])
+    : withCommitment
+  const payback = (annual: Estimate | null): Estimate | null =>
+    annual ? simplePaybackYears(paybackCost, combine(negate(annual.range), [annual])) : null
+
+  return {
+    ownUnit,
+    realSavings,
+    shiftedToTenants: shifted,
+    shiftedTotal,
+    rentals,
+    landlordAnnual,
+    landlordAnnualIncomplete: incomplete,
+    tenantsPayingMore: rentals.filter(r => r.tenant !== null && r.tenant.range.high > 0).map(r => r.unitId),
+    incentivesKnown,
+    incentivesWithoutAmount: a.incentives.filter(i => i.value === null).map(i => i.offerId),
+    coverage,
+    netUpfront,
+    projectCommitment,
+    paybackYears: payback(realSavings),
+    paybackIfCostShifted: shifted.length > 0 ? payback(landlordAnnual) : null,
+    paybackExcludesCommitment: projectCommitment.cost === null,
+    usesReplacementBaseline: a.avoidedReplacementCost !== null,
+  }
+}
+```
+
+- [ ] **Step 4: Run to verify pass**
+
+Run: `cd engine && npx vitest run test/landlord.test.ts && npm run typecheck`
+Expected: PASS (16 tests); typecheck clean.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add engine/src/landlord.ts engine/test/landlord.test.ts
+git commit -m "feat(engine): landlord view — own unit, who gains in rentals, incentive coverage, rent commitment"
+```
+
+---
+
 ### Task 16: Sourced assumptions and `Quantities` (with confidence)
 
 Cost and price assumptions are numbers too: each needs a source (principle 3). **Rule for this task: if you can't find a source for an assumption, leave it out.** The engine then shows that offer's percentage without a dollar figure (`benefit: null`). Never invent a value.
@@ -3821,7 +4454,9 @@ export function quantitiesFromAssumptions(list: readonly Assumption[]): Quantiti
 | `heat_pump_cost_per_ton` | 3860 / 5830 / 7800 USD per ton (ductless; mean ± 1 SD) | MA23X14-B-RHPINV Table 1 and Table 6 | Found |
 | `rooftop_solar_cost_per_kw` | 3010 / 3750 / 3775 USD per kWdc | DOER SMART PY2027 Aggregated Cost Survey (rooftop ≤27.5 kWdc residential, N = 7) | Found |
 | `solar_yield_kwh_per_kw_year` | min / median / max of PVWatts v8 runs | PVWatts v8 (`developer.nlr.gov`) for Boston, Worcester, Springfield; tilt 20–35°, azimuth 180°, losses 14% | Compute in this step |
-| `heat_pump_tons_per_unit` | — | No Massachusetts source found | **Omit** (the UI shows example sizes or the contractor's quoted size) |
+| `heat_pump_tons_per_unit` | from the contractor's quote (medium), else ResStock MA 2–4 unit stock estimate (**low**, "typical for similar buildings") | data-sources §9b | Per address; no default value |
+| `annual_heat_load_mmbtu` | from the user's past fuel use (medium), else ResStock MA stock estimate (**low**) | data-sources §9b | Per address; no default value |
+| `oil_boiler_replacement_cost_per_ton` | 920 / 920 / 920 USD per ton (2023 $), confidence **low**; the user's own quote overrides | EEAC Heat Pump Incremental Cost Research (2024), Table 3 | Found |
 | `weatherization_cost_per_unit` | — | No Massachusetts source found | **Omit** (percentage only) |
 | `rooftop_solar_kw_per_building` | — | Per address from Google Solar / PVWatts in Phase 3 | **Omit** |
 | `community_solar_credits_per_year` | — | No published typical value | **Omit** |

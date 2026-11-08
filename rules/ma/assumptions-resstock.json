@@ -1,0 +1,620 @@
+[
+  {
+    "id": "annual_heat_load_mmbtu.natural_gas",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 21.3,
+      "mid": 33.4,
+      "high": 50.0
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 1681,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.natural_gas",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 1.74,
+      "mid": 2.43,
+      "high": 3.25
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 1681,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.natural_gas.1950_1999",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 16.0,
+      "mid": 24.0,
+      "high": 36.2
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 440,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.natural_gas.1950_1999",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 1.47,
+      "mid": 1.94,
+      "high": 2.65
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 440,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.natural_gas.2000_plus",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat, built 2000 or later; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 6.1,
+      "mid": 12.4,
+      "high": 21.4
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 74,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.natural_gas.2000_plus",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat, built 2000 or later; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 0.79,
+      "mid": 1.15,
+      "high": 1.62
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 74,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.natural_gas.pre1950",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (gas heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 26.3,
+      "mid": 39.0,
+      "high": 55.3
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 1167,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.natural_gas.pre1950",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (gas heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 2.05,
+      "mid": 2.68,
+      "high": 3.52
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 1167,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.oil",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 22.8,
+      "mid": 35.8,
+      "high": 50.8
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 349,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.oil",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 1.97,
+      "mid": 2.48,
+      "high": 3.29
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 349,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.oil.1950_1999",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (oil heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 15.6,
+      "mid": 23.9,
+      "high": 35.8
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 71,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.oil.1950_1999",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (oil heat, built 1950–1999; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 1.33,
+      "mid": 1.89,
+      "high": 2.45
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 71,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.oil.pre1950",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (oil heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 27.6,
+      "mid": 38.3,
+      "high": 51.8
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 274,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.oil.pre1950",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (oil heat, built before 1950; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 2.08,
+      "mid": 2.61,
+      "high": 3.46
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 274,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "annual_heat_load_mmbtu.propane",
+    "description": "Heat delivered per year: typical for similar Massachusetts 2–4 unit homes (propane heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "MMBtu per year",
+    "value": {
+      "low": 21.4,
+      "mid": 31.0,
+      "high": 53.3
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 36,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.load.heating.energy_delivered..kbtu",
+        "quote": "Total energy delivered by heating system includes HVAC distribution losses.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_tons.propane",
+    "description": "Size of the main heating system: typical for similar Massachusetts 2–4 unit homes (propane heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "tons",
+    "value": {
+      "low": 1.64,
+      "mid": 2.1,
+      "high": 3.07
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 36,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.params.size_heating_system_primary..kbtu_per_hr",
+        "quote": "Size, Heating System Primary",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "hot_water_share_of_fuel.natural_gas",
+    "description": "Share of the fuel that heats hot water when the same fuel heats the home: typical for similar Massachusetts 2–4 unit homes (gas heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "fraction",
+    "value": {
+      "low": 0.142,
+      "mid": 0.205,
+      "high": 0.297
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 1504,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.natural_gas.hot_water.energy_consumption..kwh",
+        "quote": "Natural gas consumed by natural gas hot water systems.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.natural_gas.heating.energy_consumption..kwh",
+        "quote": "Natural gas consumed by natural gas heating systems, excludes heat pump backup.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "in.water_heater_fuel",
+        "quote": "The water heater fuel type.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "hot_water_share_of_fuel.oil",
+    "description": "Share of the fuel that heats hot water when the same fuel heats the home: typical for similar Massachusetts 2–4 unit homes (oil heat; ResStock, simulated), not measured for yours. Range = 25th / 50th / 75th percentile",
+    "unit": "fraction",
+    "value": {
+      "low": 0.145,
+      "mid": 0.182,
+      "high": 0.272
+    },
+    "confidence": "low",
+    "dataset": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/metadata_and_annual_results/by_state/full/csv/state%3DMA/MA_upgrade0.csv.gz",
+    "sampleSize": 157,
+    "sources": [
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.fuel_oil.hot_water.energy_consumption..kwh",
+        "quote": "Fuel oil consumed by fuel oil hot water systems",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "out.fuel_oil.heating.energy_consumption..kwh",
+        "quote": "Fuel oil consumed by fuel oil heating systems, excludes heat pump backup.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "in.water_heater_fuel",
+        "quote": "The water heater fuel type.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/data_dictionary.tsv",
+        "section": "weight",
+        "quote": "Number of dwelling units this model represents in real life.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://oedi-data-lake.s3.amazonaws.com/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/2025/resstock_amy2018_release_1/citation.txt",
+        "section": "DATASET",
+        "quote": "License CC-BY-4.0",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  }
+]

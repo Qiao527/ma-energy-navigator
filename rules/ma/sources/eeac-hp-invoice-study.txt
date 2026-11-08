@@ -1,0 +1,3560 @@
+[[page 1]]
+ 1 
+  
+ 
+Residential Heat Pump 
+Invoice Cost Analysis 
+(MA23X14-B-RHPINV) 
+ 
+FINAL 
+10/18/2024 
+ 
+SUBMITTED TO: 
+Massachusetts Program Administrators and Energy 
+Efficiency Advisory Council 
+SUBMITTED BY: 
+NMR Group, Inc. 
+ 
+ 
+
+[[page 2]]
+Residential Heat Pump Invoice Cost Analysis (MA23X14-B-RHPINV)
+The goal of this study was to develop a 
+repeatable methodology and baseline 
+metrics for tracking trends in heat pump 
+costs over time to assist with quantifying 
+market effects from the PAs' support of 
+residential heat pumps in Massachusetts. 
+Centrally ducted air-source heat pumps 
+(ASHP), ground-source heat pumps (GSHP), 
+heat pump water heaters (HPWH) and mini-
+split heat pumps invoices were utilized for 
+this study. The sources for these data are 
+Mass Save rebate applications for heat 
+pumps, as well as the Massachusetts Clean 
+Energy Center (MassCEC).
+nmrgroupinc.com
+HP % of All Costs
+Ductless MSHP Ducted and Mixed MSHP ASHP
+2019 2020 2021 2022 2023
+40
+60
+80
+Since 2019 the fraction of project costs 
+attributed to equipment prices has increased 
+for all equipment categories examined in 
+this study, including the three most 
+common types shown at right, but overall 
+project costs do not show the same trend. 
+Note: The 2023 proportions are preliminary 
+values based on comparatively small samples.
+Key Findings
+ASHP costs typically decrease when they are 
+part of a larger project, as shown by the plot 
+of project costs per ton.
+Electrical work does not represent a 
+substantial portion of project costs, and 
+service upgrades are uncommon.
+While it is possible that homes which would require a service upgrade forgo 
+the installation of heat pumps, another possibility is that existing capacity is 
+sufficient, especially when displacing existing equipment like resistance 
+heating or a central air-conditioner.
+The baseline costs established in this study 
+are sampled from projects installed circa 
+2021–2022, but the costs at right are have 
+been adjusted to January 2024.
+Ductless 
+MSHP
+Ducted 
+MSHP
+Central 
+ASHP
+GSHP HPWH
+$5,830/ton $6.914/ton $6,560/ton $14,211/ton $68/gallon
+[[page 3]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+3 
+Table of Contents 
+EXECUTIVE SUMMARY................................ ................................ ................................ ........... 7 
+KEY FINDINGS ................................ ................................ ................................ ................... 8 
+CONCLUSIONS ................................ ................................ ................................ .................. 8 
+RECOMMENDATIONS ................................ ................................ ................................ .......... 9 
+CONSIDERATIONS ................................ ................................ ................................ .............. 9 
+SECTION 1 INTRODUCTION ................................ ................................ .......................... 12 
+1.1 GOALS ................................ ................................ ................................ ................. 12 
+1.2 DATA SOURCES ................................ ................................ ................................ .... 12 
+1.2.1 Project Cost Data ................................ ................................ ........................... 12 
+1.2.2 Equipment Performance and Cost Data ................................ ......................... 14 
+1.2.3 Trade Wages ................................ ................................ ................................ .. 15 
+1.3 METHODOLOGY ................................ ................................ ................................ .... 15 
+1.3.1 Program Data Preparation, Sampling & Invoice Transcription ........................ 15 
+1.3.2 Web-Scraping ................................ ................................ ................................  16 
+1.3.3 Cost Normalization ................................ ................................ ......................... 17 
+1.3.4 Regions ................................ ................................ ................................ .......... 19 
+1.3.5 Enhanced Dataset ................................ ................................ .......................... 19 
+1.3.6 Data Cleaning ................................ ................................ ................................  19 
+1.3.7 Forecast ................................ ................................ ................................ ......... 20 
+SECTION 2 DUCTLESS MSHP ................................ ................................ ...................... 22 
+2.1 KEY FINDINGS ................................ ................................ ................................ ...... 22 
+2.2 CAPACITY-NORMALIZED PROJECT COST ................................ ................................  22 
+2.2.1 Large Projects ................................ ................................ ................................  23 
+2.2.2 MassCEC vs. Mass Save ................................ ................................ ............... 24 
+2.3 ITEMIZED COST AVAILABILITY ................................ ................................ ................ 24 
+2.4 HEAT PUMP EQUIPMENT ................................ ................................ ....................... 24 
+2.4.1 Web-scraping Comparison ................................ ................................ ............. 25 
+2.5 INSTALLATION LABOR ................................ ................................ ............................ 26 
+2.6 WIRING ................................ ................................ ................................ ................ 26 
+2.7 REGIONAL COMPARISON ................................ ................................ ....................... 27 
+2.8 BASELINE ................................ ................................ ................................ ............. 29 
+[[page 4]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+4 
+SECTION 3 DUCTED AND MIXED MSHP ................................ ................................ ........ 30 
+3.1 KEY FINDINGS ................................ ................................ ................................ ...... 30 
+3.2 CAPACITY-NORMALIZED PROJECT COST ................................ ................................  30 
+3.2.1 Large Projects ................................ ................................ ................................  31 
+3.2.2 MassCEC vs. Mass Save ................................ ................................ ............... 32 
+3.3 ITEMIZED COST AVAILABILITY ................................ ................................ ................ 32 
+3.4 HEAT PUMP EQUIPMENT ................................ ................................ ....................... 32 
+3.4.1 Web-scraping Comparison ................................ ................................ ............. 33 
+3.5 INSTALLATION LABOR ................................ ................................ ............................ 34 
+3.6 WIRING ................................ ................................ ................................ ................ 35 
+3.7 REGIONAL COMPARISON ................................ ................................ ....................... 35 
+3.8 BASELINE ................................ ................................ ................................ ............. 37 
+SECTION 4 CENTRALLY DUCTED ASHP ................................ ................................ ....... 38 
+4.1 KEY FINDINGS ................................ ................................ ................................ ...... 38 
+4.2 CAPACITY-NORMALIZED PROJECT COST ................................ ................................  38 
+4.2.1 Large Projects ................................ ................................ ................................  39 
+4.2.2 MassCEC vs. Mass Save ................................ ................................ ............... 40 
+4.3 ITEMIZED COST AVAILABILITY ................................ ................................ ................ 40 
+4.4 HEAT PUMP EQUIPMENT ................................ ................................ ....................... 40 
+4.4.1 Web-scraping Comparison ................................ ................................ ............. 41 
+4.5 INSTALLATION LABOR ................................ ................................ ............................ 42 
+4.6 WIRING ................................ ................................ ................................ ................ 42 
+4.7 REGIONAL COMPARISON ................................ ................................ ....................... 43 
+4.8 BASELINE ................................ ................................ ................................ ............. 44 
+SECTION 5 GSHP ................................ ................................ ................................ ....... 45 
+5.1 KEY FINDINGS ................................ ................................ ................................ ...... 45 
+5.2 CAPACITY-NORMALIZED PROJECT COST ................................ ................................  45 
+5.3 ITEMIZED COST AVAILABILITY ................................ ................................ ................ 46 
+5.4 HEAT PUMP EQUIPMENT & LABOR ................................ ................................ ......... 46 
+5.4.1 Web-scraping Comparison ................................ ................................ ............. 47 
+5.5 GROUND LOOP ................................ ................................ ................................ ..... 48 
+5.6 REGIONAL COMPARISON ................................ ................................ ....................... 49 
+[[page 5]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+5 
+5.7 EXISTING VERSUS NEW CONSTRUCTION ................................ ................................  50 
+5.8 BASELINE ................................ ................................ ................................ ............. 50 
+SECTION 6 HPWH COSTS ................................ ................................ ........................... 51 
+6.1 KEY FINDINGS ................................ ................................ ................................ ...... 51 
+6.2 CAPACITY-NORMALIZED PROJECT COST ................................ ................................  51 
+6.3 ITEMIZED COST AVAILABILITY ................................ ................................ ................ 52 
+6.3.1 Large Projects ................................ ................................ ................................  52 
+6.4 HEAT PUMP EQUIPMENT ................................ ................................ ....................... 52 
+6.4.1 Web-scraping Comparison ................................ ................................ ............. 53 
+6.5 INSTALLATION LABOR ................................ ................................ ............................ 54 
+6.6 WIRING ................................ ................................ ................................ ................ 54 
+6.7 REGIONAL COMPARISON ................................ ................................ ....................... 55 
+6.8 BASELINE ................................ ................................ ................................ ............. 56 
+APPENDIX A DATA TABLES ................................ ................................ ............................ 57 
+A.1 METHODOLOGY ................................ ................................ ................................ .... 57 
+A.1.1 Web-Scraping ................................ ................................ ................................  57 
+A.1.2 Inflation Adjustment ................................ ................................ ........................ 57 
+A.2 DUCTLESS MSHP ................................ ................................ ................................  59 
+A.2.1 Data Tables ................................ ................................ ................................ .... 59 
+A.2.2 Additional Details................................ ................................ ............................ 60 
+A.3 DUCTED AND MIXED MSHP ................................ ................................ .................. 63 
+A.3.1 Data Tables ................................ ................................ ................................ .... 63 
+A.3.2 Additional Details................................ ................................ ............................ 64 
+A.4 CENTRALLY DUCTED ASHP ................................ ................................ .................. 68 
+A.4.1 Data Tables ................................ ................................ ................................ .... 68 
+A.4.2 Additional Details................................ ................................ ............................ 69 
+A.5 GSHP ................................ ................................ ................................ ................. 73 
+A.5.1 Data Tables ................................ ................................ ................................ .... 73 
+A.5.2 Additional Details................................ ................................ ............................ 74 
+A.6 HPWH ................................ ................................ ................................ ................. 75 
+A.6.1 Data Tables ................................ ................................ ................................ .... 75 
+A.6.2 Additional Details................................ ................................ ............................ 75 
+[[page 6]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+6 
+A.7 TRADE WAGES & REGIONS ................................ ................................ ................... 77 
+APPENDIX B CENTRAL AIR CONDITIONERS ................................ ................................ ..... 80 
+B.1 KEY FINDINGS ................................ ................................ ................................ ...... 80 
+B.2 BACKGROUND ................................ ................................ ................................ ...... 80 
+B.3 CAPACITY-NORMALIZED PROJECT COST ................................ ................................  81 
+B.4 ITEMIZED COST AVAILABILITY ................................ ................................ ................ 81 
+B.5 CAC EQUIPMENT COST ................................ ................................ ........................ 82 
+B.5.1 Web-scraping Comparison ................................ ................................ ............. 82 
+B.6 INSTALLATION LABOR COST ................................ ................................ .................. 83 
+B.7 WIRING COST ................................ ................................ ................................ ....... 84 
+B.8 DUCT COST ................................ ................................ ................................ .......... 85 
+  
+[[page 7]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+7 
+Executive Summary 
+The purpose of this study is to develop a repeatable methodology and baseline metrics for 
+tracking trends in heat pump project costs over time that will assist with quantifying market effects 
+from the PAs’ support of residential heat pumps in Massachusetts. This includes centrally ducted 
+air-source heat pumps (ASHP), ground -source heat pumps (GSHP), heat pump water heaters 
+(HPWH), and mini-split heat pumps (MSHP). MSHPs are also variously known as multi-split heat 
+pumps and ductless air-source heat pumps, although they also come in ducted configurations. 
+In this study NMR analyzed a sample of 227 ASHP, 490 MSHP, 7 GSHP and 69 HPWH projects 
+across Massachusetts supported by the electric and gas energy efficiency Program 
+Administrators (PAs) that sponsor Mass Save ® (Figure 1 ). These heat pumps were installed 
+primarily in existing homes between 2021 and 2022. NMR also analyzed the invoices of 94 Mass 
+Save central air conditioner (CAC) projects , expecting that they would provide a useful 
+comparison for ASHP since CAC are effectively heat pumps that only operate in cooling mode. 
+We supplemented the Mass Save sample with 11 ASHP, 2,212 MSHP and 186 GSHP projects 
+dating to between 2019 and 2021 from databases published by the Massachusetts Clean Energy 
+Center (MassCEC). The results of our analysis (methods in Section 1.3) comprise the bulk of this 
+report in Section 2 through Section 6, the highlights of which are summarized on the next page. 
+Figure 1: Mass Save Program Invoice Samples by Equipment Type and Region 
+The regions in Figure 1  are Core-Based Statistical Areas (CBSA). These areas  group 
+economically coupled communities together and may cross state boundaries . For example, 
+Rhode Island and Bristol County, MA comprise the Providence-Warwick CBSA (Section 1.3.4). 
+ES 
+ES 
+[[page 8]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+8 
+KEY FINDINGS 
+➢ The fraction of project costs attributed to e quipment prices have increased for all 
+HVAC categories: centrally ducted ASHP  (Section 4.4), ductless MSHP (Section 2.4), 
+ducted/mixed MSHP (Section 3.4) and GSHP (Section 5.4). 
+➢ In contrast , trends in overall project costs are mixed . Inflation-adjusted d uctless 
+MSHP project costs have increased slightly (Section 2.2), while those for ducted/mixed 
+MSHP have decreased (Section 3.2), but no statistically significant trend is apparent for  
+either ASHP (Section 4.2) or GSHP (Section 5.2). 
+➢ ASHP costs decrease when they are part of a larger project that includes installation 
+of other equipment such as a furnace (Section 4.2.1). 
+➢ GSHP costs are lower for new construction than they are for existing homes , 
+although it is primarily the equipment and installation costs that exhibit the most substantial 
+difference, not the ground-loop costs (Section 5.7). 
+➢ Wiring does not represent a substantial portion of project  costs, and service 
+upgrades are uncommon in the sample of program projects examined in this study. It is 
+possible that most homes that would require a service upgrade choose to forgo the 
+installation of heat pumps , but another possibility is that e xisting capacity is sufficient to 
+meet the load of the new equipment  (e.g., the replacement of resistance heating or a 
+central air-conditioner with a heat pump). 
+➢ There is notable homogeneity among regional wages for heat pump-related trades, 
+although there are some trends across equipment types suggesting wages in Hampden, 
+Hampshire, and Franklin counties were lower than the rest of the state during the period 
+the study covers, while Dukes and Nantucket counties were higher (Appendix A.7). 
+CONCLUSIONS 
+Our analysis has found evidence that the distribution of inflation-adjusted costs within a project 
+shifted toward higher equipment costs over the study period, but overall project costs do not show 
+the same trend. This suggests that from 2019 to 2022–2023, equipment costs increased faster 
+than inflation while the rate was slower for  other project costs. In general, one would expect 
+equipment costs to decrease as the scale of adoption increases and manufacturing techniques 
+improve.1 However, numerous factors in recent years, such as shipping disruptions in the Suez 
+and Panama canals (2021 and 2023–2024 respectively) and other supply chain constraints have 
+served to drive up prices. It is also possible that changes in equipment mark -up practices by 
+contractors have contributed to this trend. Given these confounding factors and inconsistencies 
+across related equipment categories in our sample, we have little to no evidence at present that 
+supports (or refutes) the hypothesis that program incentives drive up heat pump project costs. 
+ 
+1 An alternative trend followed by some technologies is  for costs to remain about the same  but for specifications to 
+improve. Although we did not control for efficiency in this study, in the Tracking Data and Invoice Comparison Memo 
+we found that incentivized equipment specifications fell within narrow bands, limiting the potential for impacts due to 
+significant improvements in effi ciency over time. Indeed, a cursory review of ductless MSHP heating efficiency also 
+reveals no longitudinal trends of note; ductless MSHP represent the largest proportion of program activity. 
+[[page 9]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+9 
+RECOMMENDATIONS 
+Table 1 shows the recommend baseline values of full heat pump project costs (i.e., total installed 
+cost) in January 2024 dollars including equipment, installation labor and ancillary costs. 
+Table 1: Baseline Heat Pump Project Costs and Proportions (Jan. 2024$) 
+Heat Pump Type Total Installed Cost Heat Pump Installation Labor Other 
+Ductless MSHP $5,830/ton 59% 30% 11% 
+Ducted & Mixed MSHP $6,914/ton 47% 42% 11% 
+ASHP $6,560/ton 59% 28% 13% 
+GSHP $14,211/ton 56%† 18% 
+HPWH $68/gallon 68% 25% 7% 
+† GSHP invoices are typically broken down differently, if at all, with heat pump plus installation costs as one item, 
+and the ground loop as another. The average ground loop represents 26% of a project’s cost. 
+The baseline period is generally 2021–2022 but varies slightly by equipment type depending on the data available. 
+CONSIDERATIONS 
+The team can periodically repeat the  methods and analyses laid out in this report to 
+provide updated information on the residential heat pump markets and  inform 
+understanding of the impacts of Mass Save ’s residential heat pump offerings. Future 
+studies extending the time series could inform PA program planning as well as  feed into other 
+research studies  that need cost information,  including the annual heat pump market effects 
+studies and the incremental cost studies performed under Residential contract. Since heat pump 
+costs are among the market effects indicators meant to be reported with the annual heat pump 
+market effects studies, it may be useful to conduct the heat pump invoice analysis annually, timed 
+to incorporate  indicator-specific results into the market effects  study report . Because rebate 
+applications are frequently submitted several months after a project is installed and may 
+experience further delays in processing, a single program year’s data may include projects 
+spanning multiple years. Invoices obtained for future studie s are likely to yield additional 
+information about previous years’ heat pump costs, so future studies could also be used to 
+augment and verify or refine past year’ results. 
+While web-scraped costs are an imperfect touchstone for participant costs due to differences in 
+channel sourcing, sampling frequency, et cetera, they can nevertheless serve as a useful indicator 
+of broader market conditions due to their provenance as non -program data. To ensure that the 
+scraped costs are available when needed, they could be collected on a periodic basis—perhaps 
+once a year—and then analyzed when they are needed for  other evaluation activities, such as 
+informing incremental cost studies or updating certain parameters in the enhanced dataset. 
+It should also be noted that the preliminary web-scraping results from this study were provided to 
+Guidehouse for use in their most recent incremental cost study ( MA22R51-B-HPMS). The 
+enhanced dataset pairs these costs with individual sampled program projects and their itemized 
+invoice costs, which could be used to further review or revise the incremental costs. 
+  
+[[page 10]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+10 
+Revised program intake forms and tracking systems would simplify cost data review and 
+analysis. The rebate forms in this study d id not include fields such as equipment disposition 
+(replacement versus supplementary supply), or MSHP equipment configuration (ducted, ductless 
+or mixed). While these parameters would be useful for classifying participants, they would also 
+compete with a need to reduce bureaucratic friction for participants. 
+Traditionally, each rebate form has been assigned a unique ID by the program implementor, but 
+frequently many pieces of equipment are installed at the same time and there does not appear to 
+be an identifier tying these separate rebates  together. The lack of such a unifying identifier 
+significantly complicates efforts to compare program tracking data against invoice samples 
+received in response to a data request. 
+NMR also noted another need to improve the project cost field of the implementor’s tracking 
+system in the April 2024 Transcribed Data and Invoice Comparison memo produced as part of 
+this study. We found the project cost field unreliable because it sometimes included data entry 
+mistakes, the cost of more than one measure, or non-program work. 
+Consider improving future rounds of heat pump cost-tracking by expanding the data 
+sources used and devising a database -driven collection form to increase process 
+efficiency. NMR made use of the PAs’ Qualified Product List (QPL) in this study, but in reviewing 
+older invoices and web-scraped products we encountered many models that were not on the 
+QPL. Purchasing access to NEEP’s Cold-Climate ASHP Specification Product List or the AHRI 
+Certification Directory would improve the efficiency of verifying the specifications of scraped and 
+incentivized products. We also developed a spreadsheet data collection form for invoice data at 
+the beginning of the study, but over time learned that such an approach was too cumbersome 
+given the variations in invoicing practices among contractors.  Devising a database -driven 
+collection form to allow for free entry of individual invoice items  would streamline reviewing 
+invoices, ultimately lowering costs over time. 
+Given our findings regarding seasonal and regional variations in costs, future studies 
+might incorporate these factors into their sampling plan.  However, doing so is likely to 
+increase project costs and implementer response burden given the increased sample sizes 
+required, particularly if future data request responses are of a similar unstratified nature to those 
+received in this study. For both data requests NMR made to the implementors in this study, we 
+requested specific numbers of invoices for different types of equipment  (e.g., 210 HPWH) but 
+instead received a large, unsorted collection of invoices for both heat pump and non -heat pump 
+projects. Sorting through this stack required considerable unforeseen effort, which would increase 
+with larger samples or additional quota variables such as installation season. To solve this, NMR 
+could randomly sample projects from the program tracking data and request rebate 
+documentation for the se projects by rebate ID , if the implementor can easily handle such 
+requests. Alas, this may bias the sample since we observed in this study that approximately one-
+third of the invoices we processed were not within the heat pump project tracking data we had 
+available. It is not clear why this is the case, but there are numerous plausible scenarios that could 
+contribute to this  outcome. For example,  the invoices were  attributed to and tracked under a 
+different program year, the applicant sought a rebate of some of the listed  equipment but not 
+others, or a duplicate application may have been received and assigned a different number. 
+[[page 11]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+11 
+Future studies should consider the influence various program and non-program factors 
+may have on heat pump project costs  and cost trends . Changes to program incentives or 
+eligibility requirements are obvious potential influences, but other factors—such as the “Silver 
+Tsunami’s” impact on th e trades work force as the baby -boomer generation retires —are more 
+easily overlooked. Another influence is the phase-out of many HFC refrigerants. Although, given 
+their age, we expect the projects in this study to be minimally affected by the EPA’s regulation of 
+HFC refrigerants under the Kigali Amendment to the Montreal Protocol, future studies should 
+recognize the potential disruptions to the market as manufacturers redesign their products to use 
+refrigerants with a lower global warming potential  (GWP). Specifically, i mports of high-GWP 
+residential HVAC equipment will be banned after January 1, 2025 , and any covered stock must 
+be installed before January 1, 2026.2,3 
+A potential impact of changes to program incentives is for contractors to adjust the m ark-up 
+invoiced on equipment to capture more value, so examining changes in mark-up over time could 
+be instructive . Unfortunately, mark -up is a particularly opaque  aspect of invoicing practice. 
+However, subsequent studies could seek to probe trends in this practice through various 
+techniques. One possible, if imperfect, approach would be to  examine the average ratio of 
+itemized equipment cost to web-scraped cost over time to focus on any change of inferred mark-
+up rather than the calculated rate itself. Based on some preliminary analysis of the data from this 
+study which revealed no obvious longitudinal trends for either ductless or ducted MSHP, 
+additional sample may be required to help ensure an adequate number of invoices with itemized 
+equipment costs are available to allow for robust statistical analysis. 
+Another, similar, factor which may total project costs is the possibility of selective price increases 
+by distributors and retailers compared to other regions. Such behavior could be motivated by a 
+desire to capture a larger proportion of program incentives. We could explore this in the next study 
+by collecting prices from vendors with multiple locations  to compare the listed prices for 
+Massachusetts and a similar region with a less generous or non-existent heat pump offering.  
+ 
+2  United States Environmental Protection Agency, ( 2023). Technology Transitions HFC Restrictions by Sector . 
+https://www.epa.gov/climate-hfcs-reduction/technology-transitions-hfc-restrictions-sector (Accessed September 2024) 
+3 Restrictions on variable refrigerant flow systems are January 1, 2026, and January 1, 2027, respectively. 
+[[page 12]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+12 
+Section 1 Introduction 
+This Residential Heat Pump Cost Tracking (MA23X14-B-RHPINV) study seeks to document the 
+costs associated with program -incentivized residential heat pump installations and develop 
+metrics for tracking heat pump cost trends over time.  It was prepared  for the Massachusetts 
+Program Administrators (PAs) and the Energy Efficiency Advisory Council (EEAC) consultants by 
+the Massachusetts Cross-Cutting Research Area evaluation team, led by NMR Group. 
+1.1 GOALS 
+The overarching purpose of this study is to develop a repeatable methodology and baseline 
+metrics for tracking trends in heat pump project costs over time that will assist with quantifying 
+market effects from the PAs’ support of residential heat pumps in M assachusetts. This includes 
+centrally ducted air-source heat pumps (ASHP), ground-source heat pumps (GSHP), heat pump 
+water heaters (HPWH), and mini-split heat pumps (MSHP). MSHP are also variously known as 
+multi-split heat pumps and ductless air-source heat pumps, although they also come in ducted 
+configurations. Per the original work plan, this study aims to: 
+1. Establish and document a methodology for long-term tracking of the labor and materials 
+costs of heat pump projects using labor and materials/equipment cost data from the 
+invoices of participating projects and equipment costs from web -scraping sites of 
+Massachusetts distributors and online wholesalers. 
+2. Extract as much information as possible from project invoices about the work done at 
+each sampled installation and analyze the impact of various job attributes (e.g., panel 
+upgrades, use of integrated controls, addition or changes to ductwork, removal of 
+previous equipment, listed rebates) on overall invoiced project costs, exclusive of 
+program incentives. 
+3. Identify the key variables impacting project costs, recommend normalized cost metrics 
+using these variables, and establish baseline values for these metrics for comparison 
+against future measurements. 
+1.2 DATA SOURCES 
+This study employs two sources of project cost data: 1) Mass Save program rebate applications 
+for heat pumps and heat pump water heaters, and 2) public databases of heat pump project costs 
+published by the Massachusetts Clean Energy Center (MassCEC). 
+1.2.1 Project Cost Data 
+Mass Save program rebate applications. The Mass Save rebate data comprised information 
+from PA program tracking data for the Residential Coordinated Delivery and Residential Retail 
+initiatives supplemented with project invoices that participating installers or customers submitted 
+as part of their rebate applications.  For the program trackin g data, NMR leveraged a 
+comprehensive set of 2021 and 2022 residential heat pump and CAC  tracking data already on 
+hand from the Heat Pump Market Effects Indicators Baseline study (MA22X06-B-HPMEIB). 
+1 
+[[page 13]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+13 
+NMR requested 1,198 customer invoices (300 ASHP, 660 MSHP, 2 8 GSHP, 210 HPWH) from 
+EFI in September 2023 , and received 2,576 unsorted rebate applications three months later . 
+Since the response exceeded NMR’s expectations, we increased the size of the ASHP and MSHP 
+samples. We recorded 227 ASHP and 490 MSHP invoices, more than doubling our initial targets 
+of 100 ASHP and 202 MSHP. Our samples of 7 GSHP and 69 HPWH invoices were just shy of 
+the 10 GSHP and 70 HPWH originally planned. 
+After the PAs directed NMR to add central air conditioners to the scope of this study, 4 NMR 
+submitted a second data request for 300 CAC invoices to Resource Innovations in June 2024 and 
+received 10,001 unsorted invoices in August. We hoped to extract details from 100 CAC invoices, 
+but due to time constraints our final sample size of CAC invoices is still TBD. 
+MassCEC databases. Table 2 summarizes the program incentives and requirements for the 
+Mass Save heat pump rebate programs circa January 2022, and the relevant MassCEC offerings. 
+The requirements of the two GSHP offerings were identical, while the requirements for ASHP and 
+MSHP differed. The Mass Save program required higher levels of ASHP/MSHP cooling efficiency 
+than the MassCEC program and tied low temperature performance to a heat pump’s ability to 
+maintain heating capacity at 17° Fahrenheit. In contrast, the MassCEC program used the 
+Northeast Energy Efficiency Partnerships (NEEP)’s cold climate AS HP specification, which ties 
+low temperature performance to operating efficiency at 5° Fahrenheit. 
+The MassCEC ASHP/MSHP data covers two programs: a residential/small capacity offering that 
+ran from 2014 to 2019, and a whole -home program available in 2020 and 2021. NMR analyzed 
+the full whole -home program data set but only the 2019 data for the residential program. The 
+whole-home program was open to single -family buildings in program administrator territories 
+served by natural gas, 5  while the earlier program was open to all program administrator 
+customers. 
+Despite the differences in program design —including lower average incentives —nearly all 
+MassCEC projects from 2019 to 2021 satisfied the January 2022 Mass Save program 
+requirements. Every ASHP project, 99% of MSHP projects, and 96% of GSHP satisfied the Mass 
+Save program requirements in Table 2. Consequently, the MassCEC data provide a valuable 
+historical context of market conditions for this initial review of the factors influencing heat pump 
+project costs and accompanying start of a long-term cost tracking endeavor. 
+ 
+4 Because air conditioners are effectively heat pumps that only operate in cooling mode, the Working Group agreed to 
+a review of CAC invoices as a  comparison for centrally ducted ASHP project costs, especially those of ductwork, 
+electrical work, and installation labor. 
+5 New construction participants were also required to be all-electric. 
+[[page 14]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+14 
+Table 2: Mass Save and MassCEC Heat Pump Program Summary 
+Heat Pump Type Requirements Incentives 
+ Mass Save MassCEC Mass Save MassCEC 
+MSHP, 
+ductless single split 
+18 SEER 
+10 HSPF5 
+≥68% cap. at 17° 15 SEER 
+10 HSPF6,7,8 
+1.75 COP at 5° 
+$10,000/ 
+whole home 
+OR 
+$1,250/ton1 
+Whole-home (2020–21): 
+$2,500 any + 
+$1,250 MOD/LI + 
+$1,250 LI7 
+ 
+Residential (2019): 
+$500/ton + 
+$250/ton MOD/LI + 
+$250/ton LI4,8 
+MSHP, 
+ducted or multi-split 
+16 SEER 
+9.5 HSPF5 
+≥58% cap. at 17° 
+ASHP, 
+central ducted 
+16 SEER 
+9.5 HSPF5 
+≥60% cap. at 17° 
+15 SEER 
+9 HSPF6,7,8 
+1.75 COP at 5° 
+GSHP, 
+duct closed loop 
+17.1 EER 
+3.6 COP1,2 
+17.1 EER 
+3.6 COP2,3 
+$10,000/ 
+home1 
+$2,000/ton any + 
+$1,000/ton MOD/LI + 
+$500/ton LI3,4 
+GSHP, 
+ducted open loop 
+21.1 EER 
+4.1 COP1,2 
+21.1 EER 
+4.1 COP2,3 
+GSHP, 
+hydronic open loop 
+16.1 EER 
+3.1 COP1,2 
+16.1 EER 
+3.1 COP2,3 
+GSHP, 
+hydronic closed loop 
+20.1 EER 
+3.5 COP1,2 
+20.1 EER 
+3.5 COP2,3 
+1. MassSave.com (2022). Heat Pump Rebates. https://web.archive.org/web/20220222084724/https://
+www.masssave.com/en/saving/residential-rebates/heat-pump  (Accessed Nov. 2023) 
+2. U.S. Environmental Protection Agency. (2011). ENERGY STAR® Program Requirements Product Specification 
+for Geothermal Heat Pumps: Eligibility Criteria Version 3.2.  https://www.energystar.gov/sites/default/files/asset/
+document/Geothermal%20Heat%20Pumps%20Version%203.2%20Final%20Specification.pdf (Accessed Nov. 
+2023) 
+3. Massachusetts Clean Energy Center. (May 2018). Residential and Small -Scale Ground -Source Heat Pump 
+Program: Program Manual https://files.masscec.com/get-clean-energy/govt-np/clean-heating-cooling/Residential_
+Small-Scale_GSHP_Program_Manual.pdf (Accessed Nov. 2023) 
+4. Additional incentives apply to some projects, as well as caps limiting the rebate to 20–35% of project costs in most 
+cases. 
+5. MassSave.com (2022). Heat Pump Qualified Product List (HPQPL). https://web.archive.org/web/
+20220217195355/https://www.masssave.com/saving/residential-rebates/heat-pump/heat-pump-qualified-list 
+(Accessed Nov. 2023) 
+6. Northeast Energy Efficiency Partnership. (2018). Cold Climate Air-Source Heat Pump Specification (Version 3.0). 
+https://neep.org/sites/default/files/media-files/cold_climate_air-source_heat_pump_specification-
+version_3.0_final.pdf (Accessed Nov. 2023) 
+7. MassCEC. (2021). Air -Source Heat Pumps. https://web.archive.org/web/20210120075354/https://www.masscec.
+com/air-source-heat-pumps-1 (Accessed Nov. 2023) 
+8. Massachusetts Clean Energy Center. (Feb. 2019). Residential and Small -Scale Air-Source Heat Pump Program: 
+Program Manual https://web.archive.org/web/20220119005827/https://files.masscec.com/get-clean-energy/
+residential/air-source-heat-pumps/ASHPProgramManualSmallScale.pdf (Accessed Nov. 2023) 
+1.2.2 Equipment Performance and Cost Data 
+This study incorporates equipment performance specifications from the AHRI Directory of 
+Certified Performance and NEEP’s Cold Climate Air Source Heat Pump Product List, discussed 
+in Section 1.3.5. In addition, market rate costs were collected from seven online storefronts (Table 
+4) to provide points of comparison to the equipment costs observed in Mass Save projects. 
+  
+[[page 15]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+15 
+1.2.3 Trade Wages 
+The construction sector wages used in the regional analysis sections of this report are the average 
+of the 2021 and 2022 wages from the Bureau of Labor Statistics (BLS) tables for metropolitan 
+and nonmetropolitan areas (Table 117 in Section A.7). These areas group economically coupled 
+communities together and may cross state boundaries.  Additional discussion follows  briefly in 
+Section 1.3.5. 
+1.3 METHODOLOGY 
+This section describes the techniques used to prepare the data in this study. 
+1.3.1 Program Data Preparation, Sampling & Invoice Transcription 
+Once NMR received a response to a data request, we removed duplicate files from program 
+implementor’s records  and converted the myriad image formats  among them to PDF . We 
+processed the resulting files with optical character recognition (OCR) to facilitate search and data 
+extraction. Searching for various keywords related to the equipment categories of interest allowed 
+us to sort the files into folders by heat pump type, although we soon discovered that the paperwork 
+associated with a given rebate number often included multiple types of equipment. The program 
+implementor assigned a unique identifier to each customer’s rebate form, resulting in the creation 
+of multiple IDs and redundant sets of documents for some projects.  The team extracted 
+information for all relevant equipment types from these multi-measure invoices. 
+We sampled invoices from the breadth of the furnished files for each heat pump type, while slightly 
+favoring invoices that contained itemized cost information. 6  Where possible , we  recorded 
+separate costs for the heat pump itself, installation labor, wiring, miscellaneous materials, duct 
+work, controls, equipment removal, permits, and delivery. We also took care to exclude any non-
+heat pump equipment such as furnaces, boilers, or humidifiers, when possible, or to discard the 
+invoice when not possible . Similarly, we reversed any discounts or “prebates”7 applied by the 
+contractor to reflect the true market rate cost of the work in our data. 
+In addition to project cost details, NMR recorded the equipment model and any listed 
+specifications, as well as the type of wiring work performed if applicable . We also transcribed 
+project identifiers such as the rebate and application numbers, contractor details, installation date 
+and address. NMR attempted to determine whether work was performed in an existing or newly 
+constructed home  using keyword searches , 8  and recorded  this in the enhanced dataset  
+(Section 1.3.5) with the rest of the details described here. 
+ 
+6 In a mid-study memo NMR reported findings noting that low-volume contractors are significantly more likely to provide 
+itemized invoices. We also noted that while the distribution of contractor sizes in the initial sample of invoices differed 
+from the program, all contractor size segments were well represented in the sample. 
+7 A common practice where by the program rebate is assigned to the contractor,  who reduces the upfront cost  
+accordingly. 
+8 For example, some contractors or homeowners may helpfully record “NC” or “New Construction” on the invoice or 
+rebate form, while references to equipment removal or replacement are indicative of existing homes. 
+[[page 16]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+16 
+As Table 3 shows, a minority of invoices include a line item for sales tax . The presence of this 
+item is fortuitous when available because i t provides a useful means of quality control , and a 
+mechanism to estimate the equipment-labor split for partially itemized invoices. 
+Table 3: Itemized Sales Tax Prevalence 
+ MSHP ASHP CAC GSHP HPWH 
+Prevalence 16% 7% 14% 0% 24% 
+Finally, when developing the study work plan, the team assumed that the invoices NMR sampled 
+would be drawn equally from across the state and are treated equally in this analysis. Therefore, 
+the team develop ed no weights  for the analysis, which means  each invoice included in the 
+analysis had a weight of 1 except for outliers (1.3.6) assigned a weight of 0. 
+1.3.2 Web-Scraping 
+To provide another reference for equipment costs, NMR collected published prices for heat pumps 
+and heat pump water heaters by scraping 11 online stores in l ate September  2023 through 
+October 2023. We collected the advertised price, model numbers, equipment specifications, and 
+shipping fees for both program eligible and lower-performance models. Since most of the vendors 
+we explored include free freight rate shipping for these products or have storefronts in 
+Massachusetts, our analysis includes shipping fees in the total equipment cost where applicable 
+to place sources on equal footing. 
+The top of Table 4 summarizes the distribution of web-scraped costs, while the bottom provides 
+the approximate prevalence of equipment sourcing by channel . To develop this latter estimate 
+NMR first grouped the 2022 program -supported units of each equipment type by the names of 
+the vendors from whom the equipment was purchased, and then grouped the vendors by channel. 
+However, we were not able identify the channel for all vendors. We allocated these “unknown 
+channel” vendors based on ratios derived from responses to questions in the residential installer 
+survey of the Heat Pump Market Effects Indicator Baseline study (MA22X06-B-HPMEIB). These 
+questions asked installers where they purchased the majority of the ASHP /MSHP and HPWH 
+they installed. 
+Table 4: Approximate Prevalence by Channel 
+ Channel (n) ASHP GSHP† HPWH MSHP 
+Program Supply House/Distributors 93% 92% 84% 93% 
+Manufacturers/Representatives 8% 8% 0% 8% 
+Home Improvement Centers 0% 0% 16% <1% 
+Online Retailers 0% 1% <1% 0% 
+† Given the specialized nature of GSHP, we expect that installers source more equipment from 
+manufacturers/representatives than the 22X06 survey implies. 
+Scraped n 232 163 65 14,276 
+Supply House/Distributors (3) 63% 20% 23% 1% 
+Manufacturers/Representatives (0) 0% 0% 0% 0% 
+Home Improvement Centers (2) 0% 0% 29% 4% 
+Online Retailers (6) 37% 80% 48% 96% 
+[[page 17]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+17 
+There are a limited number of websites that publish prices for the equipment categories examined 
+in this study , making it difficult to mirror the (estimated) sourcing pattern of program partners. 
+Moreover, although there are legitimate concerns about the use of a simple arithmetic average of 
+published prices, weighting is not practical since the mix of represented channels will vary by 
+model (e.g., due to manufacturer business relationships and other factors, scraped costs for a 
+given model may not be available from multiple channels or even multiple sources). 
+Although the analysis of web-scraped heat pump costs is restricted to complete compressor plus 
+air handler packages, analogous to what would be installed in a home, the configurations of MSHP 
+air handler head units can vary among retail packages. A 30 kBTUh MSHP package might include 
+an 18 kBTUh ducted air handler and 12 kBTUh wall unit, or three 12 kBTUh wall units, etc. We 
+would expect such disparate configurations to have different costs, even when they include the 
+same model o f compressor , and similar issues affect other equipment types . We therefore 
+developed a multi -tier approach to matching web-scraped with project  invoices, favoring more 
+precise techniques over coarser methods where possible. The order of matching is as follows: 
+1. Average cost for a listed AHRI number, since numbered ratings are given for specific 
+compressor and air handler combinations. 
+2. MSHP only: Average scraped cost by compressor model number and air handler 
+configuration (i.e., the number of ducted units and the number of ductless units). 
+3. Average scraped cost of all available packages for the same compressor model. 
+4. Average cost for web -scraped equipment with the similar performance specifications 
+determined by binning the scraped data (A.1.1). 
+To provide a more precise cost comparison for MSHP, which account for two -thirds of the 2022 
+heat pump project tracking data, we made use of data from a previous project. In addition to the 
+web-scraping conducted expressly for this study, NMR previously collected MSHP costs for the 
+MA 20R23 Residential New Construction Energy Optimization Cost Study in August 2020  from 
+five of the same retailer and distributor sources used in October 2023.  With these older costs, 
+which we paired with program projects in the same manner as those from 2023, it is possible to 
+interpolate between them to the installation/invoice date of individual projects and better account 
+for some changes in market conditions. 
+1.3.3 Cost Normalization 
+All costs reported in this study—both web-scraping results and invoice transcription data—have 
+been converted to constant dollars using the Bureau of Labor Statics’ monthly national Consumer 
+Price Index (CPI).9 While working with real January 2024 dollars facilitates analysis, it also means 
+that longitudinal cost series presented elsewhere in this report do not exhibit the upward trend 
+readers may expect based on day-to-day experience with nominal dollars. Table 5 presents the 
+magnitude of this increase in nominal dollars of recent years via the relative increase in the CPI 
+since January 2020. 
+ 
+9  United States Bureau of Labor Statistics (2024). Consumer Price Index for All Urban Consumers. 
+https://data.bls.gov/timeseries/CUUR0000SA0. Accessed August 21, 2024. See also A.1.2 Inflation Adjustment. 
+[[page 18]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+18 
+Table 5: National Consumer Price Index (January 2020=100%) 
+Year Jan Feb Mar Apr May June July Aug Sep Oct Nov Dec 
+2019 98% 98% 99% 99% 99% 99% 99% 99% 100% 100% 100% 100% 
+2020 100% 100% 100% 99% 99% 100% 100% 101% 101% 101% 101% 101% 
+2021 101% 102% 103% 104% 104% 105% 106% 106% 106% 107% 108% 108% 
+2022 109% 110% 111% 112% 113% 115% 115% 115% 115% 116% 115% 115% 
+2023 116% 117% 117% 118% 118% 118% 118% 119% 119% 119% 119% 119% 
+Figure 2 compares the Producer Price Index (PPI, purple line) of the HVAC manufacturing sector 
+with the National CPI (blue) and regional CPI (green).10,11 These indices tracked one another 
+closely for most of th is study’s time frame, which supports the standard approach of using the 
+U.S. CPI for normalization described above. However, it is noteworthy that the HVAC PPI began 
+to deviate more significantly in mid-2021. The New England CPI also began to diverge slightly 
+from the national rate around the same time . This may be an intermittent anomaly arising from 
+supply chain issues or may necessitate alternative or additional corrections in future studies if it 
+endures. 
+Figure 2: Price Index Comparisons 
+ 
+ 
+ 
+10 U.S. Bureau of Labor Statistics (2024). Producer Price Index by Industry: HVAC and Commercial Refrigeration 
+Equipment [PCU3334133341. https://fred.stlouisfed.org/series/PCU3334133341 Accessed August 27, 2024.   
+PPI is generally considered to be a leading indicator for CPI as producers tend to pass price increases to consumers. 
+Over time, the two indices are expected to converge while there may be extended periods in which one is higher than 
+the other. 
+11 United States Bureau of Labor Statistics (2024). Consumer Price Index for All Urban Consumers  (Northeast). 
+https://data.bls.gov/pdq/SurveyOutputServlet?data_tool=dropmap&series_id=CUUR0100SA0,CUUS0100SA0  
+Accessed September 25, 2024. 
+2020 02, 
+C     1 
+2021 0 , Sue  
+Canal Blocked 2022 02,  ussia 
+ nvades  kraine
+100%
+105%
+110%
+115%
+120%
+125%
+1 0%
+1 5%
+1 0%
+1 5%
+PP  (  AC)
+ S CP 
+NE CP 
+See the Data  ► 
+ 
+[[page 19]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+19 
+1.3.4 Regions 
+The United States Office of Management and Budget (OMB) defines several systems for grouping 
+municipalities. Although the BLS published wages employed in this report’s analyses of regional 
+cost comparisons are available for eight metropolitan New England City and Town areas (NECTA) 
+in Massachusetts, the report analysis instead relies on the seven Core-Based Statistical Areas 
+(CBSA). These systems overlap, but NECTA omits 47 nonmetropolitan municipalities across the 
+state that BLS combines into one supplementary category, for a total of nine. In contrast, CBSA 
+simply omits Nantucket , which we have paired  with nearby Dukes County. A more detailed 
+comparison of these regions is available in Section A.7. 
+1.3.5 Enhanced Dataset 
+The team prepared an enhanced dataset containing implementer program data, invoice details 
+transcribed by NMR, equipment performance ratings, and web-scraped equipment costs of similar 
+equipment. To preserve detail while minimizing complexity, the enhanced dataset includes 
+multiple tables, with identifiers to link them together. 
+Where possible the performance specifications —both heating and cooling capacities and 
+efficiencies, particularly at 5 ° F —were determined by AHRI rating number. For MSHP, a 
+secondary approach was to use the average specifications for a given heat pump model and air 
+handler configuration. Finally, if other methods were not viable, we added the average of 
+accessible ratings for a given heat pump model to the dataset. 
+1.3.6 Data Cleaning 
+After examining the histograms of capacity-normalized costs  and observing a non-Gaussian 
+longer tail of high-cost projects, we excluded normalized project costs greater than three standard 
+deviations (σ) from the mean as outliers. 12 This preserves more of the plausible but higher-cost 
+projects than an approach like 1.5 times the interquartile range (IQR). For example, a 1.5 IQR cut-
+off (equivalent to 2.7 σ ) would limit the GSHP costs in Figure 3 to $6,312 to $ 22,111/ton, 
+compared to the $2,200 to $26,371/ton employed. 
+ 
+12 This was performed on the combined dataset of Mass Save invoices and previously cleaned MassCEC sample. 
+[[page 20]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+20 
+Figure 3: Example Outlier Exclusion – GSHP (Jan. 2024 $/ton) 
+1.3.7 Forecast 
+Since chronological breadth of the data request materials is wider than anticipated, NMR sought 
+to provide short-term forecasts of total project costs as an extension of the study’s goal to provide 
+baseline metrics and also test out a model for the future iterations of this cost study. 
+Autoregressive Integrated Moving Average  (ARIMA) and Seasonal Autoregressive Integrated 
+Moving Average (SARIMA) are widely used time-series methods for forecasting. ARIMA relies on 
+past values, including autoregressive and moving average components, to forecast future values. 
+SARIMA, on the other hand, not only uses past values but also incorporates seasonality patterns. 
+Because it includes  seasonality as an additional parameter, SARIMA is more effective than 
+ARIMA in predicting complex data that exhibits cyclical trends. 
+In our review of the normalized project cost data, we found a semi-annual cycle corresponding to 
+the heating and cooling seasons with trailing shoulder months. As such, we determined that the 
+best fit for quarterly invoice data was a SARIMA(p=0, d=0, q=0, P=0, D=1, Q=1, S=2) model. This 
+incorporates a semi-annual cycle (S=2), a moving average between cycles (Q=1) and t he 
+difference between the current cycle and its predecessor (D=1). Figure 4 shows an example of 
+this lagged differencing. The original monthly average cost per ton (Jan. 2024$)  for MSHP is 
+shown on the left, and processed data on the right. The “noisier” appearance of the latter is closer 
+to the form of input preferred for forecasting. 
+  6. k,  7. k 
+( 7. k,  8. k 
+( 8. k,   . k 
+(  . k,  10. k 
+( 10. k,  11. k 
+( 11. k,  12. k 
+( 12. k,  1 . k 
+( 1 . k,  1 . k 
+( 1 . k,  15. k 
+( 15. k,  16. k 
+( 16. k,  17. k 
+( 17. k,  18. k 
+( 18. k,  1 . k 
+( 1 . k,  20. k 
+( 20. k,  21. k 
+( 21. k,  22. k 
+( 22. k,  2 . k 
+( 2 . k,  2 . k 
+( 2 . k,  25. k 
+( 25. k,  26. k 
+( 26. k,  26.7k 
+ utliers   26.7k
+0
+5
+10
+15
+20
+25
+ 0
+[[page 21]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+21 
+Figure 4: Example Forecast Model Input Processing 
+ 
+ 
+ 
+diff(All MS P, lag 6)
+All MS P
+[[page 22]]
+ 
+ 22 
+2 
+Section 2 Ductless MSHP 
+Ductless MSHP installations include single mini-split or multi -split heat pumps (MSHP) with a 
+combination of wall-mount, ceiling cassette, or floor console air handlers. The installation costs of 
+these projects are significantly different from those of ducted MSHP and mixed (ducted + ductless) 
+projects, which are reported separately in Section 3. 
+Unfortunately, we could not confidently classify the air handler configuration of most MassCEC 
+projects and therefore omitted 1,887 of the 2,212 available invoices from this analysis. 
+2.1 KEY FINDINGS 
+➢ The installed cost for ductless MSHP projects h ave changed little  since 2019 , 
+averaging $5,830 per ton of capacity across 2021 and 2022 ; adjusted to January 2024 
+pricing (2.2). 
+➢ However, equipment costs have increased significantly (2.2). 
+➢ We detected no relationship between ductless MSHP project cost and the inclusion 
+of other tasks such as the installation of a HPWH on an invoice (2.2.1). 
+➢ There are regional differences in ductless MSHP project costs, primarily labor (2.7). 
+2.2 CAPACITY-NORMALIZED PROJECT COST 
+Figure 5 presents the average cost per ton of ductless MSHPs among invoices with no other work 
+performed, or the sum of the following costs associated with ductless MSHP installations  from 
+itemized invoices: heat pump equipment (including sales tax and delivery fees), miscellaneous 
+materials, installation labor, wiring, controls, permits, and equipment removal. Although there is 
+some volatility in the cost of  ductless MSHP, the long -term trend in inflation-adjusted dollars 
+appears to be rather constant as indicated by the flat dotted trendline.13 In other words, capacity-
+normalized total project costs appear to increase at nearly the same rate as general inflation.  
+While this runs counter to the general expectation that costs should decrease as a technology 
+becomes more prevalent, it also does not indicate that program incentives are appreciably driving 
+costs up for this equipment category, at least for the time frame and sample analyzed in this 
+memo. 
+ 
+13Note: The graph’s trendline is fit to the mean quarterly project cost per ton .14 The totals for some invoices may not 
+include sales tax. 
+[[page 23]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+23 
+Figure 5: Ductless MSHP – Project Cost (Jan. 2024 $/ton) 
+ 
+2.2.1 Large Projects 
+Under the theory that contractors might offer lower prices to customers  requesting larger multi-
+measure projects due to the guarantee of more work and decreased travel, we compared the 
+average cost per ton between Mass Save projects with and without non-MSHP activities.  
+However, contrary to our hypothesis, the 13% difference in average cost per ton for ductless 
+MSHP projects with different scopes was not statistically significant (Figure 6, Table 6). 
+Figure 6: Ductless MSHP-only vs. Multi-measure Project Cost per ton (Jan. 2024$) 
+Table 6: Ductless MSHP – Project Scope Cost Dependency (Jan. 2024$/ton) 
+ Ductless MSHP only Multiple Measures 
+n 376 31 
+Mean $5,664 $6,546 
+Standard Deviation $1,970 $3,104 
+  
+See the Data  ► 
+ 
+201 2020 2021 2022 202 
+  ,000
+ 6,000
+ 8,000
+ 10,000
+ 12,000  istoric  0% C 
+Forecast  0% C 
+ istoric Mean
+Forecast Mean
+50
+100
+150Projects
+MassCEC
+Mass Save
+ 2     6  8  10  12  1  
+MS P only
+Multi measure
+[[page 24]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+24 
+2.2.2 MassCEC vs. Mass Save 
+Although the left columns of Table 7 highlight a significantly higher average project cost per ton 
+for MassCEC than Mass Save projects in 2021, the only period with significant overlap, this may 
+be in part due to differences in seasonal alignment. A comparison of the large Q1 sample peaks 
+for 2019 (MassCEC) and 20 22 (Mass Save) in Figure 5, and right columns in Table 7 show a 
+significant but less pronounced difference in the opposite direction . Given these countervailing 
+trends, it is no surprise that a significant difference is not present between the full Mass CEC 
+($6,151/ton) and Mass Save ($6,245/ton) ductless MSHP samples. 
+Table 7: Ductless MSHP – Source Comparison (Jan. 2024$/ton) 
+ 2021 Projects First Quarter Projects 
+ MassCEC Mass Save MassCEC (2019) Mass Save (2022) 
+n 30 222 183 130 
+Mean Installed Cost $7,357* $5,373 $4,879* $6,089 
+Standard Deviation $1,579 $2,060 $1,758 $1,987 
+HSPF 11.2 11.2 13.3* 11.1 
+* Significantly different at the 90% confidence level. 
+2.3 ITEMIZED COST AVAILABILITY 
+In the cost itemization availability summary of Mass Save invoices in Table 8, “mentioned” means 
+that an invoice gives some indication a specific ductless MSHP project component such as wiring 
+factored into the total project cost, while “explicit cost” (a subset of the former) means the invoice 
+includes a dollar value attributable to that component.  Equipment and installation costs are the 
+most common components with an explicit dollar value and are explored in greater detail in the 
+next few sub-sections, as is wiring due to a particular interest in this component by the program 
+administrators. Details for other projects costs are available in Appendix A.2.2. 
+Table 8: Ductless MSHP – Itemization Availability Summary (n=407) 
+Detail Level Labor HP Wiring Ducts/Piping Controls Removal Permits 
+Mentioned 34% 38% 50% 1% 32% 5% 17% 
+Explicit cost 34% 38% 22% 0% 10% 1% 4% 
+2.4 HEAT PUMP EQUIPMENT 
+The ductless heat pump equipment costs summarized in Table 9 include MSHP compressors and 
+ductless air handlers including wall -mount units, ceiling cassettes and floor-resting consoles.14 
+These represent the largest portion of total project costs and have there has been a statistically 
+significant increase in recent years (Figure 7). Note, however, that this includes some invoices 
+with no listed labor cost. Examples include self-installed units, or an invoice where the contractor-
+invoiced total matched that of the distributor’s waybill. 
+ 
+14 The totals for some invoices may not include sales tax. 
+[[page 25]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+25 
+Figure 7: Ductless MSHP – Equipment Portion of Itemized Installation Costs (%) 
+ 
+Table 9: Ductless MSHP – Equipment Portion of Itemized Installation Costs (%) 
+ 
+2.4.1 Web-scraping Comparison 
+NMR previously scraped MSHP costs in 2020  and used these along with the costs scraped for 
+this study in October 2023 to interpolate equipment costs to the date of individual projects. We 
+compared the web-derived costs with the itemized equipment costs in Table 10 using a paired 
+sample T -test and found a significant difference in these costs of 31% for ductless MSHP . 
+However, this is not surprising since contractors are likely to include markup on their invoices. 
+Moreover, the web-scraped costs are of varying levels of precision as outlined in Section 1.3.2 
+and further evidenced by differences in the number of web-scraped prices shown in the “Web-
+Scraped n” column of Table 10. While the web-scraped price of the average invoice relies on 135 
+separate listings, others rely on many more or far fewer sources. 
+Table 10: Ductless MSHP – Equipment Cost Comparison (n=159) (Jan. 2024/ton) 
+ Invoice Web-Scraped Web-Scraped n 
+Minimum $1,099 $465 2 
+Mean $2,997 $2,054* 135.1 
+Maximum $7,818 $4,110 1,779 
+Standard Deviation $1,130 $551 256.6 
+* Statistically significant at the 90% confidence level. 
+201 2020 2021 2022 202 
+20%
+ 0%
+60%
+80%
+E uipment
+ 2019 2020 2021 2022 2023 
+n 15 MassCEC 30 MassCEC 
+2 Mass Save 
+30 MassCEC 
+101 Mass Save 
+49 Mass Save 2 Mass Save 
+Minimum 21% 24% 29% 20% 50% 
+Lower CI 35% 45% 57% 54% – 
+Mean 41% 49% 59% 58% 72% 
+Upper CI 46% 52% 61% 63% – 
+Maximum 59% 80% 95% 96% 94% 
+Std. Dev. 12% 13% 14% 19% 32% 
+See the Data  ► 
+ 
+[[page 26]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+26 
+2.5 INSTALLATION LABOR 
+Table 11 outlines the proportion of labor  costs associated with  equipment installation. These 
+proportions exclude other associated costs of installing a heat pump, such as wiring, removal of 
+previous heat pumps, or permits. The average fraction of a project’s cost attributable to labor has 
+remained around one third of the total ductless MSHP installation cost, and there is no significant 
+trend within the sample shown in Figure 8. However, installation labor also accounts for over 50% 
+of the total cost in 9% of ductless MSHP projects. 
+Figure 8: Ductless MSHP – Labor Portion of Itemized Installation Costs (%) 
+ 
+Table 11: Ductless MSHP – Labor Portion of Itemized Installation Costs (%) 
+ 
+2.6 WIRING 
+Wiring typically accounts for less than 10% of ductless MSHP project costs, based on the limited 
+number of invoices that itemized this activity (Table 12). 15  Among the 196 invoices with 
+descriptions of wiring work, only 2% (four) included an electrical service upgrade. Twice as many 
+referred to control s only ( eight), and another  26 were non-specific, while  the remaining 158 
+described basic electrical connection activities. 
+ 
+15 Depending on individual invoice itemization level, wiring costs may include some combination of electrical supplies, 
+electrician labor, and/or electrical permits. 
+201 2020 2021 2022 202 
+0%
+20%
+ 0%
+60%
+80%
+Labor
+ 2019 2020 2021 2022 2023 
+n 15 MassCEC 30 MassCEC  
+1 Mass Save 
+29 MassCEC  
+89 Mass Save 
+45 Mass Save 1 Mass Save 
+Minimum 19% 11% 6% 4% – 
+Lower CI 30% 29% 28% 28% – 
+Mean 37% 32% 29% 33% 43% 
+Upper CI 45% 36% 31% 37% – 
+Maximum 67% 52% 55% 78% – 
+Std. Dev. 17% 12% 11% 17% – 
+See the Data  ► 
+ 
+[[page 27]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+27 
+Table 12: Ductless MSHP–Wiring Proportion of Installation Costs (%) 
+ 
+2.7 REGIONAL COMPARISON 
+Table 13 compares the mix of all Mass Save MSHP projects in 2021 and 2022 by region with the 
+regional composition of the sampled ductless MSHP projects (Total) and those with itemized costs 
+(Equipment, Labor) .16 While there are some differences in the representation of the different 
+regions in the sample compared to the program tracking data, in general most regions are well-
+represented in our sample, supporting our initial assumption of random sampling and the decision 
+to use unweighted data in the analysis. 
+Table 13: Ductless MSHP – Regional Representation (%) 
+Region Counties Prog. Sample 
+  ‘21-‘22 Total Equip. Labor 
+Barnstable Barnstable 11% 20% 12% 13% 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk 50% 40% 41% 40% 
+Pittsfield Berkshire 3% 2% 3% 3% 
+Providence-Warwick Bristol 6% 7% 2% 2% 
+Springfield Franklin, Hampden, Hampshire 11% 19% 29% 30% 
+Worcester Worcester 18% 11% 8% 8% 
+Rest of MA Dukes, Nantucket 1% 2% 3% 3% 
+Statewide All 12,357 665 229 210 
+Table 14 compares the statistical significance of total project and heat pump costs in individual 
+regions to the remainder of the state  (excluding that region). The table  reveals significant 
+differences in project costs  for every region except Pittsfield . However, only Boston and 
+Springfield have significantly different equipment costs, higher and lower respectively. Table 15 
+shows that labor costs also contribute to many of the regional differences in project cost. 
+ 
+16 The program tracking data does not  differentiate between MSHP and ASHP, nor ducted versus ductless MSHP. 
+However, based on model numbers NMR was able to reliably categorize equipment into MSHP versus ASHP.  The 
+categorization of MSHP air handler type is less certain and therefore not employed here. 
+ 2019 2020 2021 2022 2023 
+n 12 MassCEC 25 MassCEC 
+ 
+23 MassCEC  
+66 Mass Save 
+23 Mass Save 2 Mass Save 
+Minimum 2% 3% 2% 1% 6% 
+Lower CI 7% 7% 8% 6% 2% 
+Mean 9% 8% 9% 8% 6% 
+Upper CI 11% 9% 10% 11% 11% 
+Maximum 13% 16% 41% 21% 7% 
+Std. Dev. 4% 4% 7% 6% 1% 
+See the Data  ► 
+ 
+[[page 28]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+28 
+Table 14: Ductless MSHP – Project and Equipment Cost by Region (Jan. 2024$/ton) 
+Region Counties Total Equipment 
+  Mean $ n Mean n 
+Barnstable Barnstable $5,146* 131 $2,912 28 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk $6,313* 264 $3,360* 95 
+Pittsfield Berkshire $5,584 14 $2,977 8 
+Providence-Warwick Bristol $4,011* 44 $3,285 5 
+Springfield Franklin, Hampden, Hampshire $5,029* 125 $2,934* 66 
+Worcester Worcester $6,136* 73 $3,274 19 
+Rest of MA Dukes, Nantucket $6,591* 14 $3,101 8 
+Statewide All $5,661 665 $3,151 229 
+* Statistically significant difference from the rest of the state at the 90% confidence level. 
+There is little regional variation in the wages of the trades shown in Table 15, which have been 
+normalized to set the statewide average as 100%. This homogenization of wages across regions 
+is consistent with observations that contractors frequently service large territories that may span 
+metropolitan boundaries. Similar to the normalized wages on the right side of the table, the labor 
+column in Table 15 shows the itemized labor cost per installed unit (compressors plus air 
+handlers) in each region relative to the statewide average. Given the relative homogeneity of trade 
+wages, variations in regional unit -normalized labor costs are suggestive of differences in 
+installation and/or invoicing practices. 
+While the  proportion of project costs attributed to labor in Dukes and Nantucket counties  
+(“ est of MA”) appears abnormally high relative to the local wages for related trades—170% of 
+the statewide average—this is based on only a handful of invoices (seven). In contrast, the labor 
+portion among the larger sample of Springfield -area invoices (63) is much lower than average , 
+despite the nearly average wages in this part of the state. Ductless MSHP projects in Boston, the 
+region with the largest regional sample, also feature a higher-than-expected proportion of labor 
+relative to local wages. 
+Table 15: Ductless MSHP – Unit-normalized Labor Cost and Average 2021–2022 
+Wages by Region17 (MSHP Units = compressors + air handlers) 
+Region Labor Labor n Plumber HVAC Electrician 
+Barnstable 85% 27 81% 97% 91% 
+Boston 124% 85 101% 105% 100% 
+Pittsfield 100% 7 93% 92% 93% 
+Providence-Warwick 76% 4 85% 95% 79% 
+Springfield 68% 63 96% 98% 99% 
+Worcester 97% 17 97% 95% 98% 
+Rest of MA 170% 7 96% 96% 82% 
+Statewide $1,181 210 100% 100% 100% 
+ 
+ 
+17  United States Bureau of Labor Statistics (2024). Occupational Employment and Wage Statistics . 
+https://www.bls.gov/oes/tables.htm Accessed August 2024 
+See the Data  ► 
+ 
+[[page 29]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+29 
+2.8 BASELINE 
+Given the relative stability of ductless MSHP pricing previously explored in this section, NMR 
+proposes the following baseline costs in Table 16 derived from the average 2021 through 2022 
+costs and proportions. 
+Table 16: Ductless MSHP – Baseline Costs 
+ n Proportion Jan. 2024$/ton 
+Heat Pump Equipment 180 59% $3,440 
+Installation Labor 167 30% $1,749 
+Wiring and Other Costs – 11% $641 
+Total Installed Cost 394 100% $5,830 
+Italicized cells are calculated from other table values. 
+ 
+[[page 30]]
+ 
+ 30 
+3 
+Section 3 Ducted and Mixed MSHP 
+Ducted mini-split and multi-split (MSHP) installations include one or more air handlers connected 
+with small duct systems. Since the installation costs of these projects are not significantly different 
+from those of systems with a mix of ducted and ductless air handlers , we report on a combined 
+sample of ducted and mixed projects. 
+Unfortunately, we were not able to confidently classify the air handler configuration of most 
+MassCEC projects and therefore omitted 1,887 of the 2,212 available invoices from this analysis. 
+3.1 KEY FINDINGS 
+➢ The installed cost for ducted/mixed MSHP projects sampled from the Mass Save 
+program have decreased over time, averaging $6,914 per ton of capacity across 2021 
+and 2022, adjusted to January 2024 pricing (3.2). 
+➢ Like ductless MSHP , ducted/mixed MSHP equipment prices are increasing (3.4),  
+but there is no significant trend in labor costs (3.5). 
+➢ We detected no relationship between duct ed/mixed MSHP project cost and the 
+inclusion of other tasks such as the installation of a HPWH on an invoice (3.2.1). 
+➢ There are a few regional differences in ducted/mixed MSHP project costs, primarily 
+due to labor (3.73.6). 
+3.2 CAPACITY-NORMALIZED PROJECT COST 
+NMR recorded single invoices for a ducted/mixed MSHP in the second quarters of 2019 and 2022. 
+This produces an undefined confidence interval that, along with the dearth of sampled invoices in 
+the third quarter of 2019 and 2022, explains the graphic discontinuities in Figure 9. The average 
+cost per ton includes the total project cost from invoices with no other work performed, or the sum 
+of the following costs associated with duct ed/mixed MSHP installations from itemized invoices: 
+heat pump equipment (including sales tax and delivery fees), miscellaneous materials, installation 
+labor, ducts, wiring, controls, permits, and equipment removal. 
+Although there is some volatility in the cost of ducted/mixed MSHP, ANOVA reveals a statistically 
+significant downward trend in inflation-adjusted dollars per ton for ducted/mixed MSHP since the 
+early COVID-19 pandemic of approximately $800 per ton  per year , 18 and a n exploration of 
+possible causes follows. As such, there is no indication within this sample to suggest a relationship 
+between that Mass Save program incentives and changes in costs for this equipment categor y 
+since 2021. 
+ 
+18 Note: The graph’s trendline is fit to the mean quarterly project cost per ton, but the ANOVA was performed on project 
+costs per ton by year. 
+[[page 31]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+31 
+Figure 9: Ducted & Mixed MSHP – Project Cost (Jan. 2024 $/ton) 
+ 
+3.2.1 Large Projects 
+We compared the average cost per ton between Mass Save projects with and without non-MSHP 
+activities, under the theory that contractors might offer lower prices to customers installing many 
+forms of mechanical equipment due to the guarantee of more work and decreased travel . 
+However, as with ductless MHSP, the 9% difference in cost per ton for projects with narrower 
+versus broader scopes of work is not statistically significant (Figure 10, Table 17). 
+Figure 10: Ducted & Mixed MSHP-only vs. Multi-measure Proj. Cost per ton (Jan. 2024$) 
+ 
+Table 17: Ducted & Mixed MSHP – Project Scope Cost Dependency (Jan. 2024$/ton) 
+ Ducted/Mixed MSHP only Multiple Measures 
+n 62 12 
+Mean $6,850 $7,569 
+Standard deviation $2,029 $2,445 
+ 2        5  6  7  8     10  11  12  1   1  
+MS P only
+Multi measure
+See the Data  ► 
+ 
+201 2020 2021 2022 202 
+  ,000
+ 6,000
+ 8,000
+ 10,000
+ 12,000
+ istoric  0% C 
+Forecast  0% C 
+ istoric Mean
+Forecast Mean
+10
+20
+Projects
+MassCEC
+Mass Save
+[[page 32]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+32 
+3.2.2 MassCEC vs. Mass Save 
+Unlike ductless MSHP, there are significant differences between MassCEC and Mass Save for 
+the full sample of ducted and mixed invoices in Table 18, as well as various subsets of the sample 
+including projects performed in 2021.19 On average, MassCEC ducted/mixed MSHP projects are 
+more efficient and more expensive. One source of the differing significance between MassCEC 
+and Mass Save for the ductless versus ducted/mixed MSHP projects is the dearth of partial load 
+ducted/mixed MSHP projects. Ninety-two percent of the MassCEC ducted/mixed MSHP projects 
+were whole-home installations, compared to only 29% of ductless projects. 
+Table 18: Ducted & Mixed MSHP – Source Comparison (Jan. 2024$/ton) 
+ 2021 Projects All Projects 
+ MassCEC Mass Save MassCEC Mass Save 
+n 23 38 63 74 
+Mean Installed Cost $8,666* $7,131 $9,064* $6,967 
+Standard Deviation $2,098 $2,296 $2,355 $2,210 
+HSPF 11.2* 10.4 10.9* 10.6 
+* Significantly different at the 90% confidence level. 
+3.3 ITEMIZED COST AVAILABILITY 
+In the cost itemization availability summary of  Mass Save invoices in  Table 19, “mentioned” 
+means that an invoice indicates a specific ducted/mixed MSHP project component such as wiring 
+factored into the total project cost, while “explicit cost” (a subset of the former) means the invoice 
+includes a dollar value attributable to that component.  Equipment and installation costs are the 
+most common components with an explicit dollar value and are explored in greater detail in the 
+next few sub-sections, as is wiring. Details for other projects costs are available in Appendix A.3.2. 
+Table 19: Ducted & Mixed MSHP – Itemization Detail Summary (n=74) 
+Detail Level Labor HP Wiring Ducts/Piping Controls Removal Permits 
+Mentioned 28% 33% 50% 50% 55% 15% 15% 
+Explicit cost 28% 33% 16% 7% 20% 1% 3% 
+3.4 HEAT PUMP EQUIPMENT 
+The duct ed/mixed heat pump equipment costs summarized in Table 20 include MSHP 
+compressors and any associated air handlers.20 These costs represent the largest portion of total 
+project costs and have increased significantly since 2021 (Figure 11); this trend and significance 
+persists even if one omits the low project cost outlier from 2019. 
+ 
+19 The same Q1 between MassCEC (2019) and Mass Save (2021) explored for ductless MSHP was also repeated but 
+is not shown. It also showed Mass CEC ducted/mixed MSHP to be significantly more efficient and costlier. 
+20 The totals for some invoices may not include sales tax. 
+[[page 33]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+33 
+Figure 11: Ducted & Mixed MSHP – Equipment Portion of Itemized Install. Costs (%) 
+ 
+Table 20: Ducted & Mixed MSHP – Equipment Portion of Itemized Install. Costs (%) 
+ 
+3.4.1 Web-scraping Comparison 
+NMR previously scraped MSHP costs in 2020 and used these along with the costs scraped for 
+this study in October 2023 to interpolate equipment costs to the date of 74 individual projects. We 
+compared the web-derived costs with the itemized equipment costs in Table 21 using a paired 
+sample T-test and found a significant difference in these costs for ducted and mixed MSHPs of 
+approximately 43%. However, the presence of a significant difference is unsurprising since 
+contractors are likely to include markup on their invoices. Moreover, the web -scraped costs are 
+of varying levels of precision, as outlined in Section 1.3.2 and further evidenced by differences in 
+the number of web-scraped prices shown in the “ Web-Scraped n” column of Table 21. While the 
+web-scraped price of the average invoice relies on 15 2 separate listings, others rely on many 
+more or far fewer sources. 
+201 2020 2021 2022 202 
+20%
+ 0%
+60%
+80%
+E uipment
+Project Cost  utlier  nlier
+ 2019 2020 2021 2022 2023 
+n 6 MassCEC 29 MassCEC 23 MassCEC  
+13 Mass Save 
+7 Mass Save 4 Mass Save 
+Minimum 39% 28% 17% 28% 28% 
+Lower CI 40% 37% 37% 40% 20% 
+Mean 41% 40% 42% 52% 56% 
+Upper CI 43% 42% 47% 64% 92% 
+Maximum 44% 65% 96% 76% 94% 
+Std. Dev. 2% 8% 17% 17% 31% 
+See the Data  ► 
+ 
+[[page 34]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+34 
+Table 21: Ducted & Mixed MSHP –Equip. Cost Comparison (n=24) (Jan. 2024/ton) 
+ Invoice Web-Scraped Web-Scraped n 
+Minimum $1,498 $566 2 
+Mean $3,304* $1,890 152.6 
+Maximum $6,158 $3,214 1,120 
+Standard Deviation $1,291 $608 243.6 
+* Statistically significant at the 90% confidence level. 
+3.5 INSTALLATION LABOR 
+Table 22 summarizes the proportion of labor costs associated with installation. Th is excludes 
+other associated costs of installing a heat pump, such as electrical connections and removal of 
+pre-existing equipment. The average fraction of a ducted/mixed MSHP project’s cost attributable 
+to labor has consistently remained between 30% and 40% of the total installation cost, similar to 
+ductless MSHP  projects. The increasing trendline of project labor cost portion by year in  
+Figure 12 is not statistically significant with or without the 2019 project cost outlier. 
+Figure 12: Ducted & Mixed MSHP – Labor Portion of Itemized Install. Costs (%) 
+ 
+Table 22: Ducted & Mixed MSHP – Labor Portion of Itemized Installation Costs (%) 
+ 
+201 2020 2021 2022 202 
+0%
+20%
+ 0%
+60%
+80%
+Labor
+Project Cost  utlier  nlier
+ 2019 2020 2021 2022 2023 
+n 6 MassCEC 29 MassCEC 21 MassCEC  
+12 Mass Save 
+6 Mass Save 3 Mass Save 
+Minimum 37% 9% 13% 19% 21% 
+Lower CI 38% 25% 28% 24% 3% 
+Mean 39% 30% 33% 39% 36% 
+Upper CI 41% 35% 39% 54% 70% 
+Maximum 41% 55% 83% 72% 59% 
+Std. Dev. 2% 15% 17% 18% 20% 
+See the Data  ► 
+ 
+[[page 35]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+35 
+3.6 WIRING 
+Wiring typically accounts for less than 10% of ducted/mixed MSHP project costs, based on the 
+limited number of invoices that itemized this activity ( Table 23).21 None of the 37  invoices with 
+descriptions of wiring work included an electrical service upgrade. Five percent ( two) invoices 
+referred to controls only, while most remaining invoices (31, or 82% of those with details ) 
+described basic electrical connection activities. 
+Table 23: Ducted & Mixed MSHP – Wiring Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 2 MassCEC 21 MassCEC 19 MassCEC 
+4 Mass Save 
+6 Mass 
+Save 
+1 Mass 
+Save 
+Minimum 7% 3% 1% 1% – 
+Lower CI 5% 6% 5% 1% – 
+Mean 7% 7% 7% 11% 10% 
+Upper CI 10% 8% 9% 21% – 
+Maximum 7% 16% 19% 32% – 
+Std. Dev. 1% 3% 5% 12% – 
+ 
+3.7 REGIONAL COMPARISON 
+Table 24 compares the mix of all Mass Save MSHP projects in 2021 and 2022 by region with the 
+regional composition of the sampled ductless MSHP projects (Total) and those with itemized costs 
+(Equipment, Labor).22 While there are differences in the regional composition of our sample and 
+the program tracking data, in general most regions are well-represented. 
+Table 24:Ducted & Mixed – Regional Representation (%) 
+Region Counties Prog. Sample 
+  ‘21-‘22 Total Equip. Labor 
+Barnstable Barnstable 11% 17% 2% 3% 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk 50% 56% 67% 65% 
+Pittsfield Berkshire 3% 0% 0% 0% 
+Providence-Warwick Bristol 6% 4% 2% 3% 
+Springfield Franklin, Hampden, Hampshire 11% 8% 12% 13% 
+Worcester Worcester 18% 10% 7% 8% 
+Rest of MA Dukes, Nantucket 1% 5% 9% 9% 
+Statewide All 12,357 137 82 77 
+  
+ 
+21 Depending on individual invoice itemization level, wiring costs may include some combination of electrical supplies, 
+electrician labor, and/or electrical permits. 
+22 The program tracking data does not differentiate between MSHP and ASHP, nor ducted versus ductless MSHP. 
+However, based on model numbers NMR was able to reliably categorize equipment into MSHP versus ASHP. The 
+categorization of MSHP air handler type is less certain and therefore not employed here. 
+See the Data  ► 
+ 
+[[page 36]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+36 
+In Table 25 we find that Dukes and Nantucket counties (“ est of MA”) have much higher project 
+costs than anywhere else in the Commonwealth , nearly 50% more per ton due to higher labor 
+costs (Table 26). Boston and Barnstable also have statistically significantly different project costs 
+per ton, but neither Barnstable’s lower costs nor Boston’s higher costs have an obvious cause in 
+equipment or labor. Lastly, Worcester’s lower equipment costs appear to be offset by labor costs, 
+shown in Table 26. 
+Table 25: Ducted & Mixed Project Cost and Equipment by Region (Jan. 2024$/ton) 
+Region Counties Total Equipment 
+  Mean n Mean n 
+Barnstable Barnstable $6,074* 23 $4,099 2 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk $8,440* 77 $3,511 55 
+Pittsfield Berkshire – – – – 
+Providence-Warwick Bristol $8,624 5 $3,700 2 
+Springfield Franklin, Hampden, Hampshire $6,967 11 $3,445 10 
+Worcester Worcester $7,337 14 $2,814* 6 
+Rest of MA Dukes, Nantucket $11,753* 7 $4,077 7 
+Statewide All $7,931 137 $3,519 82 
+* Statistically significant at the 90% confidence level. 
+There is little regional variation in the wages of the trades shown in Table 26, which have been 
+normalized to set the statewide average as 100%. This homogenization of wages across regions 
+is consistent with observations that contractors frequently service large territories that may span 
+metropolitan boundaries. Similar to the normalized wages on the right side of the table, the labor 
+column in Table 26 shows the itemized labor cost per installed unit (compressors plus air 
+handlers) in each region relative to the statewide average. Given the relative homogeneity of trade 
+wages, variations in regional unit -normalized labor costs are suggestive of differen ces in 
+installation and/or invoicing practices. 
+Table 26: Ducted & Mixed MSHP – Unit-normalized Labor Cost and Average  
+2021–2022 Wages by Region23 (MSHP Units = compressors + air handlers) 
+Region Labor Labor n Plumber HVAC Electrician 
+Barnstable 102% 2 81% 97% 91% 
+Boston 88% 50 101% 105% 100% 
+Pittsfield – 0 93% 92% 93% 
+Providence-Warwick 131% 2 85% 95% 79% 
+Springfield 60% 10 96% 98% 99% 
+Worcester 126% 6 97% 95% 98% 
+Rest of MA 209% 7 96% 96% 82% 
+Statewide $3,029 77 100% 100% 100% 
+ 
+ 
+ 
+23  United States Bureau of Labor Statistics (2024). Occupational Employment and Wage Statistics . 
+https://www.bls.gov/oes/tables.htm Accessed August 2024 
+See the Data  ► 
+ 
+ 
+[[page 37]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+37 
+3.8 BASELINE 
+Figure 13 suggests a steadiness in ducted/mixed MSHP Mass Save project costs, in contrast to 
+the longer term trend of decreasing costs for the larger sample in Figure 9. 
+Figure 13: Ducted and Mixed MSHP – Mass Save Project Costs (Jan. 2024 $/ton) 
+Since the costs and specifications of ducted & mixed MSHP projects performed under the  
+MassCEC are distinctly different from those supported through  Mass Save , we recommend 
+excluding these projects from the baseline of this segment, and instead relying upon the average 
+capacity-normalized costs plus equipment and labor cost proportions from Mass Save projects in 
+2021 and 2022, compiled in Table 27. 
+Table 27: Ducted & Mixed MSHP – Baseline Costs 
+ n Proportion Jan. 2024$/ton 
+Heat Pump Equipment 20 47% $3,250 
+Installation Labor 19 42% $2,931 
+Wiring and Other Costs – 11% $733 
+Total Installed Cost 70 100% $6,914 
+Italicized cells are calculated from other table values. 
+ 0
+ 2,000
+  ,000
+ 6,000
+ 8,000
+ 10,000
+ 12,000
+ 1 ,000
+[[page 38]]
+ 
+ 38 
+4 
+ 
+Section 4 Centrally Ducted ASHP 
+Centrally ducted air-source heat pumps (ASHP) are designed like central air conditioners (CAC). 
+They feature a single compressor -coil pair connected to conventional ductwork and distribute 
+conditioned air to an entire home  or large zone s within a home. This category of equipment is 
+subject to the same federal regulations as MSHP but are typically less efficient than ducted and 
+especially ductless MSHP , hence the differing program requirements in Table 2 and separate 
+analysis here. 
+For a comparison of ASHP and CAC, see Appendix B. 
+4.1 KEY FINDINGS 
+➢ The installed cost per ton of ASHP projects have remained consistent, averaging 
+$6,560 per ton of capacity across 2021 and 2022 when adjusted to January 2024 dollars 
+(4.2). 
+➢ Yet the average proportion of project costs attributed to the ASHP itself has 
+increased (4.4), while those of labor have decreased (4.5). 
+➢ Multi-measure ASHP projects costs are 13% less per ton than ASHP-only projects 
+(4.2.1), but there is no significant difference between MassCEC and Mass Save projects 
+(4.2.2). 
+4.2 CAPACITY-NORMALIZED PROJECT COST 
+Figure 14  presents the average cost per ton of ASHP among invoices with no other work 
+performed, or the sum of the following costs associated with ASHP installations from itemized 
+invoices: heat pump equipment (including sales tax and delivery fees), miscellaneous materials, 
+installation labor, wiring, ducts, controls, permits, and equipment removal. The long-term trend of 
+ASHP project costs in inflation-adjusted dollars appears to be decreasing slightly, but this trend 
+is not statistically significant . This does not support the premise that program incentives are 
+driving costs up for this equipment category; instead, it conforms to the expectation that in a well-
+functioning market, the cost of a technology in real dollars should decrease as it matures. 
+[[page 39]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+39 
+Figure 14: Centrally Ducted ASHP – Project Cost (Jan. 2024 $/ton) 
+ 
+ 
+4.2.1 Large Projects 
+NMR hypothesized that contractors might offer lower prices to customers installing many forms 
+of mechanical equipment due to the guarantee of more work and decreased travel. Therefore, we 
+compared the average cost per ton between ASHP-only projects and multi-measure projects.  
+As shown in Table 28, we found a significant difference in centrally ducted ASHP cost per ton 
+between narrower and broader scopes of work.  In fact, the more expansive Mass Save ASHP 
+projects averaged $1,150 less per ton than the centrally ducted ASHP-only Mass Save projects, 
+similar to the large gap between group median of $1,126 per ton visible in Figure 17. Also of note, 
+two-thirds (43) of the multi-measure projects included furnaces, many of which were recorded as 
+dual-fuel heat pumps (i.e., the furnace and ASHP were configured to work together). 
+Figure 15: ASHP-only vs. Multi-measure Project Cost per ton (Jan. 2024$) 
+ 
+2020 2021 2022 202 
+ 2,000
+  ,000
+ 6,000
+ 8,000
+ 10,000
+ 12,000
+ 1 ,000
+20
+ 0
+60
+Projects
+MassCEC
+Mass Save
+ istoric  0% C 
+Forecast  0% C 
+ istoric Mean
+Forecast Mean
+0
+ 2     6  8  10  12  1  
+AS P only
+Multi measure
+See the Data  ► 
+ 
+[[page 40]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+40 
+Table 28: ASHP – Project Scope Cost Dependency (Jan. 2024$/ton) 
+ ASHP only Multiple Measures 
+*n 168 60 
+Mean $6,701* $5,551 
+Standard Deviation $2,698 $2,596 
+HSPF 9.8 9.8 
+4.2.2 MassCEC vs. Mass Save 
+Unlike ducted MSHPs, there was no statistically significant difference detected between 
+MassCEC and Mass Save invoices for centrally ducted ASHP. 
+Table 29: ASHP – Source Comparison (Jan. 2024$/ton) 
+ 2021 Projects All Projects 
+ MassCEC Mass Save MassCEC Mass Save 
+n 4 96 11 217 
+Mean Installed Cost $6,101 $6,185 $6,859 $6,375 
+Standard Deviation $2,862 $2,533 $3,178 $2,694 
+4.3 ITEMIZED COST AVAILABILITY 
+In the cost itemization availability summary of Mass Save invoices in  Table 30, “mentioned” 
+means that an invoice gives some indication a specific centrally ducted ASHP project component 
+such as wiring factored into the total project cost, while “explicit cost” (a subset of the former) 
+means the invoice includes a dollar value attributable to that component. Heat pump, installation 
+labor and control costs are the most common components with an explicit dollar value and the 
+first two are explored in greater detail in the next few sub-sections, as is. Details for other projects 
+costs including controls are available in Appendix A.4.2. 
+Table 30: ASHP – Itemization Detail Summary (n=217) 
+Detail Level Labor HP Wiring Ducts/Piping Controls Removal Permits 
+Mentioned 18% 18% 33% 27% 81% 30% 13% 
+Explicit cost 18% 18% 13% 7% 24% 4% 3% 
+4.4 HEAT PUMP EQUIPMENT 
+The centrally ducted ASHP heat pump equipment costs summarized in Table 31 include ASHP 
+compressors and any dedicated air handlers. 24 These costs generally account for the largest 
+single portion of total project costs. In contrast to the insignificant downward trend in total ASHP 
+project costs, Figure 16 reveals a significant increase in the proportion of centrally ducted ASHP 
+project cost attributable to equipment. 
+ 
+24 The totals for some invoices may not include sales tax. 
+[[page 41]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+41 
+Figure 16: ASHP – Equipment Portion of Itemized Installation Costs (%) 
+ 
+Table 31: ASHP – Equipment Portion of Itemized Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 3 MassCEC 4 MassCEC 4 MassCEC  
+13 Mass Save 
+22 Mass Save 7 Mass Save 
+Minimum 8% 31% 25% 28% 47% 
+Lower CI – 34% 43% 61% 57% 
+Mean 43% 44% 50% 66% 73% 
+Upper CI – 54% 56% 70% 89% 
+Maximum 63% 50% 79% 83% 97% 
+Std. Dev. 30% 8% 15% 12% 21% 
+ 
+4.4.1 Web-scraping Comparison 
+We compared the web-derived ASHP costs with the itemized ASHP invoice equipment costs in 
+Table 32 using a paired sample t-test and found a significant difference in these costs of 56%. 
+However, the presence of a significant difference is unsurprising due to various factors: 1) unlike 
+MSHP, even though both costs have bee n normalized to January 2024 dollars, we do not have 
+pre-October 2023 costs to derive an installation date interpolated cost for comparison ; 2) 
+contractors are likely to include markup on their invoices ; and 3) the web-scraped costs are of 
+varying levels of precision, as outlined in Section 1.3.2 and further evidenced by the wide range 
+in number of web-scraped prices shown in the “Web-Scraped n” column of Table 32. 
+Table 32: ASHP –Equip. Cost Comparison (n=53) (Jan. 2024/ton) 
+ Invoice Web-Scraped Web-Scraped n 
+Minimum $911 $514 1 
+Mean $3,502* $1,946 9.8 
+Maximum $9,819 $6,433 141 
+Standard Deviation $1,820 $964 22 
+* Statistically significant at the 90% confidence level. 
+201 2020 2021 2022 202 
+20%
+ 0%
+60%
+80%
+100%
+E uipment
+See the Data  ► 
+ 
+[[page 42]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+42 
+4.5 INSTALLATION LABOR 
+Table 33 summarizes the proportion of labor costs associated with installation. This excludes 
+other associated costs of installing a heat pump, such as electrical connections and removal of 
+pre-existing equipment. Due to the small number of invoices with an itemized labor cost many 
+years of the sample time frame  and their variance , there is no significant  trend in the average 
+fraction of a centrally ducted AS P project’s cost attributable to labor. 
+Figure 17: ASHP – Labor Portion of Itemized Installation Costs (%) 
+ 
+Table 33: ASHP – Labor Portion of Itemized Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 3 MassCEC 4 MassCEC 4 MassCEC 
+12 Mass Save 
+22 Mass Save 4 Mass Save 
+Minimum 22% 15% 15% 11% 21% 
+Lower CI – 10% 26% 21% 16% 
+Mean 38% 28% 32% 25% 30% 
+Upper CI – 46% 39% 28% 45% 
+Maximum 69% 50% 63% 48% 49% 
+Std. Dev. 27% 15% 14% 10% 12% 
+ 
+4.6 WIRING 
+Wiring typically accounts for less than 10% of centrally ducted ASHP project costs (Table 33).25 
+Among the 69 invoices with descriptions of wiring work, only 3% ( two) included an electrical 
+service upgrade. Another 3% ( two) referred to controls only, while the remaining 94% ( 65) 
+described basic electrical connection activities. 
+ 
+25 Depending on individual invoice itemization level, wiring costs may include some combination of electrical supplies, 
+electrician labor, and/or electrical permits. 
+201 2020 2021 2022 202 
+20%
+ 0%
+60%
+Labor
+See the Data  ► 
+ 
+[[page 43]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+43 
+Table 34: ASHP – Wiring Proportion of Installation Costs (%) 
+ 
+4.7 REGIONAL COMPARISON 
+Table 35 compares the mix of all Mass Save ASHP projects in 2021 and 2022 by region with the 
+regional composition of the sampled centrally ducted ASHP projects (Total) and those with 
+itemized costs (Equipment, Labor). While there are subtle differences in the regional composition 
+of our sample and the program tracking data, in general most regions are well-represented. 
+Table 35:ASHP – Regional Representation (%) 
+Region Counties Prog. Sample 
+  ‘21-‘22 Total Equip. Labor 
+Barnstable Barnstable 7% 12% 9% 8% 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk 68% 64% 58% 59% 
+Pittsfield Berkshire 1% 1% 2% 2% 
+Providence-Warwick Bristol 2% 4% 4% 4% 
+Springfield Franklin, Hampden, Hampshire 4% 4% 6% 6% 
+Worcester Worcester 17% 14% 15% 16% 
+Rest of MA Dukes, Nantucket 1% 2% 6% 4% 
+Statewide All 5,485 228 53 49 
+The total and equipment costs per ton of ASHP in Boston are significantly higher than in the rest 
+of the state, while total project costs are significantly lower in Springfield (Table 36). 
+Table 36: ASHP –Project and Equipment Cost by Region (Jan. 2024$/ton) 
+Region Counties Total Equipment 
+  Mean n Mean n 
+Barnstable Barnstable $5,637* 27 $3,180 5 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk $6,756* 146 $3,912* 31 
+Pittsfield Berkshire $5,123 3 $1,236 1 
+Providence-Warwick Bristol $5,907 8 $3,156 2 
+Springfield Franklin, Hampden, Hampshire $4,769* 8 $2,187 3 
+Worcester Worcester $6,258 32 $3,462 8 
+Rest of MA Dukes, Nantucket $4,815 4 $2,119 3 
+Statewide All $6,522 228 $3,776 53 
+* Statistically significant at the 90% confidence level. 
+ 2019 2020 2021 2022 2023 
+n 1 MassCEC 3 MassCEC 4 MassCEC 
+15 Mass Save 
+9 Mass Save 4 Mass Save 
+Minimum – 3% 2% 3% 2% 
+Lower CI – 2% 7% 5% 1% 
+Mean 6% 6% 10% 8% 9% 
+Upper CI – 11% 13% 11% 17% 
+Maximum – 9% 32% 17% 16% 
+Std. Dev. – 3% 8% 5% 7% 
+See the Data  ► 
+ 
+[[page 44]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+44 
+There is little regional variation in the wages of the trades shown in Table 37, which have been 
+normalized to set the statewide average as 100%. Similar to the normalized wages on the right 
+side of the table, the labor column in Table 37 shows the itemized labor cost per installed 
+compressors in each region relative to the statewide average. 
+The normalized labor proportions in Table 37 appear similar to the normalized wage rates for 
+most regions, although in most locations the sample sizes are too small to be certain or lend much 
+credence to the apparent exceptions of Springfield or Dukes and Nantucket counties (“ est of 
+MA”, much higher) in isolation. However, these regional differences (Springfield and Rest of MA) 
+mirror those seen for both ductless (2.7) and ducted/mixed MSHP (3.6). 
+Table 37: Centrally Ducted ASHP – Unit-normalized Labor Cost and Average  
+2021–2022 Wages by Region26 (MSHP Units = compressors + air handlers) 
+Region Labor Labor n Plumber HVAC Electrician 
+Barnstable 105% 4 81% 97% 91% 
+Boston 102% 29 101% 105% 100% 
+Pittsfield 95% 1 93% 92% 93% 
+Providence-Warwick 95% 2 85% 95% 79% 
+Springfield 72% 3 96% 98% 99% 
+Worcester 96% 8 97% 95% 98% 
+Rest of MA 124% 2 96% 96% 82% 
+Statewide $5,039 49 100% 100% 100% 
+ 
+4.8 BASELINE 
+Given the relative stability of ASHP pricing previously explored in this section, NMR proposes the 
+following baseline costs in Table 38 derived from the average 2021 through 2022 costs and 
+proportions of ASHP invoices. 
+Table 38: ASHP – Baseline Costs 
+ n Proportion Jan. 2024$/ton 
+Heat Pump Equipment 39 59% $3,870 
+Installation Labor 39 28% $1,837 
+Wiring and Other Costs – 13% $853 
+Total Installed Cost 211 100% $6,560 
+Italicized cells are calculated from other table values. 
+ 
+ 
+26  United States Bureau of Labor Statistics (2024). Occupational Employment and Wage Statistics . 
+https://www.bls.gov/oes/tables.htm Accessed August 2024 
+See the Data ► 
+ 
+[[page 45]]
+ 
+ 45 
+5 
+Section 5 GSHP 
+Ground-source heat pumps (GSHP) are a family of equipment that exchange heat with the soil to 
+warm or cool a home. They are exceptionally efficient but also comparatively expensive. 
+5.1 KEY FINDINGS 
+➢ GSHP retrofits are significantly more expensive than new construction projects , 
+costing an additional 10% on average (5.7). 
+➢ GSHP equipment plus installation labor costs appear to be increasing, but the trend 
+for overall project costs is less certain. 
+5.2 CAPACITY-NORMALIZED PROJECT COST 
+The importance of the statistically significant positively sloped dotted trendline in Figure 18 may 
+be misleading since it is driven by a single  Mass Save invoice from Q4 of 2022. 27 Absent this 
+invoice, an insignificant trendline with negative but nearly zero slope would emerge. 
+Figure 18: GSHP – Project Cost (Jan. 2024 $/ton) 
+ 
+27 This invoice falls just within the three standard deviation threshold described in 1.3.6,  
+at just over $25,800 per ton compared to the $11,500–$15,800 of other quarters. 
+See the Data  ► 
+201 2020 2021 2022 202 
+ 0
+ 5,000
+ 10,000
+ 15,000
+ 20,000
+ 25,000
+  0,000
+  5,000
+ istoric  0% C 
+Forecast  0% C 
+ istoric Mean
+Forecast Mean
+10
+20
+ 0
+Projects
+MassCEC
+Mass Save
+[[page 46]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+46 
+5.3 ITEMIZED COST AVAILABILITY 
+Due to the small number of Mass Save program participants installing GSHP, NMR encountered 
+few invoices for these projects , and fewer still itemized costs  (Table 39). Consequently, t he 
+majority of records in the remainder of this section are from a MassCEC program, which broke 
+down costs differently from other heat pumps into three broad categories: heat pump equipment 
+and labor (5.4), ground loop costs (5.5) and other. 
+Table 39: GSHP – Itemization Detail Summary (n=7) 
+Detail Level Labor HP Wiring Ducts/Piping Controls Removal Permits 
+Mentioned 14% 14% 29% 43% 14% 14% 43% 
+Explicit cost 14% 14% 29% 29% 0% 0% 29% 
+5.4 HEAT PUMP EQUIPMENT & LABOR 
+Table 40 includes the heat pump equipment and installation labor costs ; however, MassCEC 
+invoices with a missing or zero-dollar loop cost have been excluded since the heat pump costs 
+on these invoices may have the ground loop costs folded in. The average GSHP equipment and 
+installation costs account for more than half of the total project cost. ANOVA indicates that this 
+proportion—marked by the trendline in Figure 19—has increased significantly.28 
+Figure 19: GSHP – Heat Pump Equipment & Labor Portion of Installation Costs (%) 
+ 
+  
+ 
+28 The caveat about the 2022 Q4 invoice in Section 5.2 does NOT apply. That invoice has no itemized costs and is 
+therefore not included in this analysis. 
+201 2020 2021 2022
+ 0%
+60%
+80%
+E uipment    nstallation
+[[page 47]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+47 
+Table 40: GSHP – Heat Pump Equipment & Labor Portion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 91 MassCEC 82 MassCEC – 1 Mass Save – 
+Minimum 27% 33% – – – 
+Lower CI 52% 55% – – – 
+Mean 54% 58% – 69% – 
+Upper CI 56% 60% – – – 
+Maximum 86% 83% – – – 
+Std. Dev. 12% 12% – – – 
+5.4.1 Web-scraping Comparison 
+Table 41 provides some comparisons between the equipment plus installation labor costs from 
+sample invoices with the web-scraped costs. Because this is not a like-for-like comparison, we 
+have also included the portion of invoice heat pump cost represented by the web-scraped cost. 
+Another caveat is that even though all costs are in Januar y 2024 dollars, we only have market 
+pricing from October 2023 for comparison . Ten of the eleven projects with web-scraped 
+equipment costs higher than the invoice heat pump equipment plus installation labor costs are 
+exact matches by model; however, they rely on a single listing each. 
+Table 41: GSHP – Heat Pump Equipment Cost Comparison (n=77) (Jan. 2024/ton) 
+ HP Equip. & Install Web-Scraped Web-Scraped n Web-Scraped ÷HP 
+Minimum $4,145 $849 1 8% 
+Mean $7,635 $3,511 3.1 52% 
+Maximum $19,532 $11,559 9 235% 
+Standard Deviation $2,799 $3,367 1.9 55% 
+The invoices with comparatively high web-scraped equipment costs fall below y=x and are marked 
+with blue diamonds in Figure 20. 
+See the Data  ► 
+ 
+[[page 48]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+48 
+Figure 20: GSHP – Web-Scraped HP Cost vs. Invoiced Equip. & Labor HP Cost 
+(Jan. 2024/ton) 
+5.5 GROUND LOOP 
+Table 42 includes the labor and materials associated with the installation of the ground loop for a 
+GSHP system; however, as with equipment costs, we excluded MassCEC invoices with a missing 
+or zero -dollar loop cost since the loop costs  must have been mischaracterized . On average, 
+ground loop costs represent one-quarter of total project cost, but no significant trend was detected 
+(Figure 21). This is less variation than one might expect given the potential impacts of local soil 
+conditions on the ability to easily trench or drill. 
+Figure 21: GSHP – Ground Loop Portion of Itemized Installation Costs (%) 
+ 
+ 
+201 2020 2021 2022
+0%
+10%
+20%
+ 0%
+ 0%
+50%
+60%
+Loop
+ 0
+  ,000
+ 8,000
+ 12,000
+ 16,000
+ 20,000
+ 0  2,000   ,000  6,000  8,000  10,000  12,000
+ nvoiced Cost
+Web Scraped Cost Normal  nvoice Web  nvoice 100%
+[[page 49]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+49 
+Table 42: GSHP – Ground Loop Portion of Itemized Installation Costs (%) 
+ 
+5.6 REGIONAL COMPARISON 
+All regions with recent Mass Save-incentivized GSHP projects are well represented in the sample 
+(Table 43). The MassCEC project data also extends to regions not represented in the 2021 and 
+2022 Mass Save program data, i.e., Pittsfield and Barnstable. 
+Table 43: GSHP – Regional Representation (%) 
+Region Counties Prog. Sample 
+  ‘21-‘22 Total HP / Loop 
+Barnstable Barnstable 0% 3% 3% 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk 60% 73% 74% 
+Pittsfield Berkshire 0% 2% 2% 
+Providence-Warwick Bristol 10% 4% 4% 
+Springfield Franklin, Hampden, Hampshire 10% 7% 6% 
+Worcester Worcester 21% 12% 11% 
+Rest of MA Dukes, Nantucket – ̶ – 
+Statewide All 62 189 174 
+The loop and total costs of GSHP in the Boston area are significantly higher than in the rest of 
+the state, possibly due to local soil conditions, the complexities of construction in existing urban 
+neighborhoods or other unforeseen factors . In contrast, loop costs are distinctly cheaper in 
+Springfield and overall costs are significantly lower in Worcester. 
+Table 44: GSHP – Project, Equipment and Loop Costs by Region (Jan. 2024$/ton) 
+Region Counties Total Heat Pump Loop 
+  Mean n Mean n Mean n 
+Barnstable Barnstable $12,175 5 $7,279 5 $2,477* 5 
+Boston Essex, Middlesex … Suffolk $14,493* 138 $7,985 128 $3,874* 128 
+Pittsfield Berkshire $14,998 4 $8,093 4 $2,112 4 
+Providence-Warwick Bristol $15,196 7 $9,369 7 $3,984 7 
+Springfield Franklin, Hampden, Hampshire $13,270 13 $8,292 10 $2,363* 10 
+Worcester Worcester $12,867* 22 $7,775 20 $3,423 20 
+Rest of MA Dukes, Nantucket – – – – – – 
+Statewide All $14,195 189 $8,016 174 $3,659 174 
+* Statistically significant difference from the rest of the state at the 90% confidence level. 
+ 2019 2020 2021 2022 2023 
+n 91 MassCEC 82 MassCEC – 1 Mass Save – 
+Minimum 6% 2% – – – 
+Lower CI 25% 22% – – – 
+Mean 27% 25% – 28% – 
+Upper CI 30% 27% – – – 
+Maximum 55% 59% – – – 
+Std. Dev. 15% 14% – – – 
+See the Data  ► 
+ 
+[[page 50]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+50 
+5.7 EXISTING VERSUS NEW CONSTRUCTION 
+While the heat pump equipment and installation costs as well as total project costs in Table 45 
+are significantly higher in existing than in new homes—almost 10% more —even though the 
+installed equipment is of similar efficiency , and the provided loop installation costs do not differ  
+significantly. These results contrast with the trends one might initially expect, i.e., that costs of 
+eligible equipment would be comparable between the two groups but the cost of installing a 
+ground loop in a n established neighborhood or yard with mature plantings would be more 
+expensive. However, other  factors may contribute to these differences, such as the higher 
+proportion of new construction projects around Worcester and Warwick versus retrofit projects in 
+the Boston area. 
+Table 45: GSHP – Average Capacity-normalized Costs by Home Age (Jan, 2024$/ton) 
+ Existing New Construction 
+n 129 MassCEC       
+1 Mass Save 
+58 MassCEC 
+Project Cost $14,606* $13,309 
+Heat Pump Cost; equip. + labor $8.336* $7,430 
+Loop Cost; equipment + labor $3,747 $3,463 
+Other Factors 
+Mean Heating Efficiency (COP) 4.21 4.26 
+Regional Distribution: Barnstable 3% 2% 
+Regional Distribution: Boston 78%* 62% 
+Regional Distribution: Pittsfield 2% 2% 
+Regional Distribution: Providence RI-Warwick 2%* 7% 
+Regional Distribution: Springfield 5% 9% 
+Regional Distribution: Worcester 8%* 19% 
+* Significantly different at the 90% confidence level. 
+5.8 BASELINE 
+Given the extremely small sample of Mass Save program GSHP invoices within our sample, NMR 
+recommends using the whole sample to establish baseline costs and proportions in  
+Table 46, rather than restrict ing the baseline to the 2020–2021 period adopted for other 
+equipment types. 
+Table 46: GSHP – Baseline Costs 
+ n Proportion Jan. 2024$/ton 
+Heat Pump Equipment 174 56% $7,958 
+Installation Labor  26% $3,695 
+Wiring and Other Costs – 18% $2,558 
+Total Installed Cost 189 100% $14,211 
+Italicized cells are calculated from other table values. 
+ 
+[[page 51]]
+ 
+ 51 
+6 
+Section 6 HPWH Costs 
+Heat pump water heaters (HPWH) extract heat from their surroundings to warm the water in their 
+tanks. They also include electric resistance coils for backup in case the air cannot provide enough 
+heat. Most models are installed in the same manner as a conventional storage water heater. 
+6.1 KEY FINDINGS 
+➢ Labor (6.5), equipment (6.4) and overall project costs (6.3) of HPWH projects appear 
+to be increasing, but these trends are not statistically robust due to the sample size 
+and a clustering of projects within a narrow window. 
+➢ Unlike other equipment categories, there was no significant difference between 
+invoiced and web-scraped equipment costs (6.4.1). 
+6.2 CAPACITY-NORMALIZED PROJECT COST 
+The capacity-normalized project cost of HPWH is the sum of the cost of the water heater itself, 
+installation labor, piping, wiring, permits and removal of existing equipment divided by the storage 
+volume of the water heater. Although the trendline of average costs per gallon in Figure 22 tracks 
+the data and forecast closely, ANOVA reveals no significant trends in these costs over time. 
+Figure 22: HPWH – Project Cost (Jan. 2024 $/gallon) 
+ 
+  
+See the Data  ► 
+ 
+2020 2021 2022 202 
+ 20
+  0
+ 60
+ 80
+ 100
+ 120
+ istoric  0% C 
+Forecast  0% C 
+ istoric Mean
+Forecast Mean
+10
+20
+ 0
+ 0
+Projects
+Mass Save
+[[page 52]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+52 
+6.3 ITEMIZED COST AVAILABILITY 
+In the cost itemization availability summary of  Mass Save invoices in  Table 47, “mentioned” 
+means that an invoice indicates a specific HPWH project component such as wiring factored into 
+the total project cost, while “explicit cost” (a subset of the former) means the invoice includes a 
+dollar value attributable to that component.  The number of itemized labor and equipment costs 
+for HPWH are higher than for any other category of heat pump in this study , while availability of 
+wiring cost details is the lowest. Details for other projects costs are available in Appendix A.6.2. 
+Table 47: HPWH – Itemization Detail Summary (n=66) 
+Detail Level Labor HPWH Wiring Piping Removal Permits 
+Mentioned 41% 45% 11% 29% 20% 8% 
+Explicit cost 41% 45% 6% 18% 1% 6% 
+6.3.1 Large Projects 
+Under the theory that contractors might offer lower prices to customers installing many forms of 
+mechanical equipment due to decreased travel and the guarantee of more work, we compared 
+the average cost per gallon between projects with and without non-HPWH activities. As shown in 
+Table 48, the homes that received more equipment unexpectedly paid more per gallon than those 
+only receiving a water heater despite lower—but not significantly different—average efficiency. 
+Table 48: HPWH – Project Scope Cost Dependency (Jan. 2024$/gallon) 
+ HPWH only Multiple Installs 
+n 56 10 
+Average $65* $84 
+Standard Deviation $18 $22 
+UEF 3.66 3.56 
+* Significantly different at the 90% confidence level. 
+6.4 HEAT PUMP EQUIPMENT 
+The proportion of total HPWH project costs among invoices with itemized heat pump costs are 
+summarized in Table 49. Overall, equipment represents approximately two thirds of total costs, 
+the largest proportion of all equipment types in this study.  The trendline of heat pump cost 
+proportions in Figure 23 is increasing but does not appear to be significant. 
+[[page 53]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+53 
+Figure 23: HPWH – Equipment Portion of Itemized Installation Costs (%) 
+ 
+Table 49: HPWH – Equipment Portion of Itemized Installation Costs (%) 29 
+ 
+6.4.1 Web-scraping Comparison 
+We compared the web-derived HPWH costs with the itemized HPWH invoice equipment costs in 
+Table 50 using a paired sample t -test and found no significant difference in  pricing.30 This 
+suggests that there is minimal mark-up for this measure on program invoices, potentially due to 
+differences in sourcing practices and/or offering design. For instance, the PAs began midstream 
+support for HPWHs in 2022, 31 ending the “mail-in” rebate-style offering still in use for space -
+conditioning equipment . Before th is shift, home improvement center receipts were frequently 
+provided as proof of payment in the rebate paperwork for many HPWH projects, a comparatively 
+rare sight among the HVAC invoices we reviewed in this study. 
+ 
+29 The totals for some invoices may not include sales tax. 
+30 Although, as with ASHP and GSHP, we only have inflation-adjusted October 2023 scraped-costs for comparison and 
+are unable to interpolate the scraped-costs to the installation date as was possible for MSHP. 
+31  Mass Save (2022).  Heat Pump Water Heaters . https://web.archive.org/web/20221004054851/https:// 
+www.masssave.com/en/saving/residential-rebates/heat-pump-water-heaters (Accessed October 2024) 
+2020 2021 2022
+ 0%
+60%
+80%
+100%
+E uipment
+ 2019 2020 2021 2022 2023 
+n – 2 Mass Save 22 Mass Save 6 Mass Save – 
+Minimum – 72% 38% 53% – 
+Lower CI – 36% 59% 62% – 
+Mean – 78% 65% 73% – 
+Upper CI – 100% 71% 85% – 
+Maximum – 85% 100% 94% – 
+Std. Dev. – 10% 16% 14% – 
+See the Data  ► 
+ 
+[[page 54]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+54 
+Table 50: HPWH – Equipment Cost Comparison (n=30) (Jan. 2024/gallon) 
+ Invoice Web-Scraped Web-Scraped n 
+Minimum $32 $29 1 
+Mean $36 $42 2.1 
+Maximum $45 $86 4 
+Standard Deviation $3.11 $13.46 1.3 
+6.5 INSTALLATION LABOR 
+Table 52  summarizes the proportion of labor costs associated with HPWH installation. This 
+excludes other associated costs of installing a heat pump, such as electrical connections and 
+removal of pre-existing equipment. As with HPWH equipment costs, the average itemized labor 
+costs of our sample appear to increase over time, but the trend is not statistically significant. 
+Installation labor represents approximately one-quarter of total project costs, like other categories 
+of equipment. 
+Figure 24: HPWH – Labor Portion of Itemized Installation Costs (%) 
+ 
+Table 51: HPWH – Labor Portion of Itemized Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – 2 Mass Save 21 Mass Save 4 Mass Save – 
+Minimum – 10% 7% 18% – 
+Lower CI – 0% 22% 14% – 
+Mean – 16% 27% 28% – 
+Upper CI – 54% 32% 41% – 
+Maximum – 22% 55% 44% – 
+Std. Dev. – 9% 14% 11% – 
+ 
+6.6 WIRING 
+None of the seven HPWH projects with wiring details included a service upgrade, but the average 
+proportion of project cost attributable to wiring is approximately 20% (Table 52). 
+2020 2021 2022
+0%
+10%
+20%
+ 0%
+ 0%
+50%
+Labor
+See the Data  ► 
+ 
+[[page 55]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+55 
+Table 52: HPWH – Wiring Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – – 2 Mass Save 2 Mass Save – 
+Minimum – – 12% 15% – 
+Lower CI – – – – – 
+Mean – – 17% 22% – 
+Upper CI – – – – – 
+Maximum – – 23% 29% – 
+Std. Dev. – – 8% 10% – 
+ 
+6.7 REGIONAL COMPARISON 
+As with other equipment types, there are some deviations between program participation rates 
+and our sample  in Table 53, but all are well represented with the debatable exception of 
+Barnstable since neither invoice in this region included itemized labor costs. 
+Table 53:HPWH – Regional Representation (%) 
+Region Counties Prog. Sample 
+  ‘21-‘22 Total Equip. Labor 
+Barnstable Barnstable 7% 3% 3% - 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk 36% 24% 23% 22% 
+Pittsfield Berkshire 4% 3% 7% 7% 
+Providence-Warwick Bristol 4% 8% 10% 7% 
+Springfield Franklin, Hampden, Hampshire 25% 36% 27% 30% 
+Worcester Worcester 21% 23% 27% 30% 
+Rest of MA Dukes, Nantucket 2% 3% 3% 4% 
+Statewide All 384 66 30 27 
+As shown in Table 54, overall projects are significantly lower in Pittsfield and Springfield than the 
+state average. 
+Table 54: HPWH –Project and Equipment Cost by Region (Jan. 2024$/gallon) 
+Region Counties Total Equipment 
+  Mean n Mean n 
+Barnstable Barnstable $70 2 $38 1 
+Boston Essex, Middlesex, Norfolk, Plymouth, Suffolk $70 16 $41 7 
+Pittsfield Berkshire $46* 2 $36 2 
+Providence-Warwick Bristol $70 5 $48 3 
+Springfield Franklin, Hampden, Hampshire $66* 24 $44 8 
+Worcester Worcester $69 15 $37 8 
+Rest of MA Dukes, Nantucket $81 2 $50 1 
+Statewide All $68 66 $42 30 
+* Statistically significant at the 90% confidence level. 
+  
+See the Data  ► 
+ 
+[[page 56]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+56 
+Although the sample in Table 55 only includes two itemized labor costs for HPWH in the Pittsfield 
+region, the normalized proportion of project costs represented by labor on these invoices is much 
+lower than Commonwealth overall (Statewide=100%) , which supports the previous finding of 
+lower overall projects costs in this region. Meanwhile, Boston has a surprisingly low proportion of 
+labor cost, but no significant differences in equipment or overall project costs (Table 54). 
+Table 55: HPWH – Unit-normalized Labor Cost and Average 2021–2022 
+Wages by Region32 
+Region Labor n Plumber HVAC Electrician 
+Barnstable – – 81% 97% 91% 
+Boston 74% 6 101% 105% 100% 
+Pittsfield 37% 2 93% 92% 93% 
+Providence-Warwick 139% 2 85% 95% 79% 
+Springfield 101% 8 96% 98% 99% 
+Worcester 120% 8 97% 95% 98% 
+Rest of MA 132% 1 96% 96% 82% 
+Statewide $868 27 100% 100% 100% 
+ 
+6.8 BASELINE 
+Because of the small sample size, NMR recommends using all 67 non-outlier Mass Save invoices 
+to establish baseline costs, 88% of which are from mid-2020 through mid-2021. 
+Table 56: HPWH – Baseline Costs 
+ n Proportion Jan. 2024$/gallon 
+Heat Pump Equipment 29 68% $46 
+Installation Labor 28 25% $17 
+Wiring and Other Costs – 7% $5 
+Total Installed Cost 67 100% $68 
+Italicized cells are calculated from other table values. 
+ 
+ 
+32  United States Bureau of Labor Statistics (2024). Occupational Employment and Wage Statistics . 
+https://www.bls.gov/oes/tables.htm Accessed August 2024 
+See the Data  ► 
+ 
+[[page 57]]
+ 
+ 
+57 
+A 
+Appendix A Data Tables 
+A.1 METHODOLOGY 
+A.1.1 Web-Scraping 
+Where model-specific methods were unable to yield a match, NMR used the average cost for 
+web-scraped equipment with similar performance specifications. We first attempted to  match 
+invoices to web-scraped heat pumps with identical efficiencies. Invoices that did not have an exact 
+specification match were then paired with similarly rated web-scraped units, prioritizing the heat 
+pump’s heating performance in the event of a tie or no match. For example, if there was no exact 
+match for a 17.2 SEER, 8.1 HSPF unit, NMR tried to match to the average of all units within the 
+17 SEER/8 HSPF bin. Failing that, the costs for other units with an 8.0–8.25 HSPF rating. 
+The binning to determine similarity was performed by rounding efficiency ratings to the nearest 
+multiple of the related unit granularity listed in Table 57. Note that HPWH matching employed tank 
+volume rather than cooling efficiency as the second criteria, and that no specification binning was 
+required; all HPWH were matched either by model, exact efficiency and volume, or exact 
+efficiency. 
+Table 57: Specification Matching Bin Widths 
+HSPF SEER COP EER UEF 
+0.20 0.25 0.20 0.50 – 
+A.1.2 Inflation Adjustment 
+Table 58: National Consumer Price Index (1982–1984=100)33 
+Year Jan. Feb. Mar. Apr. May June July Aug. Sep. Oct. Nov. Dec. 
+2019 251.7 252.8 254.2 255.5 256.1 256.1 256.6 256.6 256.8 257.3 257.2 257.0 
+2020 258.0 258.7 258.1 256.4 256.4 257.8 259.1 259.9 260.3 260.4 260.2 260.5 
+2021 261.6 263.0 264.9 267.1 269.2 271.7 273.0 273.6 274.3 276.6 277.9 278.8 
+2022 281.1 283.7 287.5 289.1 292.3 296.3 296.3 296.2 296.8 298.0 297.7 296.8 
+2023 299.2 300.8 301.8 303.4 304.1 305.1 305.7 307.0 307.8 307.7 307.1 306.7 
+ 
+33  United States Bureau of Labor Statistics (2024). Consumer Price Index for All Urban Consumers. 
+https://data.bls.gov/timeseries/CUUR0000SA0. Accessed August 21, 2024 
+[[page 58]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+58 
+Table 59: New England Consumer Price Index (1982–1984=100)34 
+Year Jan. Feb. Mar. Apr. May June July Aug. Sep. Oct. Nov. Dec. 
+2019 266.1 266.7 268.0 269.1 269.7 270.1 270.4 270.5 270.6 270.3 270.6 270.4 
+2020 272.3 273.1 272.5 271.3 271.3 272.3 273.3 273.6 273.9 273.4 273.5 274.2 
+2021 275.4 276.5 278.2 280.2 281.9 284.7 285.2 285.6 286.4 288.2 289.8 290.4 
+2022 292.6 294.6 298.4 300.3 302.9 306.5 305.9 306.9 307.2 308.0 308.4 308.2 
+2023 310.3 312.0 311.2 311.8 312.2 313.3 314.0 315.4 316.4 316.3 316.3 316.1 
+Table 60: Producer Price Index (Dec 2003=100)35 
+Year Jan. Feb. Mar. Apr. May June July Aug. Sep. Oct. Nov. Dec. 
+2019 152.8 152.8 153.6 154.6 154.5 154.8 155.2 155.2 155.0 155.2 155.0 155.4 
+2020 155.7 156.2 157.5 157.7 157.1 157.8 157.6 158.4 158.5 158.3 158.9 159.0 
+2021 160.7 161.6 162.8 163.4 164.6 168.0 169.8 172.0 174.5 176.8 179.3 182.2 
+2022 188.9 192.8 196.0 200.1 202.5 205.7 208.1 207.9 208.9 209.9 210.3 211.2 
+2023 212.6 213.2 216.6 217.0 217.9 217.3 217.8 218.2 218.3 218.7 219.2 218.8 
+ 
+  
+ 
+34 United States Bureau of Labor Statistics (2024). Consumer Price Index for All Urban Consumers  (Northeast). 
+https://data.bls.gov/pdq/SurveyOutputServlet?data_tool=dropmap&series_id=CUUR0100SA0,CUUS0100SA0  
+Accessed September 25, 2024. 
+35 U.S. Bureau of Labor Statistics (2024). Producer Price Index by Industry: HVAC and Commercial Refrigeration 
+Equipment [PCU3334133341. https://fred.stlouisfed.org/series/PCU3334133341 Accessed August 27, 2024. 
+Back to Report  ► 
+ 
+[[page 59]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+59 
+A.2 DUCTLESS MSHP 
+A.2.1 Data Tables 
+Table 61: Ductless MSHP – Installed Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 198 MassCEC 30 MassCEC 
+3 Mass Save 
+30 MassCEC 
+222 Mass Save 
+172 Mass Save 10 Mass Save 
+Minimum $1,104 $2,717 $1,528 $1,114 $4,139 
+Lower CI $4,806 $6,662 $5,390 $5,893 $5,542 
+Mean $5,016 $7,142 $5,610 $6,152 $6,359 
+Upper CI $5,226 $7,622 $5,829 $6,412 $7,175 
+Maximum $10,677 $10,440 $13,015 $15,044 $9,029 
+Std. Dev. $1,787 $1,628 $2,107 $2,055 $1,409 
+Table 62: Ductless MSHP – Equipment Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 15 MassCEC 30 MassCEC   
+2 Mass Save 
+30 MassCEC  
+101 Mass Save 
+49 Mass Save 2 Mass Save 
+Minimum $1,607 $2,047 $1,099 $1,336 $2,444 
+Lower CI $2,312 $3,099 $2,916 $2,914 $0 
+Mean $2,619 $3,391 $3,101 $3,238 $4,481 
+Upper CI $2,926 $3,683 $3,287 $3,562 $17,345 
+Maximum $4,274 $5,547 $8,269 $7,818 $6,519 
+Std. Dev. $675 $974 $1,282 $1,353 $2,881 
+Table 63: Ductless MSHP –Installation Labor Cost (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 15 MassCEC 30 MassCEC 
+1 Mass Save 
+29 MassCEC  
+89 Mass Save 
+45 Mass Save 1 Mass Save 
+Minimum $1,923 $1,022 $221 $207 – 
+Lower CI $4,890 $4,968 $4,096 $3,380 – 
+Mean $7,386 $5,887 $4,797 $4,060 $6,271 
+Upper CI $9,883 $6,806 $5,498 $4,739 – 
+Maximum $19,547 $14,224 $21,263 $12,023 – 
+Std. Dev. $5,490 $3,015 $4,592 $2,714 – 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+[[page 60]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+60 
+MSHP labor costs in Table 64 are normalized by the number of compressors and air handlers, 
+since the latter varies from home to home and the number of units installed influences the amount 
+of labor required more than equipment capacity. The raw trade labor rates data are in A.7. 
+Table 64: Ductless MSHP – Installation Labor Cost per unit (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 15 MassCEC 30 MassCEC   
+1 Mass Save 
+29 MassCEC  
+89 Mass Save 
+45 Mass Save 1 Mass Save 
+Mean units 4.4 4.5 4.2 3.9 – 
+Minimum $599 $511 $55 $104 – 
+Lower CI $1,188 $1,217 $957 $915 – 
+Mean $1,768 $1,414 $1,067 $1,121 $1,254 
+Upper CI $2,347 $1,611 $1,177 $1,326 – 
+Maximum $4,240 $2,845 $3,568 $4,916 – 
+Std. Dev. $1,274 $647 $722 $821 – 
+A.2.2 Additional Details 
+Table 65: Ductless MSHP – Equipment Removal Proportion of Install. Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 1 MassCEC 4 MassCEC 2 MassCEC  
+3 Mass Save 
+3 Mass Save – 
+Minimum – 3% 2% 2% – 
+Lower CI – 3% 2% 0% – 
+Mean 9% 5% 6% 5% – 
+Upper CI – 7% 9% 10% – 
+Maximum – 6% 10% 7% – 
+Std. Dev. – 2% 4% 3% – 
+Table 66: Ductless MSHP – Equipment Removal Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – 4 MassCEC 2 MassCEC  
+3 Mass Save 
+3 Mass Save – 
+Minimum – $592 $249 $658 – 
+Lower CI – $616 $323 -$108 – 
+Mean $1,498. $1,190 $451 $1,398 – 
+Upper CI – $1,765 $579 $2,904 – 
+Maximum – $1,788 $588 $2,390 – 
+Std. Dev. – $488 $134 $893 – 
+Depending on individual invoice itemization level, wiring costs may include some combination of 
+electrical supplies, electrician labor, and/or electrical permits. 
+Back to Report  ► 
+ 
+[[page 61]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+61 
+Table 67: Ductless MSHP – Wiring Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 12 MassCEC 25 MassCEC 26 MassCEC  
+63 Mass Save 
+23 Mass Save 2 Mass Save 
+Minimum $539 $478 $233 $264 $1,031 
+Lower CI $947 $1,134 $1,159 $988 – 
+Mean $1,257 $1,453 $1,364 $1,339 $1,289 
+Upper CI $1,568 $1,772 $1,568 $1,690 – 
+Maximum $2,397 $4,113 $7,449 $4,662 $1,546 
+Std. Dev. $600 $932 $1,158 $981 $364 
+ 
+ 
+Table 68: Ductless MSHP – Controls Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – – 25 Mass Save 14 Mass Save 2 Mass Save 
+Minimum – – 1% 2% 6% 
+Lower CI – – 5% 5% -– 
+Mean – – 6% 6% 9% 
+Upper CI – – 7% 8% – 
+Maximum – – 13% 15% 12% 
+Std. Dev. – – 3% 3% 5% 
+Table 69: Ductless MSHP – Controls Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – – 25 Mass Save 14 Mass Save 2 Mass Save 
+Minimum – – $166 $311 $515 
+Lower CI – – $754 $373 – 
+Mean – – $1,083 $734 $1,057 
+Upper CI – – $1,412 $1,095 – 
+Maximum – – $4,580 $3,291 $1,598 
+Std. Dev. – – $962 $762 $765 
+Table 70: Ductless MSHP – Misc. Materials Proportion of Install. Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 14 MassCEC 27 MassCEC 
+2 Mass Save 
+24 MassCEC  
+53 Mass Save 
+26 Mass Save 3 Mass Save 
+Minimum 4% 1% 1% 1% 0.1% 
+Lower CI 10% 8% 11% 9% – 
+Mean 13% 11% 13% 12% 7% 
+Upper CI 16% 13% 15% 14% – 
+Maximum 23% 34% 45% 34% 12% 
+Std. Dev. 7% 8% 9% 8% 6% 
+ 
+Back to Report  ► 
+ 
+[[page 62]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+62 
+Table 71: Ductless MSHP – Miscellaneous Materials Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 14 MassCEC 27 MassCEC 
+2 Mass Save 
+24 MassCEC  
+53 Mass Save 
+26 Mass Save 3 Mass Save 
+Minimum $633 $291 $58 $64 $26 
+Lower CI $1,631 $1,306 $1,609 $1,248 – 
+Mean $2,006 $2,086 $1,923 $1,824 $1,606 
+Upper CI $2,381 $2,865 $2,236 $2,399 – 
+Maximum $3,543 $12,194 $9,204 $6,026 $2,491 
+Std. Dev. $792 $2,468 $1,653 $1,717 $1,372 
+Electrical permits may be folded into the wiring costs on some invoices. 
+Table 72: Ductless MSHP – Permits Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+N 8 MassCEC 18 MassCEC 19 MassCEC  
+15 Mass Save 
+6 Mass Save – 
+Minimum 0.2% 0.3% 0.3% 0.3% – 
+Lower CI 1% 1% 1% 1% – 
+Mean 1% 1% 1% 1% – 
+Upper CI 1% 2% 1% 2% – 
+Maximum 2% 4% 5% 2% – 
+Std. Dev. 0.4% 1% 1% 1% – 
+Table 73: Ductless MSHP – Permits Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 8 MassCEC 18 MassCEC 19 MassCEC  
+15 Mass Save 
+6 Mass Save – 
+Minimum $48 $60 $39 $26 – 
+Lower CI $65 $147 $202 $56 – 
+Mean $119 $209 $250 $168 – 
+Upper CI $172 $271 $298 $279 – 
+Maximum $240 $596 $652 $389 – 
+Std. Dev. $80 $152 $165 $136 – 
+  
+[[page 63]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+63 
+A.3 DUCTED AND MIXED MSHP 
+A.3.1 Data Tables 
+Table 74: Ducted & Mixed MSHP – Installed Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 11 MassCEC 29 MassCEC 23 MassCEC  
+38 Mass Save 
+32 Mass Save 4 Mass Save 
+Minimum $5,399 $4,965 $2,537 $3,303 $5,301 
+Lower CI $7,290 $8,764 $7,211 $6,104 $3,181 
+Mean $8,597 $9,558 $7,709 $6,658 $7,883 
+Upper CI $9,904 $10,352 $8,208 $7,212 $12,585 
+Maximum $12,813 $13,820 $13,520 $11,819 $13,827 
+Std. Dev. $2,392 $2,512 $2,330 $1,849 $3,996 
+ 
+ 
+Table 75: Ducted & Mixed MSHP – Equipment Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 6 MassCEC 29 MassCEC 23 MassCEC  
+13 Mass Save 
+7 Mass Save 4 Mass Save 
+Minimum $2,609 $2,407 $1,498 $2,218 $1,977 
+Lower CI $2,929 $3,460 $2,974 $2,521 $1,876 
+Mean $3,837 $3,684 $3,345 $3,242 $3,902 
+Upper CI $4,745 $3,908 $3,716 $3,963 $5,927 
+Maximum $5,205 $4,785 $6,681 $4,905 $6,158 
+Std. Dev. $1,104 $708 $1,318 $982 $1,722 
+ 
+ 
+Table 76: Ducted & Mixed MSHP –Installation Labor Cost (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 6 MassCEC 29 MassCEC 21 MassCEC  
+12 Mass Save 
+6 Mass Save 3 Mass Save 
+Minimum $7,207 $1,795 $999 $1,152 $4,458 
+Lower CI $6,801 $5,979 $6,472 $3,419 $2,428 
+Mean $8,311 $7,035 $7,896 $8,102 $6,695 
+Upper CI $9,822 $8,092 $9,320 $12,784 $10,963 
+Maximum $12,012 $12,257 $18,604 $16,927 $9,443 
+Std. Dev. $1,836 $3,345 $4,829 $5,692 $2,532 
+ 
+ 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+[[page 64]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+64 
+MSHP labor costs in Table 77 are normalized by the number of compressors and air handlers, 
+since the latter varies from home to home and the number of units installed influences the amount 
+of labor required more than equipment capacity. The raw trade labor rates data are in A.7. 
+Table 77: Ducted & Mixed MSHP – Installation Labor Cost per unit (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 6 MassCEC 29 MassCEC 21 MassCEC  
+12 Mass Save 
+6 Mass 
+Save 
+3 Mass 
+Save 
+Mean units 2 2.7 3 2.7 2 
+Minimum $3,604 $897 $499 $576 $2,229 
+Lower CI $3,400 $2,425 $2,227 $982 $1,214 
+Mean $4,156 $3,001 $2,751 $3,404 $3,348 
+Upper CI $4,911 $3,578 $3,275 $5,825 $5,482 
+Maximum $6,006 $6,128 $7,624 $8,463 $4,722 
+Std. Dev. $918 $1,824 $1,776 $2,943 $1,266 
+ 
+A.3.2 Additional Details 
+Table 78: Ducted & Mixed MSHP – Equip. Removal Proportion of Install. Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 1 MassCEC 5 MassCEC 7 MassCEC  
+1 Mass Save 
+1 Mass Save – 
+Minimum – 2% 2% – – 
+Lower CI – 1% 2% – – 
+Mean 3% 3% 4% 9% – 
+Upper CI – 5% 7% – – 
+Maximum – 6% 13% – – 
+Std. Dev. – 2% 4% – – 
+Table 79: Ducted & Mixed MSHP – Equipment Removal Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 1 MassCEC 5 MassCEC 7 MassCEC  
+1 Mass Save 
+1 Mass Save – 
+Minimum – $474 $227 – – 
+Lower CI – $147 $643 – – 
+Mean $961 $929 $1,151 $2,962 – 
+Upper CI – $1,710 $1,658 – – 
+Maximum – $2,393 $2,329 – – 
+Std. Dev. – $820 $873 – – 
+ 
+  
+Back to Report  ► 
+ 
+[[page 65]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+65 
+Depending on individual invoice itemization level, wiring costs may include some combination of 
+electrical supplies, electrician labor, and/or electrical permits. 
+Table 80: Ducted & Mixed MSHP – Wiring Costs (Jan. 2024$) 
+ 
+ 
+Table 81: Ducted & Mixed MSHP – Duct Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 5 MassCEC 28 MassCEC 17 MassCEC  
+3 Mass Save 
+1 Mass Save 1 Mass Save 
+Minimum 3% 5% 5% – – 
+Lower CI 8% 11% 17% – – 
+Mean 13% 14% 20% 7% 37% 
+Upper CI 18% 17% 23% – – 
+Maximum 15% 35% 33% – – 
+Std. Dev. 5% 11% 8% – – 
+Table 82: Ducted & Mixed MSHP – Duct Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 5 MassCEC 28 MassCEC 17 MassCEC  
+3 Mass Save 
+1 Mass Save 1 Mass Save 
+Minimum $602 $953 $908 – – 
+Lower CI $1,454 $2,671 $3,628 – – 
+Mean $2,427 $3,845 $5,070 $834 $7,675 
+Upper CI $3,399 $5,019 $6,513 – – 
+Maximum $2,883 $14,339 $14,059 – – 
+Std. Dev. $1,020 $3,647 $3,731 – – 
+ 2019 2020 2021 2022 2023 
+n 2 MassCEC 21 MassCEC 19 MassCEC  
+4 Mass Save 
+6 Mass Save 1 Mass Save 
+Minimum $1,204 $592 $426 $208 – 
+Lower CI – $1,307 $1,306 $201 – 
+Mean $1,803 $1,677 $1,673 $1,680 $2,062 
+Upper CI – $2,048 $2,041 $3,158 – 
+Maximum $2,402 $3,589 $3,518 $4,973 – 
+Std. Dev. $847 $985 $1,027 $1,798 – 
+Back to Report  ► 
+ 
+[[page 66]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+66 
+Table 83: Ducted & Mixed MSHP – Controls Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – – 8 Mass Save 4 Mass Save 3 Mass Save 
+Minimum – – 1% 1% 3% 
+Lower CI – – 2% 0.1% 2% 
+Mean – – 5% 5% 4% 
+Upper CI – – 8% 9% 5% 
+Maximum – – 12% 8% 5% 
+Std. Dev. – – 4% 4% 1% 
+Table 84: Ducted & Mixed MSHP – Controls Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – – 8 Mass Save 4 Mass Save 3 Mass Save 
+Minimum – – $139 $155 $726 
+Lower CI – – $605 – $583 
+Mean – – $1,723 $764 $852 
+Upper CI – – $2,840 – $1,120 
+Maximum – – $4,547 $1,860 $1,031 
+Std. Dev. – – $1,668 $773 $159 
+Table 85: Ducted & Mixed MSHP – Misc. Materials Proportion of Install. Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 2 MassCEC 26 MassCEC 18 MassCEC  
+8 Mass Save 
+8 Mass Save 1 Mass Save 
+Minimum 7% 2% 1% 1% – 
+Lower CI – 8% 9% 5% – 
+Mean 10% 10% 12% 9% 2% 
+Upper CI – 12% 15% 13% – 
+Maximum 13% 27% 45% 16% – 
+Std. Dev. 5% 6% 9% 6% – 
+Table 86: Ducted & Mixed MSHP – Miscellaneous Materials Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 2 MassCEC 26 MassCEC 18 MassCEC  
+8 Mass Save 
+8 Mass Save 1 Mass Save 
+Minimum $1,204 $277 $235 $197 – 
+Lower CI -$6,767 $1,816 $1,821 $738 – 
+Mean $2,704 $2,614 $2,648 $1,419 $387 
+Upper CI $12,175 $3,412 $3,476 $2,100 – 
+Maximum $4,204 $9,862 $11,931 $3,291 – 
+Std. Dev. $2,121 $2,382 $2,470 $1,016 – 
+Electrical permits may be folded into the wiring costs on some invoices. 
+[[page 67]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+67 
+Table 87: Ducted & Mixed MSHP – Permits Proportion of Installation Costs (%) 
+n 4 Mass CEC 10 MassCEC 15 MassCEC 1 Mass Save 1 Mass Save 
+Minimum – 0.6% 0.4% – – 
+Lower CI – 1% 1% – – 
+Mean 4% 1% 1% 1% 3% 
+Upper CI – 1% 2% – – 
+Maximum – 1% 3% – – 
+Std. Dev. – 0.3% 0.8% – – 
+Table 88: Ducted & Mixed MSHP – Permits Costs (Jan. 2024$) 
+n 4 MassCEC 10 MassCEC 15 MassCEC 1 Mass Save 1 Mass Save 
+Minimum – $118 $57 – – 
+Lower CI – $154 $220 – – 
+Mean $7,808 $219 $301 $165 $897 
+Upper CI – $284 $383 – – 
+Maximum – $357 $586 – – 
+Std. Dev. – $112 $179 – – 
+  
+ 2019 2020 2021 2022 2023 
+ 2019 2020 2021 2022 2023 
+[[page 68]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+68 
+A.4 CENTRALLY DUCTED ASHP 
+A.4.1 Data Tables 
+Table 89: ASHP – Installed Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 3 MassCEC 4 MassCEC 4 MassCEC  
+96 Mass Save 
+106 Mass Save 15 Mass Save 
+Minimum $4,888 $3,838 $1,710 $2,261 $2,173 
+Lower CI $3,074 $1,873 $5,762 $6,105 $4,828 
+Mean $8,547 $6,351 $6,182 $6,546 $6,383 
+Upper CI $14,020 $10,828 $6,602 $6,988 $7,937 
+Maximum $11,085 $11,941 $15,264 $13,787 $15,132 
+Std. Dev. $3,246 $3,806 $2,531 $2,740 $3,418 
+ 
+Table 90: ASHP – Equipment Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 3 MassCEC 4 MassCEC 4 MassCEC  
+13 Mass Save 
+22 Mass Save 7 Mass Save 
+Minimum $911 $1,209 $1,236 $1,727 $2,006 
+Lower CI – $641 $2,427 $3,029 $2,859 
+Mean $3,200 $2,863 $2,949 $3,635 $4,921 
+Upper CI – $5,086 $3,472 $4,242 $6,983 
+Maximum $5,586 $5,526 $4,519 $8,029 $9,819 
+Std. Dev. $2,339 $1,888 $1,234 $1,653 $2,808 
+ 
+Table 91: ASHP – Labor Cost (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 3 MassCEC 4 MassCEC 4 MassCEC  
+12 Mass Save 
+22 Mass Save 4 Mass Save 
+Minimum $4,314 $2,273 $2,537 $1,097 $3,101 
+Lower CI – $2,595 $4,048 $3,188 $2,909 
+Mean $14,323 $6,741 $7,552 $4,055 $8,991 
+Upper CI – $10,886 $11,055 $4,921 $15,073 
+Maximum $30,288 $9,564 $35,437 $9,832 $15,458 
+Std. Dev. $13,974 $3,523 $7,994 $2,361 $5,169 
+ 
+ 
+ASHP labor costs in Table 92 are normalized by the number of compressors, since this influences 
+the amount of labor required  more strongly than capacity. The raw trade labor rates data are in 
+A.7. 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+[[page 69]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+69 
+Table 92: ASHP – Installation Labor Cost per unit (Jan. 2024$) 
+ 
+A.4.2 Additional Details 
+Table 93: ASHP – Equipment Removal Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – 1 MassCEC 2 MassCEC 
+3 Mass Save 
+3 Mass Save 2 Mass Save 
+Minimum – – 0.2% 2% 4% 
+Lower CI – – 1% – – 
+Mean – 1% 6% 5% 9% 
+Upper CI – – 11% – – 
+Maximum – – 13% 9% 13% 
+Std. Dev. – – 5% 4% 6% 
+Table 94: ASHP – Equipment Removal Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – – 2 MassCEC 
+3 Mass Save 
+3 Mass Save 2 Mass Save 
+Minimum – – $96 $416 $1,031 
+Lower CI – – $160 $144 – 
+Mean – $597 $1,104 $876 $1,661 
+Upper CI – – $2,048 $1,608 – 
+Maximum – – $2,329 $1,278 $2,290 
+Std. Dev. – – $990 $434 $890 
+Depending on individual invoice itemization level, wiring costs may include some combination of 
+electrical supplies, electrician labor, and/or electrical permits. 
+ 2019 2020 2021 2022 2023 
+n 3 MassCEC 4 MassCEC 4 MassCEC  
+12 Mass Save 
+22 Mass 
+Save 
+4 Mass 
+Save 
+Mean units 1.3 1.5 1.3 1.1 1.5 
+Minimum $4,183 $2,273 $2,537 $1,097 $3,101 
+Lower CI – $2,663 $3,765 $2,844 $3,251 
+Mean $12,929 $4,351 $5,393 $3,691 $5,806 
+Upper CI – $6,038 $7,021 $4,538 $8,362 
+Maximum $30,288 $5,569 $17,719 $9,832 $7,729 
+Std. Dev. $15,034 $1,434 $3,714 $2,309 $2,172 
+Back to Report  ► 
+ 
+[[page 70]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+70 
+Table 95: ASHP – Wiring Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 1 MassCEC 3 MassCEC 4 MassCEC  
+15 Mass Save 
+9 Mass Save 4 Mass Save 
+Minimum – $957 $226 $520 $180 
+Lower CI – – $1,218 $903 – 
+Mean $1,198 $2,112 $1,922 $1,653 $2,552 
+Upper CI – – $2,625 $2,403 – 
+Maximum – $4,182 $6,637 $4,291 $5,155 
+Std. Dev. – $1,797 $1,769 $1,210 $2,389 
+ 
+ 
+Table 96: ASHP – Duct Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 2 MassCEC 3 MassCEC 2 MassCEC  
+10 Mass Save 
+4 Mass Save 2 Mass Save 
+Minimum 9% 3% 3% 1% 6% 
+Lower CI – – 9% 3% – 
+Mean 13% 19% 16% 18% 15% 
+Upper CI – – 22% 34% – 
+Maximum 16% 39% 34% 32% 24% 
+Std. Dev. 5% 19% 12% 13% 13% 
+Table 97: ASHP – Duct Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 2 MassCEC 3 MassCEC 2 MassCEC  
+10 Mass Save 
+4 Mass Save 2 Mass Save 
+Minimum $3,640 $1,195 $321 $115 $670 
+Lower CI – – $1,850 $578 – 
+Mean $5,369 $3,986 $4,718 $3,699 $7,162 
+Upper CI – – $7,586 $6,821 – 
+Maximum $7,099 $5,982 $17,523 $6,522 $13,654 
+Std. Dev. $2,445 $2,491 $5,532 $2,653 $9,181 
+Table 98: ASHP – Controls Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – – 14 Mass Save 25 Mass Save 12 Mass Save 
+Minimum – – 0.2% 1% 1% 
+Lower CI – – 3% 4% 4% 
+Mean – – 5% 5% 5% 
+Upper CI – – 6% 7% 6% 
+Maximum – – 11% 16% 9% 
+Std. Dev. – – 3% 4% 2% 
+Back to Report  ► 
+ 
+[[page 71]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+71 
+Table 99: ASHP – Controls Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – – 14 Mass Save 25 Mass Save 12 Mass Save 
+Minimum – – $56 $259 $345 
+Lower CI – – $469 $634 $670 
+Mean – – $961 $827 $909 
+Upper CI – – $1,453 $1,020 $1,147 
+Maximum – – $3,595 $2,078 $1,810 
+Std. Dev. – – $1,039 $565 $460 
+Table 100: ASHP – Miscellaneous Materials Proportion of Installation Costs (%) 
+n 3 MassCEC 3 MassCEC 2 MassCEC  
+6 Mass Save 
+6 Mass Save – 
+Minimum 6% 5% 1% 2% – 
+Lower CI 5% 0% 3% 4% – 
+Mean 7% 10% 7% 10% – 
+Upper CI 9% 19% 11% 16% – 
+Maximum 8% 16% 18% 20% – 
+Std. Dev. 1% 5% 6% 7% – 
+Table 101: ASHP – Miscellaneous Materials Costs (Jan. 2024$) 
+n 3 MassCEC 3 MassCEC 2 MassCEC  
+6 Mass Save 
+6 Mass Save – 
+Minimum $1,553 $1,196 $208 $326 – 
+Lower CI $1,102 – $443 $578 – 
+Mean $2,225 $3,502 $1,193 $1,628 – 
+Upper CI $3,348 – $1,942 $2,679 – 
+Maximum $2,885 $7,516 $3,018 $3,312 – 
+Std. Dev. $666 $3,489 $1,119 $1,277 – 
+Table 102: ASHP – Permits Proportion of Installation Costs (%) 
+n 1 MassCEC 1 MassCEC 3 MassCEC 
+4 Mass Save 
+2 Mass Save – 
+Minimum – – 0.3% 1% – 
+Lower CI – – 1% – – 
+Mean 1% 2% 2% 2% – 
+Upper CI – – 2% – – 
+Maximum – – 4% 4% – 
+Std. Dev. – – 1% 2% – 
+  
+ 2019 2020 2021 2022 2023 
+ 2019 2020 2021 2022 2023 
+ 2019 2020 2021 2022 2023 
+[[page 72]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+72 
+Table 103: ASHP – Permits Costs (Jan. 2024$) 
+n 1 MassCEC 1 MassCEC 3 MassCEC  
+4 Mass Save 
+2 Mass Save – 
+Minimum – – $107 $215 – 
+Lower CI – – $178 – – 
+Mean $301 $598 $294 $414 – 
+Upper CI – – $409 – – 
+Maximum – – $482 $614 – 
+Std. Dev. – – $158 $283 – 
+  
+ 2019 2020 2021 2022 2023 
+[[page 73]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+73 
+A.5 GSHP 
+A.5.1 Data Tables 
+Table 104: GSHP – Installed Cost per ton (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 96 MassCEC 88 MassCEC 2 Mass Save 3 Mass Save – 
+Minimum $6,293 $6,400 $11,126 $10,776 – 
+Lower CI $13,735 $13,376 – $2,219 – 
+Mean $14,319 $13,950 $17,430 $16,260 – 
+Upper CI $14,904 $14,525 – $30,301 – 
+Maximum $26,532 $23,647 $23,734 $25,844 – 
+Std. Dev. $3,446 $3,243 $8,915 $8,329 – 
+Table 105: GSHP – Heat Pump Equipment & Labor Cost per ton (Jan. 2024$) 
+ 
+ 
+Table 106: GSHP – Loop Cost per unit (Jan. 2024$) 
+ 
+ 
+  
+ 2019 2020 2021 2022 2023 
+n 91 MassCEC 82 MassCEC – 1 Mass Save – 
+Minimum $3,696 $4,145 – – – 
+Lower CI $7,357 $7,563 – – – 
+Mean $7,875 $8,053 – $17,929 – 
+Upper CI $8,392 $8,542 – – – 
+Maximum $19,532 $19,628 – – – 
+Std. Dev. $2,971 $2,662 – – – 
+ 2019 2020 2021 2022 2023 
+n 91 MassCEC 82 MassCEC – 1 Mass Save – 
+Minimum $2,397 $1,192 – – – 
+Lower CI $10,715 $10,512 – – – 
+Mean $11,846 $11,953 – $11,691 – 
+Upper CI $12,978 $13,394 – – – 
+Maximum $32,119 $42,102 – – – 
+Std. Dev. $6,494 $7,840 – – – 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+ 
+Back to Report  ► 
+ 
+[[page 74]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+74 
+A.5.2 Additional Details 
+Eleven MassCEC projects have no listed l oop costs. The loop costs of the se projects may be 
+folded into the  miscellaneous or heat pump cost  items, although those costs do not appear 
+abnormally large for these projects. 
+Table 107: GSHP – Miscellaneous Materials Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n 88 MassCEC 78 MassCEC – – – 
+Minimum 2% 2% – – – 
+Lower CI 18% 17% – – – 
+Mean 19% 19% – – – 
+Upper CI 21% 21% – – – 
+Maximum 41% 43% – – – 
+Std. Dev. 10% 11% – – – 
+Table 108: GSHP – Miscellaneous Materials Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n 88 MassCEC 78 MassCEC – – – 
+Minimum $1,953 $975    
+Lower CI $11,684 $11,530 – – – 
+Mean $13,415 $13,401 – – – 
+Upper CI $15,146 $15,272 – – – 
+Maximum $43,448 $46,658 – – – 
+Std. Dev. $9,768 $9,924 – – – 
+  
+[[page 75]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+75 
+A.6 HPWH 
+A.6.1 Data Tables 
+Table 109: HPWH – Installed Cost per gallon (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – 3 Mass Save 53 Mass Save 10 Mass Save – 
+Minimum – $66 $38 $41 – 
+Lower CI – $57 $62 $60 – 
+Mean – $71 $67 $75 – 
+Upper CI – $85 $71 $90 – 
+Maximum – $81 $105 $124 – 
+Std. Dev. – $8 $19 $26 – 
+Table 110: HPWH – Equipment Cost per gallon (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – 2 Mass Save 22 Mass Save 6 Mass Save – 
+Minimum – $47 $29 $36 – 
+Lower CI – – $34 $35 – 
+Mean – $58 $38 $48 – 
+Upper CI – – $43 $60 – 
+Maximum – $69 $86 $74 – 
+Std. Dev. – $15 $12 $15 – 
+Table 111: HPWH – Installation Labor Cost (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – 2 Mass Save 21 Mass Save 4 Mass Save – 
+Minimum – $385 $222 $462 – 
+Lower CI – – $667 $319 – 
+Mean – $550 $888 $921 – 
+Upper CI – – $1,109 $1,524 – 
+Maximum – $715 $2,190 $1,645 – 
+Std. Dev. – $234 $587 $512 – 
+A.6.2 Additional Details 
+Depending on individual invoice itemization level, wiring costs may include some combination of 
+electrical supplies, electrician labor, and/or electrical permits. 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+Back to Report  ► 
+ 
+[[page 76]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+76 
+Table 112: HPWH – Wiring Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – – 2 Mass Save 2 Mass Save – 
+Minimum – – $356 $713 – 
+Lower CI – – – – – 
+Mean – – $507 $1,121 – 
+Upper CI – – – – – 
+Maximum – – $658 $1,530 – 
+Std. Dev. – – $213 $577 – 
+Table 113: HPWH – Piping Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – 1 Mass Save 9 Mass Save 2 Mass Save – 
+Minimum – – 3% 5% – 
+Lower CI – – 5% 1% – 
+Mean – 7% 10% 5% – 
+Upper CI – – 15% 9% – 
+Maximum – – 30% 6% – 
+Std. Dev. – – 8% 1% – 
+Table 114: HPWH – Piping Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – 1 Mass Save 9 Mass Save 2 Mass Save – 
+Minimum – – $68 $123 – 
+Lower CI – – $117 – – 
+Mean – $215 $385 $155 – 
+Upper CI – – $652 – – 
+Maximum – – $1,470 $186 – 
+Std. Dev. – – $432 $45 – 
+Table 115: HPWH – Permits Proportion of Installation Costs (%) 
+ 2019 2020 2021 2022 2023 
+n – – 2 Mass Save 2 Mass Save – 
+Minimum – – 2% 2% – 
+Lower CI – – 1% 0% – 
+Mean – – 2% 2% – 
+Upper CI – – 2% 5% – 
+Maximum – – 2% 3% – 
+Std. Dev. – – 0% 1% – 
+Electrical permits may be folded into the wiring costs on some invoices. 
+Back to Report  ► 
+ 
+[[page 77]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+77 
+Table 116: HPWH – Permits Costs (Jan. 2024$) 
+ 2019 2020 2021 2022 2023 
+n – – 2 Mass Save 2 Mass Save – 
+Minimum – – $56 $88 – 
+Lower CI – – $56 $46 – 
+Mean – – $56 $96 – 
+Upper CI – – $57 $146 – 
+Maximum – – $56 $104 – 
+Std. Dev. – – $0 $11 – 
+A.7 TRADE WAGES & REGIONS 
+The list below provides the precise BLS names along with the abbreviated terms used in the rest 
+of the report. 
+• Electrician; Electricians 
+• HVAC; Heating, Air Conditioning, and Refrigeration Mechanics and Installers 
+• Plumber; Plumbers, Pipefitters, and Steamfitters 
+Table 117: Regional Hourly Wage by Trade36 
+ 2021 2022 
+ Plumber HVAC Electrician Plumber HVAC Electrician 
+Barnstable $30.73 $29.64 $29.95 $31.12 $30.47 $38.00 
+Boston $37.82 $29.63 $36.73 $39.26 $35.05 $38.38 
+Pittsfield $35.13 $27.90 $34.38 $35.89 $28.84 $35.48 
+RI $29.91 $28.98 $29.21 $34.65 $29.61 $30.23 
+Springfield $35.93 $29.02 $36.25 $36.85 $31.15 $37.77 
+Worcester $36.50 $28.83 $36.11 $37.09 $30.00 $37.36 
+Rest of MA 36.98 $29.70 $29.91 35.83 $29.76 $31.77 
+MA $37.60 $29.52 $36.53 $38.38 $32.18 $38.34 
+US $28.75 $23.17 $28.37 $28.88 $23.88 $28.51 
+Table 118 collects the normalized labor proportions of projects costs from each of the equipment 
+categories examined in this study to reveal broader patterns. The only apparent trends are 
+consistently higher labor costs on the islands, and lower costs in Springfield. 
+ 
+36  United States Bureau of Labor Statistics (2024). Occupational Employment and Wage Statistics . 
+https://www.bls.gov/oes/tables.htm Accessed August 2024 
+[[page 78]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+78 
+Table 118: Unit-normalized Labor Costs and Average 2021–2022 Wages  
+by Region (MA=100%) 
+ Ductless 
+MSHP 
+Ducted/Mixed 
+MSHP 
+ASHP HPWH Plumber HVAC Electrician 
+Barnstable 85% 102% 104% – 81% 97% 91% 
+Boston 124% 88% 103% 74% 101% 105% 100% 
+Pittsfield 100% – 94% 37% 93% 92% 93% 
+RI 76% 131% 94% 139% 85% 95% 79% 
+Springfield 68% 60% 71% 101% 96% 98% 99% 
+Worcester 97% 126% 96% 120% 97% 95% 98% 
+Rest of MA 170% 209% 123% 132% 96% 96% 82% 
+Figure 25: Core-Based Statistical Areas versus New England City and Town Areas 
+ 
+
+[[page 79]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+79 
+Table 119: Region Mapping 
+Report Label Core-Based Statistical Area BLS Metropolitan Areas (NECTA) 
+Barnstable Barnstable Town, MA Barnstable Town, MA 
+Barnstable Barnstable Town, MA Massachusetts nonmetropolitan area 
+(Barnstable County 
+Boston Boston-Cambridge-Nashua, MA-NH Boston-Cambridge-Nashua, MA-NH 
+Pittsfield Pittsfield, MA Pittsfield, MA 
+Pittsfield Pittsfield, MA Massachusetts nonmetropolitan area 
+(Pittsfield County) 
+Providence-Warwick Providence-Warwick,RI-MA Providence-Warwick,RI-MA 
+Providence-Warwick Providence-Warwick,RI-MA New Bedford, MA 
+Springfield Springfield, MA Springfield, MA-CT 
+Springfield Springfield, MA Massachusetts nonmetropolitan area 
+(Franklin and Hampshire Counties) 
+Worcester Worcester, MA-CT Worcester, MA-CT 
+Worcester Worcester, MA-CT Leominster-Gardner MA 
+Worcester Worcester, MA-CT Massachusetts nonmetropolitan area 
+(Worcester County) 
+Rest of MA Vineyard Haven, MA Massachusetts nonmetropolitan area 
+Rest of MA – 
+(Nantucket County) 
+– 
+(Nantucket County) 
+[[page 80]]
+ 
+ 
+80 
+B 
+12 1 1 15 16 17 18 1 20 21 22 2 2 
+ ounded SEE 
+AS PCAC
+20
+ 0
+60
+20
+ 0
+60
+Appendix B Central Air Conditioners 
+Central air conditioners (CAC) are effectively heat pumps that only operate in cooling mode. 
+B.1 KEY FINDINGS 
+➢ As expected, duct and wiring proportions of installation costs for CAC and ASHP 
+projects are similar, although the sample of projects with itemized costs is small. 
+B.2 BACKGROUND 
+NMR reviewed invoices for program -incentivized CAC installed when this equipment was still 
+supported (pre-2022), and for non-incentivized systems uncovered during our examination of 
+other rebate documentation. While we expected a small premium in ASHP equipment costs and 
+total project costs relative to CAC,37 we also expected that other CAC costs would provide a useful 
+comparison for ASHP given the similarity in design and installation processes i.e., installation 
+labor, electrical work and ductwork costs should be comparable. 
+Moreover, the program required cooling efficiency levels of 16 SEER or greater for both ASHP 
+and CAC through 2021, increasing the similarity between the two samples for the most common 
+efficiency rating of both equipment categories, as shown in Figure 26.38 The comparisons of CAC 
+and ASHP costs that follow are for both 16 SEER -only invoices and the full sample of invoices. 
+We have included the latter for two reasons: 1) 37% of the CAC invoices with itemized costs are 
+not 16 SEER and 2) at least one -sixth of the CACs with efficiencies below 16 SEER were 
+previously rated as 16 SEER by their manufacturers.39 
+Figure 26:Distribution of Sampled ASHP and CAC Cooling Efficiencies (SEER) 
+ 
+  
+ 
+37 Due to some differences in compressor components, reduced economies of scale, et cetera. 
+38 NMR calculated the rounded SEER in Figure 26 and for the equipment stratification throughout this section using  
+capacity-weighted cooling efficiencies of each project ( 𝑅𝑜𝑢𝑛𝑑𝑒𝑑 𝑆𝐸𝐸𝑅 = ( ∑ 𝑆𝐸𝐸𝑅 × 𝐶𝑎𝑝𝑎𝑐𝑖𝑡𝑦𝑢𝑛𝑖𝑡 ) ÷  ∑ 𝐶𝑎𝑝𝑎𝑐𝑖𝑡𝑦𝑢𝑛𝑖𝑡 ), 
+rounded to the nearest whole number i.e.”16 SEER” represents equipment rated 15.5 through 16.49 SEER inclusive. 
+39 Four of twenty -three low -SEER CAC models have older ratings that NMR verified to be 16 SEER or greater.  
+Two more have nominal efficiencies of 16 SEER, and four others may be 16 SEER but are currently using an average 
+model-specific compressor efficiency since the documentation lacked sufficient detail for a configuration-specific rating. 
+[[page 81]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+81 
+B.3 CAPACITY-NORMALIZED PROJECT COST 
+The average project cost per ton of all sampled CAC and ASHP are significantly different in Table 
+120 due to the higher proportion of centrally ducted ASHP with efficiencies greater than 16 SEER 
+(Figure 26). However, the higher average cost of 16 SEER ASHP compared to 16 SEER CAC is 
+not statistically significant. This agrees with our initial premise that CAC and ASHP costs should 
+be broadly similar given the nature of these technologies. For reference, the Mass Save incentive 
+for CACs was $50/ton in 2021, compared to $250/ton for ASHP in 2021 and later $1,250/ton in 
+2022.40,41 
+Figure 27: All CAC vs. All ASHP – Installed Cost per ton (Jan. 2024$) 
+ 
+Table 120: CAC vs. ASHP – Installed Cost per ton (Jan. 2024$) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+59 Mass Save 
+ 
+94 Mass Save 
+ 
+67 Mass Save 
+11 MassCEC 
+217 Mass Save 
+Minimum $1,181 $578 $2,173 $1,710 
+Lower CI $4,126 $4,038 $5,405 $6,102 
+Mean $4,547 $4,370b $5,954 $6,399b 
+Upper CI $4,968 $4,702 $6,502 $6,695 
+Maximum $8,960 $8,960 $12,724 $15,264 
+Std. Dev. $1,934 $1,937 $2,692 $2,714 
+b. Statistically significant from other equipment type at the 90% confidence level. 
+B.4 ITEMIZED COST AVAILABILITY 
+The availability of itemized costs for CAC projects in Table 121 broadly mirrors that seen for ASHP 
+(Table 30), but with more representation of permit and wiring costs and less of controls. 
+Table 121: CAC – Itemization Detail Summary (n=94) 
+Detail Level Labor HP Wiring Ducts Controls Removal Permits 
+Mentioned 22% 26% 50% 33% 40% 43% 29% 
+Explicit cost 22% 26% 17% 13% 15% 5% 10% 
+ 
+40  MassSave.com (202 1). Electric Heating and Cooling Equipment  Rebates. https://web.archive.org/web/ 
+20210227005816/https://www.masssave.com/en/saving/residential-rebates/electric-heating-and-cooling (Accessed 
+Sept. 2024) 
+41  MassSave.com (2022). Heat Pump Rebates. https://web.archive.org/web/20220222084724/https://www. 
+masssave.com/en/saving/residential-rebates/heat-pump (Accessed Nov. 2023) 
+ 0  1  2        5  6  7  8     10  11  12  1   1   15 
+AS P
+CAC
+[[page 82]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+82 
+B.5 CAC EQUIPMENT COST 
+As with project costs, the large proportion of high SEER ASHP drives the differences in average 
+equipment costs between the all-CAC and all-ASHP groups in Figure 30 and Table 122. Likewise, 
+although there may be a premium for heat pump equipment, there is no significant difference 
+between equipment costs for CAC and ASHP rated 16 SEER. 
+Figure 28: All CAC vs. All ASHP – Equipment Cost per ton (Jan. 2024$) 
+ 
+Table 122: CAC vs. ASHP – Equipment Cost per ton (Jan. 2024$) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+15 Mass Save 
+ 
+23 Mass Save 
+ 
+8 Mass Save 
+11 MassCEC  
+42 Mass Save 
+Minimum $1,091 $524 $1,246 $911 
+Lower CI $1,550 $1,500 $1,759 $3,084 
+Mean $1,927 $1,856b $2,260a $3,502b 
+Upper CI $2,303 $2,212 $2,762 $3,921 
+Maximum $3,784 $4,637 $3,845 $9,819 
+Std. Dev. $828 $994 $749 $1,820 
+a. Statistically significant from non-16 SEER ASHP at the 90% confidence level. 
+b. Statistically significant from other equipment type at the 90% confidence level. 
+Table 123: CAC vs. ASHP – Equipment Portion of Itemized Installation Costs (%) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n 15 Mass Save 23 Mass Save 8 Mass Save 11 MassCEC 
+42 Mass Save 
+Minimum 28% 28% 28% 8% 
+Lower CI 39% 45% 52% 54% 
+Mean 56% 52% 66% 59% 
+Upper CI 72% 59% 79% 63% 
+Maximum 91% 100% 92% 97% 
+Std. Dev. 24% 20% 20% 18% 
+B.5.1 Web-scraping Comparison 
+To provide additional context regarding the invoiced costs of CAC versus ASHP equipment, NMR 
+collected the costs of similarly rated equipment in September 2024. These approximately -16 
+SEER devices (14 to 15 SEER2) from a single retailer are shown in Figure 29. In this limited 
+sample, the difference in average cost per nominal ton between equipment types is $147  
+ 1  2        5  6  7  8     10 
+AS P
+CAC
+[[page 83]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+83 
+(Table 124); or $186 when excluding the $1,725/ton CAC outlier at 3.03 standard deviations. This 
+is nearly half the $333 difference between 16 SEER CEC and ASHP in Table 122, but the latter 
+likely includes additional markup. Therefore, we have another piece of evidence that CAC project 
+costs are similar to those for ASHP, but with a modest but expected premium for ASHP. 
+Figure 29: CAC vs. ASHP – Retailer Equipment Cost per nominal ton (Jan. 2024$) 
+ 
+Table 124 CAC vs. ASHP – Retailer Equipment Cost per nominal ton (Jan. 2024$) 
+ All CACs Inlier CACs ASHP 
+n 23 22 21 
+Minimum $556 $556 $739 
+Lower CI $748 $730 $927 
+Mean $851 $812 $998 
+Upper CI $954 $892 $1,068 
+Maximum $1,725 $1,725 $1,357 
+Std. Dev. $288 $221 $187 
+B.6 INSTALLATION LABOR COST 
+There are no differences among the highly variable per-unit labor costs between any of the groups 
+of equipment in Figure 30 and Table 125. Nevertheless, among the few 16 SEER projects with 
+itemized labor costs, the CAC projects are more expensive than ASHP in terms of dollars per 
+project, dollars per unit and percentage of installation project cost. 
+Figure 30: All CAC vs. All ASHP – Labor Cost per unit (Jan. 2024$) 
+ 
+ 600  700  800   00  1,000  1,100  1,200  1, 00  1, 00  1,500  1,600  1,700
+AS P
+CAC
+ 0  5  10  15  20  25   0 
+AS P
+CAC
+[[page 84]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+84 
+Table 125: CAC vs. ASHP – Labor Portion of Itemized Installation Costs (%) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+14 Mass Save 
+ 
+21 Mass Save 
+ 
+7 Mass Save 
+11 MassCEC  
+38 Mass Save 
+Minimum 19% 10% 15% 11% 
+Lower CI 30% 28% 18% 26% 
+Mean 36% 33% 27% 29% 
+Upper CI 42% 39% 35% 32% 
+Maximum 66% 66% 50% 69% 
+Std. Dev. 13% 14% 12% 13% 
+Table 126: CAC vs. ASHP – Installation Labor Costs (Jan. 2024$) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+14 Mass Save 
+ 
+21 Mass Save 
+ 
+7 Mass Save 
+11 MassCEC  
+38 Mass Save 
+Minimum $1,770 $658 $1,097 $1,097 
+Lower CI $3,038 $2,910 $1,777 $4,924 
+Mean $4,684 $4,067 $3,331 $6,447 
+Upper CI $6,329 $5,224 $4,885 $7,971 
+Maximum $12,339 $12,339 $7,614 $35,437 
+Std. Dev. $3,476 $3,074 $2,116 $6,360 
+Table 127: CAC vs. ASHP – Installation Labor Cost per unit (Jan. 2024$) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+14 Mass Save 
+ 
+21 Mass Save 
+ 
+7 Mass Save 
+11 MassCEC  
+38 Mass Save 
+Mean units 1.0 1.0 1.0 1.2 
+Minimum $1,770 $658 $1,097 $1,097 
+Lower CI $3,038 $2,814 $1,777 $3,932 
+Mean $4,684 $3,987 $3,331 $5,039 
+Upper CI $6,329 $5,159 $4,885 $6,145 
+Maximum $12,339 $12,339 $7,614 $30,288 
+Std. Dev. $3,476 $3,114 $2,116 $4,619 
+B.7 WIRING COST 
+There are no discernible differences among the proportion of project costs represented by wiring 
+activities between any of the groups of equipment in Table 128 due to the complete overlap of 
+CAC wiring proportion with those of ASHP in Figure 31. Thus, there are no differences in wiring 
+costs for 16 SEER projects. Given the higher total projects costs across all ASHP projects in  
+Table 120, the wiring costs of high SEER ASHP projects in dollars may be slightly higher than 
+those of sampled CAC invoices. 
+[[page 85]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+85 
+Figure 31: All CAC vs. All ASHP – Wiring Cost Proportion of Installation Costs (%) 
+ 
+Table 128: CAC vs. ASHP – Wiring Cost Proportion of Installation Costs (%) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+10 Mass Save 
+ 
+16 Mass Save 
+ 
+8 Mass Save 
+8 MassCEC  
+28 Mass Save 
+Minimum 5% 3% 2% 2% 
+Lower CI 6% 6% 3% 7% 
+Mean 8% 8% 9% 9% 
+Upper CI 10% 9% 16% 11% 
+Maximum 15% 15% 32% 32% 
+Std. Dev. 3% 4% 10% 6% 
+Table 129: CAC vs. ASHP – Wiring Costs (Jan. 2024$) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+10 Mass Save 
+ 
+16 Mass Save 
+ 
+8 Mass Save 
+8 MassCEC  
+28 Mass Save 
+Minimum $555 $498 $180 $180 
+Lower CI $798 $1,389 $139 $1,458 
+Mean $1,151 $1,143 $1,564 $1,920 
+Upper CI $1,504 $1,389 $2,988 $2,383 
+Maximum $2,663 $2,663 $6,637 $6,637 
+Std. Dev. $609 $562 $2,127 $1,643 
+B.8 DUCT COST 
+Due to the significant overlap of distributions in Figure 32 and wide standard deviations in Table 
+130 there are no significant differences in the proportion of project costs allocated to ductwork 
+among equipment categories. However, we also would not expect an appreciable difference since 
+any given CAC duct system could also be used for an ASHP.42 
+ 
+42 The inverse is also true, except for rare installations using small-duct, high-velocity ASHP. 
+0% 5% 10% 15% 20% 25%  0%
+AS P
+CAC
+[[page 86]]
+RESIDENTIAL HEAT PUMP INVOICE COST ANALYSIS (MA23X14-B-RHPINV) 
+   
+ 
+86 
+Figure 32: All CAC vs. All ASHP – Duct Cost Proportion of Installation Costs (%) 
+ 
+Table 130: CAC vs. ASHP – Duct Cost Proportion of Installation Costs (%) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+7 Mass Save 
+ 
+12 Mass Save 
+ 
+6 Mass Save 
+7 MassCEC  
+16 Mass Save 
+Minimum 1% 1% 4% 1% 
+Lower CI 5% 10% 6% 12% 
+Mean 19% 20% 19% 16% 
+Upper CI 33% 30% 31% 21% 
+Maximum 50% 50% 34% 39% 
+Std. Dev. 19% 19% 15% 12% 
+Table 131: CAC vs. ASHP – Duct Costs (Jan. 2024$) 
+ CAC ASHP 
+ 16 SEER All 16 SEER All 
+n  
+7 Mass Save 
+ 
+12 Mass Save 
+ 
+6 Mass Save 
+7 MassCEC  
+16 Mass Save 
+Minimum $156 $156 $499 $115 
+Lower CI $853 $1,608 $171 $3,044 
+Mean $2,854 $3,142 $4,445 $4,715 
+Upper CI $4,854 $4,676 $8,719 $6,385 
+Maximum $7,522 $7,771 $13,828 $17,523 
+Std. Dev. $2,724 $2,959 $5,196 $4,666 
+ 
+0% 5% 10% 15% 20% 25%  0%  5%  0%  5% 50%
+AS P
+CAC

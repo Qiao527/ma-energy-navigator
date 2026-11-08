@@ -1,0 +1,54 @@
+[
+  {
+    "before": "assessment",
+    "after": "weatherization",
+    "reason": "Insulation and air-sealing offers are qualified during the Home Energy Assessment.",
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/home-energy-assessments",
+        "section": "Incentives",
+        "quote": "An Energy Specialist will identify energy-saving opportunities throughout your home and make recommendations.",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "before": "assessment",
+    "after": "heat_pump",
+    "reason": "The assessment report can show the home is weatherized enough for a whole-home rebate (option B), and it is the way into DEC and income-based heat pump offers.",
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "(B) Home Energy Assessment report indicates less than $1,000 worth of weatherization recommended",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "before": "weatherization",
+    "after": "heat_pump",
+    "reason": "Whole-home heat pump rebates require the home to be sufficiently weatherized first.",
+    "sources": [
+      {
+        "url": "https://www.masssave.com/en/residential/rebates-offers-services/heating-and-cooling/heat-pumps/air-source-heat-pumps",
+        "section": "Additional eligibility requirements for the Whole-home Rebate",
+        "quote": "Homes must be sufficiently weatherized prior to heat pump installation",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  },
+  {
+    "before": "rooftop_solar",
+    "after": "tax_credit",
+    "reason": "The state credit is claimed for the expenditure on the installed system.",
+    "sources": [
+      {
+        "url": "https://www.mass.gov/info-details/mass-general-laws-c-62-ss-6",
+        "section": "§ 6(d)",
+        "quote": "a credit equal to fifteen per cent of the net expenditure for a renewable energy source property",
+        "lastVerified": "2026-11-06"
+      }
+    ]
+  }
+]
