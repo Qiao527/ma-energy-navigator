@@ -1,66 +1,65 @@
 # Every Floor
 
-**Heat pumps and efficiency programs for Massachusetts triple-deckers and two-families: which programs fit each floor, what to do first, and who saves or pays more when a building switches.**
+Heat pumps and efficiency programs for Massachusetts triple-deckers and two-families. It shows which programs fit
+each floor, what to do first, and who ends up paying more when a building switches.
 
 [![CI](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml/badge.svg)](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml)
 
-**Live page:** https://qiao527.github.io/ma-energy-navigator/
+**Try it:** https://qiao527.github.io/ma-energy-navigator/
 
-![Every Floor: the answer for a Boston triple-decker beside the building drawn floor by floor](docs/assets/every-floor.png)
+![Every Floor in use: switching between today and heat pumps, dragging the electricity price, moving the heat pumps to an owner-paid meter, and entering a building with answers that apply to every floor](docs/assets/every-floor-demo.gif)
 
-*The building shown is the demo: **demo data**, with fictional oil delivery records.*
+*The building in the demo is made up, including its oil delivery records.*
 
-An energy engineering portfolio project by **Qiao Long** (Boston College, Human-Centered Engineering).
+An energy engineering portfolio project by Qiao Long (Boston College, Human-Centered Engineering).
 
 ---
 
 ## Why it exists
 
-Massachusetts has generous efficiency and heat pump programs, but they are hard to navigate. A small landlord
-deciding about a 2–4 unit building faces three problems:
+Massachusetts has generous heat pump and efficiency programs, and they're hard to use. If you own a three-unit
+building, the rules change by unit, by who lives there, by income, by town and by install date. You often buy
+the oil while your tenants pay the electric bill a heat pump would run on. MassCEC does offer human navigators
+who walk owners through this, but only in a six-city pilot.
 
-- **Many rules.** Programs change by unit, owner, income, town and install date.
-- **Split bills.** The landlord often buys the oil, while tenants pay the electric bill a heat pump runs on.
-- **Few navigators.** MassCEC's human navigator service is a pilot in six cities.
+Households below 200% of the federal poverty level spend about 13% of their income on home energy. For everyone
+else it's about 2% (DOE LEAD Tool, 2022 update).
 
-Households below 200% of the federal poverty level spend about 13% of income on home energy, against about 2% for
-everyone else (DOE LEAD Tool, 2022 update).
+The idea came from a hackathon brief on Massachusetts buildings: energy waste, retrofit priorities, and who gets
+access to savings. The hackathon is over. This repository finishes the idea.
 
-The project started from a hackathon brief on Massachusetts buildings: energy waste, retrofit prioritization,
-building performance, tenant and owner incentives, and access to energy savings. The hackathon has ended; this
-repository finishes the idea.
+## What the page does
 
-## What it shows
+You describe the building: who lives on each floor, how it's heated, who pays which bill. Then the page shows:
 
-For a confirmed building (who lives on each floor, the heating fuel, who pays which bill), the page shows:
+1. The likely yearly change in running cost with heat pumps, as a range, next to the building drawn floor by
+   floor with each bill and who pays it.
+2. Why. One million Btu of heat costs a different amount from oil, gas, propane, baseboard and a heat pump, and
+   there's an electricity price and an efficiency at which a heat pump breaks even.
+3. Sliders for your own electricity price, fuel price and heat pump efficiency, and a switch for whether the
+   heat pumps run on tenants' meters or an owner-paid one. Every number follows.
+4. The heating cost that would move onto tenants' bills, the sanitary code rule that limits it (105 CMR 410),
+   and four fair ways to handle it. It isn't legal advice.
+5. The programs in the order to do them, what each one needs, and what only the program can confirm.
+6. A map of Designated Equity Communities and the navigator pilot cities.
+7. Every step of the math, with a source for every assumption.
 
-1. **The answer.** The yearly change in the building's heating cost with heat pumps, as a range with a
-   confidence label, beside the building drawn floor by floor. Each floor shows each bill and who pays it.
-2. **Why.** What one million Btu of heat costs from oil, gas, propane, electric baseboard and a cold-climate heat
-   pump, plus the electricity price and heat pump efficiency at which a heat pump breaks even.
-3. **What-if controls.** Your own electricity price, fuel price and heat pump efficiency, and whether the heat
-   pumps run on the tenants' meters or an owner-paid meter. Every number on the page follows.
-4. **Fairness.** Heating cost that would move onto tenants' electric bills, the Massachusetts sanitary code
-   constraint (105 CMR 410), and four fair ways to handle it. This is not legal advice.
-5. **Access.** A map of Designated Equity Communities and the MassCEC navigator pilot cities.
-6. **The plan.** Programs in the order to do them, what each requires, and what only the program can confirm.
-7. **The method.** Every step from fuel records to bills and CO₂, with every assumption's source.
+## What it found
 
-### An honest finding
+Here's the result I didn't expect when I started. At Massachusetts average prices for winter 2025–26, switching
+the demo building's heat and hot water from oil to heat pumps lands anywhere from saving about $1,250 to paying
+about $3,530 more a year. The typical case costs more, about $1,200.
 
-At Massachusetts statewide prices for winter 2025–26, the demo building's switch of heat and hot water from oil
-to heat pumps lands **between saving about $1,250 and paying about $3,530 more a year**. The typical case costs
-more, about +$1,200.
+The reason is simple once you see it. A million Btu of heat costs about $27 from an 84% efficient oil boiler.
+From a heat pump at its field-measured efficiency (2.41), it costs about $34, even on Eversource's winter heat
+pump rate, which averages $0.28/kWh over the season against $0.35 standard. Break-even is about $0.22/kWh, or an
+efficiency of about 3.1.
 
-- One million Btu of heat costs about $27 from an 84% oil boiler.
-- From a heat pump at the field-measured seasonal efficiency of 2.41, it costs about $34 on Eversource's winter
-  heat pump rate. That rate averages $0.28/kWh over the heating season, against $0.35/kWh standard.
-- Meanwhile **$2,590 to $5,500 a year** of energy cost moves from the landlord's oil bill to the tenants'
-  electric bills. That split incentive is what the page puts in front of a landlord.
+The bigger story for a landlord is who pays. On each floor's own meter, $2,590 to $5,500 a year of energy cost
+moves from the landlord's oil bill to the tenants' electric bills. The state's own energy office says it plainly:
+households "should not assume that switching fuels will automatically lead to savings."
 
-The page says so plainly and shows where the break-even point lies: about $0.22/kWh at today's efficiency, or a
-seasonal efficiency of about 3.1 at the winter heat pump rate. This matches the Department of Energy Resources'
-own caution that households "should not assume that switching fuels will automatically lead to savings."
+![The answer for the demo building beside the building drawn floor by floor](docs/assets/every-floor.png)
 
 ## The energy chain
 
@@ -83,18 +82,20 @@ All 51 assumptions and every rule are listed in the page, with links and the dat
 
 ## How the numbers stay honest
 
-- **Numbers come only from tested code.** The engine (`engine/`) computes eligibility, costs, bills, payback and
-  CO₂ as low / mid / high ranges with a confidence label and its reasons. Nothing is typed by hand into the page.
-- **Every rule and assumption has a source.** Each one carries a URL, the section, a verbatim quote and the date
-  it was checked.
-- **Quotes are machine-checked.** `npm run rules:check-drafts` verifies every quote against a saved text snapshot
-  of the source (`rules/ma/sources/`).
-- **Nothing ships without the owner's approval.** An approval is recorded in `rules/ma/approvals.json` against
-  the file's SHA-256. The loader refuses any rule file that changed after approval, and the web build fails too.
-- **Standard scenarios.** `npm run scenarios` runs fixed buildings and dates against expected results; a changed
-  result needs the owner's approval.
-- **Ask, don't guess.** Unknown facts (who pays a bill, whether the boiler heats water) become questions, never
-  assumptions.
+Every number on the page comes out of the engine in `engine/`, a tested TypeScript package. It works in low /
+mid / high ranges and attaches a confidence label with its reasons. Nothing is typed into the page by hand.
+
+Each rule and assumption carries the URL it came from, the section, a word-for-word quote and the date someone
+checked it. `npm run rules:check-drafts` confirms every quote actually appears in a saved copy of the source
+(`rules/ma/sources/`), so a misquote fails the build.
+
+Nothing ships until the owner approves it. Approvals are stored in `rules/ma/approvals.json` against each file's
+SHA-256, and the loader and the public build both refuse a file that changed afterward. The standard scenarios
+(`npm run scenarios`) pin the engine's answers for fixed buildings and dates, and a changed answer needs approval
+again.
+
+When a fact is unknown, like who pays a bill or whether the boiler heats the water, the page asks. It doesn't
+guess.
 
 The full worked example, from delivery records to bills, CO₂ and who pays, is in [`docs/methods.md`](docs/methods.md).
 

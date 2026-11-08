@@ -2,6 +2,20 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-08 (Form shortcut, demo GIF, plain copy)
+
+- **"Every floor" in the form:** heating, who pays heat, who pays electricity, whether the boiler heats water,
+  where hot water comes from afterward, and occupancy can be answered once for all floors. The field shows
+  "Differs by floor" when the floors disagree, and single floors can still be changed. — Qiao.
+- **Demo GIF in the README** (`docs/assets/every-floor-demo.gif`, about 13 s, 1.3 MB), recorded from the
+  production build with headless Chromium. — Qiao.
+- **Plain copy (humanizer pass):**
+  - footer, plan and form hints rewritten in plain words;
+  - section titles "Where extra help is available" and "Where every number comes from";
+  - CO₂ shown as "X–Y tonnes less CO₂ a year";
+  - README intro, finding and honesty sections rewritten as prose instead of bold-headed lists.
+  — Qiao.
+
 ## 2026-11-08 (Clarity pass for first-time visitors)
 
 - **Wrap-up direction:** no new features; polish so a landlord understands at a glance. — Qiao.
