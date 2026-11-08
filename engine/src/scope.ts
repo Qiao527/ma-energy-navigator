@@ -31,6 +31,8 @@ export interface Scope {
   incomeTables: Readonly<Record<string, readonly number[]>>
   /** Named predicates from rules data, keyed by id. */
   predicates: Readonly<Record<string, NamedPredicate>>
+  /** The heat pump work is done: an install date on or before today (Qiao, 2026-11-07). Absent = still planning. */
+  installed?: boolean
 }
 
 /** The closed list of facts rules may use. Renaming one is a breaking change (schema §1). */
@@ -56,6 +58,7 @@ export const FACT_PATHS = [
   'building.ownerApproval',
   'user.householdSize',
   'user.onDiscountRate',
+  'project.installed',
 ] as const
 
 export function derive(input: Input, dec: readonly DecEntry[]): Derived {
@@ -99,6 +102,7 @@ export function getFact(s: Scope, path: string): Scalar | null {
     case 'building.ownerApproval': return b.ownerApproval
     case 'user.householdSize': return s.input.household.size
     case 'user.onDiscountRate': return s.input.household.onDiscountRate
+    case 'project.installed': return s.installed ?? false
     default: throw new Error(`unknown fact path: ${path}`)
   }
 }
