@@ -1,4 +1,4 @@
-import { breakEven, heatCosts, report, withOverrides, type HeatSource, type Report, type UnitEnergy } from '../../engine/src/energy.js'
+import { breakEven, heatCosts, heatPumpPrice, report, withOverrides, type HeatSource, type Report, type UnitEnergy } from '../../engine/src/energy.js'
 import type { Estimate } from '../../engine/src/estimate.js'
 import type { Fuel, Unit } from '../../engine/src/facts.js'
 import { HEAT_COST_SHIFT_CONSTRAINT } from '../../engine/src/landlord.js'
@@ -213,7 +213,8 @@ const SOURCE_LABEL: Record<HeatSource, string> = {
 }
 function heatPrice(s: State, v: View): string {
   const list = assumptionsFor(v)
-  const rows = heatCosts(list)
+  const utility = s.input.building.electricUtility
+  const rows = heatCosts(list, utility)
   if (rows.length === 0) return ''
   const current = mainFuel(s)
   const lim = Math.max(60, Math.ceil(Math.max(...rows.map(x => x.perMMBtu.range.high)) / 20) * 20)
@@ -230,8 +231,10 @@ function heatPrice(s: State, v: View): string {
       <span class="hb-track"><span class="hb-range ${kind}" data-k="hb.${row.id}.r" style="left:${pct(e.low)};width:calc(${pct(e.high)} - ${pct(e.low)})"></span><span class="hb-dot ${kind}" data-k="hb.${row.id}.d" style="left:${pct(e.mid)}"></span></span>
       <span class="hb-value">${n(`hb.${row.id}`, e.mid, 'c2').replace('.00', '')}</span></li>`
   }).join('')
-  const be = breakEven(list, current)
-  const elec = list.find(a => a.id === 'price.electricity')?.value.mid ?? 0
+  const be = breakEven(list, current, utility)
+  const hpRate = heatPumpPrice(list, utility)
+  const elec = be?.heatPumpPricePerKwh ?? hpRate?.price.range.mid ?? 0
+  const standard = list.find(a => a.id === 'price.electricity')?.value.mid ?? 0
   const cop = list.find(a => a.id === 'heat_pump_seasonal_cop')?.value.mid ?? 0
   const lead = cur && hp
     ? `One million Btu of heat from a heat pump costs about ${n('why.hp', hp.perMMBtu.range.mid, 'c2')}, against ${n('why.cur', cur.perMMBtu.range.mid, 'c2')} from ${SOURCE_LABEL[current].toLowerCase()}. ${hp.perMMBtu.range.mid > cur.perMMBtu.range.mid ? 'At these prices, electricity costs more than the heat pump’s efficiency saves.' : 'At these prices, the heat pump’s efficiency wins.'}`
@@ -247,7 +250,9 @@ function heatPrice(s: State, v: View): string {
     <tbody>${rows.map(r => `<tr><th scope="row">${SOURCE_LABEL[r.id]}</th><td>$${num(r.perMMBtu.range.low, 2)}</td><td>$${num(r.perMMBtu.range.mid, 2)}</td><td>$${num(r.perMMBtu.range.high, 2)}</td><td>${CONF[r.perMMBtu.confidence]}</td></tr>`).join('')}</tbody></table></div></details>`
   return `<section class="band" aria-labelledby="h-why"><div class="band-text">
       <h2 id="h-why">The price of one unit of heat</h2><p>${lead}</p>${verdict}
-      <p class="muted">Test your own electricity price, ${fuelName(current)} price or heat pump efficiency in the bar above. The new winter heat pump rate lowers delivery charges. It is not counted yet.</p>
+      <p class="muted">${hpRate?.rate === 'seasonal'
+        ? `Heat pump electricity is priced at the winter heat pump rate: ${fmt(standard, 'c2')}/kWh standard, ${fmt(elec, 'c2')}/kWh for a heat pump home from November to April. `
+        : `${esc(hpRate?.note ?? '')} `}Test your own electricity price (the standard rate), ${fuelName(current)} price or heat pump efficiency in the bar above.</p>
     </div>
     <div class="band-chart"><ol class="hbars" aria-label="Cost per million Btu of heat, by system">${bars}</ol>
       <div class="hb-axis" aria-hidden="true">${ticks.map(t => `<span style="left:${pct(t)}">$${t}</span>`).join('')}</div>

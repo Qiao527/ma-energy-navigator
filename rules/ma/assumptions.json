@@ -249,7 +249,7 @@
   },
   {
     "id": "price.electricity",
-    "description": "Massachusetts statewide average electric rate (DOER): last winter to this winter's projection. The new winter heat pump rate lowers delivery charges for heat pump households, so heat pump costs here may be a little high",
+    "description": "Massachusetts statewide average electric rate (DOER): last winter to this winter's projection. It is the standard residential rate; a heat pump home on Eversource or National Grid pays less in winter (heat_pump_rate_discount.*)",
     "unit": "USD per kWh",
     "value": {
       "low": 0.33,
@@ -268,6 +268,122 @@
         "url": "https://www.mass.gov/info-details/massachusetts-household-heating-costs",
         "section": "Heat Pump Rate",
         "quote": "These seasonal delivery rates, approved by the DPU, lower winter delivery charges for households that heat with air-source or ground-source heat pumps.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_rate_discount.eversource",
+    "description": "How much less a heat pump home pays per kWh from November through April on Eversource (Eastern Massachusetts rates, effective September 1 – December 31, 2026): distribution $0.09837 → $0.05286, transmission $0.04673 → $0.01492, revenue decoupling $0.00539 → $0.00443, together $0.07828 less. Supply is unchanged. Rates reset on January 1",
+    "unit": "USD per kWh",
+    "value": {
+      "low": 0.07828,
+      "mid": 0.07828,
+      "high": 0.07828
+    },
+    "confidence": "medium",
+    "sources": [
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential, Non-Heating (R1)",
+        "quote": "Distribution Energy Charge ** $0.09837 per kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential, Non-Heating (R1)",
+        "quote": "Transmission Charge $0.04673 per kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential, Non-Heating (R1)",
+        "quote": "Revenue Decoupling Charge $0.00539 per kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential Heat Pump Service (R1HP)",
+        "quote": "Distribution Energy Charge (Winter: November - April) ** $0.05286 per kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential Heat Pump Service (R1HP)",
+        "quote": "Transmission Charge (Winter: November - April) $0.01492 per kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential Heat Pump Service (R1HP)",
+        "quote": "Revenue Decoupling Charge $0.00443 per kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.eversource.com/residential/account-billing/manage-bill/about-your-bill/rates-tariffs/electric-delivery-rates/ema",
+        "section": "Residential Heat Pump Service (R1HP)",
+        "quote": "These rates are effective September 1, 2026 - December 31, 2026.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/residential-electric-seasonal-heat-pump-rates",
+        "section": "How does the seasonal heat pump rate work?",
+        "quote": "From November 1 through April 30, eligible customers pay lower distribution and transmission charges on their electric bill. The lower rates apply to all the electricity you use, not just the electricity used by your heat pump.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/residential-electric-seasonal-heat-pump-rates",
+        "section": "Automatic Enrollment",
+        "quote": "Eversource, National Grid, and Unitil automatically enroll customers in the seasonal heat pump rates who received or currently live at a home that received a qualifying heat pump rebate through Mass Save programs on or after January 1, 2019.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heat_pump_rate_discount.national_grid",
+    "description": "How much less a heat pump home pays per kWh from November through April on National Grid (Massachusetts Electric, R-1, effective July 1, 2026): the approved rate lowers distribution from $0.11028 to $0.06791, $0.04237 less. National Grid has asked the DPU (D.P.U. 26-71) to also cut the winter transmission charge from $0.05464 to $0.00477 from November 1, 2026; if approved, the discount is $0.09224. Not yet confirmed approved, so the typical value is the approved rate",
+    "unit": "USD per kWh",
+    "value": {
+      "low": 0.04237,
+      "mid": 0.04237,
+      "high": 0.09224
+    },
+    "confidence": "low",
+    "sources": [
+      {
+        "url": "https://www.nationalgridus.com/media/pdfs/billing-payments/electric-rates/ma/2026/0726meco.pdf",
+        "section": "R-1 retail delivery, All kWh",
+        "quote": "All kWh $0.11028 ($0.00031) $0.00002 ($0.00029) $0.02463 $0.00250 $0.02713 $0.00050 $0.02451 $0.00935 $0.00315 $0.00006 $0.05464 $0.22933",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.nationalgridus.com/media/pdfs/billing-payments/electric-rates/ma/2026/0726meco.pdf",
+        "section": "R-1 retail delivery, Heat Pump kWh",
+        "quote": "Heat Pump kWh (Nov 1-Apr 30) $0.06791 ($0.00031) $0.00002 ($0.00029) $0.02463 $0.00250 $0.02713 $0.00050 $0.02451 $0.00935 $0.00315 $0.00006 $0.05464 $0.18696",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.nationalgridus.com/media/pdfs/billing-payments/electric-rates/ma/2026/0726meco.pdf",
+        "section": "Sheet 1",
+        "quote": "Effective: July 1, 2026",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.nationalgridus.com/media/pdfs/our-company/dpu/2026/national_grid_d.p.u._26-71_reissued_notice_and_order_of_notice_07.16.2026.pdf",
+        "section": "D.P.U. 26-71 notice, page 1",
+        "quote": "approval of revised heat pump rates that incorporate winter transmission charges along with related tariff revisions for effect November 1, 2026.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.nationalgridus.com/media/pdfs/our-company/dpu/2026/national_grid_d.p.u._26-71_reissued_notice_and_order_of_notice_07.16.2026.pdf",
+        "section": "D.P.U. 26-71 notice, page 2",
+        "quote": "approval of the proposed heat pump rates would result in a transmission service charge of $0.00477 per kilowatt-hour (“kWh”) for the period March 2026 through February 2027.",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/residential-electric-seasonal-heat-pump-rates",
+        "section": "How does the seasonal heat pump rate work?",
+        "quote": "From November 1 through April 30, eligible customers pay lower distribution and transmission charges on their electric bill. The lower rates apply to all the electricity you use, not just the electricity used by your heat pump.",
         "lastVerified": "2026-11-07"
       }
     ]

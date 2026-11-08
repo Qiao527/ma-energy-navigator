@@ -1,0 +1,330 @@
+Electric Delivery Rates | Eversource
+Residential
+Switch to Business Site
+Gas Emergency
+Massachusetts
+Massachusetts
+Massachusetts
+Connecticut
+New Hampshire
+Search
+Help
+sign in / sign up
+sign in
+sign out
+Menu
+Select Region
+Residential
+Switch to Business Site
+Select Service Area
+Massachusetts
+Massachusetts
+Connecticut
+New Hampshire
+Account & Billing
+View Bills & Payments
+Other Ways to Pay
+Bill & Rates Information
+Payment Plans & Assistance
+Usage Details
+Account Overview
+Manage Account Settings
+Outages & Storms
+Report or Check Power Outage
+Report or Check Gas Outage
+View Outage Map
+Storm Preparedness
+Power Restoration Process
+Power Outage Text Alerts
+Services
+Moving: Start, Stop or Transfer Service
+Construction & Renovation
+Streetlight Requests
+Claims
+Connect to Gas
+Save Money & Energy
+Trending Topics
+Energy Efficiency Programs
+Save With Efficient Products
+Energy Savings Tips & Tools
+Clean Energy Options
+Safety
+Electric Safety
+Natural Gas Safety
+Report a Gas Leak
+Report Energy Theft
+Avoiding Scams
+Call 811 Before You Dig
+About
+Our Company
+Sustainability
+Reliability
+Community
+Transmission & Distribution
+Doing Business With Us
+Residential
+...
+Account & Billing
+Manage Your Bill
+Bill & Rates Information
+Rates & Tariffs
+Electric Delivery Rates
+Information on this page is for customers in
+Boston, MA
+Not your town? Change location
+Electric Delivery Rates
+The delivery portion of your bill includes the costs of maintaining and upgrading the grid, as well as funding for critical customer services and programs, taxes and other state and federally mandated charges.
+Learn what these charges fund.
+Current Rates
+Delivery rates change twice each year – on January 1 and July 1. Rates are subject to change at the discretion of the Massachusetts Department of Public Utilities (DPU).
+The below rates are the most common for residential customers. You may have a different rate.
+View summary of electric rates in Massachusetts.
+Residential, Non-Heating
+Rates:
+R1, R2*
+This rate is available to all domestic uses in a single private dwelling, in an individual apartment or in a residential condominium in which the principal means of heating the premises is not provided by permanently installed electric space heating equipment.
+These rates are effective September 1, 2026 - December 31, 2026.
+Delivery Component
+Current Rate
+Customer Charge
+$10.00
+per month
+Distribution Energy Charge
+**
+$0.09837
+per kWh
+Revenue Decoupling Charge
+$0.00539
+per kWh
+Distributed Solar Charge
+$0.00583
+per kWh
+Renewable Energy Charge
+$0.00050
+per kWh
+Net Metering Recovery Surcharge
+$0.00625
+per kWh
+Provisional System Planning Factor
+$0.00008
+per kWh
+Electric Vehicle Program Factor
+$0.00104
+per kWh
+Transition Energy Charge
+- $0.00077
+per kWh
+Transmission Charge
+$0.04673
+per kWh
+Energy Efficiency Charge
+(Greater Boston, Cambridge and South Shore only)***
+$0.02292
+per kWh
+Energy Efficiency Charge
+(Cape Cod and Martha's Vineyard only)
+$0.03738
+per kWh
+Electric Sector Modernization Plan
+$0.00001
+per kWh
+*R-2 is a Residential Assistance rate. A 42% discount is applied to the total bill.
+Residential Heat Pump Service
+Rates:
+R1HP, R2HP*
+This rate is available to customers who qualify for residential delivery service who have an eligible device that is used to heat or supplement another heat source for their home or part of their home by transferring thermal energy from the outside with the use of the refrigeration cycle.
+These rates are effective September 1, 2026 - December 31, 2026.
+Delivery Component
+Current Rate
+Customer Charge
+$10.00
+per month
+Distribution Energy Charge (Summer: May - October)
+**
+$0.09837
+per kWh
+Distribution Energy Charge (Winter: November - April)
+**
+$0.05286
+per kWh
+Transition Energy Charge
+- $0.00077
+per kWh
+Transmission Charge (Summer: May - October)
+$0.04673
+per kWh
+Transmission Charge (Winter: November - April)
+$0.01492
+per kWh
+Revenue Decoupling Charge
+$0.00443
+per kWh
+Distributed Solar Charge
+$0.00583
+per kWh
+Renewable Energy Charge
+$0.00050
+per kWh
+Net Metering Recovery Surcharge
+$0.00625
+per kWh
+Provisional System Planning Factor
+$0.00008
+per kWh
+Electric Vehicle Program Factor
+$0.00104
+per kWh
+Energy Efficiency Charge
+(Greater Boston, Cambridge and South Shore only)***
+$0.02292
+per kWh
+Energy Efficiency Charge
+(Cape Cod and Martha's Vineyard only)
+$0.03738
+per kWh
+Electric Sector Modernization Plan
+$0.00001
+per kWh
+*R2HP is a Residential Assistance Heat Pump rate. A 42% discount is applied to the total bill.
+Residential, Heating
+Rates:
+R3, R4*
+This rate is available to all domestic uses in a single private dwelling, in an individual apartment or in a residential condominium in which the principal means of heating the premises is provided by permanently installed electric space heating equipment.
+These rates are effective September 1, 2026 - December 31, 2026.
+Delivery Component
+Current Rate
+Customer Charge
+$10.00
+per month
+Distribution Energy Charge
+**
+$0.09115
+per kWh
+Transition Energy Charge
+- $0.0004477
+per kWh
+Transmission Charge
+$0.04673
+per kWh
+Revenue Decoupling Charge
+$0.00527
+per kWh
+Distributed Solar Charge
+$0.00583
+per kWh
+Renewable Energy Charge
+$0.00050
+per kWh
+Net Metering Recovery Surcharge
+$0.00625
+per kWh
+Provisional System Planning Factor
+$0.00008
+per kWh
+Electric Vehicle Program Factor
+$0.00104
+per kWh
+Energy Efficiency Charge
+(Greater Boston, Cambridge and South Shore only)***
+$0.02292
+per kWh
+Energy Efficiency Charge
+(Cape Cod and Martha's Vineyard only)
+$0.03738
+per kWh
+Electric Sector Modernization Plan
+$0.00001
+per kWh
+*R-4 is a Residential Heating Assistance rate. A 42% discount is applied to the total bill.
+** The Distribution Energy Charge includes
+: Base Distribution, Exogenous Cost Adjustment, Pension Adjustment Factor, Residential Assistance Adjustment Factor, Attorney General Consulting Expense, Long Term Renewable Contract Adjustment, Solar Program Cost Adjustment, Basic Service Cost True Up Factor, Solar Expansion Cost Recovery Factor, Vegetation Management, Grid Modernization, Tax Act Credit Factor, Electronic Payment Recovery, Advanced Metering Infrastructure and Storm Recovery Adjustment.
+*** Greater Boston and South Shore:
+This area includes the MetroWest communities, Somerville, Arlington and Walpole (and surrounding towns) and Cambridge and South Shore (including communities around Plymouth and New Bedford).
+Archive of Past Delivery Rates
+Electric delivery rates from previous years are available.
+View archive
+Update Your Location
+Knowing your town helps us provide information customized to your service area
+When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.
+Start typing to select a town in our service territory
+Go
+Back
+Mobile Apps
+Residential
+Account & Billing
+Outages & Storms
+Services
+Save Money & Energy
+Safety
+Supplier Options
+Upload Documents
+Our Company
+About
+Service Territory
+Investors
+News
+Accessibility
+Careers
+Contact Us
+Doing Business With Us
+Affiliates
+Energy Suppliers
+Builders & Contractors
+DG, Interconnections & Net Metering
+Municipal & State Officials
+Property Management Gateway
+Procurement
+Real Estate
+©2026 Eversource. All rights reserved
+Sitemap
+Terms & Conditions
+Privacy Policy
+©2026 Eversource. All rights reserved
+Choose your location
+Select a state to get the information you need for your service area.
+Connecticut
+Massachusetts
+New Hampshire
+Power Outage
+Gas Emergency
+Terms & Conditions
+Privacy Policy
+©2024 Eversource. All rights reserved.
+Begin Your Search
+Search this site
+This website uses cookies and similar technologies to enable our website functionalities, like enhancing your user experience or analyzing site performance and traffic. We also share information about your use of our site with our social media, advertising, and analytics partners. You can exercise your rights to opt out of the sale or processing of personal data for targeted advertising or profiling by clicking on the link "Your Opt-Out Rights." For more details, see our Cookie Notice.
+View our privacy policy to learn more
+Accept Cookies
+Reject Cookies
+Manage cookie preferences
+Manage Cookie Preferences
+When you visit our website, we store cookies on your browser to collect information. The information collected might relate to you, your preferences, or your device, and is mostly used to make the site work as you expect and to provide a more personalized web experience. However, you can choose not to allow certain types of cookies, which may impact your experience of the site and the services we are able to offer. Click on the different category headings to learn more and change our default settings according to your preference. You can exercise your rights to opt out by clicking on "Sale of Personal Data and Targeted Advertisement" below. You cannot opt out of our First Party Strictly Necessary Cookies as they are deployed in order to ensure the proper functioning of our website, such as prompting the cookie banner and remembering your settings (e.g. to log into your account, to redirect you when you log out, etc.). For more information about the First and Third-Party Cookies used please follow this link.
+Visit our privacy center for more information
+Allow All
+Strictly Necessary Cookies
+Always Active
+These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information.
+Functional Cookies
+Functional Cookies
+These cookies enable the website to provide enhanced functionality and personalization. They may be set by us or by third party providers whose services we have added to our pages. If you do not allow these cookies then some or all of these services may not function properly.
+Performance Cookies
+Performance Cookies
+These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous. If you do not allow these cookies we will not know when you have visited our site, and will not be able to monitor its performance.
+Targeting Cookies
+Targeting Cookies
+These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant ads on other sites. They do not store directly personal information but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+Cookie List
+Clear
+checkbox label
+label
+Apply
+Cancel
+Consent
+Leg.Interest
+checkbox label
+label
+checkbox label
+label
+checkbox label
+label
+Confirm My Choices

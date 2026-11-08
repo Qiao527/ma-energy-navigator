@@ -2,6 +2,28 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Seasonal heat pump rate)
+
+- **Technical:** heat pump electricity is priced at the standard statewide rate minus the electric company's
+  winter heat pump discount (`heatPumpPrice`, engine). Eversource (and Cape Light Compact towns, which Eversource
+  serves) $0.07828/kWh: distribution, transmission and revenue decoupling, rates effective Sept 1 – Dec 31, 2026.
+  National Grid $0.04237/kWh approved (distribution); up to $0.09224/kWh if D.P.U. 26-71 (winter transmission)
+  is approved, so confidence is low. Unitil (no sourced figure yet), municipal and unknown companies use the
+  standard rate, with a note. The home is assumed enrolled (automatic with a Mass Save heat pump rebate). The
+  discount on the household's other winter electricity is left out (conservative).
+- **Effect on Story 1 (Boston, Eversource):** the answer moves from "+$870–4,820 a year" to "between saving $550
+  and paying $2,690 more". A heat pump's heat costs about $33 per MMBtu against $27 from oil.
+- **Approved:** the two assumptions (quote check passed) moved into `rules/ma/assumptions.json`; approval run at
+  Qiao's instruction ("好"). — Qiao.
+
+## 2026-11-07 (Standard scenarios approved)
+
+- **Nine scenario baselines approved** (`approved: {by: Qiao}`); `npm run scenarios` now checks them. — Qiao.
+- **`story1-installed-deadline-passed` held:** an installed project still shows the DEC no-cost rental heat pump
+  as potential, which needs enrollment before installation. It is re-recorded and re-reviewed after F1. — Qiao.
+- **Tenant view keeps one free weatherization offer per unit** (best-of): an income-eligible tenant sees the
+  rental-unit 100% insulation offer, not also Income Eligible weatherization. — Qiao (kept as recommended).
+
 ## 2026-11-07 (Positioning: an energy engineering portfolio; first public version today)
 
 - **The project stays a portfolio project, now framed as an energy engineering portfolio.** Why: the goal is

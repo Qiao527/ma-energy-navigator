@@ -1,5 +1,6 @@
 import { combine, estimate, type Estimate } from './estimate.js'
 import { InputSchema, type Fuel, type Input } from './facts.js'
+type ElectricUtility = NonNullable<Input['building']['electricUtility']>
 import { heatPumpSwitch, KWH_PER_MMBTU, splitByPayer, type PayerSplit, type SwitchEstimates } from './finance.js'
 import { landlordView, type HotWaterProject, type LandlordView, type UnitProject } from './landlord.js'
 import { navigate, type NavigateOptions, type NavigateResult } from './navigate.js'
@@ -55,6 +56,36 @@ function fuelSide(fuel: Fuel, list: readonly Assumption[]): { price: Estimate; e
   return { price: combine(div(price.range, heat.range), [price, heat]), efficiency, kgCo2 }
 }
 
+/**
+ * What a heat pump household pays per kWh in winter. Eversource, National Grid and Unitil lower winter delivery
+ * charges (Nov 1 – Apr 30) for homes heated by a heat pump; enrollment is automatic with a Mass Save heat pump
+ * rebate. Cape Light Compact towns get delivery from Eversource. Municipal utilities have no such rate.
+ * The discount also lowers the household's other winter electricity; that saving is left out (conservative).
+ */
+export interface HeatPumpPrice { price: Estimate; rate: 'seasonal' | 'standard'; note: string | null }
+const DELIVERY: Partial<Record<ElectricUtility, 'eversource' | 'national_grid' | 'unitil'>> = {
+  eversource: 'eversource', cape_light_compact: 'eversource', national_grid: 'national_grid', unitil: 'unitil',
+}
+const COMPANY = { eversource: 'Eversource', national_grid: 'National Grid', unitil: 'Unitil' } as const
+export function heatPumpPrice(list: readonly Assumption[], utility: ElectricUtility | null | undefined): HeatPumpPrice | null {
+  const elec = find(list, 'price.electricity')
+  if (elec === null) return null
+  const standard = (note: string | null): HeatPumpPrice => ({ price: elec, rate: 'standard', note })
+  if (utility === undefined) return standard(null)
+  if (utility === null) return standard('Electric company unknown, so the winter heat pump rate is not counted.')
+  if (utility === 'municipal') return standard('Municipal electric companies have no state seasonal heat pump rate, so the standard rate is used.')
+  const company = DELIVERY[utility]
+  const discount = company === undefined ? null : find(list, `heat_pump_rate_discount.${company}`)
+  if (company === undefined || discount === null) {
+    return standard(`There is no sourced winter heat pump discount for ${company ? COMPANY[company] : utility} yet, so the standard rate is used.`)
+  }
+  return {
+    price: combine(sub(elec.range, discount.range), [elec, discount], 'winter seasonal heat pump rate (Nov 1 – Apr 30)'),
+    rate: 'seasonal',
+    note: `Heat pump electricity uses ${COMPANY[company]}'s seasonal heat pump rate (assumes the home is enrolled, which is automatic with a Mass Save heat pump rebate). The rate also lowers other winter electricity; that saving is not counted.`,
+  }
+}
+
 function compare(yours: Estimate, typical: Estimate): Comparison {
   const position = yours.range.mid > typical.range.high ? 'higher_than_most' : yours.range.mid < typical.range.low ? 'lower_than_most' : 'typical'
   const message = {
@@ -97,13 +128,15 @@ export function unitEnergy(input: Input, unitId: string, list: readonly Assumpti
     return out
   }
   const side = fuelSide(u.heatingFuel, list)
-  const elec = find(list, 'price.electricity')
+  const hp = heatPumpPrice(list, input.building.electricUtility)
+  const elec = hp?.price ?? null
   const cop = find(list, 'heat_pump_seasonal_cop')
   const gridLb = find(list, 'co2_lb_per_mwh.grid')
   if (side === null || elec === null || cop === null || gridLb === null) {
     notes.push(`There is no sourced price, efficiency or emission factor for ${u.heatingFuel} or for heat pumps yet, so bills are not estimated.`)
     return out
   }
+  if (hp?.note) notes.push(hp.note)
   out.bills = heatPumpSwitch({ load: heatLoad, fuelEfficiency: side.efficiency, fuelPricePerMMBtu: side.price, seasonalCop: cop, electricityPricePerKwh: elec })
   out.split = splitByPayer(out.bills, { heatingFuel: u.heatingFuel, heatPaidBy: u.heatPaidBy, electricPaidBy: opts.heatPumpMeter === 'owner' ? 'owner' : u.electricPaidBy, upfrontNet: null })
 
@@ -208,13 +241,13 @@ export function report(rawInput: unknown, rules: RuleSet, options: ReportOptions
 export type HeatSource = 'oil' | 'natural_gas' | 'propane' | 'electric_resistance' | 'heat_pump'
 
 /** What one MMBtu of heat delivered to the home costs with each source, at sourced Massachusetts prices. */
-export function heatCosts(list: readonly Assumption[]): { id: HeatSource; perMMBtu: Estimate }[] {
+export function heatCosts(list: readonly Assumption[], utility?: ElectricUtility | null): { id: HeatSource; perMMBtu: Estimate }[] {
   const out: { id: HeatSource; perMMBtu: Estimate }[] = []
   for (const fuel of ['oil', 'natural_gas', 'propane', 'electric_resistance'] as const) {
     const s = fuelSide(fuel, list)
     if (s) out.push({ id: fuel, perMMBtu: combine(div(s.price.range, s.efficiency.range), [s.price, s.efficiency]) })
   }
-  const elec = find(list, 'price.electricity')
+  const elec = heatPumpPrice(list, utility)?.price
   const cop = find(list, 'heat_pump_seasonal_cop')
   if (elec && cop) out.push({ id: 'heat_pump', perMMBtu: combine(div(scale(elec.range, KWH_PER_MMBTU), cop.range), [elec, cop]) })
   return out
@@ -224,13 +257,17 @@ export function heatCosts(list: readonly Assumption[]): { id: HeatSource; perMMB
  * Where a heat pump costs the same as the current fuel, at typical (mid) values: the electricity price at today's
  * heat pump efficiency, and the efficiency at today's electricity price.
  */
-export function breakEven(list: readonly Assumption[], fuel: Fuel): { electricityPricePerKwh: number; seasonalCop: number } | null {
+export function breakEven(list: readonly Assumption[], fuel: Fuel, utility?: ElectricUtility | null): { electricityPricePerKwh: number; seasonalCop: number; heatPumpPricePerKwh: number } | null {
   const s = fuelSide(fuel, list)
-  const elec = find(list, 'price.electricity')
+  const elec = heatPumpPrice(list, utility)?.price
   const cop = find(list, 'heat_pump_seasonal_cop')
-  if (s === null || elec === null || cop === null) return null
+  if (s === null || !elec || cop === null) return null
   const fuelPer = s.price.range.mid / s.efficiency.range.mid
-  return { electricityPricePerKwh: (fuelPer * cop.range.mid) / KWH_PER_MMBTU, seasonalCop: (elec.range.mid * KWH_PER_MMBTU) / fuelPer }
+  return {
+    electricityPricePerKwh: (fuelPer * cop.range.mid) / KWH_PER_MMBTU,
+    seasonalCop: (elec.range.mid * KWH_PER_MMBTU) / fuelPer,
+    heatPumpPricePerKwh: elec.range.mid,
+  }
 }
 
 /** What-if values (E7): the user's own price or efficiency replaces the sourced range with that exact value. Unknown ids are ignored. */

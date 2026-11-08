@@ -126,5 +126,13 @@
     "checkedOn": "2026-11-07",
     "approvedBy": "Qiao",
     "approvedOn": "2026-11-07"
+  },
+  {
+    "file": "assumptions.json",
+    "sha256": "9d5fc91d8b056e5bd7ebe31c1f93b889b7bf9bcd8a127aff59b194423329dd06",
+    "draftedBy": "model-draft",
+    "checkedOn": "2026-11-08",
+    "approvedBy": "Qiao",
+    "approvedOn": "2026-11-07"
   }
 ]

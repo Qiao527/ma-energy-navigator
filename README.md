@@ -48,15 +48,17 @@ For a confirmed building (who lives on each floor, the heating fuel, who pays wh
 
 ### An honest finding
 
-At Massachusetts statewide prices for winter 2025–26, the demo building's switch from oil to heat pumps
-**raises** running costs:
+At Massachusetts statewide prices for winter 2025–26, the demo building's switch from oil to heat pumps is
+**about break-even at best and more expensive in the typical case**: from saving about $550 to paying about
+$2,690 more a year.
 
-- one million Btu costs about $27 from an 84% oil boiler;
-- it costs about $43 from a heat pump at the field-measured seasonal efficiency of 2.41.
+- One million Btu of heat costs about $27 from an 84% oil boiler.
+- From a heat pump at the field-measured seasonal efficiency of 2.41, it costs about $33 on Eversource's winter
+  heat pump rate ($0.27/kWh instead of $0.35/kWh standard).
 
-The page says so plainly and shows where the break-even point lies (about $0.22/kWh at today's efficiency). This
-matches the Department of Energy Resources' own caution that households "should not assume that switching fuels
-will automatically lead to savings." The new winter heat pump electric rate is not modeled yet.
+The page says so plainly and shows where the break-even point lies: about $0.22/kWh at today's efficiency, or a
+seasonal efficiency of about 3.0 at the winter heat pump rate. This matches the Department of Energy Resources'
+own caution that households "should not assume that switching fuels will automatically lead to savings."
 
 ## The energy chain
 
@@ -69,11 +71,12 @@ will automatically lead to savings." The new winter heat pump electric rate is n
 | No records | Typical heat load and heat pump size for similar buildings | ResStock, by fuel and vintage (25th / 50th / 75th percentile) |
 | Heat pump electricity | Heat ÷ seasonal COP (1.90 / 2.41 / 2.80) | Cadmus cold-climate heat pump field study (MassCEC, NYSERDA, DOE) |
 | Bills | Statewide prices for this winter and last | Massachusetts DOER, Household Heating Costs |
+| Heat pump rate | Winter (Nov–Apr) delivery discount by electric company | Eversource and National Grid tariffs; D.P.U. 26-71 |
 | CO₂ | Fuel factors; New England grid factor | EPA Emission Factors Hub 2025 (eGRID NEWE) |
 | Project cost | Tons × installed cost per ton | EEAC Residential Heat Pump Invoice Cost Study |
 | Incentives | Each program's published rules, with verbatim quotes | Mass Save, mass.gov, DPU, M.G.L. |
 
-All 47 assumptions and every rule are listed in the page, with links and the date each was checked.
+All 49 assumptions and every rule are listed in the page, with links and the date each was checked.
 
 ## How the numbers stay honest
 
