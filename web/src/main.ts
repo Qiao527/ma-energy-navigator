@@ -140,9 +140,10 @@ reportEl.addEventListener('click', e => {
   if (b.dataset.mode) view.mode = b.dataset.mode as View['mode']
   if (b.dataset.meter) view.meter = b.dataset.meter as View['meter']
   if (b.dataset.zoom) view.zoom = b.dataset.zoom as View['zoom']
-  const sel = b.dataset.mode ? `[data-mode="${b.dataset.mode}"]` : b.dataset.zoom ? `[data-zoom="${b.dataset.zoom}"]` : null
+  // Re-rendering replaces the button; put focus back on its replacement (WCAG 2.4.3).
+  const sel = b.dataset.mode ? `[data-mode="${b.dataset.mode}"]` : b.dataset.zoom ? `[data-zoom="${b.dataset.zoom}"]` : b.dataset.meter ? `button[data-meter="${b.dataset.meter}"]` : null
   render()
-  if (sel) reportEl.querySelector<HTMLElement>(sel)?.focus()
+  if (sel) (reportEl.querySelector<HTMLElement>(sel) ?? (b.dataset.meter ? document.querySelector<HTMLElement>(`#whatif [data-meter="${b.dataset.meter}"]`) : null))?.focus()
 })
 document.querySelectorAll<HTMLButtonElement>('#whatif [data-meter]').forEach(b =>
   b.addEventListener('click', () => { view.meter = b.dataset.meter as View['meter']; render() }))

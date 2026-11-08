@@ -37,14 +37,13 @@ describe('vintage bands (ResStock groups)', () => {
 describe('heating need from the user’s fuel records (Task 16)', () => {
   const recs = [{ year: 2024, quantity: 400, unit: 'gallons' as const }, { year: 2025, quantity: 500, unit: 'gallons' as const }]
   test('two seasons: min / mean / max × heat content × efficiency, confidence medium', () => {
-    const e = heatLoadFromRecords(recs, 'oil', LIST)
+    const e = heatLoadFromRecords(recs, 'oil', LIST, false)
     const k = 0.1385 * 0.84
     expect(e?.range.low).toBeCloseTo(400 * k, 6)
     expect(e?.range.mid).toBeCloseTo(450 * k, 6)
     expect(e?.range.high).toBeCloseTo(500 * k, 6)
     expect(e?.confidence).toBe('medium')
     expect(e?.why.join(' ')).toMatch(/2 heating seasons/)
-    expect(e?.why.join(' ')).toMatch(/hot water/)
   })
   test('deliveries in the same season are added up', () => {
     const e = heatLoadFromRecords([{ year: 2024, quantity: 150, unit: 'gallons' }, { year: 2024, quantity: 250, unit: 'gallons' }], 'oil', LIST)
@@ -106,8 +105,13 @@ describe('hot water from the same boiler (F2, Qiao 2026-11-07)', () => {
     expect(e?.confidence).toBe('medium')
     expect(e?.why.join(' ')).not.toMatch(/hot water/)
   })
-  test('not yet answered: no change, the caveat stays', () => {
-    expect(heatLoadFromRecords(recs, 'oil', LIST, null)?.why.join(' ')).toMatch(/may be overstated/)
+  test('not yet answered: the range covers both answers (low end with the widest share out), confidence low, the caveat stays', () => {
+    const e = heatLoadFromRecords(recs, 'oil', LIST, null)
+    expect(e?.range.low).toBeCloseTo(400 * k * (1 - 0.272), 6)
+    expect(e?.range.mid).toBeCloseTo(450 * k, 6)
+    expect(e?.range.high).toBeCloseTo(500 * k, 6)
+    expect(e?.confidence).toBe('low')
+    expect(e?.why.join(' ')).toMatch(/may be overstated/)
   })
   test('quantitiesFor passes the unit’s answer through', () => {
     const i = building([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: true, fuelRecords: recs })], 1910)
@@ -117,7 +121,7 @@ describe('hot water from the same boiler (F2, Qiao 2026-11-07)', () => {
 
 describe('quantitiesFor: the most specific source wins', () => {
   test('records → medium heat load; ResStock fuel × vintage → tons; cost = tons × $/ton', () => {
-    const i = building([unit('1', { heatingFuel: 'oil', fuelRecords: [{ year: 2024, quantity: 400, unit: 'gallons' }, { year: 2025, quantity: 500, unit: 'gallons' }] })], 1910)
+    const i = building([unit('1', { heatingFuel: 'oil', hotWaterFromBoiler: false, fuelRecords: [{ year: 2024, quantity: 400, unit: 'gallons' }, { year: 2025, quantity: 500, unit: 'gallons' }] })], 1910)
     const q = quantitiesFor(i, LIST)('1')
     expect(q.heatLoadMMBtu?.confidence).toBe('medium')
     expect(q.heatPumpTons?.range).toEqual(range(2.1, 2.6, 3.4))

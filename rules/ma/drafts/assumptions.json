@@ -426,6 +426,37 @@
     ]
   },
   {
+    "id": "heating_hdd_share.ma.nov_apr",
+    "description": "Share of the Massachusetts heating season (population-weighted heating degree days, NOAA CPC) that falls in November–April, when the seasonal heat pump rate applies. Normal winter: cumulative normal HDD through April (6,049 + 20 = 6,069) minus through October (480 + 137 = 617), over the full-season normal of 6,407: 0.851. Winter 2025–26 as it happened: (6,049 − 480) ÷ 6,327 = 0.880",
+    "unit": "fraction of the heating season",
+    "value": {
+      "low": 0.851,
+      "mid": 0.851,
+      "high": 0.88
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2025/Oct%202025.txt",
+        "section": "Monthly data for Oct 2025, Massachusetts (month total, deviations, cumulative from July 1)",
+        "quote": "MASSACHUSETTS 381 -69 -5 480 -137 9 -22 2",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Apr%202026.txt",
+        "section": "Monthly data for Apr 2026, Massachusetts",
+        "quote": "MASSACHUSETTS 493 -80 -8 6049 -20 304 0 5",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Jun%202026.txt",
+        "section": "Monthly data for Jun 2026, Massachusetts",
+        "quote": "MASSACHUSETTS 19 -43 -25 6327 -80 313 -1 5",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
     "id": "heat_pump_seasonal_cop",
     "description": "Measured seasonal heating efficiency of cold-climate heat pumps in whole-home use in Massachusetts and New York homes (Cadmus field study, 2020–21 winter, 23 homes): mixed systems 1.90, all whole-home 2.41, ductless 2.80. That winter was milder than average, so a cold winter may be lower",
     "unit": "COP (heat out / electricity in)",

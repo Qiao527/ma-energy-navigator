@@ -2,6 +2,15 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Phase 1 independent review)
+
+- **Nine findings, all confirmed and fixed** (`docs/reviews/phase-1-review.md`). Two are model changes:
+  - an unanswered hot-water question widens the heat load range;
+  - the winter heat pump discount is weighted by the November–April share of the heating season.
+  Building-wide figures now need every floor. — Technical.
+- **Rule draft (waiting for Qiao):** `heating_hdd_share.ma.nov_apr` 0.851 / 0.851 / 0.880 from NOAA CPC monthly
+  state data. Approved together with the heat pump water heater value.
+
 ## 2026-11-07 (F3, F4)
 
 - **Technical (F3):** `demoData` is a required field on every scenario; all ten are invented buildings, so all are

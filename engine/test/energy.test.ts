@@ -207,21 +207,22 @@ describe('report: heat pump meter option reaches the landlord view', () => {
 })
 
 describe('seasonal heat pump rate: winter delivery discount by electric company', () => {
-  const RATED = [...LIST, a('heat_pump_rate_discount.eversource', 0.0783, 0.0783, 0.0783), a('heat_pump_rate_discount.national_grid', 0.0424, 0.0424, 0.0424)]
+  const W = 0.851
+  const RATED = [...LIST, a('heat_pump_rate_discount.eversource', 0.0783, 0.0783, 0.0783), a('heat_pump_rate_discount.national_grid', 0.0424, 0.0424, 0.0424), a('heating_hdd_share.ma.nov_apr', W, W, W)]
   const at = (electricUtility: 'eversource' | 'national_grid' | 'unitil' | 'cape_light_compact' | 'municipal' | null) =>
     InputSchema.parse(input({ userUnitId: '1', building: { electricUtility, units: [unit('1', { heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: 'tenant', fuelRecords: RECS, hotWaterFromBoiler: false })] } }))
   const load = 350 * 0.1385 * 0.84
   test('Eversource: heat pump kWh are priced at the statewide rate minus the winter discount', () => {
     const u = unitEnergy(at('eversource'), '1', RATED)
-    expect(u.bills?.electricBill.range.mid).toBeCloseTo((load * KWH_PER_MMBTU / 2.41) * (0.35 - 0.0783), 6)
-    expect(u.bills?.electricBill.range.low).toBeCloseTo((load * KWH_PER_MMBTU / 2.8) * (0.33 - 0.0783), 6)
+    expect(u.bills?.electricBill.range.mid).toBeCloseTo((load * KWH_PER_MMBTU / 2.41) * (0.35 - 0.0783 * W), 6)
+    expect(u.bills?.electricBill.range.low).toBeCloseTo((load * KWH_PER_MMBTU / 2.8) * (0.33 - 0.0783 * W), 6)
     expect(u.notes.join(' ')).toMatch(/seasonal heat pump rate/)
   })
   test('Cape Light Compact towns are Eversource for delivery, so the same discount applies', () => {
     expect(heatPumpPrice(RATED, 'cape_light_compact')?.rate).toBe('seasonal')
   })
   test('National Grid uses its own discount', () => {
-    expect(heatPumpPrice(RATED, 'national_grid')?.price.range.mid).toBeCloseTo(0.35 - 0.0424, 9)
+    expect(heatPumpPrice(RATED, 'national_grid')?.price.range.mid).toBeCloseTo(0.35 - 0.0424 * W, 9)
   })
   test('a municipal utility, Unitil (no sourced figure yet) or an unknown company: the standard rate, and the page says why', () => {
     for (const c of ['municipal', 'unitil', null] as const) {
@@ -237,18 +238,51 @@ describe('seasonal heat pump rate: winter delivery discount by electric company'
   test('without the discount assumption the standard rate is used (no invented discount)', () => {
     expect(heatPumpPrice(LIST, 'eversource')?.rate).toBe('standard')
   })
+  test('the discount covers only the November–April share of the heating season; without that share, no discount is assumed', () => {
+    expect(heatPumpPrice(RATED.filter(x => x.id !== 'heating_hdd_share.ma.nov_apr'), 'eversource')?.rate).toBe('standard')
+  })
   test('the price of heat and the break-even efficiency use the building’s heat pump rate; the break-even price is the rate to beat', () => {
     const hp = heatCosts(RATED, 'eversource').find(x => x.id === 'heat_pump')
-    expect(hp?.perMMBtu.range.mid).toBeCloseTo(KWH_PER_MMBTU / 2.41 * (0.35 - 0.0783), 6)
+    expect(hp?.perMMBtu.range.mid).toBeCloseTo(KWH_PER_MMBTU / 2.41 * (0.35 - 0.0783 * W), 6)
     expect(heatCosts(RATED).find(x => x.id === 'heat_pump')?.perMMBtu.range.mid).toBeCloseTo(KWH_PER_MMBTU / 2.41 * 0.35, 6)
     const b = breakEven(RATED, 'oil', 'eversource')
     const oilPer = 3.1 / 0.1385 / 0.84
-    expect(b?.seasonalCop).toBeCloseTo((0.35 - 0.0783) * KWH_PER_MMBTU / oilPer, 6)
+    expect(b?.seasonalCop).toBeCloseTo((0.35 - 0.0783 * W) * KWH_PER_MMBTU / oilPer, 6)
     expect(b?.electricityPricePerKwh).toBeCloseTo(oilPer * 2.41 / KWH_PER_MMBTU, 6)
-    expect(b?.heatPumpPricePerKwh).toBeCloseTo(0.35 - 0.0783, 9)
+    expect(b?.heatPumpPricePerKwh).toBeCloseTo(0.35 - 0.0783 * W, 9)
   })
   test('a what-if electricity price is the standard rate; the discount still comes off it', () => {
     const h = heatPumpPrice(withOverrides(RATED, { 'price.electricity': 0.3 }), 'eversource')
-    expect(h?.price.range.mid).toBeCloseTo(0.3 - 0.0783, 9)
+    expect(h?.price.range.mid).toBeCloseTo(0.3 - 0.0783 * W, 9)
+  })
+})
+
+describe('report: a building-wide answer covers every floor (review 2 and 4)', () => {
+  const rulesDir = fileURLToPath(new URL('../../rules/ma/', import.meta.url))
+  const rules = loadRuleSet(rulesDir, { requireApproval: false, overlayDir: `${rulesDir}drafts` })
+  const list = loadAssumptions(rulesDir, { requireApproval: false, overlayDir: `${rulesDir}drafts` })
+  const opts = { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false }
+  const oil = (id: string, over: Parameters<typeof unit>[1] = {}) => unit(id, {
+    occupancy: id === '1' ? 'owner' : 'renter', heatingFuel: 'oil', heatPaidBy: 'owner', electricPaidBy: id === '1' ? 'owner' : 'tenant', fuelRecords: RECS, hotWaterFromBoiler: false, ...over,
+  })
+  test('one floor cannot be estimated: no building total, no CO₂ total, no landlord view, and the reason names the floor', () => {
+    const r = report(input({ role: 'owner_occupant_landlord', userUnitId: '1', building: { yearBuilt: 1910, units: [oil('1'), oil('2'), oil('3', { heatingFuel: null })] } }), rules, opts, list)
+    expect(r.notEstimated).toEqual(['3'])
+    expect(r.buildingChange).toBeNull()
+    expect(r.co2Total).toBeNull()
+    expect(r.landlord).toBeNull()
+    expect(r.landlordReason).toMatch(/3/)
+  })
+  test('a floor whose tenant buys the oil still counts in the building total, but not in the landlord’s own saving', () => {
+    const r = report(input({ role: 'owner_occupant_landlord', userUnitId: '1', building: { yearBuilt: 1910, units: [oil('1'), oil('2', { heatPaidBy: 'tenant' })] } }), rules, opts, list)
+    const net = (id: string) => r.units.find(u => u.unitId === id)?.bills?.net.range.mid ?? NaN
+    expect(r.notEstimated).toEqual([])
+    expect(r.buildingChange?.range.mid).toBeCloseTo(net('1') + net('2'), 6)
+    expect(r.landlord?.realSavings?.range.mid).toBeCloseTo(net('1'), 6)
+  })
+  test('a floor already on a heat pump has nothing to switch and does not block the total', () => {
+    const r = report(input({ role: 'owner_occupant_landlord', userUnitId: '1', building: { yearBuilt: 1910, units: [oil('1'), oil('2', { heatingFuel: 'heat_pump' })] } }), rules, opts, list)
+    expect(r.notEstimated).toEqual([])
+    expect(r.buildingChange).not.toBeNull()
   })
 })
