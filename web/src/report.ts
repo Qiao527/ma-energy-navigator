@@ -91,7 +91,11 @@ function headline(r: Report, s: State): { text: string; e: Estimate | null } {
     if (e.range.high <= 0) return { e, text: `With heat pumps, ${who} would go down ${rangeN('hl', -e.range.high, -e.range.low)} a year.` }
     return { e, text: `With heat pumps, ${who} would change by ${signedN('hl', e)} a year.` }
   }
-  if (r.notEstimated.length > 0) return { e: null, text: `Add the heating fuel and fuel records for ${r.notEstimated.map(id => `floor ${id}`).join(' and ')} to see the whole building.` }
+  if (r.notEstimated.length > 0) {
+    const ids = r.notEstimated
+    const which = ids.length === 1 ? `floor ${ids[0]}` : `floors ${ids.slice(0, -1).join(', ')} and ${ids[ids.length - 1]}`
+    return { e: null, text: `Add the heating fuel and fuel records for ${which} to see the whole building.` }
+  }
   return { e: null, text: 'Tell us how each floor is heated, and who pays which bill, to see who saves and who pays more.' }
 }
 
@@ -448,6 +452,11 @@ function rest(r: Report): string {
 }
 
 export function reportHtml(s: State, v: View): string {
+  if (s.input.building.municipality.trim() === '') {
+    return `<section class="empty" aria-labelledby="h-answer"><h1 id="h-answer" class="headline">Start with the building’s city or town.</h1>
+      <p>Then add how each floor is heated and who pays which bill. Every number on this page follows from those answers.</p>
+      <p><button type="button" data-action="edit">Enter your building</button></p></section>`
+  }
   const { r, error } = compute(s, v)
   if (error || !r) return `<p class="error" role="alert">This building can’t be estimated yet: ${esc(error ?? 'unknown error')}. Check the details in “Edit the building”.</p>`
   return `${hero(r, s, v)}${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r) : ''}${mapSection(s, v.zoom)}${plan(r)}${engineering(r, s)}${rest(r)}`

@@ -2,6 +2,14 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-08 (Outside audit: three fixes)
+
+- **Town names match regardless of case and spaces** (`derive`). "boston" was not found as a Designated Equity
+  Community while the map highlighted it. Tested.
+- **A blank town shows a "start here" state**, not a validation error. An empty text field stays an empty string
+  instead of turning into null.
+- **Any edit clears the demo label**, so the user's own numbers are never marked "demo data". — Technical.
+
 ## 2026-11-07 (Phase 1 closed)
 
 - **Approved:** the heat pump water heater electricity and the November–April season share ("批准数据"), and the

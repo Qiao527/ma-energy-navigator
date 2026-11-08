@@ -128,8 +128,11 @@ export function formHtml(s: State): string {
 }
 
 export function setPath(s: State, path: string, kind: Kind, value: string): void {
+  // Once the user changes anything, these are no longer the demo's numbers (audit 2026-11-08).
+  s.demo = false
   const band = value.match(/^(\d+)-(\d+)$/)
-  const v: unknown = value === '' ? null
+  const v: unknown = kind === 'text' ? value
+    : value === '' ? null
     : kind === 'band' ? (band ? { low: Number(band[1]), high: Number(band[2]) } : null)
     : kind === 'tri' ? value === 'yes'
     : kind === 'int' ? Math.round(Number(value))
