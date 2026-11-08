@@ -1,0 +1,930 @@
+[[page 1]]
+Impact Evaluation of the Heat Pump Water Heater 
+and Electronically Commutated Motor Circulator Pump Measures
+Summary of Methods and Findings   |   June 2026
+
+[[page 2]]
+CONTENTS
+ Project background
+ The measures
+ Evaluation objectives
+ Evaluation activities and findings
+ Key findings
+ Summary of each evaluation activity and key findings
+ Benefit cost results
+ Recommended TRM changes
+
+[[page 3]]
+BACKGROUND
+3
+[[page 4]]
+WHY DO WE DO EVALUATIONS?
+ Independent evaluation of Trust programs are required by Maine law
+ The Trust shall 
+ arrange for an independent evaluation 
+ of each major program implemented under this section
+ at least once every 5 years
+ include the results in the annual report submitted to the PUC and Legislature
+ The evaluation must
+ Include accounting audit of the program 
+ Include evaluation of program effectiveness in meeting goals
+ Be conducted by a competent professional with expertise in energy efficiency matters
+ Chapter 35-A, Section 10104 of Maine Statutes
+ Assess past program performance
+ Inform future savings estimates and program design changes
+Project Background
+
+[[page 5]]
+EVALUATION OBJECTIVES
+ Estimate the gross energy savings (kWh), summer and winter demand reduction (kW), and 
+fossil fuel impacts (MMBtu) for heat pump water heaters and electronically commutated 
+motor circulator pumps
+ Conduct detailed measurement and verification on a sample of projects
+ Calculate a “realization rate” equal to the ratio of evaluated savings to claimed savings
+ Extrapolate the findings from the sample to the population
+ Recommend changes to the Technical Reference Manual (TRM) and factor schedule in effRT
+ Estimate the net-to-gross ratio (NTGR) 
+ Conduct a benefit/cost analysis using the evaluated savings
+Project Background
+
+[[page 6]]
+ Evaluation period: January 2023 – June 2024
+ Three program pathways: (1) Instant – 
+Distributor, (2) Instant – Retail, 
+and (3) Mail-in – Retail
+ Rebates are only available for 
+ENERGY STAR® certified HPWHs
+ Baseline efficiency is a blend of 
+pre-existing water heaters and 
+new, code-minimum water 
+heaters
+Heat Pump Water Heater (HPWH)
+ Evaluation period: FY2023 (July 2022 – June 
+2023)
+ Contractors buy the ECMCPs at a discounted 
+price and pass an instant discount to 
+participants – no paperwork or rebate checks
+ The baseline pump motor 
+is a shaded pole motor
+Electronically Commutated Motor 
+Circulator Pump (ECMCP)
+Project Background
+EVALUATED MEASURES
+[[page 7]]
+EVALUATION ACTIVITIES & FINDINGS
+7
+[[page 8]]
+EVALUATION ACTIVITIES
+ HPWH evaluation activities included:
+ Web-based participant survey with questions about the prior water heater (condition and fuel) and 
+motivations behind installing a HPWH
+ Pre/post AMI analysis of a subset of survey participants
+ Metering study for a subset of survey participants
+ Phone interviews with five primary HPWH distributors
+ ECMCP evaluation activities included:
+ Price elasticity analysis to understand how variations in incentive levels affect sales volume
+ Metering study including 41 program-supported ECMCPs in a sample of 22 households
+ Phone interviews with five ECMCP/HPWH distributors and fifteen participating contractors
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 9]]
+EVALUATION TOPIC MATRIX
+Evaluation Topic Pre/Post AMI 
+Analysis Metering Surveys / 
+Interviews
+Price Elasticity 
+Modeling
+Heat Pump Water 
+Heaters
+Annual energy impact   
+Summer and winter peak impacts   
+Energy period factors   
+Peak coincidence factors   
+Hourly load shape   
+In-service rate 
+Net-to-gross ratio 
+Determine the appropriate baseline 
+ECM Circulator 
+Pumps
+Annual energy impact 
+Summer and winter peak impacts 
+Energy period factors 
+Peak coincidence factors 
+In-service rate 
+Net-to-gross ratio  
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 10]]
+KEY FINDINGS – HPWH ANAL YSIS
+Topic Findings
+DHW baseline fuel
+We found that 54% of participants had electric water heaters before installing the program -
+supported HPWH. Of the 46% with non-electric baselines, most used oil. Often, the replaced oil -
+fired system was integrated with the home’s space heating. 
+Annual energy impact
+Homes with electric baselines: 1,298 kWh of annual energy savings
+Homes with non-electric baselines: 862 kWh of additional annual electric use
+The average “all-in” MMBtu impact (inclusive of all energy saved or added regardless of fuel type) 
+was 5.44 MMBtu/y.
+Program impact on customer-
+level purchasing decisions Overall, we estimate the freeridership rate is 15.8% and the NTGR is 84.2%. 
+Program impact on 
+distributor-level stocking, 
+sales, and awareness
+Distributors were asked to rate how influential the incentive program has been in reaching the 
+current level of awareness and adoption of HPWHs among Maine contractors. On a scale from 0 
+(not influential) to 10 (extremely influential), the average rating was 9.8.
+Customer satisfaction 92% of survey respondents reported that they probably would, definitely would, or already have 
+recommended a HPWH to family, friends, or neighbors.
+Cost effectiveness In the prospective gross scenario, we estimate the measure returns $1.94 of benefits per $1 of cost.  
+Evaluation FindingsEvaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 11]]
+KEY FINDINGS – ECMCP ANAL YSIS
+Topic Findings
+Annual energy impact of 
+an ECMCP
+In a residential application, ECMCPs save 47 kWh annually relative to a baseline circulation pump with 
+a shaded pole motor
+Typical application
+Most ECMCPs serve as supply or return pumps in a hydronic heating system, but a few program -
+supported ECMCPs in our metering sample supplied heat exchangers in a DHW system or DHW in 
+addition to space heating. As a result, we estimate non-zero summer peak demand savings.
+Price elasticity / NTG Based on our price elasticity analysis, our estimated NTGR for ECM circulator pumps is 79.5%. 
+Program impact on 
+ECMCP stocking and sales
+Four out of five interviewed distributors indicated stocking and sales of ECM pumps have increased 
+because of the incentives. 60% of the interviewed contractors indicated that the incentives have 
+influenced their stocking and sales of ECM pumps. 
+Program impact on 
+ECMCP awareness and 
+adoption
+Distributors were asked to rate how influential the incentive program has been in reaching the current 
+level of awareness and adoption of ECM pumps among Maine contractors. On a scale from 0 (not 
+influential) to 10 (extremely influential), the average rating was 8.2.
+Cost effectiveness In the prospective gross scenario, we estimate the measure returns $1.35 of benefits per $1 of cost.  
+Evaluation FindingsEvaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 12]]
+HPWH PARTICIPANT SURVEY
+ Rebate recipients with valid email addresses were invited to take a web-based survey with 
+questions about their prior domestic hot water system, their motivation to purchase a 
+HPWH, and details about their HPWH (install location, operational setting, etc.)
+ Water heating baseline fuels collected through the survey informed the AMI analysis and TRM 
+recommendations
+ 1,002 total responses
+ Key findings:
+ Overall NTGR of 84.2%
+ 48% of the respondents also installed a heat pump within the last three years. The transition of space 
+heating from oil to electric is correlated with HPWH adoption since the domestic hot water in many Maine 
+homes is served by the boiler
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 13]]
+HPWH PARTICIPANT SURVEY – BASELINE ASSESSMENT
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 14]]
+PRE/POST AMI ANAL YSIS
+ In a pre/post AMI analysis, 
+electric consumption is compared 
+across the pre-HPWH and post-
+HPWH periods
+ See steps to the right
+ 252 homes were included in the 
+analysis. We developed separate 
+regression models for each home
+ Survey responses were used to 
+identify the baseline water heating 
+fuel for each home
+ Key outputs: weather-normalized 
+annual impacts and 8760 load 
+profiles
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+Estimate Normalized 
+Baseline Consumption
+1) Clean baseline data
+2) Develop a time-of-
+week temperature 
+regression model for 
+the baseline period 
+using actual weather
+3) Use the baseline 
+model to predict 
+baseline consumption 
+under common 
+conditions
+Estimate Normalized 
+Post-Installation 
+Consumption
+4) Clean post-period 
+data
+5) Develop a time-of-
+week temperature 
+regression model for 
+the post period using 
+actual weather
+6) Use the post model 
+to predict post 
+consumption under 
+common conditions
+Estimate Impacts
+7) Calculate impacts by 
+subtracting (6) from (3)
+
+[[page 15]]
+PRE/POST AMI ANAL YSIS RESUL TS
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+ Pre-existing Electric and Non-Electric scenarios must be handled separately.
+ Pre-existing Electric
+ Prior water heater used electricity
+ Impact of HPWH is a reduction (positive savings) in electricity use
+ Pre/Post AMI fully captures energy and demand impacts
+ Pre-existing Non-Electric Baseline (and new construction)
+ Prior water heater used oil, kerosene, propane, or natural gas with negligible electricity use 
+ Impact of HPWH is an increase (negative savings) in electricity use
+ Pre/Post AMI only captures energy and demand of the HPWH, fuel reduction is not captured
+
+[[page 16]]
+PRE/POST AMI ANAL YSIS RESUL TS
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+ Distribution of annual impacts across homes in our sample
+ Differences are 
+driven by
+o Domestic hot 
+water use 
+ volume 
+ draw pattern
+o HPWH mode of 
+operation
+o Ambient 
+conditions
+o Confounding 
+factors
+ Occupancy 
+changes
+ Unscreened 
+electric load 
+modifiers
+Impact = Pre HPWH Electric Use –
+                   Post HPWH Electric Use
+[[page 17]]
+PRE/POST AMI ANAL YSIS RESUL TS – BLENDING BASELINES
+Season Baseline Fuel Peak Demand 
+Impact (kW)
+Summer
+Electric 0.118
+Non-Electric -0.040
+Blended Baseline 0.045
+Winter
+Electric 0.269
+Non-Electric -0.130
+Blended Baseline 0.084
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+ Electric Energy and Demand Impacts
+ 54% Electric Baseline
+ 46% Non-Electric Baseline
+Baseline Fuel Impact Estimate 
+(kWh/yr)
+Relative 
+Precision at 80% 
+Confidence
+Share of Blended 
+Baseline
+Electric 1,298 8.4% 53.6%
+Non-Electric -862 13.6% 46.4%
+Blended Baseline 297 10.8% ---
+
+[[page 18]]
+HPWH METERING STUDY
+ A sample of 20 program-supported HPWHs were metered over a 9-month period spanning 
+February 2025 to October 2025. The combined metering system covered:
+ Water flow
+ Water temperature (supply and return)
+ Electric use
+ Used regression modeling to develop weather-normalized 
+estimates of annual electric use, annual gallons of water used, 
+and annual heat delivered
+ Key outputs: coefficient of performance (COP) and expected 
+annual water heating load for a theoretical electric water 
+heater with a COP of 1.0 (denoted kWh/yHWL)
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 19]]
+HPWH METERING STUDY RESUL TS
+ 855 kWh/year, on average 
+ 28 gallons/day, on average 
+ Figure to the right shows an 8760 heat map
+ Pockets of orange indicate times of the year with 
+higher HPWH loads
+ Summer loads are slightly smaller than non-
+summer loads. This is likely a function of:
+ Cooler inlet water temperatures outside of the 
+summer
+ Greater standby losses when indoor temperatures 
+are lower
+ The heat pump water heater runs more efficiently 
+in a warm space
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 20]]
+HPWH METERING STUDY RESUL TS
+ The average COP was 1.8 compared to an average UEF of 3.6
+ The delta between the two factors is attributable to:
+ Operational mode. Most of the
+HPWHs operated in a hybrid mode 
+that blends HP mode and electric
+resistance  mode. 
+Efficiency is poor in ER mode. 
+ Low usage. HPWHs in homes with 
+lower hot water loads have greater 
+standby losses relative to useful 
+work performed than HPWHs in 
+homes with higher hot water loads. 
+These losses reduce the overall 
+efficiency of the HPWH
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 21]]
+HPWH METERING STUDY RESUL TS
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+Impact 
+Factor Definition Discussion
+ 
+kWh/yHWL
+Annual hot water load 
+Prior HPWH evaluation + 2015 Residential Energy Consumption Survey = 2,821 
+kWh. 
+Results from this metering study = 1,534 kWh 
+ 
+𝐸𝐸𝐸𝐸𝐹𝐹𝐸𝐸𝐸𝐸
+Ratio of field-based measurements 
+of HPWH efficiency to rated HPWH 
+efficiency
+Prior evaluation = 0.88
+Current evaluation = 0.50 
+Drivers: hybrid mode and low water use (higher standby losses)
+ 
+𝐸𝐸𝐸𝐸𝐹𝐹𝐵𝐵𝐵𝐵𝐵𝐵𝐵𝐵
+Ratio of in-situ efficiency and rated 
+efficiency
+Prior evaluation = 1 (de facto)
+Current evaluation = 0.75 
+Driver: low water use (higher standby losses)
+/ 
+Decision 
+type
+“Decision type” refers to whether 
+the HPWH replaced a functioning 
+water heater (“retrofit”) or not 
+(“lost opportunity”)
+Prior evaluation = 19% retrofit and 81% lost opportunity
+Results from this customer survey = 
+13/87 electric baseline (increased savings); 
+40/60 non-electric baseline (increased electrification loads/negative savings)
+[[page 22]]
+HPWH METERING STUDY RESUL TS
+ Realized in-situ efficiency and hot water load were primary realization rate drivers for the 
+HPWH evaluation
+ The efficiency adjustment factor for HPWHs (EAFEE) is the ratio of field-based 
+measurements of HPWH efficiency to rated HPWH efficiency. The prior evaluation found an 
+EAF of 0.88, while we found an EAF of 0.50. 
+ The prior slide covered the drivers of the low EAF 
+ Baseline storage water heaters experience standby losses just like HPWHs do, so we recommend adding an 
+EAFBase term to the TRM algorithms
+ kWh/yHWL represents the energy required to serve the annual hot water load (HWL). The 
+current TRM assumption of 2,821 kWh is drawn from the prior HPWH evaluation and based 
+on the 2015 Residential Energy Consumption Survey. Our evaluated value of 1,534 kWh is 
+based on metering study results. 
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 23]]
+ECMCP PRICE ELASTICITY ANAL YSIS
+ The goal of a price elasticity analysis is to understand how variations in incentive level affect sales 
+volume. Outputs from this analysis established the net-to-gross ratio for ECMCPs
+ We used five years of rebate data for the analysis
+ Figure to the right shows the number of pumps sold and 
+the average incentive level during each month in the 
+analysis window
+ Our analysis controlled for retail prices rising over time 
+due to inflation, seasonal effects on ECMCP purchases, 
+the dollar value of the paperwork stipend fee over time, 
+and increasing ECMCP adoption over time
+ Key findings:
+ ECMCP sales are highly responsive to discounts, and sales 
+volume spikes when the ECMCP has a lower upfront cost than the standard efficiency alternative
+ Approximately 80% of circulator pump purchases would have been the lower cost standard efficiency option 
+absent program discounts
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 24]]
+ECMCP METERING STUDY
+ We metered a sample of 41 program-
+supported ECM circulator pumps in 22 Maine 
+homes
+ The metering period varied by house but 
+generally ran from November 2024 through 
+March 2025
+ Most of the metered pumps served as supply 
+or return pumps in a hydronic heating 
+system, but a few served a DHW system or 
+DHW in addition to space heating
+ Figure to the right shows an 8760 heat map 
+of ECMCP runtime
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 25]]
+ECMCP METERING STUDY RESUL TS
+ Key realization rate drivers include:
+ Hours of use. We calculated an average annual hours of 
+use value of 812. The prior TRM assumption of 1,374 hours 
+was adapted from the 2016 Efficiency Vermont TRM
+ ∆kWmax. Prior assumptions regarding efficient and 
+baseline wattage were drawn from the 2016 Efficiency 
+Vermont TRM (14.4 Watts and 87.7 Watts, respectively). 
+Evaluated values were based on ECMCP metering data 
+and spot amp and power readings taken from non-ECM 
+pumps while in the field
+ CFW. Our weather-normalized estimate of 17.9% is based 
+on predicted pump runtime during the ISO-NE winter 
+peak period. The prior TRM assumption of 49.5% was a 
+ratio of the average heating degrees during winter on 
+peak hours to maximum heating degrees using a 
+population-weighted TMY weather profile
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+Impact Factor Evaluated Value
+WattsBase 78.2
+WattsEE 20.1
+CFW 17.9%
+CFS 0.6%
+∆kWmax 0.0581
+∆kWwp 0.0104
+∆kWsp 0.0003
+Annual Hours 812
+∆kWh 47.2
+EPF – Winter Off 51.7%
+EPF – Winter On 39.7%
+EPF – Summer Off 5.1%
+EPF – Summer On 3.5%
+
+[[page 26]]
+DISTRIBUTOR INTERVIEWS
+ We conducted phone interviews with five distributors representing 91% of HPWHs rebated 
+through the Instant – Distributor pathway and 90% of ECMCP rebates over the respective 
+evaluation periods
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+Topic HPWH Findings ECMCP Findings
+Program impact on 
+HPWH/ECMCP stocking 
+and sales
+Overall direction: 
+All five distributors indicated they have seen a 
+significant increase in sales of HPWHs since they 
+began participating in the program.
+Four of five distributors indicated stocking and 
+sales of ECM pumps have increased because of the 
+incentives. Distributors thought the share of 
+circulator pump sales that are ECM would drop by 
+more than 50% in a counterfactual scenario where 
+the incentive program never existed.
+Program impact on 
+HPWH/ECMCP 
+awareness and adoption
+Overall direction: 
+On a scale from 0 (incentive program has no 
+influence on current levels of HPWH 
+awareness/adoption) to 10 (incentive program is 
+extremely influential), the average rating was 9.8.
+On a scale from 0 (incentive program has no 
+influence on current levels of ECMCP 
+awareness/adoption) to 10 (incentive program is 
+extremely influential), the average rating was 8.2.
+
+[[page 27]]
+CONTRACTOR INTERVIEWS
+ We conducted phone interviews with fifteen ECMCP contractors and recorded their 
+responses to questions about stocking practices and the circulator pump market. Key 
+findings include:
+ 60% of the contractors interviewed indicated that the discounts have influenced their selection of circulator 
+pumps
+ When scoping a project, 60% of the 
+contractors interviewed typically propose 
+just the ECM model. Another 27% present 
+both ECM and non-ECM options
+ Overall, contractors thought the share of 
+circulator pump installations that are ECM 
+would drop from 74% to 44% in a 
+counterfactual scenario, where the 
+incentive program never existed
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+
+[[page 28]]
+BENEFIT-COST ANAL YSIS AND RESUL TS
+ We used the results of the gross and net impact evaluations in combination with two 
+different sets of avoided costs to compute benefit-cost (BC) ratios for 15 different HPWH BC 
+scenarios and 11 different ECM circulator pump BC scenarios
+ All BC analysis utilized the Efficiency Maine primary BC test, which takes the perspective of all utility 
+customers (participants and non-participants)
+ In all scenarios, both measures screened as cost effective. Primary prospective results are 
+shown below
+Evaluation 
+Activities Key Findings
+HPWH 
+Participant 
+Survey
+HPWH AMI 
+Analysis
+HPWH 
+Metering Study
+ECMCP Price
+ Elasticity 
+Analysis
+ECMCP 
+Metering Study
+Distributor and 
+Contractor 
+Interviews
+Benefit Cost 
+Analysis
+Technology Scenario Perspective Costs BC Ratio
+HPWH 2024 Gross Evaluated Prospective AESC 2024 1.94
+ECMCP 2024 Gross Evaluated Prospective AESC 2024 1.35
+
+[[page 29]]
+TRM RECOMMENDATIONS
+29
+[[page 30]]
+TRM CHANGE SUMMARY
+ For the HPWH measure, we recommend modifying select algorithms, introducing new 
+impact factors, updating impact factors, and updating per-unit savings values. The full set of 
+recommendations is included in the evaluation report. Key impact factor changes include:
+ kWh/yHWL – 1,534 (previously 2,821)
+ EAFEE – 0.50 (previously 0.88)
+ EAFBase – 0.75 (new term to account for standby losses in baseline water heaters)
+ For the ECMCP measure, we recommend updating the impact factors but not modifying 
+the algorithms or introducing new terms. 
+ The table on slide 21 shows the updated factors from metering.  
+ The price elasticity analysis on slide 19 provides the net-to-gross ratio of 79.5%.
+
+[[page 31]]
+Questions?

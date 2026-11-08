@@ -4,8 +4,8 @@
   "problems": [],
   "files": [
     {
-      "file": "offers/heat-pumps.json",
-      "sha256": "2e415bb5a9bf219c0a9b869702d78d56bed4da896a75dead040fa299309334f3"
+      "file": "assumptions.json",
+      "sha256": "53d382f448e185a14c67cd25aa26a8bcee56063fc996998da0bdfa48ef231b16"
     }
   ]
 }

@@ -2,6 +2,7 @@
   "id": "belmont-mlp",
   "title": "Belmont — municipal electric (MLP), Mass Save gas",
   "story": "Two-family in Belmont (municipal light plant), gas heat, built 2005. Owner lives in unit 1.",
+  "demoData": true,
   "input": {
     "role": "owner_occupant_landlord",
     "userUnitId": "1",
@@ -51,26 +52,6 @@
     "asOf": "2026-11-15",
     "installDate": null
   },
-  "quantities": {
-    "cost": {
-      "heat_pump": {
-        "low": 7720,
-        "mid": 14575,
-        "high": 25740,
-        "confidence": "low",
-        "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated tons (low) × EEAC invoice study $/ton"
-      }
-    },
-    "heatPumpTons": {
-      "low": 2,
-      "mid": 2.5,
-      "high": 3.3,
-      "confidence": "low",
-      "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated system size, typical for similar buildings"
-    },
-    "solarKwhPerYear": null,
-    "communitySolarCreditsPerYear": null
-  },
   "expected": {
     "results": [
       {
@@ -113,9 +94,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 888.75,
+          "mid": 1293.75,
+          "high": 1822.5,
           "confidence": "low"
         }
       },
@@ -133,9 +114,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 888.75,
+          "mid": 1293.75,
+          "high": 1822.5,
           "confidence": "low"
         }
       },
@@ -151,9 +132,9 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
-          "high": 8500,
+          "low": 2093.5,
+          "mid": 3047.5,
+          "high": 4293,
           "confidence": "low"
         }
       },
@@ -172,9 +153,9 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
-          "high": 8500,
+          "low": 2093.5,
+          "mid": 3047.5,
+          "high": 4293,
           "confidence": "low"
         }
       },

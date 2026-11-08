@@ -18,7 +18,7 @@ const blankUnit = (id: string, occupancy: Unit['occupancy']): Unit => ({
 })
 
 export function demoState(): State {
-  return { input: InputSchema.parse(structuredClone(STORY1.input)), installDate: '', boilerNeedsReplacing: false, demo: true }
+  return { input: InputSchema.parse(structuredClone(STORY1.input)), installDate: '', boilerNeedsReplacing: false, demo: STORY1.demoData }
 }
 
 export function blankState(): State {
@@ -39,7 +39,7 @@ export function blankState(): State {
 export const today = (): string => new Date().toLocaleDateString('en-CA')
 
 
-export type Kind = 'text' | 'int' | 'num' | 'tri' | 'enum'
+export type Kind = 'text' | 'int' | 'num' | 'tri' | 'enum' | 'band'
 const opt = (pairs: [string, string][], value: string | null): string =>
   pairs.map(([v, l]) => `<option value="${v}"${(value ?? '') === v ? ' selected' : ''}>${esc(l)}</option>`).join('')
 function select(id: string, path: string, label: string, pairs: [string, string][], value: string | null, kind: Kind = 'enum', structural = false): string {
@@ -51,10 +51,15 @@ function numberField(id: string, path: string, label: string, value: number | nu
   return `<div class="field"><label for="${id}">${label}</label><div class="with-unit"><input id="${id}" data-path="${path}" data-kind="${kind}" type="number" inputmode="decimal" min="0" step="any" value="${value ?? ''}"${hint ? ` aria-describedby="${id}-hint"` : ''}><span>${unit}</span></div>${hint ? `<p class="hint" id="${id}-hint">${hint}</p>` : ''}</div>`
 }
 
+/** Income bands, in dollars a year; the value is "low-high". The top band is open-ended in practice (high = low × 2). */
+const INCOME: [string, string][] = [
+  ['0-30000', 'Under $30,000'], ['30000-50000', '$30,000–50,000'], ['50000-75000', '$50,000–75,000'], ['75000-100000', '$75,000–100,000'],
+  ['100000-150000', '$100,000–150,000'], ['150000-200000', '$150,000–200,000'], ['200000-400000', '$200,000 or more'],
+]
 const FUELS: [string, string][] = [['oil', 'Heating oil'], ['natural_gas', 'Natural gas'], ['propane', 'Propane'], ['electric_resistance', 'Electric baseboard'], ['heat_pump', 'Heat pump already'], ['other', 'Other']]
 const RECORD_UNIT: Record<string, 'gallons' | 'therms' | 'kwh'> = { oil: 'gallons', propane: 'gallons', natural_gas: 'therms', electric_resistance: 'kwh' }
 
-function unitForm(u: Unit, i: number): string {
+function unitForm(u: Unit, i: number, condo: boolean): string {
   const p = `building.units.${i}`
   const id = `u${u.id}`
   const recUnit = u.heatingFuel ? RECORD_UNIT[u.heatingFuel] : undefined
@@ -77,13 +82,15 @@ function unitForm(u: Unit, i: number): string {
       ${select(`${id}-elec`, `${p}.electricPaidBy`, 'Who pays electricity', [['owner', 'Landlord / owner'], ['tenant', 'Tenant']], u.electricPaidBy)}
       ${select(`${id}-winter`, `${p}.occupiedAllWinter`, 'Lived in all winter', YES_NO, triVal(u.occupiedAllWinter), 'tri')}
       ${numberField(`${id}-tons`, `${p}.heatPumpTonsQuoted`, 'Heat pump size from a quote', u.heatPumpTonsQuoted, 'tons', 'num', 'Optional. Otherwise sized from similar homes.')}
-    </div>${records}${hotWater}</fieldset>`
+    </div>${records}${hotWater}${condo ? `<div class="grid2">
+      ${select(`${id}-meter`, `${p}.hasResidentialHeatingMeter`, 'Has its own residential heating meter', YES_NO, triVal(u.hasResidentialHeatingMeter), 'tri')}
+      ${select(`${id}-join`, `${p}.participating`, 'Takes part in the all-units insulation offer', YES_NO, triVal(u.participating), 'tri')}</div>` : ''}</fieldset>`
 }
 
 export function formHtml(s: State): string {
   const b = s.input.building
   const h = s.input.household
-  const units = b.units.map((u, i) => unitForm(u, i)).join('')
+  const units = b.units.map((u, i) => unitForm(u, i, b.ownership === 'condo')).join('')
   return `
   <div class="form-actions">
     <button type="button" data-action="demo">Load the demo building</button>
@@ -95,16 +102,23 @@ export function formHtml(s: State): string {
     ${s.input.role === 'renting_landlord' ? '' : select('me', 'userUnitId', 'I live on', b.units.map(u => [u.id, FLOOR(u.id)] as [string, string]), s.input.userUnitId)}
     ${numberField('hh-size', 'household.size', 'People in my household', h.size, 'people', 'int')}
     ${select('discount', 'household.onDiscountRate', 'On a utility discount rate', YES_NO, triVal(h.onDiscountRate), 'tri')}
+    ${(() => {
+      const cur = h.incomeBand ? `${h.incomeBand.low}-${h.incomeBand.high}` : null
+      const bands: [string, string][] = cur && h.incomeBand && !INCOME.some(([v]) => v === cur)
+        ? [[cur, `$${h.incomeBand.low.toLocaleString('en-US')}–${h.incomeBand.high.toLocaleString('en-US')}`], ...INCOME] : INCOME
+      return select('income', 'household.incomeBand', 'Household income, before tax', bands, cur, 'band')
+    })()}
   </div></fieldset>
   <fieldset><legend>The building</legend><div class="grid2">
     <div class="field"><label for="town">City or town</label><input id="town" data-path="building.municipality" data-kind="text" value="${esc(b.municipality)}" autocomplete="address-level2"></div>
     ${numberField('year', 'building.yearBuilt', 'Year built', b.yearBuilt, '', 'int')}
     ${select('units', 'unitCount', 'Homes in the building', [['2', '2'], ['3', '3'], ['4', '4']], String(b.units.length), 'enum', true)}
-    ${select('own', 'building.ownership', 'Ownership', [['single_owner', 'One owner'], ['condo', 'Condominium']], b.ownership)}
+    ${select('own', 'building.ownership', 'Ownership', [['single_owner', 'One owner'], ['condo', 'Condominium']], b.ownership, 'enum', true)}
     ${select('eu', 'building.electricUtility', 'Electric company', [['eversource', 'Eversource'], ['national_grid', 'National Grid'], ['unitil', 'Unitil'], ['cape_light_compact', 'Cape Light Compact'], ['municipal', 'Municipal light plant']], b.electricUtility)}
     ${select('gu', 'building.gasUtility', 'Gas company', [['eversource', 'Eversource'], ['national_grid', 'National Grid'], ['unitil', 'Unitil'], ['liberty', 'Liberty'], ['berkshire_gas', 'Berkshire Gas'], ['municipal', 'Municipal'], ['none', 'No gas service']], b.gasUtility)}
     ${select('hea', 'building.heaCompleted', 'Had a Mass Save energy assessment', YES_NO, triVal(b.heaCompleted), 'tri')}
     ${select('wx', 'building.weatherizationRecsDone', 'Recommended insulation done', YES_NO, triVal(b.weatherizationRecsDone), 'tri')}
+    ${select('approve', 'building.ownerApproval', 'The owner approves the upgrades', YES_NO, triVal(b.ownerApproval), 'tri')}
   </div></fieldset>
   ${units}
   <fieldset><legend>The project</legend><div class="grid2">
@@ -114,7 +128,9 @@ export function formHtml(s: State): string {
 }
 
 export function setPath(s: State, path: string, kind: Kind, value: string): void {
+  const band = value.match(/^(\d+)-(\d+)$/)
   const v: unknown = value === '' ? null
+    : kind === 'band' ? (band ? { low: Number(band[1]), high: Number(band[2]) } : null)
     : kind === 'tri' ? value === 'yes'
     : kind === 'int' ? Math.round(Number(value))
     : kind === 'num' ? Number(value)

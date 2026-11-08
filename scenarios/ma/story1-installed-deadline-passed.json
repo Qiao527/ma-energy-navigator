@@ -2,6 +2,7 @@
   "id": "story1-installed-deadline-passed",
   "title": "Story 1 — installed in December 2026, checked after the 2027-02-28 paperwork deadline",
   "story": "Story 1: owner-occupant landlord in a Boston triple-decker (DEC). Lives on floor 1, rents floors 2–3. Oil heat paid by the landlord for all floors; tenants pay their own electricity. Built 1910; no assessment or weatherization yet. The landlord has oil delivery records for two heating seasons (2024–25, 2025–26) for each floor (fictional demo numbers). The heat pumps were installed on 2026-12-01; the landlord checks on 2027-03-01.",
+  "demoData": true,
   "input": {
     "role": "owner_occupant_landlord",
     "userUnitId": "1",
@@ -96,26 +97,6 @@
   "options": {
     "asOf": "2027-03-01",
     "installDate": "2026-12-01"
-  },
-  "quantities": {
-    "cost": {
-      "heat_pump": {
-        "low": 7720,
-        "mid": 14575,
-        "high": 25740,
-        "confidence": "low",
-        "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated tons (low) × EEAC invoice study $/ton"
-      }
-    },
-    "heatPumpTons": {
-      "low": 2,
-      "mid": 2.5,
-      "high": 3.3,
-      "confidence": "low",
-      "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated system size, typical for similar buildings"
-    },
-    "solarKwhPerYear": null,
-    "communitySolarCreditsPerYear": null
   },
   "expected": {
     "results": [
@@ -292,9 +273,9 @@
           "owner_approval": "done"
         },
         "value": {
-          "low": 7720,
-          "mid": 14575,
-          "high": 25740,
+          "low": 7683.52,
+          "mid": 14783.04,
+          "high": 26413.64,
           "confidence": "low"
         }
       },
@@ -311,9 +292,9 @@
           "owner_approval": "done"
         },
         "value": {
-          "low": 7720,
-          "mid": 14575,
-          "high": 25740,
+          "low": 7683.52,
+          "mid": 14783.04,
+          "high": 26413.64,
           "confidence": "low"
         }
       },
@@ -547,5 +528,8 @@
     ],
     "upcoming": []
   },
-  "approved": null
+  "approved": {
+    "by": "Qiao",
+    "on": "2026-11-07"
+  }
 }

@@ -79,10 +79,14 @@ export function heatLoadFromRecords(records: Records, fuel: Fuel, list: readonly
   const inputs = [fuelUse, heatContent, efficiency]
   const all = mul(mul(fuelUse.range, heatContent.range), efficiency.range)
   if (hotWaterFromBoiler === false) return combine(all, inputs)
-  if (hotWaterFromBoiler === null) {
-    return combine(all, inputs, 'If the same boiler also heats your hot water, these records include it, so the heating need may be overstated.')
-  }
   const share = find(list, `hot_water_share_of_fuel.${fuel}`)
+  if (hotWaterFromBoiler === null) {
+    const note = 'If the same boiler also heats your hot water, these records include it, so the heating need may be overstated.'
+    if (share === null) return combine(all, inputs, note)
+    // Not answered yet: the low end assumes the boiler heats the water too (widest share out), so the range covers both answers.
+    const withOut = mul(all, complement(share.range))
+    return { ...combine(range(withOut.low, all.mid, all.high), [...inputs, share], note, 'The low end assumes it does.'), confidence: 'low' }
+  }
   if (share === null) {
     return { ...combine(all, inputs, `Your records include hot water, but there is no sourced hot-water share for ${fuel}, so the heating need may be overstated.`), confidence: 'low' }
   }

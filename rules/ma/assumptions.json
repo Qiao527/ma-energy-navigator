@@ -58,6 +58,43 @@
     ]
   },
   {
+    "id": "water_heater_annual_kwh.heat_pump_water_heater",
+    "description": "Yearly electricity a heat pump water heater adds where the boiler used to heat the water (Efficiency Maine impact evaluation, June 2026: meter and utility-meter data from Maine homes). Typical: 862 kWh added in homes whose old water heater burned oil, propane or gas. Low: the year's hot-water load of 1,534 kWh at the rated efficiency (UEF 3.6), 426 kWh. High: the same load in electric-resistance mode (efficiency 1.0), 1,534 kWh. Field efficiency averaged 1.8 because most units ran in hybrid mode. A household's own hot water use varies",
+    "unit": "kWh per year",
+    "value": {
+      "low": 426,
+      "mid": 862,
+      "high": 1534
+    },
+    "confidence": "low",
+    "sources": [
+      {
+        "url": "https://www.efficiencymaine.com/docs/HPWH-ECMCP-Impact-Evaluation-v4.pdf",
+        "section": "Key findings: HPWH analysis, annual energy impact",
+        "quote": "Homes with non-electric baselines: 862 kWh of additional annual electric use",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.efficiencymaine.com/docs/HPWH-ECMCP-Impact-Evaluation-v4.pdf",
+        "section": "HPWH metering study results",
+        "quote": "The average COP was 1.8 compared to an average UEF of 3.6",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.efficiencymaine.com/docs/HPWH-ECMCP-Impact-Evaluation-v4.pdf",
+        "section": "Recommended TRM changes: annual hot water load",
+        "quote": "Results from this metering study = 1,534 kWh",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://www.efficiencymaine.com/docs/HPWH-ECMCP-Impact-Evaluation-v4.pdf",
+        "section": "HPWH metering study results",
+        "quote": "855 kWh/year, on average",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
     "id": "heating_efficiency.oil",
     "description": "Efficiency of a new baseline oil boiler (AFUE 0.84); an older boiler is probably less efficient",
     "unit": "fraction",
@@ -384,6 +421,37 @@
         "url": "https://www.mass.gov/info-details/residential-electric-seasonal-heat-pump-rates",
         "section": "How does the seasonal heat pump rate work?",
         "quote": "From November 1 through April 30, eligible customers pay lower distribution and transmission charges on their electric bill. The lower rates apply to all the electricity you use, not just the electricity used by your heat pump.",
+        "lastVerified": "2026-11-07"
+      }
+    ]
+  },
+  {
+    "id": "heating_hdd_share.ma.nov_apr",
+    "description": "Share of the Massachusetts heating season (population-weighted heating degree days, NOAA CPC) that falls in November–April, when the seasonal heat pump rate applies. Normal winter: cumulative normal HDD through April (6,049 + 20 = 6,069) minus through October (480 + 137 = 617), over the full-season normal of 6,407: 0.851. Winter 2025–26 as it happened: (6,049 − 480) ÷ 6,327 = 0.880",
+    "unit": "fraction of the heating season",
+    "value": {
+      "low": 0.851,
+      "mid": 0.851,
+      "high": 0.88
+    },
+    "confidence": "high",
+    "sources": [
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2025/Oct%202025.txt",
+        "section": "Monthly data for Oct 2025, Massachusetts (month total, deviations, cumulative from July 1)",
+        "quote": "MASSACHUSETTS 381 -69 -5 480 -137 9 -22 2",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Apr%202026.txt",
+        "section": "Monthly data for Apr 2026, Massachusetts",
+        "quote": "MASSACHUSETTS 493 -80 -8 6049 -20 304 0 5",
+        "lastVerified": "2026-11-07"
+      },
+      {
+        "url": "https://ftp.cpc.ncep.noaa.gov/htdocs/products/analysis_monitoring/cdus/degree_days/archives/Heating%20degree%20Days/monthly%20states/2026/Jun%202026.txt",
+        "section": "Monthly data for Jun 2026, Massachusetts",
+        "quote": "MASSACHUSETTS 19 -43 -25 6327 -80 313 -1 5",
         "lastVerified": "2026-11-07"
       }
     ]

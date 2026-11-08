@@ -1113,6 +1113,31 @@
             "lastVerified": "2026-11-06"
           }
         ]
+      },
+      {
+        "id": "installed_before_program",
+        "question": "The heat pump is already installed. This offer is delivered turnkey, with the program coordinating and its approved contractors installing. Does an installation that is already done still qualify?",
+        "decidedBy": "Mass Save",
+        "nextAction": "Ask Mass Save (866-527-7283) before counting on it. The program does not publish an answer for installed projects.",
+        "when": {
+          "fact": "project.installed",
+          "op": "eq",
+          "value": true
+        },
+        "sources": [
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Offers for rental properties and landlords in Designated Equity Communities",
+            "quote": "A turnkey delivery experience, with project coordination and installation managed for you",
+            "lastVerified": "2026-11-07"
+          },
+          {
+            "url": "https://www.masssave.com/en/residential/rebates-offers-services/income-based-offers/designated-equity-communities",
+            "section": "Start with a no-cost Home Energy Assessment",
+            "quote": "If eligible, upgrades will be installed by approved contractors at no cost to you.",
+            "lastVerified": "2026-11-07"
+          }
+        ]
       }
     ],
     "benefit": {

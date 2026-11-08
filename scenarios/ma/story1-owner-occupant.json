@@ -2,6 +2,7 @@
   "id": "story1-owner-occupant",
   "title": "Story 1 — owner-occupant landlord, Boston",
   "story": "Story 1: owner-occupant landlord in a Boston triple-decker (DEC). Lives on floor 1, rents floors 2–3. Oil heat paid by the landlord for all floors; tenants pay their own electricity. Built 1910; no assessment or weatherization yet. The landlord has oil delivery records for two heating seasons (2024–25, 2025–26) for each floor (fictional demo numbers).",
+  "demoData": true,
   "input": {
     "role": "owner_occupant_landlord",
     "userUnitId": "1",
@@ -97,26 +98,6 @@
     "asOf": "2026-11-15",
     "installDate": null
   },
-  "quantities": {
-    "cost": {
-      "heat_pump": {
-        "low": 7720,
-        "mid": 14575,
-        "high": 25740,
-        "confidence": "low",
-        "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated tons (low) × EEAC invoice study $/ton"
-      }
-    },
-    "heatPumpTons": {
-      "low": 2,
-      "mid": 2.5,
-      "high": 3.3,
-      "confidence": "low",
-      "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated system size, typical for similar buildings"
-    },
-    "solarKwhPerYear": null,
-    "communitySolarCreditsPerYear": null
-  },
   "expected": {
     "results": [
       {
@@ -168,9 +149,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 2340,
+          "mid": 2936.25,
+          "high": 3892.5,
           "confidence": "low"
         }
       },
@@ -188,9 +169,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 2340,
+          "mid": 2936.25,
+          "high": 3892.5,
           "confidence": "low"
         }
       },
@@ -208,9 +189,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 2340,
+          "mid": 2936.25,
+          "high": 3892.5,
           "confidence": "low"
         }
       },
@@ -226,8 +207,8 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
+          "low": 5512,
+          "mid": 6916.5,
           "high": 8500,
           "confidence": "low"
         }
@@ -247,8 +228,8 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
+          "low": 5512,
+          "mid": 6916.5,
           "high": 8500,
           "confidence": "low"
         }
@@ -268,8 +249,8 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
+          "low": 5512,
+          "mid": 6916.5,
           "high": 8500,
           "confidence": "low"
         }
@@ -314,9 +295,9 @@
           "owner_approval": "done"
         },
         "value": {
-          "low": 7720,
-          "mid": 14575,
-          "high": 25740,
+          "low": 7683.52,
+          "mid": 14783.04,
+          "high": 26413.64,
           "confidence": "low"
         }
       },
@@ -332,9 +313,9 @@
           "owner_approval": "done"
         },
         "value": {
-          "low": 7720,
-          "mid": 14575,
-          "high": 25740,
+          "low": 7683.52,
+          "mid": 14783.04,
+          "high": 26413.64,
           "confidence": "low"
         }
       },

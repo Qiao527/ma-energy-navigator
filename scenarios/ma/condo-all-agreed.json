@@ -2,6 +2,7 @@
   "id": "condo-all-agreed",
   "title": "Story 2 — every unit agreed",
   "story": "Story 2: a Somerville condo triple-decker (not a DEC), gas heat. Units 1 and 2 have agreed to the all-units insulation offer. Unit 3 agreed too.",
+  "demoData": true,
   "input": {
     "role": "condo_owner",
     "userUnitId": "1",
@@ -61,26 +62,6 @@
     "asOf": "2026-11-15",
     "installDate": null
   },
-  "quantities": {
-    "cost": {
-      "heat_pump": {
-        "low": 7720,
-        "mid": 14575,
-        "high": 25740,
-        "confidence": "low",
-        "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated tons (low) × EEAC invoice study $/ton"
-      }
-    },
-    "heatPumpTons": {
-      "low": 2,
-      "mid": 2.5,
-      "high": 3.3,
-      "confidence": "low",
-      "why": "Standard-scenario fixture: ResStock MA 2–4 unit oil-heated system size, typical for similar buildings"
-    },
-    "solarKwhPerYear": null,
-    "communitySolarCreditsPerYear": null
-  },
   "expected": {
     "results": [
       {
@@ -132,9 +113,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 2306.25,
+          "mid": 3015,
+          "high": 3960,
           "confidence": "low"
         }
       },
@@ -149,9 +130,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 2306.25,
+          "mid": 3015,
+          "high": 3960,
           "confidence": "low"
         }
       },
@@ -166,9 +147,9 @@
           "integrated_control": "check"
         },
         "value": {
-          "low": 2250,
-          "mid": 2812.5,
-          "high": 3712.5,
+          "low": 2306.25,
+          "mid": 3015,
+          "high": 3960,
           "confidence": "low"
         }
       },
@@ -184,8 +165,8 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
+          "low": 5432.5,
+          "mid": 7102,
           "high": 8500,
           "confidence": "low"
         }
@@ -202,8 +183,8 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
+          "low": 5432.5,
+          "mid": 7102,
           "high": 8500,
           "confidence": "low"
         }
@@ -220,8 +201,8 @@
           "cold_climate_equipment": "check"
         },
         "value": {
-          "low": 5300,
-          "mid": 6625,
+          "low": 5432.5,
+          "mid": 7102,
           "high": 8500,
           "confidence": "low"
         }

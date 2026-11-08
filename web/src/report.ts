@@ -74,12 +74,13 @@ const between = (lo: number, hi: number, f: (x: number) => string = usd): string
 // ---------- 1. the answer, beside the switch drawn as a mechanism ----------
 
 function headline(r: Report, s: State): { text: string; e: Estimate | null } {
-  const L = r.landlord
-  if (L?.realSavings) {
-    const e = L.realSavings
-    if (e.range.low >= 0) return { e, text: `Heat pumps would <em>raise</em> this building’s heating costs by ${rangeN('hl', e.range.low, e.range.high)} a year.` }
-    if (e.range.high <= 0) return { e, text: `Heat pumps would <em>cut</em> this building’s heating costs by ${rangeN('hl', -e.range.high, -e.range.low)} a year.` }
-    return { e, text: `Heat pumps would land between saving ${n('hl.lo', -e.range.low)} and paying ${n('hl.hi', e.range.high)} more a year on heating.` }
+  if (r.buildingChange && s.input.role !== 'tenant') {
+    const e = r.buildingChange
+    const hw = r.units.some(u => u.hotWater && u.hotWater.after !== 'boiler')
+    const costs = hw ? 'heat and hot water costs' : 'heating costs'
+    if (e.range.low >= 0) return { e, text: `Heat pumps would <em>raise</em> this building’s ${costs} by ${rangeN('hl', e.range.low, e.range.high)} a year.` }
+    if (e.range.high <= 0) return { e, text: `Heat pumps would <em>cut</em> this building’s ${costs} by ${rangeN('hl', -e.range.high, -e.range.low)} a year.` }
+    return { e, text: `Heat pumps would land between saving ${n('hl.lo', -e.range.low)} and paying ${n('hl.hi', e.range.high)} more a year on ${hw ? 'heat and hot water' : 'heating'}.` }
   }
   const mine = r.units.find(u => u.unitId === s.input.userUnitId)
   const tenant = s.input.role === 'tenant'
@@ -90,24 +91,26 @@ function headline(r: Report, s: State): { text: string; e: Estimate | null } {
     if (e.range.high <= 0) return { e, text: `With heat pumps, ${who} would go down ${rangeN('hl', -e.range.high, -e.range.low)} a year.` }
     return { e, text: `With heat pumps, ${who} would change by ${signedN('hl', e)} a year.` }
   }
+  if (r.notEstimated.length > 0) return { e: null, text: `Add the heating fuel and fuel records for ${r.notEstimated.map(id => `floor ${id}`).join(' and ')} to see the whole building.` }
   return { e: null, text: 'Tell us how each floor is heated, and who pays which bill, to see who saves and who pays more.' }
 }
 
-const fig = (value: string, label: string, cls = ''): string => `<div class="figure ${cls}"><dt>${label}</dt><dd>${value}</dd></div>`
+const fig = (value: string, label: string, cls = '', e?: Estimate): string =>
+  `<div class="figure ${cls}"><dt>${label}</dt><dd>${value}</dd>${e ? `<dd class="fig-conf">${confNote(e)}${whyList(e, 'Why')}</dd>` : ''}</div>`
 function keyFigures(r: Report): string {
   const L = r.landlord
   const out: string[] = []
   if (L && L.shiftedToTenants.length > 0) {
     const lo = Math.min(...L.shiftedToTenants.map(x => x.monthly.range.low))
     const hi = Math.max(...L.shiftedToTenants.map(x => x.monthly.range.high))
-    out.push(fig(`${rangeN('shift', lo, hi)}<small>/month</small>`, 'moves onto each tenant’s electric bill, unless you adjust for it', 'shift'))
+    out.push(fig(`${rangeN('shift', lo, hi)}<small>/month</small>`, 'moves onto each tenant’s electric bill, unless you adjust for it', 'shift', L.shiftedToTenants[0]?.monthly))
   } else if (L) {
     out.push(fig('$0<small>/month</small>', 'moves onto tenants’ bills with these settings', 'shift none'))
   }
-  if (L) out.push(fig(rangeN('up', L.netUpfront.range.low, L.netUpfront.range.high), L.incentivesKnown ? `upfront after ${between(L.incentivesKnown.range.low, L.incentivesKnown.range.high)} in rebates` : 'upfront; rebate amount not known yet'))
-  if (L?.paybackYears) out.push(fig(`${rangeN('pb', L.paybackYears.range.low, L.paybackYears.range.high, 'n0')}<small> yrs</small>`, 'payback on real savings'))
-  else if (L?.realSavings) out.push(fig('No payback', 'running costs may rise at these prices'))
-  if (r.co2Total) out.push(fig(`−${rangeN('co2', -r.co2Total.change.range.high, -r.co2Total.change.range.low, 'n1')}<small> t CO₂/yr</small>`, `from about ${num(r.co2Total.before.range.mid, 0)} t today`, 'co2'))
+  if (L) out.push(fig(rangeN('up', L.netUpfront.range.low, L.netUpfront.range.high), L.incentivesKnown ? `upfront after ${between(L.incentivesKnown.range.low, L.incentivesKnown.range.high)} in rebates` : 'upfront; rebate amount not known yet', '', L.netUpfront))
+  if (L?.paybackYears) out.push(fig(`${rangeN('pb', L.paybackYears.range.low, L.paybackYears.range.high, 'n0')}<small> yrs</small>`, 'payback on real savings', '', L.paybackYears))
+  else if (L?.realSavings && r.buildingChange && r.buildingChange.range.high > 0) out.push(fig('No payback', 'running costs may rise at these prices', '', r.buildingChange))
+  if (r.co2Total) out.push(fig(`−${rangeN('co2', -r.co2Total.change.range.high, -r.co2Total.change.range.low, 'n1')}<small> t CO₂/yr</small>`, `from about ${num(r.co2Total.before.range.mid, 0)} t today`, 'co2', r.co2Total.change))
   return out.length ? `<dl class="figures">${out.join('')}</dl>` : ''
 }
 
@@ -143,6 +146,14 @@ function basement(keepsBoiler: boolean, ownerBus: boolean): string {
   </svg>`
 }
 
+/** Heating bills plus an electric water heater's switch (F2), when hot water moves off the boiler. */
+function withHotWater(e: UnitEnergy): { fuel: Estimate; heatElec: Estimate; hwElec: Estimate | null; net: Estimate } | null {
+  if (!e.bills) return null
+  const hw = e.hotWater && e.hotWater.after !== 'boiler' ? e.hotWater.bills : null
+  const add = (a: Estimate, b: Estimate | undefined): Estimate => (b ? { ...a, range: { low: a.range.low + b.range.low, mid: a.range.mid + b.range.mid, high: a.range.high + b.range.high } } : a)
+  return { fuel: add(e.bills.fuelBill, hw?.fuelBill), heatElec: e.bills.electricBill, hwElec: hw?.electricBill ?? null, net: add(e.bills.net, hw?.net) }
+}
+
 function building(r: Report, s: State, v: View): string {
   const units = [...s.input.building.units].reverse()
   const L = r.landlord
@@ -155,14 +166,23 @@ function building(r: Report, s: State, v: View): string {
     const heatPayer = u.heatPaidBy ? PAYER[u.heatPaidBy] : null
     const elecPayer = ownerBus ? 'landlord' : u.electricPaidBy ? PAYER[u.electricPaidBy] : null
     const lines: string[] = []
-    if (e?.bills) {
+    const b = e ? withHotWater(e) : null
+    if (e && b) {
+      const hwPayer = b.hwElec ? (u.electricPaidBy ? PAYER[u.electricPaidBy] : null) : null
+      const what = b.hwElec ? 'for heat and hot water' : 'for heat'
       if (v.mode === 'today') {
-        lines.push(line('fuel', `${heatPayer ? cap(heatPayer) : 'Unknown payer'} · ${fuelName(u.heatingFuel)} for heat`, `${rangeN(`f${u.id}.today`, -e.bills.fuelBill.range.high, -e.bills.fuelBill.range.low)}<span class="per">/yr</span>`))
-      } else if (heatPayer && heatPayer === elecPayer) {
-        lines.push(line('both', `${cap(heatPayer)} pays both bills`, `${signedN(`f${u.id}.net`, e.bills.net)}<span class="per">/yr</span>`))
+        lines.push(line('fuel', `${heatPayer ? cap(heatPayer) : 'Unknown payer'} · ${fuelName(u.heatingFuel)} ${what}`, `${rangeN(`f${u.id}.today`, -b.fuel.range.high, -b.fuel.range.low)}<span class="per">/yr</span>`))
+      } else if (heatPayer && heatPayer === elecPayer && (!b.hwElec || hwPayer === heatPayer)) {
+        lines.push(line('both', `${cap(heatPayer)} pays both bills`, `${signedN(`f${u.id}.net`, b.net)}<span class="per">/yr</span>`))
       } else {
-        lines.push(line('fuel', `${heatPayer ? cap(heatPayer) : 'Unknown payer'} · ${fuelName(u.heatingFuel)} bill`, `${signedN(`f${u.id}.fuel`, e.bills.fuelBill)}<span class="per">/yr</span>`))
-        lines.push(line('elec', `${elecPayer ? cap(elecPayer) : 'Unknown payer'} · electric bill`, `${signedN(`f${u.id}.elec`, e.bills.electricBill)}<span class="per">/yr</span>`))
+        lines.push(line('fuel', `${heatPayer ? cap(heatPayer) : 'Unknown payer'} · ${fuelName(u.heatingFuel)} bill`, `${signedN(`f${u.id}.fuel`, b.fuel)}<span class="per">/yr</span>`))
+        if (b.hwElec && hwPayer === elecPayer) {
+          const both = { ...b.heatElec, range: { low: b.heatElec.range.low + b.hwElec.range.low, mid: b.heatElec.range.mid + b.hwElec.range.mid, high: b.heatElec.range.high + b.hwElec.range.high } }
+          lines.push(line('elec', `${elecPayer ? cap(elecPayer) : 'Unknown payer'} · electric bill`, `${signedN(`f${u.id}.elec`, both)}<span class="per">/yr</span>`))
+        } else {
+          lines.push(line('elec', `${elecPayer ? cap(elecPayer) : 'Unknown payer'} · electric bill`, `${signedN(`f${u.id}.elec`, b.heatElec)}<span class="per">/yr</span>`))
+          if (b.hwElec) lines.push(line('elec', `${hwPayer ? cap(hwPayer) : 'Unknown payer'} · water heater electricity`, `${signedN(`f${u.id}.hw`, b.hwElec)}<span class="per">/yr</span>`))
+        }
       }
     }
     const shift = v.mode === 'after' ? L?.shiftedToTenants.find(x => x.unitId === u.id) : undefined
@@ -171,12 +191,12 @@ function building(r: Report, s: State, v: View): string {
       <div class="callout">
         <p class="callout-head"><span class="floor-no">${FLOOR(u.id)}</span> ${who}${you ? ' <span class="you">you</span>' : ''}</p>
         ${lines.length ? `<ul>${lines.join('')}</ul>` : '<p class="muted">No estimate yet: add the heating fuel.</p>'}
-        ${shift ? `<p class="shift-note">≈ ${n(`f${u.id}.shift`, shift.monthly.range.mid)} a month of heating moves to this tenant</p>` : ''}
+        ${shift ? `<p class="shift-note">${rangeN(`f${u.id}.shift`, shift.monthly.range.low, shift.monthly.range.high)} a month of ${e?.hotWater && e.hotWater.after !== 'boiler' ? 'heat and hot water cost' : 'heating'} moves to this tenant</p>` : ''}
       </div></li>`
   }).join('')
   const caption = v.mode === 'today'
     ? 'Today: one boiler in the basement heats every floor through a shared riser, and whoever pays for heat buys all the fuel.'
-    : `With heat pumps: each floor gets an outdoor unit on its porch, running on ${ownerBus ? 'one owner-paid meter, so the landlord pays the electricity' : 'that floor’s own electric meter, so whoever pays that bill pays for the heat'}${keepsBoiler ? '. The boiler stays for hot water' : ''}. Yearly change per bill, low to high.`
+    : `With heat pumps: each floor gets an outdoor unit on its porch, running on ${ownerBus ? 'one owner-paid meter, so the landlord pays the electricity' : 'that floor’s own electric meter, so whoever pays that bill pays for the heat'}${keepsBoiler ? '. The boiler stays for hot water' : r.units.some(x => x.hotWater && x.hotWater.after !== 'boiler') ? ', and a heat pump water heater on each floor takes over the hot water' : ''}. Yearly change per bill, low to high.`
   return `<figure class="elevation mode-${v.mode}${ownerBus ? ' owner-bus' : ''}" data-k="elev" aria-label="The building drawn floor by floor">
     <div class="seg-toggle" role="group" aria-label="Show the building">
       <button type="button" data-mode="today" aria-pressed="${v.mode === 'today'}">Today</button>
@@ -247,7 +267,7 @@ function heatPrice(s: State, v: View): string {
     : ''
   const table = `<details class="data"><summary>Show the numbers as a table</summary><div class="table-wrap"><table>
     <caption>Cost per million Btu (MMBtu) of heat delivered</caption><thead><tr><th scope="col">System</th><th scope="col">Low</th><th scope="col">Typical</th><th scope="col">High</th><th scope="col">Confidence</th></tr></thead>
-    <tbody>${rows.map(r => `<tr><th scope="row">${SOURCE_LABEL[r.id]}</th><td>$${num(r.perMMBtu.range.low, 2)}</td><td>$${num(r.perMMBtu.range.mid, 2)}</td><td>$${num(r.perMMBtu.range.high, 2)}</td><td>${CONF[r.perMMBtu.confidence]}</td></tr>`).join('')}</tbody></table></div></details>`
+    <tbody>${rows.map(r => `<tr><th scope="row">${SOURCE_LABEL[r.id]}</th><td>$${num(r.perMMBtu.range.low, 2)}</td><td>$${num(r.perMMBtu.range.mid, 2)}</td><td>$${num(r.perMMBtu.range.high, 2)}</td><td>${CONF[r.perMMBtu.confidence]}${whyList(r.perMMBtu, 'Why')}</td></tr>`).join('')}</tbody></table></div></details>`
   return `<section class="band" aria-labelledby="h-why"><div class="band-text">
       <h2 id="h-why">The price of one unit of heat</h2><p>${lead}</p>${verdict}
       <p class="muted">${hpRate?.rate === 'seasonal'
@@ -273,6 +293,12 @@ function beforeAfter(r: Report, s: State, v: View): string {
     const kept = e.hotWater?.after === 'boiler' && e.hotWater.fuelCostKept ? e.hotWater.fuelCostKept.range.mid : 0
     const today: Seg[] = [{ kind: 'fuel', value: -e.bills.fuelBill.range.mid, label: `${fuelName(u.heatingFuel)} for heat, ${heatPayer} pays` }]
     const after: Seg[] = [{ kind: 'elec', value: e.bills.electricBill.range.mid, label: `electricity, ${elecPayer} pays` }]
+    const hwb = e.hotWater && e.hotWater.after !== 'boiler' ? e.hotWater.bills : null
+    if (hwb) {
+      const hwPayer = u.electricPaidBy ? PAYER[u.electricPaidBy] : 'unknown payer'
+      today.push({ kind: 'fuel', value: -hwb.fuelBill.range.mid, label: `${fuelName(u.heatingFuel)} for hot water, ${heatPayer} pays` })
+      after.push({ kind: 'elec', value: hwb.electricBill.range.mid, label: `water heater electricity, ${hwPayer} pays` })
+    }
     if (kept > 0) {
       today.push({ kind: 'kept', value: kept, label: `${fuelName(u.heatingFuel)} for hot water, ${heatPayer} pays` })
       after.push({ kind: 'kept', value: kept, label: `${fuelName(u.heatingFuel)} for hot water stays, ${heatPayer} pays` })
@@ -291,14 +317,32 @@ function beforeAfter(r: Report, s: State, v: View): string {
   }
   const body = groups.map(g => `<li class="sb-group" data-floor="${g.unit.id}"><span class="sb-floor">${FLOOR(g.unit.id)}</span>${bar(g.today, `ba${g.unit.id}.today`, 'today')}${bar(g.after, `ba${g.unit.id}.after`, 'heat pumps')}</li>`).join('')
   const ticks = Array.from({ length: lim / step + 1 }, (_, i) => i * step)
+  const sg = (e: Estimate) => `${e.range.low > 0 ? '+' : e.range.low < 0 ? '−' : ''}${usd(e.range.low)} to ${e.range.high > 0 ? '+' : e.range.high < 0 ? '−' : ''}${usd(e.range.high)}`
+  const rowsFor = (g: (typeof groups)[number]): string => {
+    const b = g.e.bills!
+    const heatPayer: string = (g.unit.heatPaidBy ? PAYER[g.unit.heatPaidBy] : undefined) ?? 'unknown'
+    const hpPayer: string = v.meter === 'owner' ? 'landlord' : (g.unit.electricPaidBy ? PAYER[g.unit.electricPaidBy] : undefined) ?? 'unknown'
+    const rows: [string, string, Estimate][] = [[`${cap(fuelName(g.unit.heatingFuel))} for heat`, heatPayer, b.fuelBill], ['Heat pump electricity', hpPayer, b.electricBill]]
+    let net = b.net
+    const hw = g.e.hotWater
+    if (hw && hw.after !== 'boiler') {
+      const hwPayer: string = (g.unit.electricPaidBy ? PAYER[g.unit.electricPaidBy] : undefined) ?? 'unknown'
+      rows.push([`${cap(fuelName(g.unit.heatingFuel))} for hot water`, heatPayer, hw.bills.fuelBill], ['Water heater electricity', hwPayer, hw.bills.electricBill])
+      net = { ...net, range: { low: net.range.low + hw.bills.net.range.low, mid: net.range.mid + hw.bills.net.range.mid, high: net.range.high + hw.bills.net.range.high } }
+    }
+    const keep = hw?.after === 'boiler' ? `<tr><th scope="row">${FLOOR(g.unit.id)}</th><td>${cap(fuelName(g.unit.heatingFuel))} for hot water (boiler stays)</td><td>${heatPayer}</td><td>no change</td></tr>` : ''
+    return rows.map(([what, who, e]) => `<tr><th scope="row">${FLOOR(g.unit.id)}</th><td>${what}</td><td>${who}</td><td>${sg(e)}</td></tr>`).join('') + keep +
+      `<tr class="total"><th scope="row">${FLOOR(g.unit.id)}</th><td>All together</td><td>—</td><td>${sg(net)}</td></tr>`
+  }
   const table = `<details class="data"><summary>Show ranges and who pays</summary><div class="table-wrap"><table>
-    <caption>Yearly change by floor and bill (low to high; minus = pays less)</caption><thead><tr><th scope="col">Floor</th><th scope="col">Fuel bill</th><th scope="col">Electric bill</th><th scope="col">Both together</th></tr></thead>
-    <tbody>${groups.map(g => { const b = g.e.bills!; const sg = (e: Estimate) => `${e.range.low > 0 ? '+' : e.range.low < 0 ? '−' : ''}${usd(e.range.low)} to ${e.range.high > 0 ? '+' : e.range.high < 0 ? '−' : ''}${usd(e.range.high)}`; return `<tr><th scope="row">${FLOOR(g.unit.id)}</th><td>${sg(b.fuelBill)}</td><td>${sg(b.electricBill)}</td><td>${sg(b.net)}</td></tr>` }).join('')}</tbody></table></div></details>`
+    <caption>Yearly change by floor and bill (low to high; minus = pays less)</caption><thead><tr><th scope="col">Floor</th><th scope="col">Bill</th><th scope="col">Who pays</th><th scope="col">Change a year</th></tr></thead>
+    <tbody>${groups.map(rowsFor).join('')}</tbody></table></div></details>`
+  const hwSwitch = groups.some(g => g.e.hotWater && g.e.hotWater.after !== 'boiler')
   return `<section aria-labelledby="h-floors"><h2 id="h-floors">What each floor spends on heat, today and after</h2>
     <p class="lede">Typical yearly costs. The fuel bill goes away. An electric bill takes its place, often for a different person.</p>
     <ol class="sbars">${body}</ol>
     <div class="sb-axis" aria-hidden="true"><span class="sb-label"></span><span class="sb-ticks">${ticks.map(t => `<span style="left:${pct(t)}">${usd(t)}</span>`).join('')}</span></div>
-    <p class="legend"><span><span class="swatch fuel"></span>Heating fuel</span><span><span class="swatch elec"></span>Heat pump electricity</span>${groups.some(g => g.today.length > 1) ? '<span><span class="swatch kept"></span>Hot-water fuel that stays</span>' : ''}</p>${table}</section>`
+    <p class="legend"><span><span class="swatch fuel"></span>${hwSwitch ? 'Fuel for heat and hot water' : 'Heating fuel'}</span><span><span class="swatch elec"></span>${hwSwitch ? 'Heat pump and water heater electricity' : 'Heat pump electricity'}</span>${groups.some(g => g.today.length > 1) ? '<span><span class="swatch kept"></span>Hot-water fuel that stays</span>' : ''}</p>${table}</section>`
 }
 
 // ---------- 4. fairness ----------
@@ -343,14 +387,20 @@ function plan(r: Report): string {
       const value = vals.length ? ` · ${o?.qualification === 'up_to' ? 'up to ' : ''}${between(Math.min(...vals.map(v => v.range.low)), Math.max(...vals.map(v => v.range.high)))}${floors.length > 1 ? ' per floor' : ''}` : ''
       const confirm = best.confirmations.map(c => `<li>${esc(c.question)} <span class="muted">${esc(c.decidedBy)}: ${esc(c.nextAction)}</span></li>`).join('')
       const todo = best.prerequisites.filter(p => p.state !== 'done').map(p => `<li>${esc(p.description)}${p.unitsNeeded?.length ? ` <strong>${p.unitsNeeded.length} more unit${p.unitsNeeded.length === 1 ? '' : 's'} needed.</strong>` : ''}</li>`).join('')
+      const late = best.reason === 'application_deadline_passed' ? `<p class="offer-note">Missed the application deadline${best.applicationDeadline ? ` (${esc(best.applicationDeadline)})` : ''}. Ask the program whether a late application is possible.</p>` : ''
+      const stale = r.navigation.staleOffers.includes(`${best.offerId}@${best.version}`) ? '<p class="offer-note">The program’s page was last checked more than 90 days ago. Confirm the details with the program.</p>' : ''
       return `<li class="offer"><span class="status" data-s="${cls}">${label}</span> <span class="offer-title">${esc(o?.title ?? best.offerId)}</span><span class="muted">${floors.length ? ` · ${floors.length === 1 ? FLOOR(floors[0] ?? '') : `floors ${floors.join(', ')}`}` : ''}${value}</span>
-        ${todo || confirm ? `<details><summary>Before you apply</summary><ul>${todo}${confirm}</ul></details>` : ''}</li>`
+        ${late}${stale}${todo || confirm ? `<details><summary>Before you apply</summary><ul>${todo}${confirm}</ul></details>` : ''}</li>`
     }).join('')
     const after = st.after.length ? `<p class="muted">${st.after.map(a => esc(a.reason)).join(' ')}</p>` : ''
     return `<li class="step"><h3>${MEASURE[st.measure] ?? st.measure}</h3>${after}<ul class="offers">${items}</ul></li>`
   }).join('')
+  const seen = new Set<string>()
+  const upcoming = r.navigation.upcoming.filter(u => !seen.has(u.offerId) && seen.add(u.offerId))
+    .map(u => `<li>From ${esc(u.from)}: ${esc(OFFERS.get(`${u.offerId}@${u.version}`)?.title ?? u.offerId)}</li>`).join('')
   return `<section aria-labelledby="h-plan"><h2 id="h-plan">What to do, in order</h2>
-    <p class="lede">The programs decide eligibility. This shows what their published rules say, and what only they can confirm.</p><ol class="steps">${steps}</ol></section>`
+    <p class="lede">The programs decide eligibility. This shows what their published rules say, and what only they can confirm.</p><ol class="steps">${steps}</ol>
+    ${upcoming ? `<div class="upcoming"><h3>Changes already announced</h3><p class="muted">These replace today’s versions for installations from the date shown. Add your install date in “Edit the building” to see which applies.</p><ul>${upcoming}</ul></div>` : ''}</section>`
 }
 
 // ---------- 6. engineering notes ----------
@@ -362,9 +412,14 @@ function engineering(r: Report, s: State): string {
     const recs = (u.fuelRecords ?? []).map(x => `${num(x.quantity, 0)} ${x.unit}`).join(' / ')
     const chain: string[] = []
     if (recs) chain.push(node('Fuel records', recs, 'two winters, as entered'))
-    if (e.heatLoad) chain.push(node('Heat the floor needs', `${between(e.heatLoad.range.low, e.heatLoad.range.high, n => num(n, 0))} MMBtu`, 'normal winter, hot water out', e.heatLoad))
+    const hwNote = u.hotWaterFromBoiler === true ? 'normal winter, hot water taken out' : u.hotWaterFromBoiler === null ? 'normal winter; may include hot water' : 'normal winter'
+    if (e.heatLoad) chain.push(node('Heat the floor needs', `${between(e.heatLoad.range.low, e.heatLoad.range.high, n => num(n, 0))} MMBtu`, hwNote, e.heatLoad))
     if (e.bills) chain.push(node('Fuel today', between(-e.bills.fuelBill.range.high, -e.bills.fuelBill.range.low), 'a year'))
     if (e.bills) chain.push(node('Heat pump electricity', between(e.bills.electricBill.range.low, e.bills.electricBill.range.high), 'a year, measured efficiency'))
+    if (e.hotWater && e.hotWater.after !== 'boiler') {
+      const h = e.hotWater.bills
+      chain.push(node('Hot water, switched', `${between(-h.fuelBill.range.high, -h.fuelBill.range.low)} oil → ${between(h.electricBill.range.low, h.electricBill.range.high)}`, 'a year: heat pump water heater, field-measured use', h.electricBill))
+    }
     if (e.co2) chain.push(node('CO₂', `${num(e.co2.before.range.mid, 1)} → ${num(e.co2.after.range.mid, 1)} t`, 'a year, typical'))
     const cmp = e.comparison ? `<p class="cmp" data-pos="${e.comparison.position}">${esc(e.comparison.message)}</p>` : ''
     const notes = e.notes.map(n => `<p class="muted">${esc(n)}</p>`).join('')

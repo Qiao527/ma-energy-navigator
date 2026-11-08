@@ -2,6 +2,47 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-07 (Phase 1 closed)
+
+- **Approved:** the heat pump water heater electricity and the November–April season share ("批准数据"), and the
+  11 re-recorded scenario baselines ("批准场景"). Every rule, assumption and scenario is now approved. — Qiao.
+- **Phase 1 is closed.** The methods write-up and README are updated to the approved numbers. The demo now reads
+  between saving $1,250 and paying $3,530 more a year on heat and hot water. Next: messages for the other people
+  in the building (tenant → landlord, landlord → tenants), generated from engine results. — Qiao.
+
+## 2026-11-07 (Phase 1 independent review)
+
+- **Nine findings, all confirmed and fixed** (`docs/reviews/phase-1-review.md`). Two are model changes:
+  - an unanswered hot-water question widens the heat load range;
+  - the winter heat pump discount is weighted by the November–April share of the heating season.
+  Building-wide figures now need every floor. — Technical.
+- **Rule draft (waiting for Qiao):** `heating_hdd_share.ma.nov_apr` 0.851 / 0.851 / 0.880 from NOAA CPC monthly
+  state data. Approved together with the heat pump water heater value.
+
+## 2026-11-07 (F3, F4)
+
+- **Technical (F3):** `demoData` is a required field on every scenario; all ten are invented buildings, so all are
+  `true`. The page's demo label reads it.
+- **Technical (F4):** scenario fixture quantities are removed. Each run computes costs and heat pump size with
+  `quantitiesFor` from the assumptions in force, so an assumption change now shows in the scenarios. Re-recording
+  changed only heat pump rebate amounts (no eligibility, question or order changed); the ten baselines wait for
+  Qiao's re-approval.
+
+## 2026-11-07 (Hot water in the demo; heat pump water heater estimate)
+
+- **Demo answers** (Qiao, as recommended): each floor's boiler heats its water, and a heat pump water heater
+  takes over. Set in `web/src/demo.ts`; the standard scenario stays unchanged. — Qiao.
+- **Technical:** an electric water heater switch is now estimated when a sourced yearly electricity use exists:
+  the hot-water oil (share × mean gallons × price) goes, and kWh × the standard rate comes, on the floor's own
+  meter. CO₂ includes both. The winter heat pump rate's effect on half the year is left out (conservative).
+- **Rule draft (waiting for Qiao):** `water_heater_annual_kwh.heat_pump_water_heater` 426 / 862 / 1,534 kWh a
+  year, from Efficiency Maine's June 2026 impact evaluation (metered Maine homes). Typical: 862 kWh added where
+  the old water heater burned fuel. Low: the hot-water load at the rated UEF 3.6. High: the same load in
+  resistance mode. Confidence low. Quote check passed.
+- **Effect on the demo:** heat and hot water together, the building lands between saving $1,400 and paying $3,260
+  more a year. The page is published only after approval, because without the value the hot-water switch can't
+  be estimated.
+
 ## 2026-11-07 (Dependency updates)
 
 - **Technical:** TypeScript 7.0.2 (engine, web) and Vitest 5.1.0 (engine) applied on the branch, with all checks
@@ -12,12 +53,11 @@ Newest first. Format: date — decision — why — decided by.
 
 - **Technical:** new fact `project.installed` (install date on or before today). A confirmation can use it in
   `when`; on an installed project, offers carrying such a confirmation sort after the others in `shown`.
-- **Rule draft (waiting for Qiao):** `dec_rental_heat_pump_no_cost` gains the confirmation
+- **Rule:** `dec_rental_heat_pump_no_cost` gains the confirmation
   `installed_before_program`. The offer is turnkey ("project coordination and installation managed for you";
   "installed by approved contractors"), and whether finished work qualifies isn't published, so it stays
   potential with "ask Mass Save before counting on it". Quote check passed.
-- **Scenario:** `story1-installed-deadline-passed` re-recorded with the new confirmation; waiting for Qiao's
-  approval together with the rule.
+- **Approved** (rule and scenario) at Qiao's instruction ("批准F1"). All 11 standard scenarios are now approved. — Qiao.
 
 ## 2026-11-07 (Seasonal heat pump rate)
 

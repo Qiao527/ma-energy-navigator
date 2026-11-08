@@ -76,13 +76,16 @@ export function heatPumpPrice(list: readonly Assumption[], utility: ElectricUtil
   if (utility === 'municipal') return standard('Municipal electric companies have no state seasonal heat pump rate, so the standard rate is used.')
   const company = DELIVERY[utility]
   const discount = company === undefined ? null : find(list, `heat_pump_rate_discount.${company}`)
-  if (company === undefined || discount === null) {
+  // The discount applies November–April only; heating in October and May pays the standard rate. Heat pump
+  // electricity is spread over the season like heating degree days (NOAA, Massachusetts, normal winter).
+  const winter = find(list, 'heating_hdd_share.ma.nov_apr')
+  if (company === undefined || discount === null || winter === null) {
     return standard(`There is no sourced winter heat pump discount for ${company ? COMPANY[company] : utility} yet, so the standard rate is used.`)
   }
   return {
-    price: combine(sub(elec.range, discount.range), [elec, discount], 'winter seasonal heat pump rate (Nov 1 – Apr 30)'),
+    price: combine(sub(elec.range, mul(discount.range, winter.range)), [elec, discount, winter], 'winter seasonal heat pump rate (Nov 1 – Apr 30), weighted by the share of the heating season in those months'),
     rate: 'seasonal',
-    note: `Heat pump electricity uses ${COMPANY[company]}'s seasonal heat pump rate (assumes the home is enrolled, which is automatic with a Mass Save heat pump rebate). The rate also lowers other winter electricity; that saving is not counted.`,
+    note: `Heat pump electricity uses ${COMPANY[company]}'s seasonal heat pump rate from November to April, about ${Math.round(winter.range.mid * 100)}% of a normal heating season (assumes the home is enrolled, which is automatic with a Mass Save heat pump rebate). Delivery rates change during the year; these are the current tariffs. The rate also lowers other winter electricity; that saving is not counted.`,
   }
 }
 
@@ -163,7 +166,37 @@ export function unitEnergy(input: Input, unitId: string, list: readonly Assumpti
       if (fuelCostKept === null) notes.push('The hot-water fuel that stays on the bill is not estimated (needs fuel records and a sourced hot-water share).')
       out.hotWater = { after: 'boiler', fuelCostKept, fixedCost: find(list, `boiler_annual_service_cost.${u.heatingFuel}`) }
     } else if (u.hotWaterAfter !== null) {
-      notes.push('Switching hot water to an electric water heater is not estimated yet (no sourced water heater efficiency): the boiler fuel it saves and the electricity it uses are both left out.')
+      // The hot-water oil goes; a water heater's yearly electricity comes, on the floor's own meter, at the
+      // standard rate (it runs all year; the winter heat pump rate covers half of it, left out: conservative).
+      const share = find(list, `hot_water_share_of_fuel.${u.heatingFuel}`)
+      const price = find(list, `price.${u.heatingFuel}`)
+      const heat = find(list, `heat_content_mmbtu_per_unit.${u.heatingFuel}`)
+      const kgFuel = find(list, `co2_kg_per_mmbtu.${u.heatingFuel}`)
+      const kwh = find(list, `water_heater_annual_kwh.${u.hotWaterAfter}`)
+      const stdElec = find(list, 'price.electricity')
+      const seasons = new Map<number, number>()
+      for (const r of u.fuelRecords ?? []) seasons.set(r.year, (seasons.get(r.year) ?? 0) + r.quantity)
+      const mean = seasons.size === 0 ? null : [...seasons.values()].reduce((x, y) => x + y, 0) / seasons.size
+      if (share === null || price === null || heat === null || kgFuel === null || kwh === null || stdElec === null || mean === null) {
+        notes.push('Switching hot water to an electric water heater is not estimated (needs fuel records, a sourced hot-water share and a sourced water heater electricity use): the boiler fuel it saves and the electricity it uses are both left out.')
+      } else {
+        const gallons = scale(share.range, mean)
+        const oilCost = mul(gallons, price.range)
+        const fuelBill = combine(sub(point(0), oilCost), [share, price], 'hot-water oil no longer bought: your fuel records × the typical hot-water share')
+        const electricBill = combine(mul(kwh.range, stdElec.range), [kwh, stdElec], 'water heater electricity at the standard rate')
+        const net = combine(sub(electricBill.range, oilCost), [fuelBill, electricBill])
+        out.hotWater = { after: u.hotWaterAfter, bills: { fuelBill, electricBill, net }, meterPaidBy: u.electricPaidBy }
+        if (out.co2 !== null) {
+          const hwBefore = tonnes(mul(mul(gallons, heat.range), kgFuel.range))
+          const hwAfter = tonnes(mul(kwh.range, scale(gridLb.range, KG_PER_LB / 1000)))
+          const add = [share, heat, kgFuel, kwh, gridLb]
+          out.co2 = {
+            before: combine(sum([out.co2.before.range, hwBefore]), [out.co2.before, ...add]),
+            after: combine(sum([out.co2.after.range, hwAfter]), [out.co2.after, ...add]),
+            change: combine(sum([out.co2.change.range, sub(hwAfter, hwBefore)]), [out.co2.change, ...add]),
+          }
+        }
+      }
     }
   }
   return out
@@ -177,6 +210,11 @@ export interface ReportOptions extends NavigateOptions, EnergyOptions {
 export interface Report {
   navigation: NavigateResult
   units: UnitEnergy[]
+  /** Floors with a heating system to switch (or an unknown one) whose bills could not be estimated. */
+  notEstimated: string[]
+  /** The whole building's yearly running-cost change (heating, plus any electric water heater switch), whoever
+   *  pays. Null unless every floor with something to switch is estimated. */
+  buildingChange: Estimate | null
   co2Total: { before: Estimate; after: Estimate; change: Estimate } | null
   /** Landlords only: "is it worth it for me?" Null with a reason otherwise. */
   landlord: LandlordView | null
@@ -190,14 +228,22 @@ export function report(rawInput: unknown, rules: RuleSet, options: ReportOptions
   const input = InputSchema.parse(rawInput)
   const navigation = navigate(input, rules, { asOf: options.asOf, installDate: options.installDate }, quantitiesFor(input, list))
   const units = input.building.units.map(u => unitEnergy(input, u.id, list, { heatPumpMeter: options.heatPumpMeter ?? 'unit' }))
+  // A building-wide figure must cover every floor that has something to switch (review 2026-11-07).
+  const notEstimated = units.filter(e => e.heatingFuel !== 'heat_pump' && e.heatingFuel !== 'other' && e.bills === null).map(e => e.unitId)
+  const complete = notEstimated.length === 0
+  const nets = units.flatMap(e => (e.bills ? [e.bills.net, ...(e.hotWater && e.hotWater.after !== 'boiler' ? [e.hotWater.bills.net] : [])] : []))
+  const buildingChange = complete && nets.length > 0 ? sumOf(nets) : null
   const withCo2 = units.flatMap(u => (u.co2 ? [u.co2] : []))
-  const co2Total = withCo2.length === 0 ? null : {
+  const co2Total = !complete || withCo2.length === 0 ? null : {
     before: sumOf(withCo2.map(c => c.before)), after: sumOf(withCo2.map(c => c.after)), change: sumOf(withCo2.map(c => c.change)),
   }
 
   let landlord: LandlordView | null = null
   let landlordReason: string | null = null
-  if (input.role === 'owner_occupant_landlord' || input.role === 'renting_landlord') {
+  const floors = (ids: string[]) => ids.map(id => `floor ${id}`).join(', ')
+  if ((input.role === 'owner_occupant_landlord' || input.role === 'renting_landlord') && !complete) {
+    landlordReason = `Bills could not be estimated for ${floors(notEstimated)} (add the heating fuel and fuel records), so there is no building-wide answer yet.`
+  } else if (input.role === 'owner_occupant_landlord' || input.role === 'renting_landlord') {
     const q = quantitiesFor(input, list)
     const projects: UnitProject[] = []
     const costs: Estimate[] = []
@@ -235,7 +281,7 @@ export function report(rawInput: unknown, rules: RuleSet, options: ReportOptions
       })
     }
   }
-  return { navigation, units, co2Total, landlord, landlordReason }
+  return { navigation, units, notEstimated, buildingChange, co2Total, landlord, landlordReason }
 }
 
 export type HeatSource = 'oil' | 'natural_gas' | 'propane' | 'electric_resistance' | 'heat_pump'
