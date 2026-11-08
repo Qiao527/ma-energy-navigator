@@ -511,3 +511,11 @@ Based on `docs/review-notes.md`.
 - **Workflow: written plan, test-driven implementation, and an independent review at the end of each phase.** — Qiao.
 - **Docs mark statements as Decided / Proposed / Open** so later work can refine
   without discarding agreed decisions. — Qiao.
+
+## 2026-11-07 — License, public repository, attribution
+
+- **Decision:** The code is MIT licensed (© Qiao Long); data keeps its own terms. The repository becomes public.
+  Commits and pull requests carry no AI co-author trailer or "Generated with" footer; existing trailers were
+  removed from history before the repository went public.
+- **Why:** Qiao's portfolio, published under Qiao's name.
+- **Who:** Qiao.

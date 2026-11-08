@@ -141,6 +141,11 @@ Automated axe-core scans (WCAG 2.0–2.2 A/AA) report no violations in light or 
 
 Programs decide eligibility. This tool shows what their published rules say and names what to confirm.
 
+## License
+
+Code: [MIT](LICENSE), © 2026 Qiao Long. Data and quoted program text keep their own terms (see Data and credits):
+ResStock is CC BY 4.0, and U.S. government works are in the public domain.
+
 ## Author
 
 Qiao Long · [github.com/Qiao527](https://github.com/Qiao527)
