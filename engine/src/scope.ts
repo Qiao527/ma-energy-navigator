@@ -63,7 +63,8 @@ export const FACT_PATHS = [
 
 export function derive(input: Input, dec: readonly DecEntry[]): Derived {
   const b = input.building
-  const entry = dec.find(d => d.name === b.municipality)
+  const town = b.municipality.trim().toLowerCase()
+  const entry = dec.find(d => d.name.toLowerCase() === town)
   let isDec: boolean | null = false
   if (entry !== undefined) {
     const utilities = [b.electricUtility, b.gasUtility]

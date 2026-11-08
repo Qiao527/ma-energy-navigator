@@ -9,6 +9,11 @@ describe('derive', () => {
     const i = input({ building: { municipality: 'Boston', electricUtility: 'eversource', gasUtility: 'national_grid' } })
     expect(derive(i, DEC).isDec).toBe(true)
   })
+  test('the town name matches regardless of case and surrounding spaces (audit 2026-11-08)', () => {
+    for (const municipality of ['boston', ' BOSTON ', 'Boston']) {
+      expect(derive(input({ building: { municipality, electricUtility: 'eversource', gasUtility: 'national_grid' } }), DEC).isDec).toBe(true)
+    }
+  })
   test('a non-listed municipality is not a DEC', () => {
     expect(derive(input({ building: { municipality: 'Newton' } }), DEC).isDec).toBe(false)
   })
