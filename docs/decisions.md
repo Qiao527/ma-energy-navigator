@@ -2,6 +2,11 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-11 (AI endpoint observation)
+
+- **The `/api/` firewall observation rule is live.** It logs only and does not rate-limit. Qiao published it;
+  traffic verification, staged enforcement, and the DeepSeek spending limit remain open. — Technical.
+
 ## 2026-11-11 (Phase 2 review fixes)
 
 - **Unknown is not zero:** unallocated bill payers and unestimated water-heater switches prevent the page from
@@ -10,7 +15,7 @@ Newest first. Format: date — decision — why — decided by.
   building with AI-extracted facts requires explicit confirmation. — Technical.
 - **Town validation:** the engine and map use the shared Census municipality list. Unrecognized names leave DEC
   status unknown; the form asks the user to check spelling. — Technical.
-- **Public AI remains protected:** the initial firewall draft logs only; it is not a rate limit. A public release
+- **Public AI remains protected:** the initial firewall observation rule logs only; it is not a rate limit. A public release
   still needs effective rate limiting and a provider-side spending limit. — Technical.
 
 ## 2026-11-10 (Input interface polish)

@@ -14,7 +14,7 @@ based on code paths.
 | The fairness section can label known-floor costs as a whole-building total when another payer is unknown. | The fairness section shares the completeness check, withholds partial totals, and retains legal and fairness guidance when a known shift exists. A rendering regression checks those details. |
 | A shift caused only by hot-water electricity can be misdescribed as heat pumps on tenants’ meters. | The fairness copy now covers heating and hot water without asserting which meter serves the heat pump; a real-report regression covers owner-paid heat-pump meters. |
 | The AI explanation can describe a heating-only estimate as a whole-building change when hot water was omitted. | The explanation now specifies the types of costs covered and explicitly notes omitted hot-water changes. |
-| The paid public AI endpoints have no effective rate limit or provider spending cap. | **Open:** the Vercel firewall draft only logs requests and is not published. The AI deployment remains login-protected until rate limiting and a provider-side spending limit are in effect. |
+| The paid public AI endpoints have no effective rate limit or provider spending cap. | **Open:** the published Vercel firewall rule only logs requests; it does not limit them. The AI deployment remains login-protected until rate limiting and a provider-side spending limit are in effect. |
 
 The engine scenario suite passed before and after the municipality change. AI extraction evaluation and its
 limitations are documented in [`eval/README.md`](../../eval/README.md). The independent reviewer rechecked the fixes and ran the energy regression suite (38 tests passed), with no
