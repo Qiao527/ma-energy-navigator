@@ -1,6 +1,8 @@
 import { DATA } from './data.js'
 import { blankState, demoState, formHtml, setPath, type Kind, type State } from './form.js'
-import { DEFAULT_VIEW, fmt, mainFuel, reportHtml, type View } from './report.js'
+import { DEFAULT_VIEW, compute, fmt, mainFuel, reportHtml, type View } from './report.js'
+import { confirmReplacement, missing, renderAnswer, reviewFacts, type Extracted, type Presentation } from './assistant.js'
+import { hasUnestimatedWater } from './shift.js'
 
 let state: State = demoState()
 let view: View = structuredClone(DEFAULT_VIEW)
@@ -117,6 +119,7 @@ function play(old: Map<string, Snap>): void {
 
 let announceTimer = 0
 function render(announce = true): void {
+  $('ai-answer').textContent = ''
   const old = snapshot()
   reportEl.innerHTML = reportHtml(state, view)
   if (!reduced.matches) play(old)
@@ -218,6 +221,80 @@ formEl.addEventListener('click', e => {
 })
 document.addEventListener('click', e => { if ((e.target as HTMLElement).closest('[data-action="edit"]')) dialog.showModal() })
 $('close').addEventListener('click', () => dialog.close())
+
+
+// ---------- AI assistant: no model output reaches calculations before confirmation ----------
+let extracted: Extracted | null = null
+const aiInput = $<HTMLTextAreaElement>('ai-input')
+const aiStatus = $('ai-status')
+const aiReview = $('ai-review')
+const aiReviewSection = $('ai-review-section')
+const aiAnswer = $('ai-answer')
+const aiConfirm = $<HTMLButtonElement>('ai-confirm')
+const aiAvailable = location.hostname !== 'qiao527.github.io' && location.protocol !== 'file:'
+const setAiBusy = (busy: boolean): void => {
+  $<HTMLButtonElement>('ai-extract').disabled = busy || !aiAvailable
+  $<HTMLButtonElement>('ai-explain').disabled = busy || !aiAvailable
+}
+if (!aiAvailable) {
+  $<HTMLButtonElement>('ai-extract').disabled = true
+  $<HTMLButtonElement>('ai-explain').disabled = true
+  aiStatus.textContent = 'AI preview is available locally. See the project README for setup.'
+}
+aiInput.addEventListener('input', () => { extracted = null; aiConfirm.hidden = true; aiReviewSection.hidden = true; aiReview.replaceChildren(); if (aiAvailable) aiStatus.textContent = '' })
+async function aiRequest(path: string, text: string): Promise<unknown> {
+  const response = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) })
+  if (!response.ok) throw new Error('We couldn’t reach the assistant. Please try again, or use the form instead.')
+  return response.json()
+}
+$('ai-extract').addEventListener('click', async () => {
+  const text = aiInput.value.trim()
+  if (!text) { aiStatus.textContent = 'Describe your building first.'; return }
+  extracted = null; aiConfirm.hidden = true; aiReviewSection.hidden = true; aiReview.replaceChildren(); aiStatus.textContent = 'Reading what you wrote…'
+  setAiBusy(true)
+  try {
+    const result = await aiRequest('/api/intake', text) as Extracted
+    if (aiInput.value.trim() !== text) return
+    extracted = result
+    for (const [label, value] of reviewFacts(result)) {
+      const term = document.createElement('dt'); term.textContent = label
+      const detail = document.createElement('dd'); detail.textContent = value
+      aiReview.append(term, detail)
+    }
+    aiReviewSection.hidden = false
+    const needed = missing(result)
+    aiStatus.textContent = needed.length ? `To get started, please add: ${needed.join(', ')}. Then select “Review what I wrote” again.` : 'Please check the details below before continuing.'
+    aiConfirm.hidden = needed.length > 0
+  } catch (e) { aiStatus.textContent = e instanceof Error ? e.message : 'The assistant is unavailable.' }
+  finally { setAiBusy(false) }
+})
+aiConfirm.addEventListener('click', () => {
+  if (!extracted) return
+  const replacement = confirmReplacement(extracted, message => window.confirm(message))
+  if (!replacement) return
+  state = replacement
+  view = structuredClone(DEFAULT_VIEW)
+  extracted = null; aiConfirm.hidden = true; aiReviewSection.hidden = true; aiReview.replaceChildren()
+  aiAnswer.textContent = ''; aiStatus.textContent = 'Details added. Review the form and fill in anything still unknown.'
+  renderForm(); render(); dialog.showModal()
+  document.getElementById('role')?.focus()
+})
+$('ai-explain').addEventListener('click', async () => {
+  const before = JSON.stringify({ state, view })
+  const text = aiInput.value.trim() || 'Explain the report and help me coordinate with the other people in the building.'
+  aiStatus.textContent = 'Preparing an explanation…'; aiAnswer.textContent = ''
+  setAiBusy(true)
+  try {
+    const presentation = await aiRequest('/api/presentation', text) as Presentation
+    if (before !== JSON.stringify({ state, view })) { aiStatus.textContent = 'The report changed. Please request a new explanation.'; return }
+    if (!['cost', 'coordination'].includes(presentation.focus) || !['warm', 'direct'].includes(presentation.tone)) throw new Error('Invalid assistant response.')
+    const { r } = compute(state, view)
+    if (!r) throw new Error('Complete the building form before requesting an explanation.')
+    aiAnswer.textContent = renderAnswer(r, state.input.role, presentation, state.demo, hasUnestimatedWater(state.input, r.units))
+    aiStatus.textContent = 'Explanation ready. Numbers come from the current report; check the draft before sending.'
+  } catch (e) { aiStatus.textContent = e instanceof Error ? e.message : 'The assistant is unavailable.' }
+  finally { setAiBusy(false) }
+})
 
 if (DATA.status.previewDrafts) {
   const bar = $('preview')

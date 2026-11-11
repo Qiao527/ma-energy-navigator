@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "npm ci --prefix engine && npm ci --prefix web",
+  "buildCommand": "npm run build --prefix web",
+  "outputDirectory": "web/dist"
+}

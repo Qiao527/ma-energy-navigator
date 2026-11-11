@@ -5,7 +5,9 @@ each floor, what to do first, and who ends up paying more when a building switch
 
 [![CI](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml/badge.svg)](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml)
 
-**Try it:** https://qiao527.github.io/ma-energy-navigator/
+**Try the energy demo:** https://qiao527.github.io/ma-energy-navigator/
+
+The AI-enabled version is currently a login-protected preview; see [AI navigator](#ai-navigator).
 
 ![Every Floor in use: switching between today and heat pumps, dragging the electricity price, moving the heat pumps to an owner-paid meter, and entering a building with answers that apply to every floor](docs/assets/every-floor-demo.gif)
 
@@ -43,6 +45,26 @@ You describe the building: who lives on each floor, how it's heated, who pays wh
 5. The programs in the order to do them, what each one needs, and what only the program can confirm.
 6. A map of Designated Equity Communities and the navigator pilot cities.
 7. Every step of the math, with a source for every assumption.
+
+## How the AI flow works
+
+```mermaid
+flowchart LR
+  A[Building description] --> B[AI extracts stated facts]
+  B --> C[User reviews and confirms]
+  C --> D[Deterministic energy and rules engine]
+  D --> E[Report with ranges and sources]
+  D --> F[Reviewed explanation and message templates]
+```
+
+The model helps interpret a short description and chooses the focus and tone of a response. It does not calculate
+savings or write program names and figures. Those come from the engine; explanations and coordination messages
+are assembled from reviewed text. This is a constrained assistant, not an open-ended agent.
+
+The [AI evaluation](eval/README.md) documents 16 fictional cases, including unknown facts, conflicting answers,
+per-floor differences, out-of-scope buildings and an instruction-injection attempt. One expanded run initially
+misclassified a single-family owner; after a prompt change, the same 16 cases passed once. This is a small,
+developer-authored set, not a guarantee of model accuracy. Users confirm the form before calculations run.
 
 ## What it found
 
@@ -105,11 +127,14 @@ Decisions and their reasons are logged in [`docs/decisions.md`](docs/decisions.m
 ## Repository
 
 ```
-engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check): 243 tests
+engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check)
 rules/ma/   Approved rules and assumptions, source snapshots, approval ledger
 scenarios/  Standard scenarios with expected results
 web/        The page: a static build that runs the engine in the browser (esbuild)
+ai/         Server-side model integration, validation and tests
+eval/       Fictional model evaluation cases and reproducible runner
 analysis/   Python (standard library) data scripts: ResStock estimates, town boundaries
+data/       Shared Census municipality boundaries used by the engine and map
 tools/      Source capture, draft report, approval
 docs/       Product definition, decisions, research, plans
 ```
@@ -122,10 +147,36 @@ Requires Node 24 and Python 3.
 cd engine && npm ci && npm run check          # typecheck + all tests
 npm run scenarios                             # standard scenarios
 cd ../web && npm ci && npm run build          # web/dist/index.html (approved rules only)
-python3 -m pytest analysis tools              # data script tests
+cd .. && python3 -m pytest analysis tools     # data script tests
 ```
 
-Open `web/dist/index.html` in a browser. Nothing you enter leaves the browser.
+Open `web/dist/index.html` in a browser. Form calculations run in the browser. If you use the optional AI assistant, your description is sent to DeepSeek.
+
+## AI navigator (local preview)
+
+The optional assistant extracts explicitly stated facts from a description. Review and confirm those facts before
+they replace the form. Unknown fields stay unknown. It can also choose the focus and tone of a short explanation
+and a coordination message. Those texts use fixed, reviewed sentences and the current engine result: the model
+cannot write the displayed amounts or program names. This is a constrained first version, not an open-ended chatbot.
+
+The GitHub Pages demo is static and cannot run the AI service. A Vercel deployment uses a server-only `DEEPSEEK_API_KEY`; DeepSeek API usage is billed by the provider. The public AI endpoint still needs a budget and rate limit before launch.
+
+To try the AI flow locally, build the page as above,
+then set `DEEPSEEK_API_KEY` in your shell and run:
+
+```bash
+node ai/server.mjs
+```
+
+Open `http://localhost:3000`. The local server requires Node 24, keeps the API key on the server, and does not log
+requests. `DEEPSEEK_MODEL` optionally overrides the default DeepSeek model. Calls use the
+[DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/).
+Using the assistant sends the text you enter to DeepSeek; do not include names, street addresses, account numbers,
+or utility bills. Normal form calculations stay in your browser. The local server is for local testing only, not
+public deployment. A public backend would need authentication, rate limits, abuse protection and hosting.
+
+Run `node --test ai/*.test.mjs` for service validation tests; the engine suite covers the confirmation and
+rendering boundary and grounding across the standard scenarios. These tests use mocked model responses and cannot establish the model's extraction accuracy.
 
 ## Accessibility
 
@@ -137,7 +188,8 @@ The target is WCAG 2.2 AA:
 - motion stops under `prefers-reduced-motion`;
 - the page works at phone width (checked at 360 px).
 
-Automated axe-core scans (WCAG 2.0–2.2 A/AA) report no violations in light or dark mode.
+The Phase 1 release recorded automated axe-core scans with no violations in light or dark mode. The later AI
+interface and current mobile and keyboard flows still need a fresh full accessibility audit.
 
 ## Data and credits
 

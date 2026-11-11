@@ -1,4 +1,4 @@
-import story1 from '../../scenarios/ma/story1-owner-occupant.json'
+import story1 from '../../scenarios/ma/story1-owner-occupant.json' with { type: 'json' }
 
 /**
  * The demo building is Story 1 from the standard scenarios: fictional numbers, always labeled "demo data"

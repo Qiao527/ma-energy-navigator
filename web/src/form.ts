@@ -123,7 +123,7 @@ export function formHtml(s: State): string {
     <button type="button" data-action="demo">Load the demo building</button>
     <button type="button" data-action="blank">Clear and enter my building</button>
   </div>
-  ${s.demo ? `<p class="demo-note"><strong>Demo data.</strong> ${esc(STORY1.story)}</p>` : ''}
+  ${s.demo ? `<p class="demo-note"><strong>Example data.</strong> This form may still contain made-up details. Choose “Clear and enter my building” to start fresh.</p>` : ''}
   <fieldset><legend>You</legend><div class="grid2">
     ${select('role', 'role', 'I am', [['owner_occupant_landlord', 'A landlord who lives in the building'], ['renting_landlord', 'A landlord who lives elsewhere'], ['tenant', 'A tenant'], ['condo_owner', 'A condo owner']], s.input.role, 'enum', true)}
     ${s.input.role === 'renting_landlord' ? '' : select('me', 'userUnitId', 'I live on', b.units.map(u => [u.id, FLOOR(u.id)] as [string, string]), s.input.userUnitId)}
@@ -156,8 +156,6 @@ export function formHtml(s: State): string {
 }
 
 export function setPath(s: State, path: string, kind: Kind, value: string): void {
-  // Once the user changes anything, these are no longer the demo's numbers (audit 2026-11-08).
-  s.demo = false
   const band = value.match(/^(\d+)-(\d+)$/)
   const v: unknown = kind === 'text' ? value
     : value === '' ? null

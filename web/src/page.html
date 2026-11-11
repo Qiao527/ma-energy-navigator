@@ -360,6 +360,55 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .band-text,.band-chart,.band-chart>*,#report section,#report section>*{min-width:0}
 .table-wrap{max-width:100%;overflow-x:auto}
 .data td .why li{overflow-wrap:anywhere}
+/* Intake: generous space and a clear focus state keep the writing experience calm. */
+.assistant { margin-block: clamp(24px, 4vw, 48px); }
+.assistant-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.assistant-intro { max-width: 42ch; padding-block: 12px; }
+.assistant-eyebrow { font-size: .8rem; font-weight: 600; color: var(--ink-2); margin-bottom: 14px; }
+.assistant h2 { font-family: var(--body); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.08; letter-spacing: -.035em; max-width: 14ch; }
+.assistant-intro > p:not(.assistant-eyebrow) { margin-top: 16px; font-size: 1.04rem; color: var(--ink-2); }
+.assistant-guide { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.assistant-guide li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; color: var(--ink-2); }
+.assistant-guide li span:first-child { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 50%; font-size: .75rem; font-weight: 600; color: var(--ink); }
+.assistant-card { min-width: 0; padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 5%, transparent); }
+.assistant-card > * + * { margin-top: 16px; }
+.assistant-label { display: block; color: var(--ink); font-size: 1rem; font-weight: 600; }
+.assistant textarea { display: block; width: 100%; min-height: 160px; max-height: 360px; margin-top: 9px; padding: 15px 16px; font: 400 1rem/1.6 var(--body); color: var(--ink); caret-color: var(--elec); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 14px; resize: vertical; overflow-y: auto; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+/* shortcut: older browsers keep a manually resizable field, upgrade when field-sizing is universally supported. */
+@supports (field-sizing: content) { .assistant textarea { field-sizing: content; } }
+.assistant textarea::placeholder { color: var(--ink-2); opacity: .85; }
+.assistant textarea:hover { border-color: var(--ink); }
+.assistant textarea:focus-visible { border-color: var(--elec); outline: 2px solid var(--elec); outline-offset: 2px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--elec) 14%, transparent); }
+.assistant-hint { color: var(--ink-2); font-size: .84rem; line-height: 1.5; }
+.assistant-example { border-top: 1px solid var(--line); padding-top: 16px; }
+.assistant-example summary, .assistant-followup summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
+.assistant-example summary::-webkit-details-marker, .assistant-followup summary::-webkit-details-marker { display: none; }
+.assistant-example summary::after, .assistant-followup summary::after { content: "+"; margin-left: auto; font-size: 1.25rem; font-weight: 400; }
+.assistant-example[open] summary::after, .assistant-followup[open] summary::after { content: "−"; }
+.assistant-example p, .assistant-followup p { color: var(--ink-2); font-size: .9rem; line-height: 1.6; padding-bottom: 8px; }
+.assistant-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.assistant button { transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease; }
+.assistant button:active:not(:disabled) { transform: scale(.98); }
+.assistant button.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.assistant button.primary:hover:not(:disabled) { background: var(--ink-2); border-color: var(--ink-2); }
+button:disabled { cursor: not-allowed; opacity: .6; }
+button:disabled:hover { background: transparent; color: var(--ink); }
+.assistant button.primary:disabled { background: var(--ink); color: var(--surface); }
+.assistant-status:not(:empty) { padding: 12px 14px; border-radius: 12px; background: var(--paper); color: var(--ink-2); font-size: .9rem; }
+.assistant-review-section { border-top: 1px solid var(--line); padding-top: 20px; }
+.assistant-review-section h3 { font-size: 1.15rem; }
+.assistant-review-section > p { margin-top: 8px; color: var(--ink-2); font-size: .9rem; }
+.assistant-review { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .65rem 1rem; margin: 18px 0; }
+.assistant-review dt { color: var(--ink-2); font-size: .85rem; }
+.assistant-review dd { margin: 0; font-size: .9rem; font-weight: 600; overflow-wrap: anywhere; }
+.assistant-followup { border-top: 1px solid var(--line); padding-top: 4px; }
+.assistant pre { white-space: pre-wrap; font: inherit; overflow-wrap: anywhere; }
+.assistant pre:not(:empty) { margin: 16px 0 0; padding: 16px; border-radius: 14px; background: var(--paper); }
+#form input, #form select { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 1rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
+#form input:hover, #form select:hover { border-color: var(--ink-2); }
+#form input:focus-visible, #form select:focus-visible { border-color: var(--elec); outline: 2px solid var(--elec); outline-offset: 2px; }
+@media (max-width: 760px) { .assistant-layout { grid-template-columns: 1fr; gap: 22px; } .assistant-intro { padding-block: 0; } .assistant h2 { max-width: none; } }
+@media (max-width: 480px) { .assistant-card { border-radius: 18px; } .assistant-review { grid-template-columns: 1fr; gap: .2rem; } .assistant-review dd { margin-bottom: .5rem; } .assistant-actions > button { width: 100%; } }
 </style>
 <!-- BODY -->
 <a class="skip" href="#report">Skip to the report</a>
@@ -368,6 +417,48 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
   <p class="wordmark"><strong>Every Floor</strong><span>Heat pumps &amp; efficiency for Massachusetts 2–4 unit homes</span></p>
   <button type="button" data-action="edit" id="edit-top" class="primary">Check your building</button>
 </div></header>
+<section class="wrap assistant" aria-labelledby="ai-title">
+  <div class="assistant-layout">
+    <div class="assistant-intro">
+      <p class="assistant-eyebrow">A good place to start</p>
+      <h2 id="ai-title">Let’s talk about your building.</h2>
+      <p>Tell us what you know. We’ll help you make sense of the options, one step at a time.</p>
+      <ol class="assistant-guide">
+        <li><span aria-hidden="true">1</span><span>Are you a renter, landlord, or condo owner?</span></li>
+        <li><span aria-hidden="true">2</span><span>What Massachusetts city or town is it in?</span></li>
+        <li><span aria-hidden="true">3</span><span>How many homes are in the building? We cover 2–4 homes.</span></li>
+      </ol>
+      <p class="assistant-hint">If you know how it’s heated or who pays the bills, include that too. It’s okay to be unsure.</p>
+    </div>
+    <div class="assistant-card">
+      <div>
+        <label class="assistant-label" for="ai-input">Tell us about your building</label>
+        <textarea id="ai-input" rows="5" maxlength="4000" aria-describedby="ai-hint" placeholder="For example: I rent in a three-family home in Boston."></textarea>
+      </div>
+      <p id="ai-hint" class="assistant-hint">Your words are sent to an external AI service. Please leave out names, street addresses, account numbers, and bills.</p>
+      <div class="assistant-actions"><button type="button" class="primary" id="ai-extract">Review what I wrote</button><button type="button" data-action="edit">Use the form instead</button></div>
+      <p class="assistant-hint">The form opens with an example. Choose “Clear and enter my building” to start your own.</p>
+      <p id="ai-status" class="assistant-status" role="status" aria-live="polite"></p>
+      <section id="ai-review-section" class="assistant-review-section" aria-labelledby="ai-review-title" hidden>
+        <h3 id="ai-review-title">Check what we understood</h3>
+        <p>If anything is wrong, edit your description above and select “Review what I wrote” again. You can add anything else in the form.</p>
+        <dl id="ai-review" class="assistant-review"></dl>
+        <button type="button" class="primary" id="ai-confirm" hidden>These details are right — continue</button>
+      </section>
+      <details class="assistant-example">
+        <summary>See an example</summary>
+        <p>“I’m a landlord and live in my three-family home in Boston. All floors use oil heat, which I pay for. Each tenant pays their own electric bill.”</p>
+        <p>When an answer is the same for every floor, say so. Otherwise, you can add details for each floor later.</p>
+      </details>
+      <details class="assistant-followup">
+        <summary>Explain the current report</summary>
+        <p>Use this after checking your building. Until then, the report uses a made-up example. You can use the text box above to say what you want to focus on.</p>
+        <button type="button" id="ai-explain">Explain the report and draft a message</button>
+        <pre id="ai-answer"></pre>
+      </details>
+    </div>
+  </div>
+</section>
 <div class="whatif" id="whatif" role="region" aria-label="Try your own numbers: they change every number on the page">
 <div class="wrap whatif-toggle-row"><button type="button" id="wi-toggle" class="whatif-toggle" aria-expanded="false" aria-controls="wi-row">Try your own prices ▾</button></div>
 <div class="wrap whatif-row" id="wi-row">
@@ -379,6 +470,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
   <button type="button" id="wi-reset" class="reset">Back to statewide averages</button>
 </div></div>
 <main class="wrap" id="report" tabindex="-1"></main>
+
 <dialog id="editor" aria-labelledby="editor-title">
   <div class="editor-head"><h2 id="editor-title">The building</h2><button type="button" id="close">Done</button></div>
   <form id="form" novalidate></form>
@@ -387,5 +479,5 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 <p id="live" class="sr-only" aria-live="polite"></p>
 <footer><div class="wrap">
   <p>The programs make the final call on who qualifies. This page reads their published rules and tells you what to check with them. It isn’t legal advice. Prices are Massachusetts averages, so your own bills will differ a little.</p>
-  <p>Built <span id="built"></span> · An energy engineering portfolio project by Qiao Long, Boston College · Nothing you enter leaves your browser.</p>
+  <p>Built <span id="built"></span> · An energy engineering portfolio project by Qiao Long, Boston College · Form calculations run in your browser. If you use the AI assistant, your description is sent to an external AI service.</p>
 </div></footer>

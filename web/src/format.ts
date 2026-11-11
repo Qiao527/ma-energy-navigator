@@ -49,6 +49,7 @@ export const QUESTION: Record<string, string> = {
   'user.onDiscountRate': 'Are you on your utility’s discount rate?',
   'building.heaCompleted': 'Has the building had a Mass Save Home Energy Assessment?',
   'building.weatherizationRecsDone': 'Has recommended insulation already been done?',
+  'building.isDec': 'Confirm the town and utility details for equity-community eligibility.',
   'building.inEjBlockGroup': 'Is the building in an Environmental Justice block group?',
   'building.ownerApproval': 'Has the owner approved the work?',
 }

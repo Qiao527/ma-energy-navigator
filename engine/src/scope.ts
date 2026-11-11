@@ -1,3 +1,4 @@
+import towns from '../../data/ma-towns.json' with { type: 'json' }
 import type { Condition } from './condition.js'
 import type { Input, Unit } from './facts.js'
 
@@ -61,11 +62,15 @@ export const FACT_PATHS = [
   'project.installed',
 ] as const
 
+export const townKey = (name: string): string => name.trim().toLowerCase().replace(/ town$/, '')
+const maTowns = new Set(towns.towns.map(town => townKey(town.name)))
+export const isMassachusettsTown = (name: string): boolean => maTowns.has(townKey(name))
+
 export function derive(input: Input, dec: readonly DecEntry[]): Derived {
   const b = input.building
-  const town = b.municipality.trim().toLowerCase()
-  const entry = dec.find(d => d.name.toLowerCase() === town)
-  let isDec: boolean | null = false
+  const town = townKey(b.municipality)
+  const entry = dec.find(d => townKey(d.name) === town)
+  let isDec: boolean | null = isMassachusettsTown(b.municipality) ? false : null
   if (entry !== undefined) {
     const utilities = [b.electricUtility, b.gasUtility]
     if (entry.narrowedFor.length > 0 && utilities.includes(null)) isDec = null
