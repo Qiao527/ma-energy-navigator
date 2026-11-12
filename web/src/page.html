@@ -110,6 +110,7 @@ main.wrap > section { display: grid; gap: 16px; min-width: 0; }
 .swatch.kept { background: color-mix(in srgb, var(--fuel) 42%, var(--surface)); }
 .swatch.both { background: linear-gradient(135deg, var(--fuel) 50%, var(--elec) 50%); }
 @media (max-width: 520px) { .callout li { grid-template-columns: 12px minmax(0, 1fr); } .callout .val { grid-column: 2; } }
+@media (max-width: 360px) { .callout .val { white-space: normal; overflow-wrap: anywhere; } }
 
 /* Bands: argument + chart */
 .band, .map-band { grid-template-columns: minmax(0, 1fr); gap: 28px !important; border-top: 1.5px solid var(--ink); padding-top: 28px; }
