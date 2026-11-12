@@ -1,11 +1,8 @@
 import { createServer } from 'node:http'
 import { readFile } from 'node:fs/promises'
-import { askDeepSeek } from './navigator.mjs'
+import { handle } from './handler.mjs'
 
 const port = Number(process.env.PORT || 3000)
-const key = process.env.DEEPSEEK_API_KEY
-const model = process.env.DEEPSEEK_MODEL || 'deepseek-flash'
-if (!key) throw new Error('Set DEEPSEEK_API_KEY before starting the AI navigator.')
 const page = await readFile(new URL('../web/dist/index.html', import.meta.url))
 
 createServer(async (req, res) => {
@@ -18,10 +15,9 @@ createServer(async (req, res) => {
   try {
     let body = ''
     for await (const chunk of req) { body += chunk; if (body.length > 12000) throw new Error('Request too large') }
-    const data = JSON.parse(body)
-    if (typeof data.text !== 'string' || !data.text.trim() || data.text.length > 4000) throw new Error('Invalid request')
-    const answer = await askDeepSeek(req.url === '/api/intake' ? 'intake' : 'presentation', data.text, key, model)
-    res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(answer))
+    const request = new Request(`http://${req.headers.host}${req.url}`, { method: 'POST', headers: req.headers, body })
+    const response = await handle(request)
+    res.writeHead(response.status, Object.fromEntries(response.headers)); res.end(await response.text())
   } catch {
     res.writeHead(502, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify({ error: 'The assistant could not complete the request. Please try again or use the form.' }))
   }

@@ -375,6 +375,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .assistant-card > * + * { margin-top: 16px; }
 .assistant-label { display: block; color: var(--ink); font-size: 1rem; font-weight: 600; }
 .assistant textarea { display: block; width: 100%; min-height: 160px; max-height: 360px; margin-top: 9px; padding: 15px 16px; font: 400 1rem/1.6 var(--body); color: var(--ink); caret-color: var(--elec); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 14px; resize: vertical; overflow-y: auto; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+.assistant input[type="password"] { display: block; width: 100%; margin-top: 9px; padding: 12px; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 10px; }
 /* shortcut: older browsers keep a manually resizable field, upgrade when field-sizing is universally supported. */
 @supports (field-sizing: content) { .assistant textarea { field-sizing: content; } }
 .assistant textarea::placeholder { color: var(--ink-2); opacity: .85; }
@@ -437,6 +438,13 @@ button:disabled:hover { background: transparent; color: var(--ink); }
         <textarea id="ai-input" rows="5" maxlength="4000" aria-describedby="ai-hint" placeholder="For example: I rent in a three-family home in Boston."></textarea>
       </div>
       <p id="ai-hint" class="assistant-hint">Your words are sent to an external AI service. Please leave out names, street addresses, account numbers, and bills.</p>
+      <details class="assistant-example" id="ai-key-settings">
+        <summary>Use your own API key for live AI</summary>
+        <p>The example report below works without a key. Live AI calls are billed to your API account. Your key is sent securely to this site’s server and forwarded to the AI provider for each request; it is not saved by this app and is cleared when you reload this page.</p>
+        <label class="assistant-label" for="ai-key">Your API key</label>
+        <input id="ai-key" type="password" autocomplete="off" spellcheck="false" aria-describedby="ai-key-help">
+        <p class="assistant-hint" id="ai-key-help"><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer">Get a supported API key</a>. Never share it in your building description.</p>
+      </details>
       <div class="assistant-actions"><button type="button" class="primary" id="ai-extract">Review what I wrote</button><button type="button" data-action="edit">Use the form instead</button></div>
       <p class="assistant-hint">The form opens with an example. Choose “Clear and enter my building” to start your own.</p>
       <p id="ai-status" class="assistant-status" role="status" aria-live="polite"></p>
@@ -447,8 +455,10 @@ button:disabled:hover { background: transparent; color: var(--ink); }
         <button type="button" class="primary" id="ai-confirm" hidden>These details are right — continue</button>
       </section>
       <details class="assistant-example">
-        <summary>See an example</summary>
+        <summary>See a fixed example of AI understanding</summary>
         <p>“I’m a landlord and live in my three-family home in Boston. All floors use oil heat, which I pay for. Each tenant pays their own electric bill.”</p>
+        <p>This is a prepared example, not a live AI response.</p>
+        <dl class="assistant-review"><dt>You are</dt><dd>A landlord who lives in the building</dd><dt>City or town</dt><dd>Boston</dd><dt>Homes in the building</dt><dd>3</dd><dt>Heating on every floor</dt><dd>Heating oil</dd><dt>Who pays for heat on every floor</dt><dd>Landlord / owner</dd><dt>Who pays for electricity on every floor</dt><dd>Not sure yet</dd><dt>Electric company</dt><dd>Not sure yet</dd></dl>
         <p>When an answer is the same for every floor, say so. Otherwise, you can add details for each floor later.</p>
       </details>
       <details class="assistant-followup">

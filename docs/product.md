@@ -63,6 +63,8 @@ supports]
 - Portfolio project, not a startup. Optimize for: a sharp problem, one flow that works
   end-to-end beautifully, a defensible technical core, visible product judgment, and at
   least one real user's feedback. [Decided]
+- Public visitors can inspect a fixed example without model charges. Live AI uses the
+  visitor's own provider API key and is billed to their account. [Decided 2026-11-12 — Qiao]
 - From "solar calculator" to "navigator": solar is one module; the core is **eligibility
   and sequencing**. [Decided]
 - Massachusetts first; architecture lets other states add rules data later (not built in v1).

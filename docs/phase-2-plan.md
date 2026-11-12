@@ -12,7 +12,7 @@ The static GitHub Pages build remains usable without an AI service. Hosting a pu
 ## Public preview preparation
 
 - Serve the built static page and two same-origin serverless endpoints on Vercel; preserve the local server.
-- Keep provider authentication server-side. Use a server-only DeepSeek API key for the Vercel and local services.
+- Originally planned a server-only project key for the Vercel and local services; superseded by visitor-owned credentials below.
 - Before a public endpoint is usable, establish a project-scoped budget and API rate limit; do not expose an unrestricted paid model key.
 - Verify the production build, serverless request validation, mocked model responses and a real request when credentials are available.
 
@@ -36,3 +36,10 @@ The static GitHub Pages build remains usable without an AI service. Hosting a pu
 - Resolve Massachusetts municipalities against the shared Census list before deriving DEC status; unknown names stay unknown and the UI asks for correction.
 - Keep the paid endpoint protected until rate limiting and provider-side spend limits are effective.
 - Re-run engine scenarios before and after engine changes, focused regression tests, the full suite, and live evaluation on the corrected preview.
+
+## Visitor-owned API credentials
+
+- Keep the existing labeled example report available without an AI request. Require a visitor-provided provider key for every live AI request; never fall back to the project credential.
+- Keep the key only in the current page's password field, send it in a same-origin request header over HTTPS, and do not store or log it. Explain the server transfer and billing before use.
+- Apply the same credential requirement locally and on Vercel, preserve the deterministic engine and review step, and update the evaluation runner and setup documentation.
+- Test missing and malformed credentials, key selection and redaction, the browser flow, and a protected preview before production.

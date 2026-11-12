@@ -159,21 +159,20 @@ they replace the form. Unknown fields stay unknown. It can also choose the focus
 and a coordination message. Those texts use fixed, reviewed sentences and the current engine result: the model
 cannot write the displayed amounts or program names. This is a constrained first version, not an open-ended chatbot.
 
-The GitHub Pages demo is static and cannot run the AI service. A Vercel deployment uses a server-only `DEEPSEEK_API_KEY`; DeepSeek API usage is billed by the provider. The public AI endpoint still needs a budget and rate limit before launch.
+The example report is available without an AI request. Live AI requires the visitor's own DeepSeek API key and is billed to their account. The key stays in the current page's password field until reload and is sent via HTTPS to the application server and forwarded to DeepSeek for each request. The app does not persist or log it. The GitHub Pages demo is static and cannot run the AI service.
 
-To try the AI flow locally, build the page as above,
-then set `DEEPSEEK_API_KEY` in your shell and run:
+To try the AI flow locally, build the page as above, then run:
 
 ```bash
 node ai/server.mjs
 ```
 
-Open `http://localhost:3000`. The local server requires Node 24, keeps the API key on the server, and does not log
+Open `http://localhost:3000` and enter your key in the page. The local server requires Node 24 and does not log
 requests. `DEEPSEEK_MODEL` optionally overrides the default DeepSeek model. Calls use the
 [DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/).
 Using the assistant sends the text you enter to DeepSeek; do not include names, street addresses, account numbers,
 or utility bills. Normal form calculations stay in your browser. The local server is for local testing only, not
-public deployment. A public backend would need authentication, rate limits, abuse protection and hosting.
+public deployment. The public backend uses a rate limit; that per-IP limit is not an account-wide spending cap.
 
 Run `node --test ai/*.test.mjs` for service validation tests; the engine suite covers the confirmation and
 rendering boundary and grounding across the standard scenarios. These tests use mocked model responses and cannot establish the model's extraction accuracy.

@@ -226,6 +226,8 @@ $('close').addEventListener('click', () => dialog.close())
 // ---------- AI assistant: no model output reaches calculations before confirmation ----------
 let extracted: Extracted | null = null
 const aiInput = $<HTMLTextAreaElement>('ai-input')
+const aiKey = $<HTMLInputElement>('ai-key')
+aiKey.value = ''
 const aiStatus = $('ai-status')
 const aiReview = $('ai-review')
 const aiReviewSection = $('ai-review-section')
@@ -243,8 +245,10 @@ if (!aiAvailable) {
 }
 aiInput.addEventListener('input', () => { extracted = null; aiConfirm.hidden = true; aiReviewSection.hidden = true; aiReview.replaceChildren(); if (aiAvailable) aiStatus.textContent = '' })
 async function aiRequest(path: string, text: string): Promise<unknown> {
-  const response = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) })
-  if (!response.ok) throw new Error('We couldn’t reach the assistant. Please try again, or use the form instead.')
+  const key = aiKey.value.trim()
+  if (!key) { $<HTMLDetailsElement>('ai-key-settings').open = true; aiKey.focus(); throw new Error('Enter your API key to use live AI, or explore the example report below.') }
+  const response = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-API-Key': key }, body: JSON.stringify({ text }) })
+  if (!response.ok) throw new Error('Live AI is unavailable. Check your API key and balance, then try again, or use the form instead.')
   return response.json()
 }
 $('ai-extract').addEventListener('click', async () => {

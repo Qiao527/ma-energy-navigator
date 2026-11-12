@@ -27,8 +27,8 @@ not be interpreted as a guarantee for new users or adversarial input. Users must
 
 ## Reproduce
 
-Requires Node 24, the Vercel CLI linked to the project, access to a protected preview with `DEEPSEEK_API_KEY` set,
-and an account with available model credit. Each case sends one fictional description to DeepSeek and incurs API
+Requires Node 24, a DeepSeek key in `DEEPSEEK_API_KEY`, a fresh development `VERCEL_OIDC_TOKEN` for access to a
+protected preview, and an account with available model credit. Each case sends one fictional description and incurs API
 usage. Do not put real personal information into the fixtures.
 
 ```bash

@@ -13,8 +13,9 @@ export async function handle(req, env = process.env, ask = askDeepSeek) {
     if (body.length > 12000) return json({ error: 'Request too large' }, 413)
     const data = JSON.parse(body)
     if (typeof data.text !== 'string' || !data.text.trim() || data.text.length > 4000) return json({ error: 'Invalid request' }, 400)
-    const key = env.DEEPSEEK_API_KEY
-    if (!key) return json({ error: 'Assistant unavailable' }, 503)
+    const key = req.headers.get('x-api-key')
+    if (!key) return json({ error: 'Enter your API key to use the assistant.' }, 401)
+    if (key.length > 256 || !/^[\x21-\x7e]+$/.test(key)) return json({ error: 'Check your API key.' }, 400)
     const result = await ask(kind, data.text, key, env.DEEPSEEK_MODEL || 'deepseek-flash')
     return json(result, 200)
   } catch {

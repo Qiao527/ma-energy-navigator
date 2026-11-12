@@ -2,6 +2,12 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-12 (Public AI access)
+
+- **Use a fixed example for public demonstration and visitor-owned API keys for live AI.**
+  This keeps the portfolio accessible without charging the project's account for visitor
+  requests. — Qiao.
+
 ## 2026-11-11 (AI endpoint observation)
 
 - **The `/api/` firewall observation rule is live.** It logs only and does not rate-limit. Qiao published it;
