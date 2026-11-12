@@ -49,3 +49,9 @@ The static GitHub Pages build remains usable without an AI service. Hosting a pu
 - Make the existing fictional building and deterministic report the primary path; present the prepared AI extraction honestly as an example.
 - Move live AI input and its credential settings into an optional secondary section, keeping manual entry, key privacy, confirmation, and model-free calculations intact.
 - Verify the demo and optional live flow at mobile and desktop widths, including keyboard navigation and no-key behavior.
+
+## Resident-first guidance
+
+- Explain the questions the report can help answer, who it is for, and how to start with the fictional example or the building form.
+- Explain heat pumps and optional price and efficiency controls in plain language without changing calculations or presenting estimates as guarantees.
+- Check the example, own-building form, mobile layout, keyboard access, and existing test suite.

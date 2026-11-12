@@ -231,12 +231,13 @@ function hero(r: Report, s: State, v: View): string {
   const whatIf = Object.keys(v.whatIf).length > 0
   return `<section class="hero" aria-labelledby="h-answer">
     <div class="answer">
-      ${s.demo ? `<div class="intro-line"><p><strong>Example data:</strong> this building may still contain made-up details. Clear the form to enter your own building.</p><button type="button" data-action="edit">Check your building</button></div>` : ''}
+      ${s.demo ? `<div class="intro-line"><p><strong>Example data:</strong> this report uses a fictional building and estimates. To explore your own home, clear the form and enter your details.</p><button type="button" data-action="edit">Check your building</button></div>` : ''}
       <p class="sheet">${esc(sheet)}${s.demo ? ' <span class="tag">demo data</span>' : ''}${whatIf ? ' <span class="tag whatif">your numbers</span>' : ''}</p>
       <h1 id="h-answer" class="headline">${h.text}</h1>
       ${h.range ? `<p class="headline-range">${h.range}</p>` : ''}
       ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using your own numbers.' : 'Massachusetts average prices, winter 2025–26.'}</p>` : ''}
       ${keyFigures(r, s)}
+      ${r.navigation.steps.length ? '<p><a href="#h-plan">Jump to your suggested next steps</a></p>' : ''}
       ${r.landlordReason ? `<p class="muted">${esc(r.landlordReason)}</p>` : ''}
     </div>
     ${building(r, s, v)}
