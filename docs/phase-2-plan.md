@@ -43,3 +43,9 @@ The static GitHub Pages build remains usable without an AI service. Hosting a pu
 - Keep the key only in the current page's password field, send it in a same-origin request header over HTTPS, and do not store or log it. Explain the server transfer and billing before use.
 - Apply the same credential requirement locally and on Vercel, preserve the deterministic engine and review step, and update the evaluation runner and setup documentation.
 - Test missing and malformed credentials, key selection and redaction, the browser flow, and a protected preview before production.
+
+## Demo-first entry
+
+- Make the existing fictional building and deterministic report the primary path; present the prepared AI extraction honestly as an example.
+- Move live AI input and its credential settings into an optional secondary section, keeping manual entry, key privacy, confirmation, and model-free calculations intact.
+- Verify the demo and optional live flow at mobile and desktop widths, including keyboard navigation and no-key behavior.

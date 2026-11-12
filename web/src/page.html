@@ -373,6 +373,9 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .assistant-guide li span:first-child { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 50%; font-size: .75rem; font-weight: 600; color: var(--ink); }
 .assistant-card { min-width: 0; padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 5%, transparent); }
 .assistant-card > * + * { margin-top: 16px; }
+.assistant-demo-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 9px 18px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 600; text-decoration: none; }
+.assistant-demo-link:hover { background: var(--ink-2); }
+.assistant-live > * + * { margin-top: 16px; }
 .assistant-label { display: block; color: var(--ink); font-size: 1rem; font-weight: 600; }
 .assistant textarea { display: block; width: 100%; min-height: 160px; max-height: 360px; margin-top: 9px; padding: 15px 16px; font: 400 1rem/1.6 var(--body); color: var(--ink); caret-color: var(--elec); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 14px; resize: vertical; overflow-y: auto; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
 .assistant input[type="password"] { display: block; width: 100%; margin-top: 9px; padding: 12px; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 10px; }
@@ -422,17 +425,24 @@ button:disabled:hover { background: transparent; color: var(--ink); }
 <section class="wrap assistant" aria-labelledby="ai-title">
   <div class="assistant-layout">
     <div class="assistant-intro">
-      <p class="assistant-eyebrow">A good place to start</p>
-      <h2 id="ai-title">Let’s talk about your building.</h2>
-      <p>Tell us what you know. We’ll help you make sense of the options, one step at a time.</p>
-      <ol class="assistant-guide">
-        <li><span aria-hidden="true">1</span><span>Are you a renter, landlord, or condo owner?</span></li>
-        <li><span aria-hidden="true">2</span><span>What Massachusetts city or town is it in?</span></li>
-        <li><span aria-hidden="true">3</span><span>How many homes are in the building? We cover 2–4 homes.</span></li>
-      </ol>
-      <p class="assistant-hint">If you know how it’s heated or who pays the bills, include that too. It’s okay to be unsure.</p>
+      <p class="assistant-eyebrow">A clearer path to home energy upgrades</p>
+      <h2 id="ai-title">See what a better heating plan could look like.</h2>
+      <p>Explore an example for a Massachusetts three-family home, from building details to a practical plan.</p>
     </div>
     <div class="assistant-card">
+      <p class="assistant-eyebrow">Example building · Boston</p>
+      <h3>A three-family home, with the owner living on one floor</h3>
+      <p class="assistant-hint">The owner pays for oil heat. Tenants pay their own electricity. This fictional example is ready to explore—no setup needed.</p>
+      <a class="assistant-demo-link" href="#report">Explore the report</a>
+      <details class="assistant-example">
+        <summary>See how the assistant understands this example</summary>
+        <p>“I’m a landlord and live in my three-family home in Boston. All floors use oil heat, which I pay for. Each tenant pays their own electric bill.”</p>
+        <p>This is a prepared example, not a live AI response.</p>
+        <dl class="assistant-review"><dt>You are</dt><dd>A landlord who lives in the building</dd><dt>City or town</dt><dd>Boston</dd><dt>Homes in the building</dt><dd>3</dd><dt>Heating on every floor</dt><dd>Heating oil</dd><dt>Who pays for heat on every floor</dt><dd>Landlord / owner</dd><dt>Who pays for electricity on every floor</dt><dd>Not sure yet</dd><dt>Electric company</dt><dd>Not sure yet</dd></dl>
+      </details>
+      <details class="assistant-example assistant-live">
+        <summary>Try live AI with your own building</summary>
+        <p>Describe your role, Massachusetts city or town, and the number of homes (2–4). If you know the heating fuel or who pays the bills, include those too.</p>
       <div>
         <label class="assistant-label" for="ai-input">Tell us about your building</label>
         <textarea id="ai-input" rows="5" maxlength="4000" aria-describedby="ai-hint" placeholder="For example: I rent in a three-family home in Boston."></textarea>
@@ -454,18 +464,12 @@ button:disabled:hover { background: transparent; color: var(--ink); }
         <dl id="ai-review" class="assistant-review"></dl>
         <button type="button" class="primary" id="ai-confirm" hidden>These details are right — continue</button>
       </section>
-      <details class="assistant-example">
-        <summary>See a fixed example of AI understanding</summary>
-        <p>“I’m a landlord and live in my three-family home in Boston. All floors use oil heat, which I pay for. Each tenant pays their own electric bill.”</p>
-        <p>This is a prepared example, not a live AI response.</p>
-        <dl class="assistant-review"><dt>You are</dt><dd>A landlord who lives in the building</dd><dt>City or town</dt><dd>Boston</dd><dt>Homes in the building</dt><dd>3</dd><dt>Heating on every floor</dt><dd>Heating oil</dd><dt>Who pays for heat on every floor</dt><dd>Landlord / owner</dd><dt>Who pays for electricity on every floor</dt><dd>Not sure yet</dd><dt>Electric company</dt><dd>Not sure yet</dd></dl>
-        <p>When an answer is the same for every floor, say so. Otherwise, you can add details for each floor later.</p>
-      </details>
       <details class="assistant-followup">
         <summary>Explain the current report</summary>
         <p>Use this after checking your building. Until then, the report uses a made-up example. You can use the text box above to say what you want to focus on.</p>
         <button type="button" id="ai-explain">Explain the report and draft a message</button>
         <pre id="ai-answer"></pre>
+      </details>
       </details>
     </div>
   </div>
