@@ -1,15 +1,16 @@
 # Every Floor
 
-Heat pumps and efficiency programs for Massachusetts triple-deckers and two-families. It shows which programs fit
-each floor, what to do first, and who ends up paying more when a building switches.
+An AI-assisted energy navigator for Massachusetts 2–4 unit homes. It helps renters and small-building owners
+explore heating costs, possible assistance, and how a heat-pump project could affect each household.
 
 [![CI](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml/badge.svg)](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml)
 
-**Try the energy demo:** https://qiao527.github.io/ma-energy-navigator/
+**[Explore the live demo](https://every-floor.vercel.app/)** · [How the AI works](#how-the-ai-flow-works) · [Energy methods](docs/methods.md) · [Evaluation](eval/README.md)
 
-The AI-enabled version is currently a login-protected preview; see [AI navigator](#ai-navigator).
+The site opens with a fictional, ready-to-explore building. Live AI is optional and requires your own API key;
+the example and building form work without one. Estimates are not quotes or eligibility decisions.
 
-![Every Floor in use: switching between today and heat pumps, dragging the electricity price, moving the heat pumps to an owner-paid meter, and entering a building with answers that apply to every floor](docs/assets/every-floor-demo.gif)
+![Every Floor's landing page, showing the example building, report entry point and optional AI assistant](docs/assets/every-floor-home.png)
 
 *The building in the demo is made up, including its oil delivery records.*
 
@@ -19,10 +20,11 @@ An energy engineering portfolio project by Qiao Long (Boston College, Human-Cent
 
 ## Why it exists
 
-Massachusetts has generous heat pump and efficiency programs, and they're hard to use. If you own a three-unit
-building, the rules change by unit, by who lives there, by income, by town and by install date. You often buy
-the oil while your tenants pay the electric bill a heat pump would run on. MassCEC does offer human navigators
-who walk owners through this, but only in a six-city pilot.
+Heating upgrades in small rental buildings involve more than choosing equipment. The owner may pay for fuel
+and the upgrade, while tenants pay the electric bills that could change. Program requirements also depend on
+the building and households. [MassCEC's Home Modernization Navigator](https://goclean.masscec.com/home-modernization-navigator/)
+provides human assistance in participating cities; this portfolio project explores how software can make the
+first steps easier to understand.
 
 Households below 200% of the federal poverty level spend about 13% of their income on home energy. For everyone
 else it's about 2% (DOE LEAD Tool, 2022 update).
@@ -64,24 +66,21 @@ are assembled from reviewed text. This is a constrained assistant, not an open-e
 The [AI evaluation](eval/README.md) documents 16 fictional cases, including unknown facts, conflicting answers,
 per-floor differences, out-of-scope buildings and an instruction-injection attempt. One expanded run initially
 misclassified a single-family owner; after a prompt change, the same 16 cases passed once. This is a small,
-developer-authored set, not a guarantee of model accuracy. Users confirm the form before calculations run.
+developer-authored set, not a guarantee of model accuracy. Users confirm the form before calculations run. These
+model evaluations preceded the visitor-owned-key change; the later credential flow has mocked tests, but has not
+yet been verified end to end with a real visitor key.
 
 ## What it found
 
-Here's the result I didn't expect when I started. At Massachusetts average prices for winter 2025–26, switching
-the demo building's heat and hot water from oil to heat pumps lands anywhere from saving about $1,250 to paying
-about $3,530 more a year. The typical case costs more, about $1,200.
+The fictional Boston building illustrates why electrification cannot be reduced to a guaranteed savings number.
+The result depends on fuel prices, electricity rates, equipment efficiency and the available records. The report
+shows ranges and makes it possible to explore how assumptions affect the result.
 
-The reason is simple once you see it. A million Btu of heat costs about $27 from an 84% efficient oil boiler.
-From a heat pump at its field-measured efficiency (2.41), it costs about $34, even on Eversource's winter heat
-pump rate, which averages $0.28/kWh over the season against $0.35 standard. Break-even is about $0.22/kWh, or an
-efficiency of about 3.1.
+It also makes the split incentive visible: when an owner pays for oil and tenants pay their own electricity,
+replacing oil heat can move costs between people. The report identifies missing information rather than treating
+an unknown payer as a zero cost shift. See the [worked example](docs/methods.md) for the assumptions and sources.
 
-The bigger story for a landlord is who pays. On each floor's own meter, $2,590 to $5,500 a year of energy cost
-moves from the landlord's oil bill to the tenants' electric bills. The state's own energy office says it plainly:
-households "should not assume that switching fuels will automatically lead to savings."
-
-![The answer for the demo building beside the building drawn floor by floor](docs/assets/every-floor.png)
+![The example report beside a floor-by-floor building illustration](docs/assets/every-floor.png)
 
 ## The energy chain
 
@@ -104,8 +103,8 @@ All 51 assumptions and every rule are listed in the page, with links and the dat
 
 ## How the numbers stay honest
 
-Every number on the page comes out of the engine in `engine/`, a tested TypeScript package. It works in low /
-mid / high ranges and attaches a confidence label with its reasons. Nothing is typed into the page by hand.
+Energy estimates and eligibility results come from the engine in `engine/`, a tested TypeScript package. Estimates
+use low / mid / high ranges and attach a confidence label with its reasons. User-facing examples are explicitly labeled.
 
 Each rule and assumption carries the URL it came from, the section, a word-for-word quote and the date someone
 checked it. `npm run rules:check-drafts` confirms every quote actually appears in a saved copy of the source
@@ -183,12 +182,13 @@ The target is WCAG 2.2 AA:
 
 - every chart has a table;
 - color never carries meaning alone;
-- all controls work by keyboard;
+- keyboard access and visible focus are design requirements;
 - motion stops under `prefers-reduced-motion`;
 - the page works at phone width (checked at 360 px).
 
 The Phase 1 release recorded automated axe-core scans with no violations in light or dark mode. The later AI
-interface and current mobile and keyboard flows still need a fresh full accessibility audit.
+interface and current mobile and keyboard flows still need a fresh full accessibility audit; WCAG conformance
+has not been established.
 
 ## Data and credits
 

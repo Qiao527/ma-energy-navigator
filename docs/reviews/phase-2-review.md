@@ -1,5 +1,10 @@
 # Phase 2 independent review and response
 
+**Status update, 2026-11-12:** The review below describes the 2026-11-10 implementation and must not be read as
+an independent review of later changes. The public endpoint now requires a visitor-owned API key, has a Vercel
+per-IP rate limit, and no longer falls back to the project's key. Mocked credential-flow and no-key tests pass;
+a real visitor-key end-to-end check and a fresh full accessibility audit remain open.
+
 An independent read-only review of the working tree on 2026-11-10 found five issues that must be addressed before
 a public AI release. The reviewer reproduced the unknown-payer result against the engine; the other findings were
 based on code paths.

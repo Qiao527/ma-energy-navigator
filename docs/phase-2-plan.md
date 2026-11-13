@@ -55,3 +55,9 @@ The static GitHub Pages build remains usable without an AI service. Hosting a pu
 - Explain the questions the report can help answer, who it is for, and how to start with the fictional example or the building form.
 - Explain heat pumps and optional price and efficiency controls in plain language without changing calculations or presenting estimates as guarantees.
 - Check the example, own-building form, mobile layout, keyboard access, and existing test suite.
+
+## Portfolio release
+
+- Update the repository landing page and screenshots to match the public demo, visitor-owned credential flow, evidence, and known limits.
+- Clearly distinguish the historical independent review and model evaluations from later changes and checks.
+- Run the release checks, merge the tested branch to `main`, and verify the public repository and deployments.
