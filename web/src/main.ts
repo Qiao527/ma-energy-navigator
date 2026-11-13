@@ -241,7 +241,10 @@ const setAiBusy = (busy: boolean): void => {
 if (!aiAvailable) {
   $<HTMLButtonElement>('ai-extract').disabled = true
   $<HTMLButtonElement>('ai-explain').disabled = true
-  aiStatus.textContent = 'AI preview is available locally. See the project README for setup.'
+  const liveSite = document.createElement('a')
+  liveSite.href = 'https://every-floor.vercel.app/'
+  liveSite.textContent = 'the live Every Floor site'
+  aiStatus.replaceChildren('To use live AI, visit ', liveSite, '. The example and building form work here without AI.')
 }
 aiInput.addEventListener('input', () => { extracted = null; aiConfirm.hidden = true; aiReviewSection.hidden = true; aiReview.replaceChildren(); if (aiAvailable) aiStatus.textContent = '' })
 async function aiRequest(path: string, text: string): Promise<unknown> {
