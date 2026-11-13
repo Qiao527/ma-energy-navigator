@@ -2,6 +2,8 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, test } from 'vitest'
 import { breakEven, heatCosts, heatPumpPrice, report, unitEnergy, withOverrides } from '../src/energy.js'
 import { InputSchema } from '../src/facts.js'
+import { fairness } from '../../web/src/fairness.js'
+import { hasUnestimatedWater, shiftedCostState } from '../../web/src/shift.js'
 import { KWH_PER_MMBTU } from '../src/finance.js'
 import { AssumptionsSchema, type Assumption } from '../src/quantities.js'
 import { loadAssumptions, loadRuleSet } from '../src/load-rules.js'
@@ -133,6 +135,38 @@ describe('report (E6): Story 1 end to end on the draft rules', () => {
     expect(r.landlord).not.toBeNull()
     expect(r.landlord?.shiftedToTenants.map(s => s.unitId)).toEqual(['2', '3'])
     expect(r.landlord?.netUpfront.range.mid).toBeGreaterThan(0)
+  })
+  test('unknown electricity payers remain unknown in the displayed cost-shift status', () => {
+    const unknown = { ...i, building: { ...i.building, units: i.building.units.map(u => ({ ...u, electricPaidBy: null })) } }
+    const result = report(unknown, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false }, list)
+    expect(result.landlord).not.toBeNull()
+    expect(shiftedCostState(result.landlord!)).toBe('unknown')
+  })
+  test('a known shift plus an unknown payer cannot be presented as a complete shift', () => {
+    const mixed = { ...i, building: { ...i.building, units: i.building.units.map(u => u.id === '3' ? { ...u, electricPaidBy: null } : u) } }
+    const result = report(mixed, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false }, list)
+    expect(result.landlord?.shiftedToTenants).toHaveLength(1)
+    expect(shiftedCostState(result.landlord!)).toBe('unknown')
+    const html = fairness(result, { input: mixed, installDate: '', boilerNeedsReplacing: false, demo: false }, rules.legal.find(x => x.id === 'ma_105_cmr_410_written_rental_agreement'))
+    expect(html).toContain('full amount is unknown')
+    expect(html).toContain('class="law"')
+    expect(html).toContain('Lower the rent')
+    expect(html).not.toMatch(/\$[\d,]+/)
+  })
+  test('fairness copy does not claim heat pumps use tenant meters when only hot water does', () => {
+    const withWater = { ...i, building: { ...i.building, units: i.building.units.map(u => ({ ...u, hotWaterFromBoiler: true, hotWaterAfter: 'heat_pump_water_heater' as const })) } }
+    const result = report(withWater, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false, heatPumpMeter: 'owner' }, list)
+    expect(result.landlord?.shiftedToTenants).toHaveLength(2)
+    const html = fairness(result, { input: withWater, installDate: '', boilerNeedsReplacing: false, demo: false }, rules.legal.find(x => x.id === 'ma_105_cmr_410_written_rental_agreement'))
+    expect(html).not.toContain('Heat pumps on the tenants’ meters')
+    expect(html).toContain('heating and hot water')
+  })
+  test('an unestimated water-heater switch cannot be presented as zero tenant cost shift', () => {
+    const withWater = { ...i, building: { ...i.building, units: i.building.units.map(u => ({ ...u, hotWaterFromBoiler: true, hotWaterAfter: 'electric_resistance' as const })) } }
+    const result = report(withWater, rules, { asOf: '2026-11-15', installDate: null, boilerNeedsReplacing: false, heatPumpMeter: 'owner' }, list)
+    expect(result.landlord).not.toBeNull()
+    expect(hasUnestimatedWater(withWater, result.units)).toBe(true)
+    expect(shiftedCostState(result.landlord!, hasUnestimatedWater(withWater, result.units))).toBe('unknown')
   })
   test('the "boiler needs replacing anyway" baseline uses the sourced replacement cost per ton', () => {
     const b = report(i, rules, { asOf: '2026-11-15', installDate: '2026-12-01', boilerNeedsReplacing: true }, list)

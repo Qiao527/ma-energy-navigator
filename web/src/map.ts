@@ -1,7 +1,8 @@
 import { RULES } from './data.js'
+import { townKey } from '../../engine/src/scope.js'
 import { esc } from './format.js'
 import type { State } from './form.js'
-import towns from './ma-towns.json'
+import towns from '../../data/ma-towns.json' with { type: 'json' }
 
 /**
  * MassCEC Home Modernization Navigator pilot cities (docs/product.md §1, facts checked 2026-11-06).
@@ -26,7 +27,7 @@ export function mapView(here: { x: number; y: number } | undefined, zoom: 'state
 export function mapSection(s: State, zoom: 'state' | 'local'): string {
   const dec = new Map(RULES.dec.municipalities.map(m => [m.name, m]))
   const town = s.input.building.municipality.trim()
-  const here = towns.towns.find(t => t.name.toLowerCase() === town.toLowerCase())
+  const here = towns.towns.find(t => townKey(t.name) === townKey(town))
   const paths = towns.towns.map(t => {
     const d = dec.get(t.name)
     const cls = d ? (d.narrowedFor.length ? 'dec part' : 'dec') : 'town'

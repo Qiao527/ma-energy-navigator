@@ -2,6 +2,58 @@
 
 Newest first. Format: date — decision — why — decided by.
 
+## 2026-11-12 (Public AI access)
+
+- **Use a fixed example for public demonstration and visitor-owned API keys for live AI.**
+  This keeps the portfolio accessible without charging the project's account for visitor
+  requests. — Qiao.
+
+## 2026-11-11 (AI endpoint observation)
+
+- **The `/api/` firewall observation rule is live.** It logs only and does not rate-limit. Qiao published it;
+  traffic verification, staged enforcement, and the DeepSeek spending limit remain open. — Technical.
+
+## 2026-11-11 (Phase 2 review fixes)
+
+- **Unknown is not zero:** unallocated bill payers and unestimated water-heater switches prevent the page from
+  reporting a complete tenant cost shift. The fairness section also withholds partial totals. — Technical.
+- **Keep data provenance visible:** edited examples remain labeled as examples, and replacing the current
+  building with AI-extracted facts requires explicit confirmation. — Technical.
+- **Town validation:** the engine and map use the shared Census municipality list. Unrecognized names leave DEC
+  status unknown; the form asks the user to check spelling. — Technical.
+- **Public AI remains protected:** the initial firewall observation rule logs only; it is not a rate limit. A public release
+  still needs effective rate limiting and a provider-side spending limit. — Technical.
+
+## 2026-11-10 (Input interface polish)
+
+- **Refine the intake and form interaction:** more legible typing, clear focus and button states, responsive
+  spacing, and a restrained visual hierarchy informed by Apple’s site. Text entry and confirmation semantics
+  remain unchanged. — Qiao.
+
+## 2026-11-10 (Intake guidance)
+
+- **Make the AI entry understandable without energy expertise:** ask first for role, town and number of homes;
+  suggest heating and bill payers only when known; show an example and plain-language fact review. Keep the
+  external-service privacy notice without displaying the model brand in the product. — Qiao.
+- **Owner-occupied floors:** tenant-only payer statements cannot be applied to every floor. A live example
+  exposed the ambiguity, so the intake asks for a later per-floor answer instead. — Technical.
+
+## 2026-11-10 (DeepSeek provider)
+
+- **Use DeepSeek for the AI navigator.** Qiao already uses DeepSeek; the key stays on the server, and the
+  model response is validated before it can be used. — Qiao.
+- **Protected Vercel preview verified:** the DeepSeek key is a Preview Secret; a fictional building description
+  returned the stated facts and left unstated bill payers and utility unknown. The presentation endpoint also
+  returned a valid choice. Public release, budget and rate-limit protections remain open. — Technical.
+
+## 2026-11-10 (AI product direction)
+
+- **Prioritize a demonstrable AI product alongside the energy engineering work**, rather than treating user
+  outreach as a startup milestone. — Qiao.
+- **Phase 2 local preview:** Claude extracts explicit facts for user confirmation. The model selects from reviewed
+  explanation and message text; amounts come from the existing report. A localhost service holds the key and the
+  static page remains usable without it. Model extraction accuracy and public hosting remain open. — Technical.
+
 ## 2026-11-08 (Form shortcut, demo GIF, plain copy)
 
 - **"Every floor" in the form:** heating, who pays heat, who pays electricity, whether the boiler heats water,

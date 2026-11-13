@@ -1,0 +1,7 @@
+.env*
+.vercel
+.git
+**/node_modules
+**/__pycache__
+web/dist
+web/.gen

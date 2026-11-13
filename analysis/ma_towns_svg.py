@@ -6,7 +6,7 @@ Usage: python3 -I analysis/ma_towns_svg.py PATH_TO/cb_2023_25_cousub_500k.shp
   County subdivisions are Massachusetts' 351 cities and towns, the same basis the engine uses for municipality
   (docs/data-sources.md §1). Download into an empty folder outside the repo first.
 
-Writes web/src/ma-towns.json: {viewBox, source, towns: [{name, d, x, y}]} where (x, y) is a label point.
+Writes data/ma-towns.json: {viewBox, source, towns: [{name, d, x, y}]} where (x, y) is a label point.
 Standard library only.
 """
 import json
@@ -114,7 +114,7 @@ def build(shp: Path) -> dict:
 
 def main(path: str) -> None:
     out = build(Path(path))
-    target = Path(__file__).resolve().parent.parent / "web" / "src" / "ma-towns.json"
+    target = Path(__file__).resolve().parent.parent / "data" / "ma-towns.json"
     target.write_text(json.dumps(out, separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"wrote {target}: {len(out['towns'])} municipalities, {target.stat().st_size // 1024} KB")
 

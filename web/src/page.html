@@ -110,6 +110,7 @@ main.wrap > section { display: grid; gap: 16px; min-width: 0; }
 .swatch.kept { background: color-mix(in srgb, var(--fuel) 42%, var(--surface)); }
 .swatch.both { background: linear-gradient(135deg, var(--fuel) 50%, var(--elec) 50%); }
 @media (max-width: 520px) { .callout li { grid-template-columns: 12px minmax(0, 1fr); } .callout .val { grid-column: 2; } }
+@media (max-width: 360px) { .callout .val { white-space: normal; overflow-wrap: anywhere; } }
 
 /* Bands: argument + chart */
 .band, .map-band { grid-template-columns: minmax(0, 1fr); gap: 28px !important; border-top: 1.5px solid var(--ink); padding-top: 28px; }
@@ -360,6 +361,60 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .band-text,.band-chart,.band-chart>*,#report section,#report section>*{min-width:0}
 .table-wrap{max-width:100%;overflow-x:auto}
 .data td .why li{overflow-wrap:anywhere}
+/* Intake: generous space and a clear focus state keep the writing experience calm. */
+.assistant { margin-block: clamp(24px, 4vw, 48px); }
+.assistant-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.assistant-intro { max-width: 42ch; padding-block: 12px; }
+.assistant-eyebrow { font-size: .8rem; font-weight: 600; color: var(--ink-2); margin-bottom: 14px; }
+.assistant h2 { font-family: var(--body); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.08; letter-spacing: -.035em; max-width: 14ch; }
+.assistant-intro > p:not(.assistant-eyebrow) { margin-top: 16px; font-size: 1.04rem; color: var(--ink-2); }
+.assistant-guide { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.assistant-guide li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; color: var(--ink-2); }
+.assistant-guide li span:first-child { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 50%; font-size: .75rem; font-weight: 600; color: var(--ink); }
+.assistant-card { min-width: 0; padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 5%, transparent); }
+.assistant-card > * + * { margin-top: 16px; }
+.assistant-demo-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 9px 18px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 600; text-decoration: none; }
+.assistant-intro .assistant-demo-link { margin-top: 20px; }
+.assistant-demo-link:hover { background: var(--ink-2); }
+.assistant-live > * + * { margin-top: 16px; }
+.assistant-label { display: block; color: var(--ink); font-size: 1rem; font-weight: 600; }
+.assistant textarea { display: block; width: 100%; min-height: 160px; max-height: 360px; margin-top: 9px; padding: 15px 16px; font: 400 1rem/1.6 var(--body); color: var(--ink); caret-color: var(--elec); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 14px; resize: vertical; overflow-y: auto; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+.assistant input[type="password"] { display: block; width: 100%; margin-top: 9px; padding: 12px; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 10px; }
+/* shortcut: older browsers keep a manually resizable field, upgrade when field-sizing is universally supported. */
+@supports (field-sizing: content) { .assistant textarea { field-sizing: content; } }
+.assistant textarea::placeholder { color: var(--ink-2); opacity: .85; }
+.assistant textarea:hover { border-color: var(--ink); }
+.assistant textarea:focus-visible { border-color: var(--elec); outline: 2px solid var(--elec); outline-offset: 2px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--elec) 14%, transparent); }
+.assistant-hint { color: var(--ink-2); font-size: .84rem; line-height: 1.5; }
+.assistant-example { border-top: 1px solid var(--line); padding-top: 16px; }
+.assistant-example summary, .assistant-followup summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
+.assistant-example summary::-webkit-details-marker, .assistant-followup summary::-webkit-details-marker { display: none; }
+.assistant-example summary::after, .assistant-followup summary::after { content: "+"; margin-left: auto; font-size: 1.25rem; font-weight: 400; }
+.assistant-example[open] summary::after, .assistant-followup[open] summary::after { content: "−"; }
+.assistant-example p, .assistant-followup p { color: var(--ink-2); font-size: .9rem; line-height: 1.6; padding-bottom: 8px; }
+.assistant-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.assistant button { transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease; }
+.assistant button:active:not(:disabled) { transform: scale(.98); }
+.assistant button.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.assistant button.primary:hover:not(:disabled) { background: var(--ink-2); border-color: var(--ink-2); }
+button:disabled { cursor: not-allowed; opacity: .6; }
+button:disabled:hover { background: transparent; color: var(--ink); }
+.assistant button.primary:disabled { background: var(--ink); color: var(--surface); }
+.assistant-status:not(:empty) { padding: 12px 14px; border-radius: 12px; background: var(--paper); color: var(--ink-2); font-size: .9rem; }
+.assistant-review-section { border-top: 1px solid var(--line); padding-top: 20px; }
+.assistant-review-section h3 { font-size: 1.15rem; }
+.assistant-review-section > p { margin-top: 8px; color: var(--ink-2); font-size: .9rem; }
+.assistant-review { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .65rem 1rem; margin: 18px 0; }
+.assistant-review dt { color: var(--ink-2); font-size: .85rem; }
+.assistant-review dd { margin: 0; font-size: .9rem; font-weight: 600; overflow-wrap: anywhere; }
+.assistant-followup { border-top: 1px solid var(--line); padding-top: 4px; }
+.assistant pre { white-space: pre-wrap; font: inherit; overflow-wrap: anywhere; }
+.assistant pre:not(:empty) { margin: 16px 0 0; padding: 16px; border-radius: 14px; background: var(--paper); }
+#form input, #form select { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 1rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
+#form input:hover, #form select:hover { border-color: var(--ink-2); }
+#form input:focus-visible, #form select:focus-visible { border-color: var(--elec); outline: 2px solid var(--elec); outline-offset: 2px; }
+@media (max-width: 760px) { .assistant-layout { grid-template-columns: 1fr; gap: 22px; } .assistant-intro { padding-block: 0; } .assistant h2 { max-width: none; } }
+@media (max-width: 480px) { .assistant-card { border-radius: 18px; } .assistant-review { grid-template-columns: 1fr; gap: .2rem; } .assistant-review dd { margin-bottom: .5rem; } .assistant-actions > button { width: 100%; } }
 </style>
 <!-- BODY -->
 <a class="skip" href="#report">Skip to the report</a>
@@ -368,17 +423,77 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
   <p class="wordmark"><strong>Every Floor</strong><span>Heat pumps &amp; efficiency for Massachusetts 2–4 unit homes</span></p>
   <button type="button" data-action="edit" id="edit-top" class="primary">Check your building</button>
 </div></header>
+<section class="wrap assistant" aria-labelledby="ai-title">
+  <div class="assistant-layout">
+    <div class="assistant-intro">
+      <p class="assistant-eyebrow">For Massachusetts renters and small-building owners</p>
+      <h2 id="ai-title">Understand your home’s heating options.</h2>
+      <p>Thinking about improving comfort or lowering energy bills? Start with an example or enter what you know about your building. It’s okay not to know everything.</p>
+      <a class="assistant-demo-link" href="#report">See the example plan</a>
+      <ol class="assistant-guide" aria-label="What you can learn">
+        <li><span aria-hidden="true">1</span><span><strong>Understand the costs.</strong> See estimated ranges for heating bills and how they could change.</span></li>
+        <li><span aria-hidden="true">2</span><span><strong>See who is affected.</strong> Explore how changes could affect the owner and each household.</span></li>
+        <li><span aria-hidden="true">3</span><span><strong>Know what to do next.</strong> Find possible programs, questions to ask, and who to contact.</span></li>
+      </ol>
+      <p class="assistant-hint">One option you’ll see is a heat pump: it uses electricity to move heat into a home and can also provide cooling. The report uses estimates; programs make the final eligibility decision.</p>
+    </div>
+    <div class="assistant-card">
+      <p class="assistant-eyebrow">Example building · Boston</p>
+      <h3>A three-family home, with the owner living on one floor</h3>
+      <p class="assistant-hint">The owner pays for oil heat. Tenants pay their own electricity. This fictional example is ready to explore—no setup needed.</p>
+      <p class="assistant-hint">Want to explore your own home? Select “Check your building” at the top of the page and choose “Clear and enter my building.”</p>
+      <details class="assistant-example">
+        <summary>See how the assistant understands this example</summary>
+        <p>“I’m a landlord and live in my three-family home in Boston. All floors use oil heat, which I pay for. Each tenant pays their own electric bill.”</p>
+        <p>This is a prepared example, not a live AI response.</p>
+        <dl class="assistant-review"><dt>You are</dt><dd>A landlord who lives in the building</dd><dt>City or town</dt><dd>Boston</dd><dt>Homes in the building</dt><dd>3</dd><dt>Heating on every floor</dt><dd>Heating oil</dd><dt>Who pays for heat on every floor</dt><dd>Landlord / owner</dd><dt>Who pays for electricity on every floor</dt><dd>Not sure yet</dd><dt>Electric company</dt><dd>Not sure yet</dd></dl>
+      </details>
+      <details class="assistant-example assistant-live">
+        <summary>Try live AI with your own building</summary>
+        <p>Describe your role, Massachusetts city or town, and the number of homes (2–4). If you know the heating fuel or who pays the bills, include those too.</p>
+      <div>
+        <label class="assistant-label" for="ai-input">Tell us about your building</label>
+        <textarea id="ai-input" rows="5" maxlength="4000" aria-describedby="ai-hint" placeholder="For example: I rent in a three-family home in Boston."></textarea>
+      </div>
+      <p id="ai-hint" class="assistant-hint">Your words are sent to an external AI service. Please leave out names, street addresses, account numbers, and bills.</p>
+      <details class="assistant-example" id="ai-key-settings">
+        <summary>Use your own API key for live AI</summary>
+        <p>The example report below works without a key. Live AI calls are billed to your API account. Your key is sent securely to this site’s server and forwarded to the AI provider for each request; it is not saved by this app and is cleared when you reload this page.</p>
+        <label class="assistant-label" for="ai-key">Your API key</label>
+        <input id="ai-key" type="password" autocomplete="off" spellcheck="false" aria-describedby="ai-key-help">
+        <p class="assistant-hint" id="ai-key-help"><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer">Get a supported API key</a>. Never share it in your building description.</p>
+      </details>
+      <div class="assistant-actions"><button type="button" class="primary" id="ai-extract">Review what I wrote</button><button type="button" data-action="edit">Use the form instead</button></div>
+      <p class="assistant-hint">The form opens with an example. Choose “Clear and enter my building” to start your own.</p>
+      <p id="ai-status" class="assistant-status" role="status" aria-live="polite"></p>
+      <section id="ai-review-section" class="assistant-review-section" aria-labelledby="ai-review-title" hidden>
+        <h3 id="ai-review-title">Check what we understood</h3>
+        <p>If anything is wrong, edit your description above and select “Review what I wrote” again. You can add anything else in the form.</p>
+        <dl id="ai-review" class="assistant-review"></dl>
+        <button type="button" class="primary" id="ai-confirm" hidden>These details are right — continue</button>
+      </section>
+      <details class="assistant-followup">
+        <summary>Explain the current report</summary>
+        <p>Use this after checking your building. Until then, the report uses a made-up example. You can use the text box above to say what you want to focus on.</p>
+        <button type="button" id="ai-explain">Explain the report and draft a message</button>
+        <pre id="ai-answer"></pre>
+      </details>
+      </details>
+    </div>
+  </div>
+</section>
 <div class="whatif" id="whatif" role="region" aria-label="Try your own numbers: they change every number on the page">
 <div class="wrap whatif-toggle-row"><button type="button" id="wi-toggle" class="whatif-toggle" aria-expanded="false" aria-controls="wi-row">Try your own prices ▾</button></div>
 <div class="wrap whatif-row" id="wi-row">
-  <span class="kicker">Try your own numbers</span>
+  <span class="kicker">Optional: adjust energy prices</span>
   <div class="ctl"><label for="wi-elec">Electricity <span class="ctl-hint">(standard rate)</span></label><input type="range" id="wi-elec" min="0.15" max="0.45" step="0.01"><output id="wi-elec-o" for="wi-elec"></output></div>
   <div class="ctl" id="wi-fuel-ctl"><label for="wi-fuel" id="wi-fuel-l">Heating oil</label><input type="range" id="wi-fuel" min="2" max="5" step="0.05"><output id="wi-fuel-o" for="wi-fuel"></output></div>
-  <div class="ctl"><label for="wi-cop">Heat pump efficiency <span class="ctl-hint">(typical 2.4)</span></label><input type="range" id="wi-cop" min="1.5" max="4" step="0.1"><output id="wi-cop-o" for="wi-cop"></output></div>
+  <div class="ctl"><label for="wi-cop">Heat pump efficiency <span class="ctl-hint">(how efficiently it heats)</span></label><input type="range" id="wi-cop" min="1.5" max="4" step="0.1"><output id="wi-cop-o" for="wi-cop"></output></div>
   <div class="ctl meter"><span class="ctl-l" id="wi-meter-l">Heat pumps run on</span><div class="seg-toggle" role="group" aria-labelledby="wi-meter-l"><button type="button" data-meter="unit">Each floor’s meter</button><button type="button" data-meter="owner">Owner-paid meter</button></div></div>
   <button type="button" id="wi-reset" class="reset">Back to statewide averages</button>
 </div></div>
 <main class="wrap" id="report" tabindex="-1"></main>
+
 <dialog id="editor" aria-labelledby="editor-title">
   <div class="editor-head"><h2 id="editor-title">The building</h2><button type="button" id="close">Done</button></div>
   <form id="form" novalidate></form>
@@ -387,5 +502,5 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 <p id="live" class="sr-only" aria-live="polite"></p>
 <footer><div class="wrap">
   <p>The programs make the final call on who qualifies. This page reads their published rules and tells you what to check with them. It isn’t legal advice. Prices are Massachusetts averages, so your own bills will differ a little.</p>
-  <p>Built <span id="built"></span> · An energy engineering portfolio project by Qiao Long, Boston College · Nothing you enter leaves your browser.</p>
+  <p>Built <span id="built"></span> · An energy engineering portfolio project by Qiao Long, Boston College · Form calculations run in your browser. If you use the AI assistant, your description is sent to an external AI service.</p>
 </div></footer>

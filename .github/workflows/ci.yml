@@ -33,6 +33,8 @@ jobs:
       - name: Rules — draft check (schema, references, every quote found in its source snapshot)
         working-directory: engine
         run: npm run rules:check-drafts
+      - name: AI service tests
+        run: node --test ai/*.test.mjs
       - name: Standard scenarios
         working-directory: engine
         run: npm run scenarios

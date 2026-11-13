@@ -1,13 +1,16 @@
 # Every Floor
 
-Heat pumps and efficiency programs for Massachusetts triple-deckers and two-families. It shows which programs fit
-each floor, what to do first, and who ends up paying more when a building switches.
+An AI-assisted energy navigator for Massachusetts 2–4 unit homes. It helps renters and small-building owners
+explore heating costs, possible assistance, and how a heat-pump project could affect each household.
 
 [![CI](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml/badge.svg)](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml)
 
-**Try it:** https://qiao527.github.io/ma-energy-navigator/
+**[Explore the live demo](https://every-floor.vercel.app/)** · [How the AI works](#how-the-ai-flow-works) · [Energy methods](docs/methods.md) · [Evaluation](eval/README.md)
 
-![Every Floor in use: switching between today and heat pumps, dragging the electricity price, moving the heat pumps to an owner-paid meter, and entering a building with answers that apply to every floor](docs/assets/every-floor-demo.gif)
+The site opens with a fictional, ready-to-explore building. Live AI is optional and requires your own API key;
+the example and building form work without one. Estimates are not quotes or eligibility decisions.
+
+![Every Floor's landing page, showing the example building, report entry point and optional AI assistant](docs/assets/every-floor-home.png)
 
 *The building in the demo is made up, including its oil delivery records.*
 
@@ -17,10 +20,11 @@ An energy engineering portfolio project by Qiao Long (Boston College, Human-Cent
 
 ## Why it exists
 
-Massachusetts has generous heat pump and efficiency programs, and they're hard to use. If you own a three-unit
-building, the rules change by unit, by who lives there, by income, by town and by install date. You often buy
-the oil while your tenants pay the electric bill a heat pump would run on. MassCEC does offer human navigators
-who walk owners through this, but only in a six-city pilot.
+Heating upgrades in small rental buildings involve more than choosing equipment. The owner may pay for fuel
+and the upgrade, while tenants pay the electric bills that could change. Program requirements also depend on
+the building and households. [MassCEC's Home Modernization Navigator](https://goclean.masscec.com/home-modernization-navigator/)
+provides human assistance in participating cities; this portfolio project explores how software can make the
+first steps easier to understand.
 
 Households below 200% of the federal poverty level spend about 13% of their income on home energy. For everyone
 else it's about 2% (DOE LEAD Tool, 2022 update).
@@ -44,22 +48,39 @@ You describe the building: who lives on each floor, how it's heated, who pays wh
 6. A map of Designated Equity Communities and the navigator pilot cities.
 7. Every step of the math, with a source for every assumption.
 
+## How the AI flow works
+
+```mermaid
+flowchart LR
+  A[Building description] --> B[AI extracts stated facts]
+  B --> C[User reviews and confirms]
+  C --> D[Deterministic energy and rules engine]
+  D --> E[Report with ranges and sources]
+  D --> F[Reviewed explanation and message templates]
+```
+
+The model helps interpret a short description and chooses the focus and tone of a response. It does not calculate
+savings or write program names and figures. Those come from the engine; explanations and coordination messages
+are assembled from reviewed text. This is a constrained assistant, not an open-ended agent.
+
+The [AI evaluation](eval/README.md) documents 16 fictional cases, including unknown facts, conflicting answers,
+per-floor differences, out-of-scope buildings and an instruction-injection attempt. One expanded run initially
+misclassified a single-family owner; after a prompt change, the same 16 cases passed once. This is a small,
+developer-authored set, not a guarantee of model accuracy. Users confirm the form before calculations run. These
+model evaluations preceded the visitor-owned-key change; the later credential flow has mocked tests, but has not
+yet been verified end to end with a real visitor key.
+
 ## What it found
 
-Here's the result I didn't expect when I started. At Massachusetts average prices for winter 2025–26, switching
-the demo building's heat and hot water from oil to heat pumps lands anywhere from saving about $1,250 to paying
-about $3,530 more a year. The typical case costs more, about $1,200.
+The fictional Boston building illustrates why electrification cannot be reduced to a guaranteed savings number.
+The result depends on fuel prices, electricity rates, equipment efficiency and the available records. The report
+shows ranges and makes it possible to explore how assumptions affect the result.
 
-The reason is simple once you see it. A million Btu of heat costs about $27 from an 84% efficient oil boiler.
-From a heat pump at its field-measured efficiency (2.41), it costs about $34, even on Eversource's winter heat
-pump rate, which averages $0.28/kWh over the season against $0.35 standard. Break-even is about $0.22/kWh, or an
-efficiency of about 3.1.
+It also makes the split incentive visible: when an owner pays for oil and tenants pay their own electricity,
+replacing oil heat can move costs between people. The report identifies missing information rather than treating
+an unknown payer as a zero cost shift. See the [worked example](docs/methods.md) for the assumptions and sources.
 
-The bigger story for a landlord is who pays. On each floor's own meter, $2,590 to $5,500 a year of energy cost
-moves from the landlord's oil bill to the tenants' electric bills. The state's own energy office says it plainly:
-households "should not assume that switching fuels will automatically lead to savings."
-
-![The answer for the demo building beside the building drawn floor by floor](docs/assets/every-floor.png)
+![The example report beside a floor-by-floor building illustration](docs/assets/every-floor.png)
 
 ## The energy chain
 
@@ -82,8 +103,8 @@ All 51 assumptions and every rule are listed in the page, with links and the dat
 
 ## How the numbers stay honest
 
-Every number on the page comes out of the engine in `engine/`, a tested TypeScript package. It works in low /
-mid / high ranges and attaches a confidence label with its reasons. Nothing is typed into the page by hand.
+Energy estimates and eligibility results come from the engine in `engine/`, a tested TypeScript package. Estimates
+use low / mid / high ranges and attach a confidence label with its reasons. User-facing examples are explicitly labeled.
 
 Each rule and assumption carries the URL it came from, the section, a word-for-word quote and the date someone
 checked it. `npm run rules:check-drafts` confirms every quote actually appears in a saved copy of the source
@@ -105,11 +126,14 @@ Decisions and their reasons are logged in [`docs/decisions.md`](docs/decisions.m
 ## Repository
 
 ```
-engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check): 243 tests
+engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check)
 rules/ma/   Approved rules and assumptions, source snapshots, approval ledger
 scenarios/  Standard scenarios with expected results
 web/        The page: a static build that runs the engine in the browser (esbuild)
+ai/         Server-side model integration, validation and tests
+eval/       Fictional model evaluation cases and reproducible runner
 analysis/   Python (standard library) data scripts: ResStock estimates, town boundaries
+data/       Shared Census municipality boundaries used by the engine and map
 tools/      Source capture, draft report, approval
 docs/       Product definition, decisions, research, plans
 ```
@@ -122,10 +146,35 @@ Requires Node 24 and Python 3.
 cd engine && npm ci && npm run check          # typecheck + all tests
 npm run scenarios                             # standard scenarios
 cd ../web && npm ci && npm run build          # web/dist/index.html (approved rules only)
-python3 -m pytest analysis tools              # data script tests
+cd .. && python3 -m pytest analysis tools     # data script tests
 ```
 
-Open `web/dist/index.html` in a browser. Nothing you enter leaves the browser.
+Open `web/dist/index.html` in a browser. Form calculations run in the browser. If you use the optional AI assistant, your description is sent to DeepSeek.
+
+## AI navigator (local preview)
+
+The optional assistant extracts explicitly stated facts from a description. Review and confirm those facts before
+they replace the form. Unknown fields stay unknown. It can also choose the focus and tone of a short explanation
+and a coordination message. Those texts use fixed, reviewed sentences and the current engine result: the model
+cannot write the displayed amounts or program names. This is a constrained first version, not an open-ended chatbot.
+
+The example report is available without an AI request. Live AI requires the visitor's own DeepSeek API key and is billed to their account. The key stays in the current page's password field until reload and is sent via HTTPS to the application server and forwarded to DeepSeek for each request. The app does not persist or log it. The GitHub Pages demo is static and cannot run the AI service.
+
+To try the AI flow locally, build the page as above, then run:
+
+```bash
+node ai/server.mjs
+```
+
+Open `http://localhost:3000` and enter your key in the page. The local server requires Node 24 and does not log
+requests. `DEEPSEEK_MODEL` optionally overrides the default DeepSeek model. Calls use the
+[DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/).
+Using the assistant sends the text you enter to DeepSeek; do not include names, street addresses, account numbers,
+or utility bills. Normal form calculations stay in your browser. The local server is for local testing only, not
+public deployment. The public backend uses a rate limit; that per-IP limit is not an account-wide spending cap.
+
+Run `node --test ai/*.test.mjs` for service validation tests; the engine suite covers the confirmation and
+rendering boundary and grounding across the standard scenarios. These tests use mocked model responses and cannot establish the model's extraction accuracy.
 
 ## Accessibility
 
@@ -133,11 +182,13 @@ The target is WCAG 2.2 AA:
 
 - every chart has a table;
 - color never carries meaning alone;
-- all controls work by keyboard;
+- keyboard access and visible focus are design requirements;
 - motion stops under `prefers-reduced-motion`;
 - the page works at phone width (checked at 360 px).
 
-Automated axe-core scans (WCAG 2.0–2.2 A/AA) report no violations in light or dark mode.
+The Phase 1 release recorded automated axe-core scans with no violations in light or dark mode. The later AI
+interface and current mobile and keyboard flows still need a fresh full accessibility audit; WCAG conformance
+has not been established.
 
 ## Data and credits
 

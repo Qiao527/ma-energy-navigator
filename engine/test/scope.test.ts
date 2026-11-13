@@ -17,6 +17,10 @@ describe('derive', () => {
   test('a non-listed municipality is not a DEC', () => {
     expect(derive(input({ building: { municipality: 'Newton' } }), DEC).isDec).toBe(false)
   })
+  test('an unknown or misspelled town never becomes a definite non-DEC', () => {
+    expect(derive(input({ building: { municipality: 'Worchester' } }), DEC).isDec).toBeNull()
+    expect(derive(input({ building: { municipality: 'Barnstable' } }), DEC).isDec).toBe(false)
+  })
   test('a narrowing utility makes DEC depend on the EJ block group', () => {
     const i = input({ building: { municipality: 'Boston', electricUtility: 'unitil', gasUtility: 'none', inEjBlockGroup: null } })
     expect(derive(i, DEC).isDec).toBeNull()

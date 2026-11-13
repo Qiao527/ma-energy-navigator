@@ -1,7 +1,10 @@
+import { isMassachusettsTown } from '../../engine/src/scope.js'
+import { hasUnestimatedWater, shiftedCostState } from './shift.js'
+import { fairness } from './fairness.js'
+import { HEAT_COST_SHIFT_CONSTRAINT } from '../../engine/src/landlord.js'
 import { breakEven, heatCosts, heatPumpPrice, report, withOverrides, type HeatSource, type Report, type UnitEnergy } from '../../engine/src/energy.js'
 import type { Estimate } from '../../engine/src/estimate.js'
 import type { Fuel, Unit } from '../../engine/src/facts.js'
-import { HEAT_COST_SHIFT_CONSTRAINT } from '../../engine/src/landlord.js'
 import type { OfferResult } from '../../engine/src/offers.js'
 import type { Assumption } from '../../engine/src/quantities.js'
 import { DATA, OFFERS, PROGRAMS, RULES } from './data.js'
@@ -25,6 +28,7 @@ export function assumptionsFor(v: View): Assumption[] {
 
 export function compute(s: State, v: View): { r: Report | null; error: string | null } {
   try {
+    if (!isMassachusettsTown(s.input.building.municipality)) throw new Error('Please enter a Massachusetts city or town and check the spelling')
     const installDate = s.installDate === '' ? null : s.installDate
     return {
       r: report(s.input, RULES, { asOf: today(), installDate, boilerNeedsReplacing: s.boilerNeedsReplacing, heatPumpMeter: v.meter }, assumptionsFor(v)),
@@ -104,10 +108,13 @@ function headline(r: Report, s: State): { text: string; e: Estimate | null; rang
 
 const fig = (value: string, label: string, cls = '', e?: Estimate): string =>
   `<div class="figure ${cls}"><dt>${label}</dt><dd>${value}</dd>${e ? `<dd class="fig-conf">${confNote(e)}${whyList(e, 'Why')}</dd>` : ''}</div>`
-function keyFigures(r: Report): string {
+function keyFigures(r: Report, s: State): string {
   const L = r.landlord
+  const shift = L ? shiftedCostState(L, hasUnestimatedWater(s.input, r.units)) : null
   const out: string[] = []
-  if (L && L.shiftedToTenants.length > 0) {
+  if (L && shift === 'unknown') {
+    out.push(fig('Not known', 'Cost moved to tenants is unknown; check bill payers and unestimated hot-water changes', 'shift'))
+  } else if (L && shift === 'shifted') {
     const lo = Math.min(...L.shiftedToTenants.map(x => x.monthly.range.low))
     const hi = Math.max(...L.shiftedToTenants.map(x => x.monthly.range.high))
     out.push(fig(`${rangeN('shift', lo, hi)}<small>/month</small>`, 'moves onto each tenant’s electric bill, unless you adjust for it', 'shift', L.shiftedToTenants[0]?.monthly))
@@ -224,12 +231,13 @@ function hero(r: Report, s: State, v: View): string {
   const whatIf = Object.keys(v.whatIf).length > 0
   return `<section class="hero" aria-labelledby="h-answer">
     <div class="answer">
-      ${s.demo ? `<div class="intro-line"><p><strong>This is an example:</strong> a Boston triple-decker with made-up oil records. Enter your own building to see which programs fit each floor, what heat pumps would cost to run, and who pays.</p><button type="button" data-action="edit">Check your building</button></div>` : ''}
+      ${s.demo ? `<div class="intro-line"><p><strong>Example data:</strong> this report uses a fictional building and estimates. To explore your own home, clear the form and enter your details.</p><button type="button" data-action="edit">Check your building</button></div>` : ''}
       <p class="sheet">${esc(sheet)}${s.demo ? ' <span class="tag">demo data</span>' : ''}${whatIf ? ' <span class="tag whatif">your numbers</span>' : ''}</p>
       <h1 id="h-answer" class="headline">${h.text}</h1>
       ${h.range ? `<p class="headline-range">${h.range}</p>` : ''}
       ${h.e ? `<p class="headline-meta">${confNote(h.e)} ${whatIf ? 'Using your own numbers.' : 'Massachusetts average prices, winter 2025–26.'}</p>` : ''}
-      ${keyFigures(r)}
+      ${keyFigures(r, s)}
+      ${r.navigation.steps.length ? '<p><a href="#h-plan">Jump to your suggested next steps</a></p>' : ''}
       ${r.landlordReason ? `<p class="muted">${esc(r.landlordReason)}</p>` : ''}
     </div>
     ${building(r, s, v)}
@@ -355,28 +363,6 @@ function beforeAfter(r: Report, s: State, v: View): string {
     <p class="legend"><span><span class="swatch fuel"></span>${hwSwitch ? 'Fuel for heat and hot water' : 'Heating fuel'}</span><span><span class="swatch elec"></span>${hwSwitch ? 'Heat pump and water heater electricity' : 'Heat pump electricity'}</span>${groups.some(g => g.today.length > 1) ? '<span><span class="swatch kept"></span>Hot-water fuel that stays</span>' : ''}</p>${table}</section>`
 }
 
-// ---------- 4. fairness ----------
-
-function fairness(r: Report): string {
-  const L = r.landlord
-  if (!L || L.shiftedToTenants.length === 0) return ''
-  const legal = RULES.legal.find(x => x.id === HEAT_COST_SHIFT_CONSTRAINT)
-  const total = L.shiftedTotal
-  return `<section class="fair" aria-labelledby="h-fair"><h2 id="h-fair">Part of the saving is your tenants’ new electric bill</h2>
-    <p class="lede">You pay for oil today. Heat pumps on the tenants’ meters move ${total ? `${between(total.range.low, total.range.high)} a year` : 'heating cost'} onto their bills. The figure at the top already counts that electricity.</p>
-    ${legal ? `<p class="law"><strong>${esc(legal.leaseCheck)}</strong> ${esc(legal.summary)} <em>${esc(legal.disclaimer)}</em> Help: ${legal.resources.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.section)}</a>`).join(' · ')}</p>` : ''}
-    <ol class="options">
-      <li><strong>Lower the rent</strong><span>by the monthly amount on each floor.</span></li>
-      <li><strong>Electricity allowance</strong><span>of the same size, paid to the tenant.</span></li>
-      <li><strong>Owner-paid meter</strong><span>for the heat pumps, so nothing moves.</span></li>
-      <li><strong>Agree in writing at renewal</strong><span>and explain the electricity change openly.</span></li>
-    </ol>
-    <p><button type="button" data-meter="owner">See it with an owner-paid meter</button></p>
-    ${L.paybackIfCostShifted ? `<p class="muted">For comparison only: leaving the cost on tenants (which needs a written rental agreement) would give a payback of ${between(L.paybackIfCostShifted.range.low, L.paybackIfCostShifted.range.high, n => num(n, 0))} years.</p>` : ''}
-    ${L.projectCommitment.reason ? `<p class="muted">Project commitment terms: ${esc(L.projectCommitment.reason)} Some offers ask the landlord to commit in writing not to raise rent or evict for a period after the incentive.</p>` : ''}
-  </section>`
-}
-
 // ---------- 5. what to do first ----------
 
 function plan(r: Report): string {
@@ -467,5 +453,5 @@ export function reportHtml(s: State, v: View): string {
   }
   const { r, error } = compute(s, v)
   if (error || !r) return `<p class="error" role="alert">This building can’t be estimated yet: ${esc(error ?? 'unknown error')}. Check the details in “Edit the building”.</p>`
-  return `${hero(r, s, v)}${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r) : ''}${plan(r)}${mapSection(s, v.zoom)}${engineering(r, s)}${rest(r)}`
+  return `${hero(r, s, v)}${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r, s, RULES.legal.find(x => x.id === HEAT_COST_SHIFT_CONSTRAINT)) : ''}${plan(r)}${mapSection(s, v.zoom)}${engineering(r, s)}${rest(r)}`
 }
