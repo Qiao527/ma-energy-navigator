@@ -1,88 +1,151 @@
+<div align="center">
+
 # Every Floor
 
-An AI-assisted energy navigator for Massachusetts 2–4 unit homes. It helps renters and small-building owners
-explore heating costs, possible assistance, and how a heat-pump project could affect each household.
+**An energy navigator for Massachusetts 2–4 unit homes.**<br>
+See what heat pumps would cost to run, who would pay which bill, and which programs to try first, floor by floor.
 
 [![CI](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml/badge.svg)](https://github.com/Qiao527/ma-energy-navigator/actions/workflows/ci.yml)
+![Node 24](https://img.shields.io/badge/node-24-339933?logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/engine-TypeScript-3178C6?logo=typescript&logoColor=white)
+![WCAG 2.2 AA target](https://img.shields.io/badge/a11y-WCAG%202.2%20AA%20target-2f5bc8)
+[![License: MIT](https://img.shields.io/badge/license-MIT-16191c)](LICENSE)
 
-**[Explore the live demo](https://every-floor.vercel.app/)** · [How the AI works](#how-the-ai-flow-works) · [Energy methods](docs/methods.md) · [Evaluation](eval/README.md)
+**[Open the live demo →](https://every-floor.vercel.app/)**
 
-The site opens with a fictional, ready-to-explore building. Live AI is optional and requires your own API key;
-the example and building form work without one. Estimates are not quotes or eligibility decisions.
+[How it works](#how-it-works) · [Methods](docs/methods.md) · [AI evaluation](eval/README.md) · [Run it locally](#run-it-locally) · [All docs](docs/README.md)
 
-![Every Floor's landing page, showing the example building, report entry point and optional AI assistant](docs/assets/every-floor-home.png)
+</div>
 
-*The building in the demo is made up, including its oil delivery records.*
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/every-floor-home-dark.png">
+  <img src="docs/assets/every-floor-home.png" alt="Every Floor's landing page: the headline, a drawing of the fictional three-family example building, and the entry points to the report and the optional AI assistant">
+</picture>
 
-An energy engineering portfolio project by Qiao Long (Boston College, Human-Centered Engineering).
+<sub>The demo building is fictional, including its oil delivery records. Estimates are not quotes or eligibility decisions.</sub>
 
 ---
 
+## At a glance
+
+| | |
+|---|---|
+| **Who it's for** | Renters and small-building owners in Massachusetts 2–4 unit homes (triple-deckers, two-families) |
+| **What it answers** | Would heat pumps cost more or less to run here? Whose bill changes, and by how much? What should we do first? |
+| **How** | A tested, deterministic TypeScript engine computes every number as a low / typical / high range from sourced assumptions |
+| **Where AI fits** | Optional. It reads a short description into form fields for you to confirm. It never calculates a number or names a program |
+| **Privacy** | Form calculations run in your browser. Only text sent to the optional AI assistant leaves the page |
+
+An energy engineering portfolio project by Qiao Long (Boston College, Human-Centered Engineering).
+
+## Contents
+
+- [Why it exists](#why-it-exists)
+- [What the report shows](#what-the-report-shows)
+- [How it works](#how-it-works)
+- [How the numbers stay honest](#how-the-numbers-stay-honest)
+- [The energy chain](#the-energy-chain)
+- [Repository layout](#repository-layout)
+- [Run it locally](#run-it-locally)
+- [Accessibility](#accessibility)
+- [Status and limitations](#status-and-limitations)
+- [Data, credits and license](#data-credits-and-license)
+
 ## Why it exists
 
-Heating upgrades in small rental buildings involve more than choosing equipment. The owner may pay for fuel
-and the upgrade, while tenants pay the electric bills that could change. Program requirements also depend on
-the building and households. [MassCEC's Home Modernization Navigator](https://goclean.masscec.com/home-modernization-navigator/)
-provides human assistance in participating cities; this portfolio project explores how software can make the
-first steps easier to understand.
+Heating upgrades in small rental buildings involve more than choosing equipment. The owner may pay for fuel and
+the upgrade, while tenants pay the electric bills that could change. Program requirements also depend on the
+building and on each household.
 
-Households below 200% of the federal poverty level spend about 13% of their income on home energy. For everyone
-else it's about 2% (DOE LEAD Tool, 2022 update).
+> Households below 200% of the federal poverty level spend about **13%** of their income on home energy.
+> For everyone else it's about **2%**. *DOE LEAD Tool, 2022 update*
 
+[MassCEC's Home Modernization Navigator](https://goclean.masscec.com/home-modernization-navigator/) provides human
+help in participating cities. This project explores how software can make the first steps easier to understand.
 The idea came from a hackathon brief on Massachusetts buildings: energy waste, retrofit priorities, and who gets
-access to savings. The hackathon is over. This repository finishes the idea.
+access to savings. The hackathon is over; this repository finishes the idea.
 
-## What the page does
+## What the report shows
 
-You describe the building: who lives on each floor, how it's heated, who pays which bill. Then the page shows:
+You describe the building: who lives on each floor, how it's heated, who pays which bill. The report is laid out
+like a drawing set. It opens with the answer beside the building drawn floor by floor, then numbered sheets:
 
-1. The likely yearly change in running cost with heat pumps, as a range, next to the building drawn floor by
-   floor with each bill and who pays it.
-2. Why. One million Btu of heat costs a different amount from oil, gas, propane, baseboard and a heat pump, and
-   there's an electricity price and an efficiency at which a heat pump breaks even.
-3. Sliders for your own electricity price, fuel price and heat pump efficiency, and a switch for whether the
-   heat pumps run on tenants' meters or an owner-paid one. Every number follows.
-4. The heating cost that would move onto tenants' bills, the sanitary code rule that limits it (105 CMR 410),
-   and four fair ways to handle it. It isn't legal advice.
-5. The programs in the order to do them, what each one needs, and what only the program can confirm.
-6. A map of Designated Equity Communities and the navigator pilot cities.
-7. Every step of the math, with a source for every assumption.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/every-floor-dark.png">
+  <img src="docs/assets/every-floor.png" alt="The example report: a headline saying heat pumps would probably cost about $1,200 a year more to run, key figures in a bordered grid, and the building drawn in elevation with each floor's bill changes">
+</picture>
 
-## How the AI flow works
+| | Sheet | What you get |
+|---|---|---|
+| ★ | **The answer** | The likely yearly change in running cost as a range, the cost moved to each tenant, upfront cost after rebates, payback and CO₂, beside the building drawn floor by floor with each bill and who pays it |
+| 01 | **Price of heat** | What one million Btu costs from oil, gas, propane, baseboard and a heat pump, and the electricity price and efficiency at which a heat pump breaks even |
+| 02 | **Floor by floor** | Each floor's yearly heating bill today and with heat pumps |
+| 03 | **Tenants' bills** | The heating cost that would move onto tenants' bills, the sanitary code rule that limits it (105 CMR 410), and four fair ways to handle it. Not legal advice |
+| 04 | **What to do** | The programs in the order to do them, what each one needs, and what only the program can confirm |
+| 05 | **Extra help** | A map of Designated Equity Communities and the navigator pilot cities |
+| 06–07 | **The math and sources** | Every step of the calculation, with a source and check date for every assumption |
+
+A bar at the top lets you try your own electricity price, fuel price and heat pump efficiency, and switch the heat
+pumps between tenants' meters and an owner-paid meter. Every number on the page follows.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/every-floor-charts-dark.png">
+  <img src="docs/assets/every-floor-charts.png" alt="The sheet index, and Sheet 01: cost per million Btu by heating system as range bars, with break-even electricity price and heat pump efficiency">
+</picture>
+
+### What the example shows
+
+The fictional Boston building illustrates why electrification cannot be reduced to a guaranteed savings number.
+The result depends on fuel prices, electricity rates, equipment efficiency and the available records, so the
+report shows ranges and lets you explore how assumptions move the result.
+
+It also makes the **split incentive** visible: when an owner pays for oil and tenants pay their own electricity,
+replacing oil heat can move costs between people. The report names missing information instead of treating an
+unknown payer as a zero cost shift. The [worked example](docs/methods.md) has the assumptions and sources.
+
+## How it works
 
 ```mermaid
 flowchart LR
-  A[Building description] --> B[AI extracts stated facts]
+  A[Building description] -->|optional AI| B[Stated facts extracted]
+  F[Building form] --> C
   B --> C[User reviews and confirms]
   C --> D[Deterministic energy and rules engine]
+  R[(Approved rules and<br>sourced assumptions)] --> D
   D --> E[Report with ranges and sources]
-  D --> F[Reviewed explanation and message templates]
+  D --> G[Explanation and message<br>from reviewed templates]
 ```
 
-The model helps interpret a short description and chooses the focus and tone of a response. It does not calculate
-savings or write program names and figures. Those come from the engine; explanations and coordination messages
-are assembled from reviewed text. This is a constrained assistant, not an open-ended agent.
+The model helps interpret a short description and chooses the focus and tone of a response. **It does not
+calculate savings or write program names and figures.** Those come from the engine; explanations and coordination
+messages are assembled from reviewed text. This is a constrained assistant, not an open-ended agent.
 
-The [AI evaluation](eval/README.md) documents 16 fictional cases, including unknown facts, conflicting answers,
-per-floor differences, out-of-scope buildings and an instruction-injection attempt. One expanded run initially
-misclassified a single-family owner; after a prompt change, the same 16 cases passed once. This is a small,
-developer-authored set, not a guarantee of model accuracy. Users confirm the form before calculations run. These
-model evaluations preceded the visitor-owned-key change; the later credential flow has mocked tests, but has not
-yet been verified end to end with a real visitor key.
+- Users confirm the extracted facts before they replace the form. Unknown fields stay unknown.
+- The [AI evaluation](eval/README.md) covers 16 fictional cases: unknown facts, conflicting answers, per-floor
+  differences, out-of-scope buildings and an instruction-injection attempt. One expanded run first misclassified a
+  single-family owner; after a prompt change, the same 16 cases passed once. It is a small, developer-authored
+  set, not a guarantee of model accuracy.
 
-## What it found
+## How the numbers stay honest
 
-The fictional Boston building illustrates why electrification cannot be reduced to a guaranteed savings number.
-The result depends on fuel prices, electricity rates, equipment efficiency and the available records. The report
-shows ranges and makes it possible to explore how assumptions affect the result.
+| Guarantee | How it's enforced |
+|---|---|
+| **Numbers come only from tested code** | Estimates and eligibility come from the engine in `engine/` (Zod, Vitest, fast-check property tests) |
+| **Ranges, not false precision** | Every estimate is low / mid / high with a confidence label and its reasons |
+| **Every rule has a source** | Each rule and assumption carries its URL, section, a word-for-word quote and the date it was checked. `npm run rules:check-drafts` fails the build if a quote is missing from the saved source copy in `rules/ma/sources/` |
+| **Nothing ships unapproved** | Approvals live in `rules/ma/approvals.json` against each file's SHA-256. The loader and the public build refuse any file changed after approval |
+| **Answers don't drift** | Standard scenarios (`npm run scenarios`) pin the engine's answers for fixed buildings and dates. A changed answer needs approval again |
+| **Ask, don't guess** | When a fact is unknown, like who pays a bill or whether the boiler heats the water, the page asks |
 
-It also makes the split incentive visible: when an owner pays for oil and tenants pay their own electricity,
-replacing oil heat can move costs between people. The report identifies missing information rather than treating
-an unknown payer as a zero cost shift. See the [worked example](docs/methods.md) for the assumptions and sources.
-
-![The example report beside a floor-by-floor building illustration](docs/assets/every-floor.png)
+Decisions and their reasons are logged in [`docs/decisions.md`](docs/decisions.md); the working rules are in
+[`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## The energy chain
+
+<details>
+<summary><b>From delivery records to bills and CO₂: twelve steps, each with its source</b></summary>
+
+<br>
 
 | Step | How | Source |
 |---|---|---|
@@ -99,31 +162,12 @@ an unknown payer as a zero cost shift. See the [worked example](docs/methods.md)
 | Project cost | Tons × installed cost per ton | EEAC Residential Heat Pump Invoice Cost Study |
 | Incentives | Each program's published rules, with verbatim quotes | Mass Save, mass.gov, DPU, M.G.L. |
 
-All 51 assumptions and every rule are listed in the page, with links and the date each was checked.
+All 51 assumptions and every rule are listed in the page, with links and the date each was checked. The full
+worked example is in [`docs/methods.md`](docs/methods.md).
 
-## How the numbers stay honest
+</details>
 
-Energy estimates and eligibility results come from the engine in `engine/`, a tested TypeScript package. Estimates
-use low / mid / high ranges and attach a confidence label with its reasons. User-facing examples are explicitly labeled.
-
-Each rule and assumption carries the URL it came from, the section, a word-for-word quote and the date someone
-checked it. `npm run rules:check-drafts` confirms every quote actually appears in a saved copy of the source
-(`rules/ma/sources/`), so a misquote fails the build.
-
-Nothing ships until the owner approves it. Approvals are stored in `rules/ma/approvals.json` against each file's
-SHA-256, and the loader and the public build both refuse a file that changed afterward. The standard scenarios
-(`npm run scenarios`) pin the engine's answers for fixed buildings and dates, and a changed answer needs approval
-again.
-
-When a fact is unknown, like who pays a bill or whether the boiler heats the water, the page asks. It doesn't
-guess.
-
-The full worked example, from delivery records to bills, CO₂ and who pays, is in [`docs/methods.md`](docs/methods.md).
-
-Decisions and their reasons are logged in [`docs/decisions.md`](docs/decisions.md); the product definition is in
-[`docs/product.md`](docs/product.md); the working rules are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
-
-## Repository
+## Repository layout
 
 ```
 engine/     TypeScript rules engine and finance core (Zod, Vitest, fast-check)
@@ -131,14 +175,23 @@ rules/ma/   Approved rules and assumptions, source snapshots, approval ledger
 scenarios/  Standard scenarios with expected results
 web/        The page: a static build that runs the engine in the browser (esbuild)
 ai/         Server-side model integration, validation and tests
+api/        Serverless entry points for the hosted AI service
 eval/       Fictional model evaluation cases and reproducible runner
 analysis/   Python (standard library) data scripts: ResStock estimates, town boundaries
 data/       Shared Census municipality boundaries used by the engine and map
 tools/      Source capture, draft report, approval
-docs/       Product definition, decisions, research, plans
+docs/       Product definition, methods, decisions, research, reviews (see docs/README.md)
 ```
 
-## Run it
+| Layer | Stack |
+|---|---|
+| Engine | TypeScript, Zod schemas, Vitest, fast-check property tests |
+| Page | Static HTML + TypeScript bundled with esbuild; hand-drawn SVG, no chart library |
+| AI service | Node 24, DeepSeek JSON output, server-side validation |
+| Data scripts | Python 3 standard library, pytest |
+| Delivery | GitHub Actions CI, GitHub Pages (static), Vercel (with AI) |
+
+## Run it locally
 
 Requires Node 24 and Python 3.
 
@@ -149,32 +202,40 @@ cd ../web && npm ci && npm run build          # web/dist/index.html (approved ru
 cd .. && python3 -m pytest analysis tools     # data script tests
 ```
 
-Open `web/dist/index.html` in a browser. Form calculations run in the browser. If you use the optional AI assistant, your description is sent to DeepSeek.
+Open `web/dist/index.html` in a browser. Form calculations run in the browser.
 
-## AI navigator (local preview)
+<details>
+<summary><b>Optional: the AI navigator on a local server</b></summary>
 
-The optional assistant extracts explicitly stated facts from a description. Review and confirm those facts before
-they replace the form. Unknown fields stay unknown. It can also choose the focus and tone of a short explanation
-and a coordination message. Those texts use fixed, reviewed sentences and the current engine result: the model
-cannot write the displayed amounts or program names. This is a constrained first version, not an open-ended chatbot.
+<br>
 
-The example report is available without an AI request. Live AI requires the visitor's own DeepSeek API key and is billed to their account. The key stays in the current page's password field until reload and is sent via HTTPS to the application server and forwarded to DeepSeek for each request. The app does not persist or log it. The GitHub Pages demo is static and cannot run the AI service.
+The assistant extracts explicitly stated facts from a description; you review and confirm them before they replace
+the form. It can also choose the focus and tone of a short explanation and a coordination message. Those texts use
+fixed, reviewed sentences and the current engine result: the model cannot write the displayed amounts or program
+names.
 
-To try the AI flow locally, build the page as above, then run:
+Live AI requires the visitor's own DeepSeek API key and is billed to their account. The key stays in the page's
+password field until reload and is sent via HTTPS to the application server, which forwards it to DeepSeek for
+each request. The app does not persist or log it. The GitHub Pages demo is static and cannot run the AI service.
+
+Build the page as above, then run:
 
 ```bash
 node ai/server.mjs
 ```
 
-Open `http://localhost:3000` and enter your key in the page. The local server requires Node 24 and does not log
-requests. `DEEPSEEK_MODEL` optionally overrides the default DeepSeek model. Calls use the
+Open `http://localhost:3000` and enter your key in the page. The local server does not log requests and is for
+local testing only, not public deployment. `DEEPSEEK_MODEL` optionally overrides the default model. Calls use the
 [DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/).
-Using the assistant sends the text you enter to DeepSeek; do not include names, street addresses, account numbers,
-or utility bills. Normal form calculations stay in your browser. The local server is for local testing only, not
-public deployment. The public backend uses a rate limit; that per-IP limit is not an account-wide spending cap.
 
-Run `node --test ai/*.test.mjs` for service validation tests; the engine suite covers the confirmation and
-rendering boundary and grounding across the standard scenarios. These tests use mocked model responses and cannot establish the model's extraction accuracy.
+Using the assistant sends the text you enter to DeepSeek; do not include names, street addresses, account numbers
+or utility bills. The public backend has a per-IP rate limit, which is not an account-wide spending cap.
+
+Run `node --test ai/*.test.mjs` for service validation tests. The engine suite covers the confirmation and
+rendering boundary and grounding across the standard scenarios. These tests use mocked model responses and cannot
+establish the model's extraction accuracy.
+
+</details>
 
 ## Accessibility
 
@@ -186,26 +247,35 @@ The target is WCAG 2.2 AA:
 - motion stops under `prefers-reduced-motion`;
 - the page works at phone width (checked at 360 px).
 
-The Phase 1 release recorded automated axe-core scans with no violations in light or dark mode. The later AI
-interface and current mobile and keyboard flows still need a fresh full accessibility audit; WCAG conformance
-has not been established.
+## Status and limitations
 
-## Data and credits
+What has and hasn't been verified, in one place:
+
+- **Accessibility.** The Phase 1 release recorded automated axe-core scans with no violations in light or dark
+  mode. The later AI interface and the current mobile and keyboard flows still need a fresh full audit; WCAG
+  conformance has not been established.
+- **AI accuracy.** The evaluation is 16 developer-authored cases that passed once after a prompt change. Those runs
+  preceded the visitor-owned-key change; the later credential flow has mocked tests but has not yet been verified
+  end to end with a real visitor key.
+- **Estimates, not quotes.** Prices are Massachusetts averages, so real bills will differ. Programs decide
+  eligibility; this tool shows what their published rules say and names what to confirm.
+
+## Data, credits and license
 
 - **NREL ResStock 2025 Release 1.** Licensed CC BY 4.0: "End-Use Load Profiles for the U.S. Building Stock",
   National Renewable Energy Laboratory.
 - **U.S. Census Bureau** cartographic boundaries; **NOAA** Climate Prediction Center degree days; **EPA**
   Emission Factors Hub; **EIA** heat contents. All are U.S. government works.
-- **Program rules** are quoted from Mass Save, mass.gov (DOER, DPU, the 105 CMR 410 sanitary
-  code) and the Massachusetts General Laws, with the link to each source.
+- **Program rules** are quoted from Mass Save, mass.gov (DOER, DPU, the 105 CMR 410 sanitary code) and the
+  Massachusetts General Laws, with the link to each source.
 
-Programs decide eligibility. This tool shows what their published rules say and names what to confirm.
+Code: [MIT](LICENSE), © 2026 Qiao Long. Data and quoted program text keep their own terms: ResStock is CC BY 4.0,
+and U.S. government works are in the public domain.
 
-## License
+---
 
-Code: [MIT](LICENSE), © 2026 Qiao Long. Data and quoted program text keep their own terms (see Data and credits):
-ResStock is CC BY 4.0, and U.S. government works are in the public domain.
-
-## Author
+<div align="center">
 
 Qiao Long · [github.com/Qiao527](https://github.com/Qiao527)
+
+</div>
