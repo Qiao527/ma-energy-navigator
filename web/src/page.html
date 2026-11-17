@@ -14,6 +14,7 @@
   --ink-2: #3c4349;
   --muted: #646d75;
   --line: #d6dad4;
+  --grid: color-mix(in srgb, var(--elec) 7%, transparent);
   --fuel: #a35a1f;
   --elec: #2f5bc8;
   --ok: #2c7a4b; --maybe: #8a6500; --no: #9b3b2f;
@@ -66,17 +67,19 @@ main.wrap > section { display: grid; gap: 16px; min-width: 0; }
 .answer { display: grid; gap: 22px; align-content: start; }
 .sheet { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
 .sheet .demo { color: var(--ink); border: 1px solid var(--ink); border-radius: 3px; padding: 0 6px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.7rem; }
-.headline { font-family: var(--body); font-weight: 600; font-size: clamp(1.75rem, 3.6vw, 2.6rem); line-height: 1.15; letter-spacing: -0.015em; max-width: 20ch; }
+.headline { font-family: var(--body); font-weight: 650; font-size: clamp(1.85rem, 3.8vw, 2.75rem); line-height: 1.15; letter-spacing: -0.015em; max-width: 20ch; }
 .headline em { font-style: normal; box-shadow: inset 0 -0.32em 0 color-mix(in srgb, var(--elec) 24%, transparent); }
 .headline-meta { color: var(--muted); font-size: 0.875rem; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .conf { font-family: var(--mono); font-size: 0.72rem; border: 1px solid currentColor; border-radius: 3px; padding: 0 6px; }
 .conf[data-level="low"] { border-style: dashed; }
-.figures { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); border-top: 1.5px solid var(--ink); }
-.figure { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 4px; }
-.figure dd { margin: 0; white-space: nowrap; font-weight: 600; font-size: 1.45rem; letter-spacing: -0.01em; line-height: 1.15; }
-.figure dd small { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-left: 2px; }
+.figures { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border: 1.5px solid var(--ink); background: var(--surface); }
+.figure { padding: 16px 18px; outline: 0.5px solid var(--line); outline-offset: -0.25px; display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; }
+.figure dd { margin: 0; white-space: nowrap; font-family: var(--display); font-weight: 600; font-size: 2.1rem; letter-spacing: 0; line-height: 1; font-variant-numeric: tabular-nums; }
+.figure dd .n { font-variant-numeric: tabular-nums; }
+.figure dd small { font-family: var(--body); font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-left: 3px; }
 .figure dt { font-size: 0.85rem; color: var(--muted); }
 .figure.shift dd { color: var(--elec); }
+.figure.co2 dd { color: var(--ok); }
 .edit { justify-self: start; }
 
 /* Elevation */
@@ -111,6 +114,19 @@ main.wrap > section { display: grid; gap: 16px; min-width: 0; }
 .swatch.both { background: linear-gradient(135deg, var(--fuel) 50%, var(--elec) 50%); }
 @media (max-width: 520px) { .callout li { grid-template-columns: 12px minmax(0, 1fr); } .callout .val { grid-column: 2; } }
 @media (max-width: 360px) { .callout .val { white-space: normal; overflow-wrap: anywhere; } }
+
+/* Sheet numbers: every report section is a numbered sheet, like a drawing set */
+#report { counter-reset: sheet; }
+#report > section:not(.hero):not(.empty) { border-top: 1.5px solid var(--ink); padding-top: 28px; }
+#report h2[id^="h-"]::before { counter-increment: sheet; content: "Sheet " counter(sheet, decimal-leading-zero); display: block; margin-bottom: 8px; font: 500 0.72rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--elec); }
+.index { border: 1.5px solid var(--ink); background: var(--surface); }
+.index ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.index li { outline: 0.5px solid var(--line); outline-offset: -0.25px; }
+.index a { display: grid; gap: 2px; padding: 12px 14px; min-height: 44px; text-decoration: none; transition: background-color 160ms ease; }
+.index a:hover, .index a:focus-visible { background: color-mix(in srgb, var(--elec) 8%, transparent); }
+.index .ix-n { font: 500 0.68rem var(--mono); letter-spacing: 0.08em; color: var(--elec); }
+.index .ix-t { font: 600 1.05rem/1.15 var(--display); }
+.index-title { font: 500 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 14px; border-bottom: 1.5px solid var(--ink); display: flex; justify-content: space-between; gap: 12px; }
 
 /* Bands: argument + chart */
 .band, .map-band { grid-template-columns: minmax(0, 1fr); gap: 28px !important; border-top: 1.5px solid var(--ink); padding-top: 28px; }
@@ -185,12 +201,13 @@ tbody th { font-weight: 500; }
 /* Plan */
 .steps { list-style: none; counter-reset: s; margin: 8px 0 0; padding: 0; display: grid; gap: 0; }
 .step { counter-increment: s; display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 8px; row-gap: 6px; padding-block: 18px; border-top: 1px solid var(--line); }
-.step::before { content: counter(s, decimal-leading-zero); grid-row: span 3; font: 600 1.9rem/1 var(--display); color: var(--muted); }
+.step::before { content: counter(s, decimal-leading-zero); grid-row: span 3; font: 700 2.2rem/1 var(--display); color: transparent; -webkit-text-stroke: 1.2px var(--ink); }
+.step:hover::before { color: var(--elec); -webkit-text-stroke-color: var(--elec); }
 .step h3 { font-family: var(--display); font-size: 1.35rem; font-weight: 600; }
 .offers { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
 .offer { font-size: 0.93rem; }
 .offer-title { font-weight: 500; }
-.status { font: 500 0.7rem var(--mono); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 6px; white-space: nowrap; }
+.status { font: 500 0.68rem var(--mono); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 8px; white-space: nowrap; padding: 2px 7px; border-radius: 3px; background: color-mix(in srgb, currentColor 10%, transparent); }
 .status::before { margin-right: 4px; }
 .status[data-s="ok"] { color: var(--ok); } .status[data-s="ok"]::before { content: "●"; }
 .status[data-s="maybe"] { color: var(--maybe); } .status[data-s="maybe"]::before { content: "◐"; }
@@ -302,16 +319,18 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .hb-row:hover, .hb-row:focus-visible { background: color-mix(in srgb, var(--line) 45%, transparent); }
 .hb-label { font-size: 0.88rem; color: var(--ink-2); }
 .hb-row.em .hb-label { color: var(--ink); font-weight: 600; }
-.hb-track { position: relative; height: 16px; border-left: 1px solid var(--ink-2); }
-.hb-range { position: absolute; top: 4px; height: 8px; border-radius: 4px; transition: left 450ms ease, width 450ms ease; }
+.hb-row.em { background: color-mix(in srgb, var(--surface) 70%, transparent); box-shadow: inset 3px 0 0 var(--ink); }
+.hb-value { font-family: var(--display); font-size: 1.2rem; }
+.hb-track { position: relative; height: 20px; border-left: 1px solid var(--ink-2); background-image: repeating-linear-gradient(to right, transparent 0 calc(var(--step, 20%) - 1px), var(--line) calc(var(--step, 20%) - 1px) var(--step, 20%)); }
+.hb-range { position: absolute; top: 5px; height: 10px; border-radius: 5px; transition: left 450ms ease, width 450ms ease; }
 .hb-range.fuel { background: color-mix(in srgb, var(--fuel) 38%, transparent); }
 .hb-range.elec { background: color-mix(in srgb, var(--elec) 38%, transparent); }
-.hb-dot { position: absolute; top: 1px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid var(--surface); transition: left 450ms ease; }
+.hb-dot { position: absolute; top: 1px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; border: 2px solid var(--surface); transition: left 450ms ease; }
 .hb-dot.fuel { background: var(--fuel); } .hb-dot.elec { background: var(--elec); }
 .hb-value { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
-.hb-axis { position: relative; height: 18px; margin-left: calc(min(0.36 * 100%, 999px)); }
+.hb-axis { display: grid; grid-template-columns: minmax(110px, 0.36fr) minmax(0, 1fr) 4.5em; gap: 14px; padding-inline: 6px; }
+.hb-ticks { position: relative; height: 18px; }
 .hb-axis, .sb-ticks { font: 11px var(--mono); color: var(--muted); }
-.hb-axis { display: none; }
 .be-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border-top: 1.5px solid var(--ink); }
 .be { display: grid; gap: 2px; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
 .be-k { font-size: 0.82rem; color: var(--muted); }
@@ -325,16 +344,16 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .sb-floor { font: 600 1.15rem var(--display); }
 .sb { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); align-items: center; gap: 10px; }
 .sb-label { font: 0.72rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.sb-track { display: flex; align-items: center; gap: 2px; height: 14px; padding-right: 5.5em; position: relative; }
+.sb-track { display: flex; align-items: center; gap: 2px; height: 18px; padding-right: 5.5em; position: relative; }
 .sb-seg { height: 100%; transition: width 450ms ease; cursor: default; }
 .sb-seg:first-child { border-radius: 3px 0 0 3px; }
 .sb-seg:last-of-type { border-radius: 0 3px 3px 0; }
 .sb-seg.fuel { background: var(--fuel); } .sb-seg.elec { background: var(--elec); } .sb-seg.kept { background: color-mix(in srgb, var(--fuel) 42%, var(--surface)); }
 .sb-seg:hover, .sb-seg:focus-visible { filter: brightness(1.12); outline: 2px solid var(--ink); outline-offset: 1px; }
-.sb-total { margin-left: 8px; font-weight: 600; font-size: 0.88rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sb-total { margin-left: 8px; font-family: var(--display); font-weight: 600; font-size: 1.1rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .sb-axis { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 10px; }
 .sb-ticks { position: relative; height: 16px; margin-right: 5.5em; border-top: 1px solid var(--line); }
-.sb-ticks span, .hb-axis span { position: absolute; transform: translateX(-50%); top: 2px; }
+.sb-ticks span, .hb-ticks span { position: absolute; transform: translateX(-50%); top: 2px; }
 
 /* Map extras */
 .map-wrap .seg-toggle { margin-bottom: 10px; }
@@ -354,7 +373,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .offer-note{margin:4px 0 0;font-size:.9rem;color:var(--ink-2,inherit)}
 .upcoming{margin-top:24px}.upcoming h3{margin:0 0 4px}
 .figures>.figure{min-width:0}
-.figure dd.fig-conf{order:-1;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;font-size:.85rem;font-weight:400;white-space:normal;letter-spacing:0;min-width:0}
+.figure dd.fig-conf{order:-1;margin:6px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-family:var(--body);display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;font-size:.85rem;font-weight:400;white-space:normal;letter-spacing:0;min-width:0}
 .fig-conf .why{flex:1 1 100%;min-width:0}
 .fig-conf .why summary{font-size:.85rem}
 .fig-conf .why li{overflow-wrap:anywhere;white-space:normal}
@@ -362,24 +381,45 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .table-wrap{max-width:100%;overflow-x:auto}
 .data td .why li{overflow-wrap:anywhere}
 /* Intake: generous space and a clear focus state keep the writing experience calm. */
-.assistant { margin-block: clamp(24px, 4vw, 48px); }
-.assistant-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
-.assistant-intro { max-width: 42ch; padding-block: 12px; }
-.assistant-eyebrow { font-size: .8rem; font-weight: 600; color: var(--ink-2); margin-bottom: 14px; }
-.assistant h2 { font-family: var(--body); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.08; letter-spacing: -.035em; max-width: 14ch; }
-.assistant-intro > p:not(.assistant-eyebrow) { margin-top: 16px; font-size: 1.04rem; color: var(--ink-2); }
-.assistant-guide { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
-.assistant-guide li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; color: var(--ink-2); }
-.assistant-guide li span:first-child { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 50%; font-size: .75rem; font-weight: 600; color: var(--ink); }
-.assistant-card { min-width: 0; padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 5%, transparent); }
+.assistant { margin-block: clamp(20px, 3vw, 40px) clamp(28px, 4vw, 56px); }
+.assistant-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: start; padding: clamp(20px, 3vw, 36px); border: 1.5px solid var(--ink); background-color: var(--paper); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px; background-position: -1px -1px; position: relative; }
+.assistant-layout::before, .assistant-layout::after { content: ""; position: absolute; width: 14px; height: 14px; border-color: var(--elec); border-style: solid; }
+.assistant-layout::before { top: -7px; left: -7px; border-width: 1.5px 0 0 1.5px; }
+.assistant-layout::after { bottom: -7px; right: -7px; border-width: 0 1.5px 1.5px 0; }
+.assistant-intro { max-width: 46ch; display: grid; gap: 18px; align-content: start; }
+.assistant-eyebrow { font: 500 .72rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.assistant h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 4.8vw, 3.9rem); line-height: .96; letter-spacing: -.005em; max-width: 13ch; text-transform: none; }
+.assistant-intro > p:not(.kicker):not(.assistant-hint) { font-size: 1.06rem; color: var(--ink-2); }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.assistant-guide { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1.5px solid var(--ink); }
+.assistant-guide li { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: baseline; padding-block: 10px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+.assistant-guide li span:first-child { font: 600 1.25rem/1 var(--display); color: var(--elec); }
+.assistant-card { min-width: 0; padding: clamp(18px, 2.6vw, 28px); border: 1.5px solid var(--ink); border-radius: 0; background: var(--surface); box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 10%, transparent); }
 .assistant-card > * + * { margin-top: 16px; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: calc(-1 * clamp(18px, 2.6vw, 28px)) calc(-1 * clamp(18px, 2.6vw, 28px)) 0; padding: 10px clamp(18px, 2.6vw, 28px); border-bottom: 1.5px solid var(--ink); font: 500 .72rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
+.card-head .tag { margin: 0; white-space: nowrap; }
+.card-drawing { display: block; width: 100%; max-width: 420px; height: auto; margin-inline: auto; }
+.cd-roof { fill: var(--ink); }
+.cd-wall { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.cd-line { stroke: var(--ink); stroke-width: 1.2; }
+.cd-glass rect { fill: var(--paper); stroke: var(--ink); stroke-width: 1; }
+.cd-hp rect { fill: var(--surface); stroke: var(--elec); stroke-width: 1.5; }
+.cd-labels text { font: 500 10px var(--mono); fill: var(--ink-2); }
+.cd-ground { stroke: var(--ink); stroke-width: 2; }
+.cd-dim path { stroke: var(--muted); stroke-width: 1; fill: none; }
+.cd-dim text { font: 9px var(--mono); fill: var(--muted); text-anchor: middle; }
+.assistant-card h3 { font-family: var(--display); font-weight: 600; font-size: 1.45rem; line-height: 1.1; }
+.card-facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.card-facts > div { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.card-facts > div + div { padding-left: 12px; border-left: 1px solid var(--line); }
+.card-facts dt { font: 500 .68rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.card-facts dd { margin: 2px 0 0; font-weight: 600; font-size: .92rem; }
 .assistant-demo-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 9px 18px; border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 600; text-decoration: none; }
-.assistant-intro .assistant-demo-link { margin-top: 20px; }
 .assistant-demo-link:hover { background: var(--ink-2); }
 .assistant-live > * + * { margin-top: 16px; }
 .assistant-label { display: block; color: var(--ink); font-size: 1rem; font-weight: 600; }
-.assistant textarea { display: block; width: 100%; min-height: 160px; max-height: 360px; margin-top: 9px; padding: 15px 16px; font: 400 1rem/1.6 var(--body); color: var(--ink); caret-color: var(--elec); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 14px; resize: vertical; overflow-y: auto; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
-.assistant input[type="password"] { display: block; width: 100%; margin-top: 9px; padding: 12px; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 10px; }
+.assistant textarea { display: block; width: 100%; min-height: 160px; max-height: 360px; margin-top: 9px; padding: 15px 16px; font: 400 1rem/1.6 var(--body); color: var(--ink); caret-color: var(--elec); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 4px; resize: vertical; overflow-y: auto; transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+.assistant input[type="password"] { display: block; width: 100%; margin-top: 9px; padding: 12px; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-2); border-radius: 4px; }
 /* shortcut: older browsers keep a manually resizable field, upgrade when field-sizing is universally supported. */
 @supports (field-sizing: content) { .assistant textarea { field-sizing: content; } }
 .assistant textarea::placeholder { color: var(--ink-2); opacity: .85; }
@@ -387,7 +427,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 .assistant textarea:focus-visible { border-color: var(--elec); outline: 2px solid var(--elec); outline-offset: 2px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--elec) 14%, transparent); }
 .assistant-hint { color: var(--ink-2); font-size: .84rem; line-height: 1.5; }
 .assistant-example { border-top: 1px solid var(--line); padding-top: 16px; }
-.assistant-example summary, .assistant-followup summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
+.assistant-example summary, .assistant-followup summary { cursor: pointer; font-weight: 600; font-family: var(--display); font-size: 1.15rem; min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
 .assistant-example summary::-webkit-details-marker, .assistant-followup summary::-webkit-details-marker { display: none; }
 .assistant-example summary::after, .assistant-followup summary::after { content: "+"; margin-left: auto; font-size: 1.25rem; font-weight: 400; }
 .assistant-example[open] summary::after, .assistant-followup[open] summary::after { content: "−"; }
@@ -400,7 +440,7 @@ footer .wrap { border-top: 1.5px solid var(--ink); padding-block: 24px 40px; dis
 button:disabled { cursor: not-allowed; opacity: .6; }
 button:disabled:hover { background: transparent; color: var(--ink); }
 .assistant button.primary:disabled { background: var(--ink); color: var(--surface); }
-.assistant-status:not(:empty) { padding: 12px 14px; border-radius: 12px; background: var(--paper); color: var(--ink-2); font-size: .9rem; }
+.assistant-status:not(:empty) { padding: 12px 14px; border-radius: 4px; border-left: 3px solid var(--elec); background: var(--paper); color: var(--ink-2); font-size: .9rem; }
 .assistant-review-section { border-top: 1px solid var(--line); padding-top: 20px; }
 .assistant-review-section h3 { font-size: 1.15rem; }
 .assistant-review-section > p { margin-top: 8px; color: var(--ink-2); font-size: .9rem; }
@@ -409,12 +449,136 @@ button:disabled:hover { background: transparent; color: var(--ink); }
 .assistant-review dd { margin: 0; font-size: .9rem; font-weight: 600; overflow-wrap: anywhere; }
 .assistant-followup { border-top: 1px solid var(--line); padding-top: 4px; }
 .assistant pre { white-space: pre-wrap; font: inherit; overflow-wrap: anywhere; }
-.assistant pre:not(:empty) { margin: 16px 0 0; padding: 16px; border-radius: 14px; background: var(--paper); }
-#form input, #form select { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 1rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
+.assistant pre:not(:empty) { margin: 16px 0 0; padding: 16px; border-radius: 4px; border: 1px solid var(--line); background: var(--paper); }
+#form input, #form select { border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; font-size: 1rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
 #form input:hover, #form select:hover { border-color: var(--ink-2); }
 #form input:focus-visible, #form select:focus-visible { border-color: var(--elec); outline: 2px solid var(--elec); outline-offset: 2px; }
-@media (max-width: 760px) { .assistant-layout { grid-template-columns: 1fr; gap: 22px; } .assistant-intro { padding-block: 0; } .assistant h2 { max-width: none; } }
-@media (max-width: 480px) { .assistant-card { border-radius: 18px; } .assistant-review { grid-template-columns: 1fr; gap: .2rem; } .assistant-review dd { margin-bottom: .5rem; } .assistant-actions > button { width: 100%; } }
+@media (max-width: 760px) { .assistant-layout { grid-template-columns: 1fr; gap: 28px; } .assistant h2 { max-width: none; } }
+@media (max-width: 480px) { .assistant-layout { padding: 16px; } .card-facts { grid-template-columns: 1fr; } .card-facts > div + div { padding-left: 0; border-left: 0; } .assistant-review { grid-template-columns: 1fr; gap: .2rem; } .assistant-review dd { margin-bottom: .5rem; } .assistant-actions > button { width: 100%; } }
+
+/* ---------- Interaction layer: native controls dressed as one family of components ----------
+   Everything here is progressive: browsers without @starting-style, ::details-content or scroll timelines
+   get the same page without the motion, and prefers-reduced-motion turns all of it off. */
+:root { --spring: cubic-bezier(.3, 1.3, .5, 1); --out: cubic-bezier(.2, .8, .2, 1); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Buttons: a quick press, and primary actions lift onto an offset "drafting" shadow */
+button, .assistant-demo-link { transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 140ms var(--out), box-shadow 180ms var(--out); }
+button:active:not(:disabled), .assistant-demo-link:active { transform: translateY(1px) scale(.98); }
+.topbar button.primary:hover, .assistant button.primary:hover:not(:disabled), .assistant-demo-link:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--elec); background: var(--ink); color: var(--paper); }
+.hero-actions button:hover, .intro-line button:hover, .fair button:hover { box-shadow: 3px 3px 0 var(--elec); transform: translate(-2px, -2px); }
+
+/* Segmented toggle: one pill slides under the chosen option (report toggles animate through the render snapshot) */
+.seg-toggle { position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; isolation: isolate; }
+.seg-toggle::before { content: ""; position: absolute; z-index: -1; top: 2px; bottom: 2px; left: 2px; width: calc((100% - 4px) / 2); border-radius: 999px; background: var(--ink); transition: transform 360ms var(--spring); }
+.seg-toggle.at-1::before { transform: translateX(100%); }
+.seg-toggle button, .seg-toggle button:hover, .seg-toggle button[aria-pressed="true"] { background: transparent; box-shadow: none; transform: none; }
+.seg-toggle button { transition: color 240ms ease; white-space: nowrap; }
+.seg-toggle button[aria-pressed="true"] { color: var(--paper); }
+.seg-toggle button[aria-pressed="false"]:hover { color: var(--elec); }
+
+/* Range sliders: a filled track, a tick at the statewide figure, and a thumb that grows under the finger */
+.ctl input[type=range] { -webkit-appearance: none; appearance: none; height: 28px; background: transparent; cursor: pointer; --fill: var(--ink); }
+.ctl.changed input[type=range] { --fill: var(--elec); }
+.ctl input[type=range]:focus-visible { outline: none; }
+.ctl input[type=range]::-webkit-slider-runnable-track { height: 18px; background:
+  linear-gradient(var(--muted), var(--muted)) calc(9px + (100% - 18px) * var(--d, 0) - 1px) 50% / 2px 12px no-repeat,
+  linear-gradient(to right, var(--fill) calc(9px + (100% - 18px) * var(--p, 0)), var(--line) 0) 0 50% / 100% 4px no-repeat; }
+.ctl input[type=range]::-moz-range-track { height: 18px; background:
+  linear-gradient(var(--muted), var(--muted)) calc(9px + (100% - 18px) * var(--d, 0) - 1px) 50% / 2px 12px no-repeat,
+  linear-gradient(to right, var(--fill) calc(9px + (100% - 18px) * var(--p, 0)), var(--line) 0) 0 50% / 100% 4px no-repeat; }
+.ctl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; box-sizing: border-box; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 2px solid var(--fill); box-shadow: 0 1px 3px color-mix(in srgb, var(--ink) 25%, transparent); transition: transform 160ms var(--spring), box-shadow 160ms ease, border-color 200ms ease; }
+.ctl input[type=range]::-moz-range-thumb { box-sizing: border-box; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 2px solid var(--fill); box-shadow: 0 1px 3px color-mix(in srgb, var(--ink) 25%, transparent); transition: transform 160ms var(--spring), box-shadow 160ms ease, border-color 200ms ease; }
+.ctl input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); }
+.ctl input[type=range]:hover::-moz-range-thumb { transform: scale(1.15); }
+.ctl input[type=range]:active::-webkit-slider-thumb { transform: scale(1.25); box-shadow: 0 0 0 7px color-mix(in srgb, var(--fill) 18%, transparent); }
+.ctl input[type=range]:active::-moz-range-thumb { transform: scale(1.25); box-shadow: 0 0 0 7px color-mix(in srgb, var(--fill) 18%, transparent); }
+.ctl input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--elec); }
+.ctl input[type=range]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--elec); }
+.ctl output { transition: color 200ms ease; }
+.ctl.changed output { color: var(--elec); }
+.ctl.changed > label::after { content: " · yours"; color: var(--elec); }
+#wi-reset { transition: opacity 220ms ease, transform 220ms var(--spring), background-color 180ms ease, color 180ms ease; }
+@starting-style { #wi-reset { opacity: 0; transform: scale(.9); } }
+
+/* The what-if bar settles onto the page when it sticks, with a reading-progress line on its edge */
+.whatif { transition: box-shadow 240ms ease, background-color 240ms ease; }
+.whatif.stuck { background: color-mix(in srgb, var(--paper) 96%, transparent); box-shadow: 0 1px 0 var(--ink), 0 10px 24px -14px color-mix(in srgb, var(--ink) 45%, transparent); }
+@supports (animation-timeline: scroll()) {
+  .whatif::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--elec); transform-origin: 0 50%; transform: scaleX(0); animation: read-progress linear both; animation-timeline: scroll(root); }
+  @keyframes read-progress { to { transform: scaleX(1); } }
+}
+
+/* Sheets rise into place as they scroll into view (driven by scroll position, so re-renders don't replay it) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #report > section:not(.hero), #report > nav.index { animation: sheet-rise both var(--out); animation-timeline: view(); animation-range: entry 0% entry 35%; }
+    @keyframes sheet-rise { from { opacity: 0.001; transform: translateY(32px); } }
+  }
+}
+
+/* Sheet rail: wide screens only, fades in once the report starts */
+.rail { position: fixed; z-index: 4; right: 14px; top: 50%; display: none; flex-direction: column; gap: 2px; opacity: 0; transform: translate(10px, -50%); pointer-events: none; transition: opacity 260ms ease, transform 260ms var(--out); }
+@media (min-width: 1320px) { .rail { display: flex; } }
+.rail.show { opacity: 1; transform: translate(0, -50%); pointer-events: auto; }
+.rail a { display: flex; flex-direction: row-reverse; align-items: center; gap: 6px; padding: 3px 0; text-decoration: none; color: var(--muted); }
+.rail-n { font: 500 .68rem var(--mono); letter-spacing: .06em; padding-right: 8px; border-right: 2px solid var(--line); transition: color 200ms ease, border-color 200ms ease; }
+.rail-t { font: 600 .9rem var(--display); color: var(--ink); white-space: nowrap; background: var(--paper); padding: 1px 6px; border: 1px solid var(--line); opacity: 0; transform: translateX(6px); transition: opacity 200ms ease, transform 200ms var(--out); }
+.rail:hover .rail-t { opacity: 1; transform: none; }
+.rail a:hover .rail-n { color: var(--ink); border-color: var(--ink); }
+.rail a[aria-current] .rail-n { color: var(--elec); border-color: var(--elec); }
+@media (min-width: 1560px) { .rail a[aria-current] .rail-t { opacity: 1; transform: none; } }
+
+/* Disclosures: a chevron that turns, and content that opens with height */
+details.data > summary, details.why > summary, .offer details > summary { list-style: none; display: inline-flex; align-items: center; gap: 8px; transition: color 160ms ease, text-decoration-color 160ms ease; }
+details.data > summary::-webkit-details-marker, details.why > summary::-webkit-details-marker, .offer details > summary::-webkit-details-marker { display: none; }
+details.data > summary::before, details.why > summary::before, .offer details > summary::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: -2px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform 240ms var(--spring); }
+details.data[open] > summary::before, details.why[open] > summary::before, .offer details[open] > summary::before { transform: rotate(45deg); margin-top: -4px; }
+details.data > summary:hover, details.why > summary:hover, .offer details > summary:hover { color: var(--ink); text-decoration-color: var(--ink); }
+.assistant-example summary::after, .assistant-followup summary::after, .assistant-example[open] summary::after, .assistant-followup[open] summary::after { content: "+"; transition: transform 280ms var(--spring); }
+.assistant-example[open] > summary::after, .assistant-followup[open] > summary::after { transform: rotate(45deg); }
+.assistant-example > summary:hover, .assistant-followup > summary:hover { color: var(--elec); }
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  details::details-content { block-size: 0; overflow-y: clip; transition: block-size 320ms var(--out), content-visibility 320ms allow-discrete; }
+  details[open]::details-content { block-size: auto; }
+}
+
+/* The building drawer slides in from the right over a softened page */
+dialog#editor { transform: translateX(100%); transition: transform 380ms var(--out), overlay 380ms allow-discrete, display 380ms allow-discrete; box-shadow: -18px 0 40px -24px color-mix(in srgb, var(--ink) 50%, transparent); }
+dialog#editor[open] { transform: translateX(0); }
+@starting-style { dialog#editor[open] { transform: translateX(100%); } }
+dialog#editor::backdrop { background: transparent; transition: background-color 380ms ease, backdrop-filter 380ms ease, overlay 380ms allow-discrete, display 380ms allow-discrete; }
+dialog#editor[open]::backdrop { background: color-mix(in srgb, var(--ink) 30%, transparent); backdrop-filter: blur(2px); }
+@starting-style { dialog#editor[open]::backdrop { background: transparent; backdrop-filter: none; } }
+
+/* Select: one drawn chevron in both themes */
+select { -webkit-appearance: none; appearance: none; cursor: pointer; padding-right: 36px !important; background-image: linear-gradient(45deg, transparent 50%, var(--ink-2) 50%), linear-gradient(135deg, var(--ink-2) 50%, transparent 50%); background-position: calc(100% - 19px) 55%, calc(100% - 14px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+
+/* Tooltip and hover feedback on data */
+.tip { transition: opacity 140ms ease, transform 140ms var(--out); }
+@starting-style { .tip { opacity: 0; transform: translateY(4px); } }
+.figure { transition: background-color 180ms ease; }
+.figure:hover { background: color-mix(in srgb, var(--elec) 5%, var(--surface)); }
+.hb-row { transition: background-color 160ms ease; }
+.step { transition: background-color 200ms ease; }
+.step:hover { background: color-mix(in srgb, var(--surface) 80%, transparent); }
+.step::before { transition: color 200ms ease, -webkit-text-stroke-color 200ms ease; }
+.index a { position: relative; }
+.index a::after { content: "↓"; position: absolute; right: 12px; top: 12px; font: 500 .8rem var(--mono); color: var(--elec); opacity: 0; transform: translateY(-4px); transition: opacity 180ms ease, transform 220ms var(--spring); }
+.index a:hover::after, .index a:focus-visible::after { opacity: 1; transform: none; }
+.cd-hp rect { transition: fill 300ms ease; }
+.assistant-card:hover .cd-hp rect { fill: color-mix(in srgb, var(--elec) 18%, var(--surface)); }
+
+/* Reduced motion also covers pseudo-elements, which the universal rule above can't reach. One rule each, so a
+   browser that doesn't know one selector keeps the others. */
+@media (prefers-reduced-motion: reduce) {
+  *::before, *::after { transition: none !important; animation: none !important; }
+  ::backdrop { transition: none !important; }
+  ::details-content { transition: none !important; }
+  input[type=range]::-webkit-slider-thumb { transition: none !important; }
+  input[type=range]::-moz-range-thumb { transition: none !important; }
+}
 </style>
 <!-- BODY -->
 <a class="skip" href="#report">Skip to the report</a>
@@ -426,22 +590,32 @@ button:disabled:hover { background: transparent; color: var(--ink); }
 <section class="wrap assistant" aria-labelledby="ai-title">
   <div class="assistant-layout">
     <div class="assistant-intro">
-      <p class="assistant-eyebrow">For Massachusetts renters and small-building owners</p>
+      <p class="kicker">For Massachusetts renters and small-building owners</p>
       <h2 id="ai-title">Understand your home’s heating options.</h2>
       <p>Thinking about improving comfort or lowering energy bills? Start with an example or enter what you know about your building. It’s okay not to know everything.</p>
-      <a class="assistant-demo-link" href="#report">See the example plan</a>
+      <div class="hero-actions"><a class="assistant-demo-link" href="#report">See the example plan</a><button type="button" data-action="edit">Check your building</button></div>
       <ol class="assistant-guide" aria-label="What you can learn">
-        <li><span aria-hidden="true">1</span><span><strong>Understand the costs.</strong> See estimated ranges for heating bills and how they could change.</span></li>
-        <li><span aria-hidden="true">2</span><span><strong>See who is affected.</strong> Explore how changes could affect the owner and each household.</span></li>
-        <li><span aria-hidden="true">3</span><span><strong>Know what to do next.</strong> Find possible programs, questions to ask, and who to contact.</span></li>
+        <li><span aria-hidden="true">01</span><span><strong>Understand the costs.</strong> See estimated ranges for heating bills and how they could change.</span></li>
+        <li><span aria-hidden="true">02</span><span><strong>See who is affected.</strong> Explore how changes could affect the owner and each household.</span></li>
+        <li><span aria-hidden="true">03</span><span><strong>Know what to do next.</strong> Find possible programs, questions to ask, and who to contact.</span></li>
       </ol>
       <p class="assistant-hint">One option you’ll see is a heat pump: it uses electricity to move heat into a home and can also provide cooling. The report uses estimates; programs make the final eligibility decision.</p>
     </div>
     <div class="assistant-card">
-      <p class="assistant-eyebrow">Example building · Boston</p>
+      <p class="card-head"><span>Example building · Boston</span><span class="tag">demo data</span></p>
+      <svg class="card-drawing" viewBox="0 0 320 150" aria-hidden="true" focusable="false">
+        <path class="cd-roof" d="M60 18 H260 V26 H60 Z"/>
+        <rect class="cd-wall" x="76" y="26" width="168" height="108"/>
+        <path class="cd-line" d="M76 62 H244 M76 98 H244"/>
+        <g class="cd-glass"><rect x="92" y="34" width="18" height="22"/><rect x="122" y="34" width="18" height="22"/><rect x="92" y="70" width="18" height="22"/><rect x="122" y="70" width="18" height="22"/><rect x="92" y="106" width="18" height="22"/><rect x="122" y="106" width="18" height="22"/></g>
+        <g class="cd-hp"><rect x="248" y="40" width="20" height="14" rx="2"/><rect x="248" y="76" width="20" height="14" rx="2"/><rect x="248" y="112" width="20" height="14" rx="2"/></g>
+        <g class="cd-labels"><text x="160" y="50">3 · rented</text><text x="160" y="86">2 · rented</text><text x="160" y="122">1 · owner</text></g>
+        <path class="cd-ground" d="M40 134 H290"/>
+        <g class="cd-dim"><path d="M50 26 V134 M46 26 H54 M46 134 H54"/><text x="44" y="84" transform="rotate(-90 44 84)">3 floors · 1910</text></g>
+      </svg>
       <h3>A three-family home, with the owner living on one floor</h3>
-      <p class="assistant-hint">The owner pays for oil heat. Tenants pay their own electricity. This fictional example is ready to explore—no setup needed.</p>
-      <p class="assistant-hint">Want to explore your own home? Select “Check your building” at the top of the page and choose “Clear and enter my building.”</p>
+      <dl class="card-facts"><div><dt>Heat</dt><dd>Oil · owner pays</dd></div><div><dt>Electricity</dt><dd>Each tenant pays</dd></div><div><dt>Setup</dt><dd>None needed</dd></div></dl>
+      <p class="assistant-hint">This fictional example is ready to explore. To explore your own home, select “Check your building” and choose “Clear and enter my building.”</p>
       <details class="assistant-example">
         <summary>See how the assistant understands this example</summary>
         <p>“I’m a landlord and live in my three-family home in Boston. All floors use oil heat, which I pay for. Each tenant pays their own electric bill.”</p>
@@ -489,10 +663,11 @@ button:disabled:hover { background: transparent; color: var(--ink); }
   <div class="ctl"><label for="wi-elec">Electricity <span class="ctl-hint">(standard rate)</span></label><input type="range" id="wi-elec" min="0.15" max="0.45" step="0.01"><output id="wi-elec-o" for="wi-elec"></output></div>
   <div class="ctl" id="wi-fuel-ctl"><label for="wi-fuel" id="wi-fuel-l">Heating oil</label><input type="range" id="wi-fuel" min="2" max="5" step="0.05"><output id="wi-fuel-o" for="wi-fuel"></output></div>
   <div class="ctl"><label for="wi-cop">Heat pump efficiency <span class="ctl-hint">(how efficiently it heats)</span></label><input type="range" id="wi-cop" min="1.5" max="4" step="0.1"><output id="wi-cop-o" for="wi-cop"></output></div>
-  <div class="ctl meter"><span class="ctl-l" id="wi-meter-l">Heat pumps run on</span><div class="seg-toggle" role="group" aria-labelledby="wi-meter-l"><button type="button" data-meter="unit">Each floor’s meter</button><button type="button" data-meter="owner">Owner-paid meter</button></div></div>
+  <div class="ctl meter"><span class="ctl-l" id="wi-meter-l">Heat pumps run on</span><div class="seg-toggle" id="wi-meter" role="group" aria-labelledby="wi-meter-l"><button type="button" data-meter="unit">Each floor’s meter</button><button type="button" data-meter="owner">Owner-paid meter</button></div></div>
   <button type="button" id="wi-reset" class="reset">Back to statewide averages</button>
 </div></div>
 <main class="wrap" id="report" tabindex="-1"></main>
+<nav id="rail" class="rail" aria-hidden="true"></nav>
 
 <dialog id="editor" aria-labelledby="editor-title">
   <div class="editor-head"><h2 id="editor-title">The building</h2><button type="button" id="close">Done</button></div>
