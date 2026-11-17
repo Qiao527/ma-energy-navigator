@@ -213,7 +213,7 @@ function building(r: Report, s: State, v: View): string {
     ? 'Today: one boiler in the basement heats every floor through a shared riser, and whoever pays for heat buys all the fuel.'
     : `With heat pumps: each floor gets an outdoor unit on its porch, running on ${ownerBus ? 'one owner-paid meter, so the landlord pays the electricity' : 'that floor’s own electric meter, so whoever pays that bill pays for the heat'}${keepsBoiler ? '. The boiler stays for hot water' : r.units.some(x => x.hotWater && x.hotWater.after !== 'boiler') ? ', and a heat pump water heater on each floor takes over the hot water' : ''}. Yearly change per bill, low to high.`
   return `<figure class="elevation mode-${v.mode}${ownerBus ? ' owner-bus' : ''}" data-k="elev" aria-label="The building drawn floor by floor">
-    <div class="seg-toggle" role="group" aria-label="Show the building">
+    <div class="seg-toggle${v.mode === 'after' ? ' at-1' : ''}" data-k="seg.mode" role="group" aria-label="Show the building">
       <button type="button" data-mode="today" aria-pressed="${v.mode === 'today'}">Today</button>
       <button type="button" data-mode="after" aria-pressed="${v.mode === 'after'}">With heat pumps</button>
     </div>
@@ -292,8 +292,8 @@ function heatPrice(s: State, v: View): string {
         ? `Heat pump electricity is priced at the winter heat pump rate: ${fmt(standard, 'c2')}/kWh standard, ${fmt(elec, 'c2')}/kWh for a heat pump home from November to April. `
         : `${esc(hpRate?.note ?? '')} `}Test your own electricity price (the standard rate), ${fuelName(current)} price or heat pump efficiency in the bar above.</p>
     </div>
-    <div class="band-chart"><ol class="hbars" aria-label="Cost per million Btu of heat, by system">${bars}</ol>
-      <div class="hb-axis" aria-hidden="true">${ticks.map(t => `<span style="left:${pct(t)}">$${t}</span>`).join('')}</div>
+    <div class="band-chart"><ol class="hbars" style="--step:${(20 / lim) * 100}%" aria-label="Cost per million Btu of heat, by system">${bars}</ol>
+      <div class="hb-axis" aria-hidden="true"><span></span><span class="hb-ticks">${ticks.map(t => `<span style="left:${pct(t)}">$${t}</span>`).join('')}</span><span></span></div>
       <p class="legend"><span><span class="swatch fuel"></span>Fuel you buy</span><span><span class="swatch elec"></span>Electricity</span><span class="muted">Bar = low to high · dot = typical · per million Btu delivered</span></p>${table}</div>
   </section>`
 }
@@ -453,5 +453,21 @@ export function reportHtml(s: State, v: View): string {
   }
   const { r, error } = compute(s, v)
   if (error || !r) return `<p class="error" role="alert">This building can’t be estimated yet: ${esc(error ?? 'unknown error')}. Check the details in “Edit the building”.</p>`
-  return `${hero(r, s, v)}${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r, s, RULES.legal.find(x => x.id === HEAT_COST_SHIFT_CONSTRAINT)) : ''}${plan(r)}${mapSection(s, v.zoom)}${engineering(r, s)}${rest(r)}`
+  const body = `${heatPrice(s, v)}${beforeAfter(r, s, v)}${isLandlord(s) ? fairness(r, s, RULES.legal.find(x => x.id === HEAT_COST_SHIFT_CONSTRAINT)) : ''}${plan(r)}${mapSection(s, v.zoom)}${engineering(r, s)}${rest(r)}`
+  return `${hero(r, s, v)}${sectionIndex(body)}${body}`
+}
+
+/** Short names for the sheet index; a section without one falls back to its heading text. */
+export const INDEX_LABEL: Record<string, string> = {
+  'h-why': 'Price of heat', 'h-floors': 'Floor by floor', 'h-fair': 'Tenants’ bills', 'h-plan': 'What to do',
+  'h-map': 'Extra help', 'h-eng': 'The math', 'h-src': 'Sources',
+}
+const SECTION_HEADING = /<h2 id="(h-[\w-]+)"[^>]*>([\s\S]*?)<\/h2>/g
+/** A drawing-set index of the report, read from the section headings actually rendered. */
+function sectionIndex(body: string): string {
+  const found = [...body.matchAll(SECTION_HEADING)]
+  if (found.length < 2) return ''
+  const items = found.map(([, id = '', text = ''], i) =>
+    `<li><a href="#${id}"><span class="ix-n">${String(i + 1).padStart(2, '0')}</span><span class="ix-t">${INDEX_LABEL[id] ?? text.replace(/<[^>]+>/g, '')}</span></a></li>`).join('')
+  return `<nav class="index" aria-label="Report sections"><p class="index-title"><span>Sheet index</span><span>${found.length} sheets</span></p><ol>${items}</ol></nav>`
 }

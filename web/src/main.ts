@@ -1,6 +1,6 @@
 import { DATA } from './data.js'
 import { blankState, demoState, formHtml, setPath, type Kind, type State } from './form.js'
-import { DEFAULT_VIEW, compute, fmt, mainFuel, reportHtml, type View } from './report.js'
+import { DEFAULT_VIEW, INDEX_LABEL, compute, fmt, mainFuel, reportHtml, type View } from './report.js'
 import { confirmReplacement, missing, renderAnswer, reviewFacts, type Extracted, type Presentation } from './assistant.js'
 import { hasUnestimatedWater } from './shift.js'
 
@@ -47,13 +47,27 @@ function syncControls(): void {
     fuel.setAttribute('aria-valuetext', `${val(f.id).toFixed(2)} dollars per ${f.unit === '/gal' ? 'gallon' : 'therm'}`)
   }
   for (const b of document.querySelectorAll<HTMLButtonElement>('#whatif [data-meter]')) b.setAttribute('aria-pressed', String(b.dataset.meter === view.meter))
+  $('wi-meter').classList.toggle('at-1', view.meter === 'owner')
+  paintRange(elec, 'price.electricity')
+  paintRange(cop, 'heat_pump_seasonal_cop')
+  if (f) paintRange(fuel, f.id)
   $('wi-reset').hidden = Object.keys(view.whatIf).length === 0 && view.meter === 'unit'
+}
+
+/** The slider fills up to its value and marks the statewide figure; a changed control shows it's the user's own. */
+function paintRange(input: HTMLInputElement, id: string): void {
+  const min = Number(input.min), max = Number(input.max)
+  const at = (x: number): string => String(Math.min(1, Math.max(0, (x - min) / (max - min))))
+  input.style.setProperty('--p', at(Number(input.value)))
+  input.style.setProperty('--d', at(statewide(id)))
+  input.closest('.ctl')?.classList.toggle('changed', id in view.whatIf)
 }
 
 let pending = 0
 function onSlide(id: string, value: number): void {
   view.whatIf[id] = value
   if (Math.abs(value - statewide(id)) < 1e-9) delete view.whatIf[id]
+  paintRange(id === 'price.electricity' ? elec : id === 'heat_pump_seasonal_cop' ? cop : fuel, id)
   cancelAnimationFrame(pending)
   pending = requestAnimationFrame(() => render())
 }
@@ -125,6 +139,8 @@ function render(announce = true): void {
   if (!reduced.matches) play(old)
   syncControls()
   $('edit-top').textContent = state.demo ? 'Check your building' : 'Edit your building'
+  buildRail()
+  onScroll()
   if (announce) {
     clearTimeout(announceTimer)
     announceTimer = window.setTimeout(() => { liveEl.textContent = document.getElementById('h-answer')?.textContent ?? '' }, 900)
@@ -141,6 +157,46 @@ wiToggle.addEventListener('click', () => {
   wiToggle.setAttribute('aria-expanded', String(open))
   wiToggle.textContent = open ? 'Hide the price controls ▴' : 'Try your own prices ▾'
 })
+
+// ---------- scrolling: the bar settles when it sticks, and a rail shows which sheet you're on ----------
+
+// The rail repeats the in-report sheet index for pointer users on wide screens, so it stays out of the tab order.
+const rail = $('rail')
+let railKey = ''
+function buildRail(): void {
+  const heads = [...reportEl.querySelectorAll<HTMLElement>('h2[id^="h-"]')]
+  const key = heads.map(h => h.id).join(',')
+  if (key === railKey) return
+  railKey = key
+  rail.replaceChildren(...heads.map((h, i) => {
+    const a = document.createElement('a')
+    a.href = `#${h.id}`
+    a.tabIndex = -1
+    a.dataset.for = h.id
+    const num = document.createElement('span'); num.className = 'rail-n'; num.textContent = String(i + 1).padStart(2, '0')
+    const label = document.createElement('span'); label.className = 'rail-t'; label.textContent = INDEX_LABEL[h.id] ?? h.textContent ?? ''
+    a.append(num, label)
+    return a
+  }))
+}
+const whatifEl = $('whatif')
+let scrollFrame = 0
+function onScroll(): void {
+  cancelAnimationFrame(scrollFrame)
+  scrollFrame = requestAnimationFrame(() => {
+    whatifEl.classList.toggle('stuck', whatifEl.getBoundingClientRect().top <= 0 && window.scrollY > 0)
+    const heads = [...reportEl.querySelectorAll<HTMLElement>('h2[id^="h-"]')]
+    const line = window.innerHeight * 0.35
+    let current: string | null = null
+    for (const h of heads) if (h.getBoundingClientRect().top < line) current = h.id
+    rail.classList.toggle('show', current !== null)
+    for (const a of rail.querySelectorAll<HTMLAnchorElement>('a')) {
+      if (a.dataset.for === current) a.setAttribute('aria-current', 'true')
+      else a.removeAttribute('aria-current')
+    }
+  })
+}
+window.addEventListener('scroll', onScroll, { passive: true })
 
 // ---------- report interactions ----------
 

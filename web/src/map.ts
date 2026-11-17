@@ -61,7 +61,7 @@ export function mapSection(s: State, zoom: 'state' | 'local'): string {
       <p class="muted">Sources: <a href="${esc(DEC_SOURCE?.url ?? '')}" target="_blank" rel="noopener">Mass Save DEC list</a> · ${PILOT_SOURCES.map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.label}</a>`).join(' · ')} · <a href="${esc(towns.source)}" target="_blank" rel="noopener">Census town boundaries</a>. The shading shows where extra help applies.</p>
     </div>
     <div class="map-wrap">
-      ${here ? `<div class="seg-toggle" role="group" aria-label="Map view"><button type="button" data-zoom="state" aria-pressed="${zoom === 'state'}">All of Massachusetts</button><button type="button" data-zoom="local" aria-pressed="${zoom === 'local'}">Around ${esc(here.name)}</button></div>` : ''}
+      ${here ? `<div class="seg-toggle${zoom === 'local' ? ' at-1' : ''}" data-k="seg.zoom" role="group" aria-label="Map view"><button type="button" data-zoom="state" aria-pressed="${zoom === 'state'}">All of Massachusetts</button><button type="button" data-zoom="local" aria-pressed="${zoom === 'local'}">Around ${esc(here.name)}</button></div>` : ''}
       <svg class="map" viewBox="${view.vb}" data-k="map" data-z="${z}" style="--z:${z}" role="img" aria-labelledby="map-t"><title id="map-t">Massachusetts cities and towns: Designated Equity Communities, navigator pilot cities${here ? `, and ${esc(here.name)}` : ''}</title>${paths}${labels}${pins}${herePin}</svg></div>
   </section>`
 }
